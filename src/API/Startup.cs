@@ -35,6 +35,12 @@ namespace API
             }
 
             app.UseMvc();
+            app.UseCors(c =>
+            {
+                c.AllowAnyHeader();
+                c.AllowAnyMethod();
+                c.AllowAnyOrigin();
+            });
         }
     }
 }

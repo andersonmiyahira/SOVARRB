@@ -10,7 +10,7 @@ export class ImportarArquivoService {
   }
 
   upload(fileToUpload: any): Observable<any> {
-    const urlRecurso: string = "/upload/Send";
+    const urlRecurso: string = "ImportarArquivo/File";
     let input = new FormData();
 
     input.append("formFile", fileToUpload);

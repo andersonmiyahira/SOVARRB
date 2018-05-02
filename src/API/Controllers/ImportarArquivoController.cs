@@ -13,7 +13,7 @@ namespace API.Controllers
     {
         [HttpPost]
         [Route("File")]
-        public IActionResult PostFile(IFormFile file)
+        public IActionResult PostFile(int bancoId, IFormFile formFile)
         {
             return Ok();
 

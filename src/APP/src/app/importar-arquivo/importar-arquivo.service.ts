@@ -13,6 +13,7 @@ export class ImportarArquivoService {
     const urlRecurso: string = "ImportarArquivo/File";
     let input = new FormData();
 
+    input.append("bancoId", "1");
     input.append("formFile", fileToUpload);
     const url = `${environment.urlWebAPI}${urlRecurso}`;
 

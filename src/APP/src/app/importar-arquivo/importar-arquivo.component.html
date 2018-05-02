@@ -2,7 +2,14 @@
 <div class="row">
     <div class="col s12">
         <input #fileInput type="file" />
-        <button type="button" class="btn btn-primary btn-sm" (click)="saveUpload()" >Enviar</button>
+        <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Selecione o banco</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button class="dropdown-item">Banco do Brasil</button>
+                <button class="dropdown-item">Itaú</button>
+                <button class="dropdown-item">Bradesco</button>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" (click)="saveUpload()">Enviar e validar</button>
     </div>
 </div>
- 

@@ -23,4 +23,8 @@ export class ImportarArquivoService {
     //     return Observable.throw(error);
      // });
   }
+
+  obterBancos() {
+
+  }
 }

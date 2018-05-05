@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Domain\Domain
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossCutting", "src\CrossCutting\CrossCutting.csproj", "{CEE887A9-A383-4315-BEB5-4BEBC58B1B80}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "src\Services\Services.csproj", "{D7BF29D3-4F9E-408E-9256-56B906BD7691}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Data", "src\Infra.Data\Infra.Data.csproj", "{1EF00360-9557-4DA0-A748-9A13E8AB2C97}"
 EndProject
 Global
@@ -37,10 +35,6 @@ Global
 		{CEE887A9-A383-4315-BEB5-4BEBC58B1B80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEE887A9-A383-4315-BEB5-4BEBC58B1B80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEE887A9-A383-4315-BEB5-4BEBC58B1B80}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D7BF29D3-4F9E-408E-9256-56B906BD7691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7BF29D3-4F9E-408E-9256-56B906BD7691}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7BF29D3-4F9E-408E-9256-56B906BD7691}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7BF29D3-4F9E-408E-9256-56B906BD7691}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1EF00360-9557-4DA0-A748-9A13E8AB2C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1EF00360-9557-4DA0-A748-9A13E8AB2C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EF00360-9557-4DA0-A748-9A13E8AB2C97}.Release|Any CPU.ActiveCfg = Release|Any CPU

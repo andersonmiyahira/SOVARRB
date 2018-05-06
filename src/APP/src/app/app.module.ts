@@ -13,6 +13,7 @@ import { DashboardComponent }   from './dashboard/dashboard.component';
 import { ImportarArquivoComponent } from './importar-arquivo/importar-arquivo.component';
 import { VisualizarBoletosComponent } from './visualizar-boletos/visualizar-boletos.component';
 import { ImportarArquivoService } from './importar-arquivo/importar-arquivo.service';
+import { ApiService } from './services/api.service';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import { ImportarArquivoService } from './importar-arquivo/importar-arquivo.serv
     ImportarArquivoComponent,
     VisualizarBoletosComponent
   ],
-  providers: [ ImportarArquivoService ], 
+  providers: [ ImportarArquivoService, ApiService ], 
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

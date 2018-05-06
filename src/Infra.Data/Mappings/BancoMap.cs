@@ -10,11 +10,11 @@ namespace Infra.Data.Mappings
             builder.ToTable("Banco");
 
             builder.Property(m => m.Id)
-                .HasColumnName("id_Banco")
+                .HasColumnName("Id")
                 .IsRequired(); 
 
             builder.Property(m => m.Descricao)
-                .HasColumnName("ds_Banco")
+                .HasColumnName("Descricao")
                 .HasMaxLength(20)
                 .IsRequired();
              

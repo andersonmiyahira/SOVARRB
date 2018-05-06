@@ -1,11 +1,9 @@
-﻿using Domain.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Domain.Entities;
+using Domain.Interfaces.Repositories;
 
 namespace Infra.Data.Repositories
 {
-    public class BancoRepository : RepositoryBase<Domain.Entities.Banco>, IBancoRepository
+    public class BancoRepository : RepositoryBase<Banco>, IBancoRepository
     {
     }
 }

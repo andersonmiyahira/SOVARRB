@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\API",
+    "\\src\\API\\Controllers"
   ],
-  "SelectedNode": "\\docs",
+  "SelectedNode": "\\src\\API\\Controllers\\BancoController.cs",
   "PreviewInSolutionExplorer": false
 }

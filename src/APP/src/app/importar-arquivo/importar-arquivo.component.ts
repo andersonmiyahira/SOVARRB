@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ImportarArquivoComponent implements OnInit {
   bancos: any;
+  cnabs: any;
   importar: any;
 
   @ViewChild("fileInput") fileInput;
@@ -19,6 +20,7 @@ export class ImportarArquivoComponent implements OnInit {
 
   ngOnInit() {
     this.obterBancos();
+    this.obterCNAB();
   }
 
   saveUpload(): void {
@@ -37,6 +39,13 @@ export class ImportarArquivoComponent implements OnInit {
     this.importarArquivoService.obterBancos().subscribe(response => {
       console.log('res', response)
       this.bancos = response;
+    });
+  }
+
+  obterCNAB() {
+    this.importarArquivoService.obterTipoCNAB().subscribe(response => {
+      console.log('res', response)
+      this.cnabs = response;
     });
   }
 

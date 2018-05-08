@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Application.AppService.Banco;
+using Application.AppService.TipoCNAB;
 using Domain.Interfaces.Repositories;
 using Infra.Data.Context;
 using Infra.Data.Repositories;
@@ -30,6 +31,10 @@ namespace CrossCutting
             services.AddScoped<IBancoAppService, BancoAppService>();
             services.AddScoped<Domain.Interfaces.Services.IBancoService, Domain.Services.BancoService>();
             services.AddScoped<IBancoRepository, BancoRepository>();
+
+            services.AddScoped<ITipoCNABAppService, TipoCNABAppService>();
+            services.AddScoped<Domain.Interfaces.Services.ITipoCNABService, Domain.Services.TipoCNABService>();
+            services.AddScoped<ITipoCNABRepository, TipoCNABRepository>();
         } 
     }
 }

@@ -7,6 +7,11 @@
             <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
         </select>
 
+        <select [(ngModel)]="importar.tipoCNABId">
+            <option value="">Selecione o tipo do arquivo</option>
+            <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
+        </select>
+
         <!-- <div ngbDropdown class="d-inline-block">
             <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Selecione o banco</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">

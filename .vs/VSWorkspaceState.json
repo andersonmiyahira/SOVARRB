@@ -3,8 +3,12 @@
     "",
     "\\src",
     "\\src\\API",
-    "\\src\\API\\Controllers"
+    "\\src\\API\\Controllers",
+    "\\src\\Domain",
+    "\\src\\Domain\\Interfaces",
+    "\\src\\Domain\\Interfaces\\Repositories",
+    "\\src\\Domain\\Services"
   ],
-  "SelectedNode": "\\src\\API\\Controllers\\BancoController.cs",
+  "SelectedNode": "\\src\\API\\Controllers\\ImportarArquivoController.cs",
   "PreviewInSolutionExplorer": false
 }

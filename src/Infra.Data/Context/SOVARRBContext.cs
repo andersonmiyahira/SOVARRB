@@ -17,6 +17,7 @@ namespace Infra.Data.Context
             : base(options) { }
 
         public DbSet<Banco> Bancos { get; set; }
+        public DbSet<TipoCNAB> TipoCNAB { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

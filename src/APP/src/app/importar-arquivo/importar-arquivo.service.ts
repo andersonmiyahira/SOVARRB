@@ -28,4 +28,8 @@ export class ImportarArquivoService {
   obterBancos() {
       return this.apiService.get("http://localhost:52854/api/banco"); 
   }
+
+  obterTipoCNAB() {
+    return this.apiService.get("http://localhost:52854/api/TipoCNAB"); 
+  }
 }

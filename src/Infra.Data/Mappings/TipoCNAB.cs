@@ -10,7 +10,7 @@ namespace Infra.Data.Mappings
             builder.ToTable("TipoCNAB");
 
             builder.Property(m => m.Id)
-                .HasColumnName("Id")
+                .HasColumnName("IdTipoCNAB")
                 .IsRequired(); 
 
             builder.Property(m => m.Descricao)

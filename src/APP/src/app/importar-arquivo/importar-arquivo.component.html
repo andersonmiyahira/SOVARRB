@@ -1,25 +1,127 @@
-<h3>Importar arquivo</h3>
-<div class="row">
-    <div class="col s12">
-        <input #fileInput type="file" />
-        <select [(ngModel)]="importar.bancoId">
-            <option value="">Selecione o banco</option>
-            <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
-        </select>
-
-        <select [(ngModel)]="importar.tipoCNABId">
-            <option value="">Selecione o tipo do arquivo</option>
-            <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab   .descricao}}</option>
-        </select>
-
-        <!-- <div ngbDropdown class="d-inline-block">
-            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Selecione o banco</button>
-            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button class="dropdown-item">Banco do Brasil</button>
-                <button class="dropdown-item">Itaú</button>
-                <button class="dropdown-item">Bradesco</button>
+<h3>Validar Arquivos</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <select [(ngModel)]="importar.bancoId">
+                <option value="">Selecione o banco</option>
+                <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <select [(ngModel)]="importar.tipoCNABId">
+                <option value="">Selecione o tipo do arquivo</option>
+                <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- <h3>Selecione os arquivos</h3> -->
+            <div class="input-group">
+                <label class="input-group-btn">
+                    <span class="btn btn-primary" style="line-height: 1.19">
+                        Procurar&hellip;
+                        <input type="file" ng2FileSelect [uploader]="uploader" style="display: none;" multiple>
+                    </span>
+                </label>
+                <input type="text" class="form-control" style="height: 100%" value="Selecionados: {{ uploader?.queue?.length }} " readonly>
             </div>
-        </div> -->
-        <button type="button" class="btn btn-primary btn-sm" (click)="saveUpload()">Enviar e validar</button>
+        </div>
+
+        <div class="col-md-12" style="margin-bottom: 40px" *ngIf="uploader?.queue?.length > 0">
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="50%">Nome</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of uploader.queue">
+                            <td>
+                                <strong>{{ item?.file?.name }}</strong>
+                            </td>
+                            <td class="text-center">
+                                <span *ngIf="item.isSuccess">
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                </span>
+                                <span *ngIf="item.isError">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </span>
+                            </td>
+                            <td nowrap>
+                                <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+                                    <span class="glyphicon glyphicon-trash"></span> Remove
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <!-- <div>
+                    Progresso:
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                    </div>
+                </div> -->
+                <div class="botoes-upload">
+                    <button type="button" class="btn btn-success btn-s" (click)="saveUpload()" [disabled]="!uploader.getNotUploadedItems().length">
+                        <span class="glyphicon glyphicon-upload"></span> Enviar e Validar
+                    </button>
+                    <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                        <span class="glyphicon glyphicon-trash"></span> Remover Todos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="arquivosValidados">
+        <div class="col-md-12">
+            <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+                <ngb-panel title="REM01.txt">
+                    <ng-template ngbPanelContent>
+                            <div class="container-errors">
+                                    <div class="icon">
+                                        <i class="far fa-times-circle fa-3x"></i>
+                                    </div>
+                                    <div class="errors">
+                                        <h6>
+                                            Foram encontradas (10) falhas no arquivo enviado.
+                                        </h6>
+                                        <small>Corrija e tente enviar novamente</small>
+                                        <hr *ngIf="errors">
+                                        <ul *ngIf="errors">
+                                            <li *ngFor="let error of errors">{{error.mensagem}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                    </ng-template>
+                </ngb-panel>
+                <ngb-panel title="REM01.txt">
+                    <ng-template ngbPanelContent>
+                        <div class="container-errors">
+                            <div class="icon">
+                                <i class="far fa-times-circle fa-3x"></i>
+                            </div>
+                            <div class="errors">
+                                <h6>
+                                    Foram encontradas (10) falhas no arquivo enviado.
+                                </h6>
+                                <small>Corrija e tente enviar novamente</small>
+                                <hr *ngIf="errors">
+                                <ul *ngIf="errors">
+                                    <li *ngFor="let error of errors">{{error.mensagem}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+            </ngb-accordion>
+        </div>
     </div>
 </div>
+
+<div>

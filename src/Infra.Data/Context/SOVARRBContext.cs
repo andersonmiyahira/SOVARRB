@@ -22,7 +22,8 @@ namespace Infra.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new BancoMap()); 
+            modelBuilder.ApplyConfiguration(new BancoMap());
+            modelBuilder.ApplyConfiguration(new TipoCNABMap());
 
             base.OnModelCreating(modelBuilder);
         }

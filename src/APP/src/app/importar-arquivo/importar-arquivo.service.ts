@@ -6,30 +6,33 @@ import { ApiService } from '../services/api.service';
 
 @Injectable()
 export class ImportarArquivoService {
-  constructor(private http: HttpClient, 
-              private apiService: ApiService) {
+  constructor(private http: HttpClient,
+    private apiService: ApiService) {
   }
-   
+
   upload(fileToUpload: any, bancoId: number): Observable<any> {
     const urlRecurso: string = "ImportarArquivo/File";
     let input = new FormData();
 
     input.append("bancoId", bancoId.toString());
-    input.append("formFile", fileToUpload);
+    for (var i = 0; i < fileToUpload.length; i++) {
+      input.append("formFile", fileToUpload[i]);
+    }
+
     const url = `${environment.urlWebAPI}${urlRecurso}`;
 
     return this.http.post(url, input);
     //   .catch(error => {
     //     this.notificationToastr.error(error);
     //     return Observable.throw(error);
-     // });
+    // });
   }
 
   obterBancos() {
-      return this.apiService.get("http://localhost:52854/api/banco"); 
+    return this.apiService.get("http://localhost:52854/api/banco");
   }
 
   obterTipoCNAB() {
-    return this.apiService.get("http://localhost:52854/api/TipoCNAB"); 
+    return this.apiService.get("http://localhost:52854/api/TipoCNAB");
   }
 }

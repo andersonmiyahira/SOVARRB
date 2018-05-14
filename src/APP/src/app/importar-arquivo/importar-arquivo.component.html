@@ -91,7 +91,6 @@
                                         <h6>
                                             Foram encontradas (10) falhas no arquivo enviado.
                                         </h6>
-                                        <small>Corrija e tente enviar novamente</small>
                                         <hr *ngIf="errors">
                                         <ul *ngIf="errors">
                                             <li *ngFor="let error of errors">{{error.mensagem}}</li>
@@ -110,7 +109,6 @@
                                 <h6>
                                     Foram encontradas (10) falhas no arquivo enviado.
                                 </h6>
-                                <small>Corrija e tente enviar novamente</small>
                                 <hr *ngIf="errors">
                                 <ul *ngIf="errors">
                                     <li *ngFor="let error of errors">{{error.mensagem}}</li>

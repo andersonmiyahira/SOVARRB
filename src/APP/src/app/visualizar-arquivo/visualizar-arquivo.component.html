@@ -1,18 +1,124 @@
 <h3>Visualizar Arquivos</h3>
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <select [(ngModel)]="importar.bancoId">
-                <option value="">Selecione o banco</option>
+        <div class="col-md-3">
+            <label for="cbBanco">Data Importação de</label>
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="dpDe" [(ngModel)]="model1" ngbDatepicker #de="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" (click)="de.toggle()" type="button">
+                            <img src="{{logoDatePickerUrl}}" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label for="cbBanco">Data Importação Até</label>
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="dpAte" [(ngModel)]="model2" ngbDatepicker #ate="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" (click)="ate.toggle()" type="button">
+                            <img src="{{logoDatePickerUrl}}" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label for="cbBanco">Banco</label>
+            <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option selected="selected" value="">Selecione o banco</option>
                 <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
             </select>
         </div>
-        <div class="col-md-12">
-            <select [(ngModel)]="importar.tipoCNABId">
-                <option value="">Selecione o tipo do arquivo</option>
+        <div class="col-md-3">
+            <label for="cbCNAB">CNAB</label>
+            <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option selected="selected" value="">Selecione o tipo do arquivo</option>
                 <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
             </select>
         </div>
-    </div> 
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary btn-s">
+                <span class="glyphicon glyphicon-trash"></span> Filtrar
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label for="cbCNAB">Arquivos filtrados</label>
+            <table class="table">
+                <thead class="thead-dark table-striped">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Data Importação</th>
+                        <th scope="col">Tamanho</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Banco</th>
+                        <th scope="col">Validado</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>REM01.txt</td>
+                        <td>01/01/2018 18:00</td>
+                        <td>10kb</td>
+                        <td>CNAB 240</td>
+                        <td>Itaú</td>
+                        <td>Sim</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-s">
+                                <span class="glyphicon glyphicon-trash"></span> Baixar
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-s">
+                                <span class="glyphicon glyphicon-trash"></span> Gerar Boletos
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>REM02.txt</td>
+                        <td>01/01/2018 19:00</td>
+                        <td>100kb</td>
+                        <td>CNAB 400</td>
+                        <td>Banco do Brasil</td>
+                        <td>Não</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-s">
+                                <span class="glyphicon glyphicon-trash"></span> Baixar
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-s">
+                                <span class="glyphicon glyphicon-trash"></span> Gerar Boletos
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>REM03.txt</td>
+                        <td>01/01/2018 18:30</td>
+                        <td>300kb</td>
+                        <td>CNAB 240</td>
+                        <td>Santander</td>
+                        <td>Não</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-s">
+                                <span class="glyphicon glyphicon-trash"></span> Baixar
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-s">
+                                <span class="glyphicon glyphicon-trash"></span> Gerar Boletos
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
- 

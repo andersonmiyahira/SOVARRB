@@ -48,7 +48,7 @@ import { EsqueciSenhaService } from './esqueci-senha/esqueci-senha.service';
     CadastrarUsuarioComponent,
     EsqueciSenhaComponent,
     
-    NavBarComponent
+    NavBarComponent 
   ],
   providers: [
     ImportarArquivoService, 

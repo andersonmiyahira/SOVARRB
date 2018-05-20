@@ -1,0 +1,18 @@
+<h3>Visualizar Arquivos</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <select [(ngModel)]="importar.bancoId">
+                <option value="">Selecione o banco</option>
+                <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <select [(ngModel)]="importar.tipoCNABId">
+                <option value="">Selecione o tipo do arquivo</option>
+                <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
+            </select>
+        </div>
+    </div> 
+</div>
+ 

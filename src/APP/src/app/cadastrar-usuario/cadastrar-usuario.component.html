@@ -1,0 +1,43 @@
+<h3>Novo Usuário</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post" action="/Account/Register" novalidate="novalidate">
+                <div class="text-danger validation-summary-valid" data-valmsg-summary="true">
+                    <ul>
+                        <li style="display:none"></li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label for="Input_Email">Nome</label>
+                    <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
+                </div>
+                <div class="form-group">
+                    <label for="Input_Email">Sobrenome</label>
+                    <input class="form-control" type="text" data-val="true" id="Input_sobrenome" name="Input.sobrenome" value="">
+                </div>
+
+                <div class="form-group">
+                    <label for="Input_Email">Email</label>
+                    <input class="form-control" type="email" data-val="true" data-val-email="The Email field is not a valid e-mail address."
+                        data-val-required="The Email field is required." id="Input_Email" name="Input.Email" value="">
+                    <span class="text-danger field-validation-valid" data-valmsg-for="Input.Email" data-valmsg-replace="true"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Input_Password">Senha</label>
+                    <input class="form-control" type="password" data-val="true" data-val-length="The Password must be at least 6 and at max 100 characters long."
+                        data-val-length-max="100" data-val-length-min="6" data-val-required="The Password field is required."
+                        id="Input_Password" name="Input.Password">
+                    <span class="text-danger field-validation-valid" data-valmsg-for="Input.Password" data-valmsg-replace="true"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Input_ConfirmPassword">Confirme a senha</label>
+                    <input class="form-control" type="password" data-val="true" data-val-equalto="The password and confirmation password do not match."
+                        data-val-equalto-other="*.Password" id="Input_ConfirmPassword" name="Input.ConfirmPassword">
+                    <span class="text-danger field-validation-valid" data-valmsg-for="Input.ConfirmPassword" data-valmsg-replace="true"></span>
+                </div>
+                <button type="submit" class="btn btn-default">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</div>

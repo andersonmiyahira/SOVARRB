@@ -1,15 +1,17 @@
 <h3>Validar Arquivos</h3>
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <select [(ngModel)]="importar.bancoId">
-                <option value="">Selecione o banco</option>
+        <div class="col-md-6">
+            <label for="cbBanco">Banco</label>
+            <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" [(ngModel)]="importar.bancoId" style="display: inherit;">
+                <option selected="selected" value="">Selecione o banco</option>
                 <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
             </select>
         </div>
-        <div class="col-md-12">
-            <select [(ngModel)]="importar.tipoCNABId">
-                <option value="">Selecione o tipo do arquivo</option>
+        <div class="col-md-6">
+            <label for="cbCNAB">CNAB</label>
+            <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" [(ngModel)]="importar.tipoCNABId" style="display: inherit;">
+                <option selected="selected" value="">Selecione o tipo do arquivo</option>
                 <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
             </select>
         </div>
@@ -17,6 +19,7 @@
     <div class="row">
         <div class="col-md-12">
             <!-- <h3>Selecione os arquivos</h3> -->
+            <label>Selecione os arquivos</label>
             <div class="input-group">
                 <label class="input-group-btn">
                     <span class="btn btn-primary" style="line-height: 1.19">
@@ -80,6 +83,7 @@
     </div>
     <div class="row" *ngIf="arquivosValidados">
         <div class="col-md-12">
+            <label>Resultado</label>
             <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
                 <ngb-panel title="REM01.txt">
                     <ng-template ngbPanelContent>
@@ -121,5 +125,3 @@
         </div>
     </div>
 </div>
-
-<div>

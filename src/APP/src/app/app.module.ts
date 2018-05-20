@@ -22,7 +22,9 @@ import { CadastrarUsuarioComponent } from './cadastrar-usuario/cadastrar-usuario
 import { VisualizarArquivoComponent } from './visualizar-arquivo/visualizar-arquivo.component';
 import { VisualizarArquivoService } from './visualizar-arquivo/visualizar-arquivo.service';
 import { LoginService } from './login/login.service';
-import { CadastrarUsuarioService } from './cadastrar-usuario/cadsatrar-usuario.service';
+import { CadastrarUsuarioService } from './cadastrar-usuario/cadastrar-usuario.service';
+import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
+import { EsqueciSenhaService } from './esqueci-senha/esqueci-senha.service';
 
 
 @NgModule({
@@ -44,6 +46,7 @@ import { CadastrarUsuarioService } from './cadastrar-usuario/cadsatrar-usuario.s
     VisualizarArquivoComponent,
     LoginComponent,
     CadastrarUsuarioComponent,
+    EsqueciSenhaComponent,
     
     NavBarComponent
   ],
@@ -52,6 +55,7 @@ import { CadastrarUsuarioService } from './cadastrar-usuario/cadsatrar-usuario.s
     VisualizarArquivoService, 
     LoginService,
     CadastrarUsuarioService,
+    EsqueciSenhaService,
     ApiService
   ],
   bootstrap: [AppComponent]

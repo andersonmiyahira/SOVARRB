@@ -33,9 +33,10 @@ export class ImportarArquivoComponent implements OnInit {
   }
 
   carregarErros(){
-      this.errors.push({ mensagem: "Erro! Posição 10 - Linha 100: formato de data errada"});
-      this.errors.push({ mensagem: "Erro! Posição 20 - Linha 100: formato de data errada"});   
+      this.errors.push({ mensagem: "Erro! Posição 10 - Linha 100: formato de data errada", ehSucesso : false});
+      this.errors.push({ mensagem: "Erro! Posição 20 - Linha 100: formato de data errada", ehSucesso: false});   
       this.errors.push({ mensagem: "Erro! Posição 30 - Linha 110: esperado valor numerico"});      
+      this.errors.push({ mensagem: "Sucesso! Posição 30 - Linha 110: OK",  ehSucesso: true}); 
   }
 
   saveUpload(): void {

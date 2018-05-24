@@ -19,22 +19,29 @@ namespace CrossCutting
             //services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<IConfigurationProvider>(), sp.GetService));
 
             // Register - Services
-            RegisterAppService(services);
+            RegisterAppServices(services);
+
+            //Register - Repositories
+            RegisterRepositories(services);
             
             //Register  - Infra
             //services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<SOVARRBContext>(); 
         }
 
-        private static void RegisterAppService(IServiceCollection services)
+        private static void RegisterAppServices(IServiceCollection services)
         {
             services.AddScoped<IBancoAppService, BancoAppService>();
             services.AddScoped<Domain.Interfaces.Services.IBancoService, Domain.Services.BancoService>();
-            services.AddScoped<IBancoRepository, BancoRepository>();
 
             services.AddScoped<ITipoCNABAppService, TipoCNABAppService>();
             services.AddScoped<Domain.Interfaces.Services.ITipoCNABService, Domain.Services.TipoCNABService>();
+        }
+
+        private static void RegisterRepositories(IServiceCollection services)
+        {
+            services.AddScoped<IBancoRepository, BancoRepository>();
             services.AddScoped<ITipoCNABRepository, TipoCNABRepository>();
-        } 
+        }
     }
 }

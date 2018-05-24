@@ -28,15 +28,15 @@ export class VisualizarArquivoComponent implements OnInit {
   }
 
   carregarErros() {
-    this.errors.push({ tipo:"Header", mensagem: "Erro! Posição 10 - Linha 100: formato de data errada", ehSucesso : false});
-    this.errors.push({ tipo:"Detalhe", mensagem: "Erro! Posição 20 - Linha 102: formato de data errada", ehSucesso: false});   
-    this.errors.push({ tipo:"Detalhe", mensagem: "Erro! Posição 25 - Linha 109: formato de data errada", ehSucesso: false});   
-    this.errors.push({ tipo:"Footer", mensagem: "Erro! Posição 30 - Linha 110: esperado valor numerico"});      
+    this.errors.push({ tipo:"Header", mensagem: "Posição 10 - Posição 20, Linha 100: formato de data errada", ehSucesso : false});
+    this.errors.push({ tipo:"Detalhe", mensagem: "Posição 20 - Posição 25, Linha 102: formato de data errada", ehSucesso: false});   
+    this.errors.push({ tipo:"Detalhe", mensagem: "Posição 25 - Posição 30, Linha 109: formato de data errada", ehSucesso: false});   
+    this.errors.push({ tipo:"Footer", mensagem: "Posição 30 - Posição 38, Linha 110: esperado valor numerico", ehSucesso: false});      
     
   }
 
   carregarSucessos(){
-    this.sucessos.push({ tipo:"Detalhe", mensagem: "Sucesso! Posição 31 - Linha 111: OK", ehSucesso: true}); 
-    this.sucessos.push({ tipo:"Detalhe", mensagem: "Sucesso! Posição 32 - Linha 112: OK", ehSucesso: true}); 
+    this.sucessos.push({ tipo:"Detalhe", mensagem: "Posição 31 - Posição 35, Linha 111", ehSucesso: true}); 
+    this.sucessos.push({ tipo:"Detalhe", mensagem: "Posição 32 - Posição 40, Linha 112", ehSucesso: true}); 
   }
 }

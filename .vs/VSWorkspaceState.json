@@ -1,14 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\src",
-    "\\src\\API",
-    "\\src\\API\\Controllers",
-    "\\src\\Domain",
-    "\\src\\Domain\\Interfaces",
-    "\\src\\Domain\\Interfaces\\Repositories",
-    "\\src\\Domain\\Services"
+    "\\sql",
+    "\\src"
   ],
-  "SelectedNode": "\\src\\API\\Controllers\\ImportarArquivoController.cs",
   "PreviewInSolutionExplorer": false
 }

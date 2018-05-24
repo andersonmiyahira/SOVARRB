@@ -16,6 +16,7 @@ export class ImportarArquivoComponent implements OnInit {
   cnabs: any;
   importar: any;
   errors: any;
+  sucessos: any;
   arquivosValidados: boolean;
 
   @ViewChild("fileInput") fileInput;
@@ -23,6 +24,7 @@ export class ImportarArquivoComponent implements OnInit {
   constructor(private importarArquivoService: ImportarArquivoService) {
     this.importar = {};
     this.errors = [];
+    this.sucessos = [];
     this.arquivosValidados = false;
   }
 
@@ -30,6 +32,7 @@ export class ImportarArquivoComponent implements OnInit {
     this.obterBancos();
     this.obterCNAB();
     this.carregarErros();
+    this.carregarSucessos();
   }
 
   carregarErros(){
@@ -37,6 +40,11 @@ export class ImportarArquivoComponent implements OnInit {
       this.errors.push({ mensagem: "Erro! Posição 20 - Linha 100: formato de data errada", ehSucesso: false});   
       this.errors.push({ mensagem: "Erro! Posição 30 - Linha 110: esperado valor numerico"});      
       this.errors.push({ mensagem: "Sucesso! Posição 30 - Linha 110: OK",  ehSucesso: true}); 
+  }
+
+  carregarSucessos(){
+    this.sucessos.push({ tipo:"Detalhe", mensagem: "Posição 31 - Posição 35, Linha 111", ehSucesso: true}); 
+    this.sucessos.push({ tipo:"Detalhe", mensagem: "Posição 32 - Posição 40, Linha 112", ehSucesso: true}); 
   }
 
   saveUpload(): void {

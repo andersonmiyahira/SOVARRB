@@ -119,7 +119,7 @@
       list-style-type: disc;
   }
     
-  .container-sucesso[_ngcontent-c2] {
+  .container-sucesso {
     border: solid 1px green;
     min-height: 80px;
     display: -webkit-box;

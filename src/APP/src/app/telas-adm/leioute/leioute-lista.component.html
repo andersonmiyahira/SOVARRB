@@ -1,0 +1,19 @@
+<h3>Cadastrar Segmento</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <label for="cbBanco">Banco</label>
+            <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" [(ngModel)]="importar.bancoId" style="display: inherit;">
+                <option selected="selected" value="">Selecione o banco</option>
+                <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="cbCNAB">CNAB</label>
+            <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" [(ngModel)]="importar.tipoCNABId" style="display: inherit;">
+                <option selected="selected" value="">Selecione o tipo do arquivo</option>
+                <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
+            </select>
+        </div>
+    </div> 
+</div>

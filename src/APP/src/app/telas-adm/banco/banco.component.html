@@ -23,7 +23,7 @@
                             <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
                                 <span class="glyphicon glyphicon-trash"></span> Alterar
                             </button>
-                            <button type="button" class="btn btn-secondary btn-s">
+                            <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
                                 <span class="glyphicon glyphicon-trash"></span> Excluir
                             </button>
                         </td>
@@ -37,7 +37,7 @@
                             <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
                                 <span class="glyphicon glyphicon-trash"></span> Alterar
                             </button>
-                            <button type="button" class="btn btn-secondary btn-s">
+                            <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
                                 <span class="glyphicon glyphicon-trash"></span> Excluir
                             </button>
                         </td>
@@ -51,7 +51,7 @@
                             <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
                                 <span class="glyphicon glyphicon-trash"></span> Alterar
                             </button>
-                            <button type="button" class="btn btn-secondary btn-s" (click)="excluir(content)">
+                            <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
                                 <span class="glyphicon glyphicon-trash"></span> Excluir
                             </button>
                         </td>
@@ -92,7 +92,7 @@
                             <label for="cbCNAB">Status</label>
                             <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
                                 <option selected="selected" value="1">Ativo</option>
-                                <option  value="2">Inativo</option>
+                                <option value="2">Inativo</option>
                             </select>
                         </div>
                     </form>
@@ -106,24 +106,25 @@
     </div>
 </ng-template>
 
+
 <ng-template #excluir let-c="close" let-d="dismiss">
-        <div class="modal-header">
-            <h4 class="modal-title">Novo Banco</h4>
-            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div>
-                <div class="row">
-                    <div class="col-md-12">
-                         Tem certeza que deseja excluir?
-                    </div>
+    <div class="modal-header">
+        <h4 class="modal-title">Novo Banco</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    Tem certeza que deseja excluir?
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" (click)="c('Close click')">Salvar</button>
-            <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
-        </div>
-    </ng-template>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" (click)="c('Close click')">Sim</button>
+        <button type="button" class="btn btn-light" (click)="c('Close click')">Não</button>
+    </div>
+</ng-template>

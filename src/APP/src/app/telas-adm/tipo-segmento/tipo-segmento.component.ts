@@ -15,9 +15,12 @@ export class TipoSegmentoComponent implements OnInit {
 
   ngOnInit() {
   }
- 
 
   novo(content) {
     this.modalService.open(content, { size: 'lg' });
+  }
+
+  exclude(excluir) {
+    this.modalService.open(excluir, { size: 'lg' });
   }
 }

@@ -16,13 +16,12 @@ export class BancoComponent implements OnInit {
 
   ngOnInit() {
   }
-
   
   novo(content) {
     this.modalService.open(content, { size: 'lg' });
   }
 
-  excluir(excluir) {
+  exclude(excluir) {
     this.modalService.open(excluir, { size: 'lg' });
   }
  

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TipoSegmentoService } from './tipo-segmento.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-tipo-segmento',
@@ -8,10 +9,15 @@ import { TipoSegmentoService } from './tipo-segmento.service';
 })
 export class TipoSegmentoComponent implements OnInit {
 
-  constructor(private tipoSegmentoService: TipoSegmentoService) {
+  constructor(private tipoSegmentoService: TipoSegmentoService,
+              private modalService: NgbModal) {
   }
 
   ngOnInit() {
   }
  
+
+  novo(content) {
+    this.modalService.open(content, { size: 'lg' });
+  }
 }

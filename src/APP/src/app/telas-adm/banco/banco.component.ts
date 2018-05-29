@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploader } from 'ng2-file-upload';
 import { BancoService } from './banco.service';
 
@@ -10,10 +10,20 @@ import { BancoService } from './banco.service';
 })
 export class BancoComponent implements OnInit {
 
-  constructor(private bancoService: BancoService) {
+  constructor(private bancoService: BancoService,
+              private modalService: NgbModal) {
   }
 
   ngOnInit() {
+  }
+
+  
+  novo(content) {
+    this.modalService.open(content, { size: 'lg' });
+  }
+
+  excluir(excluir) {
+    this.modalService.open(excluir, { size: 'lg' });
   }
  
 }

@@ -32,9 +32,9 @@ import { BancoComponent } from './telas-adm/banco/banco.component';
 import { BancoService } from './telas-adm/banco/banco.service';
 import { TipoSegmentoComponent } from './telas-adm/tipo-segmento/tipo-segmento.component';
 import { TipoSegmentoService } from './telas-adm/tipo-segmento/tipo-segmento.service';
-import { LeiouteComponent } from './telas-adm/leioute/leioute-lista.component';
-import { LeiouteService } from './telas-adm/leioute/leioute-lista.service';
-
+import { LeiouteComponent } from './telas-adm/leioute/listar/leioute-lista.component';
+import { LeiouteService } from './telas-adm/leioute/leioute.service';
+import { LeiouteCadastrarComponent } from './telas-adm/leioute/cadastrar/leioute-cadastrar.component';
 
 
 @NgModule({
@@ -67,7 +67,8 @@ import { LeiouteService } from './telas-adm/leioute/leioute-lista.service';
 
     BancoComponent,
     TipoSegmentoComponent,
-    LeiouteComponent
+    LeiouteComponent,
+    LeiouteCadastrarComponent
   ],
   providers: [
     ImportarArquivoService, 

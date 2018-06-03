@@ -1,0 +1,125 @@
+<h3>Cadastrar Leioute</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="cbBanco">Banco</label>
+            <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option selected="selected" value="">Selecione o banco</option>
+                <option value="">Itaú</option>
+                <option value="">Santander</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="cbCNAB">CNAB</label>
+            <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option selected="selected" value="">Selecione o tipo do arquivo</option>
+                <option value="">240</option>
+                <option value="">400</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="cbCNAB">Tipo de transação</label>
+            <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option selected="selected" value="">Selecione o tipo da transação</option>
+                <option value="">Pagamento</option>
+                <option value="">Cobrança</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <label for="cbBanco">Tipo do registro</label>
+            <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option selected="selected" value="">Selecione tipo do registro</option>
+                <option value="">Header</option>
+                <option value="">Detalhe</option>
+                <option value="">Trailer</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="cbBanco">Segmento</label>
+            <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option selected="selected" value="">Selecione Segmento</option>
+                <option value="">Segmento P</option>
+                <option value="">Segmento Q</option>
+                <option value="">Segmento R</option>
+                <option value="">Segmento S</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary" (click)="c('Close click')">Salvar</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead-dark table-striped">
+                    <tr>
+                        <th scope="col">Posição De</th>
+                        <th scope="col">Posição Até</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Tipo Campo</th>
+                        <th scope="col">Obrigatório</th>
+                        <th scope="col">Valor esperado</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>0</th>
+                        <td>10</td>
+                        <td>caixa de texto</td>
+                        <td>Alfanumérico</td>
+                        <td>Sim</td>
+                        <td>--</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
+                                <span class="glyphicon glyphicon-trash"></span> Alterar
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                                <span class="glyphicon glyphicon-trash"></span> Excluir
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>20</th>
+                        <td>30</td>
+                        <td>caixa de texto</td>
+                        <td>Alfanumérico</td>
+                        <td>Sim</td>
+                        <td>--</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
+                                <span class="glyphicon glyphicon-trash"></span> Alterar
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                                <span class="glyphicon glyphicon-trash"></span> Excluir
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>30</th>
+                        <td>40</td>
+                        <td>caixa de texto</td>
+                        <td>Alfanumérico</td>
+                        <td>Sim</td>
+                        <td>--</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
+                                <span class="glyphicon glyphicon-trash"></span> Alterar
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                                <span class="glyphicon glyphicon-trash"></span> Excluir
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

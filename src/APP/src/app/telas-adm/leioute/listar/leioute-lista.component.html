@@ -1,0 +1,243 @@
+<h3>Cadastrar Leioute</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="cbBanco">Banco</label>
+            <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option selected="selected" value="">Selecione o banco</option>
+                <option value="">Itaú</option>
+                <option value="">Santander</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="cbCNAB">CNAB</label>
+            <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option selected="selected" value="">Selecione o tipo do arquivo</option>
+                <option value="">240</option>
+                <option value="">400</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="cbCNAB">Tipo de transação</label>
+            <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option selected="selected" value="">Selecione o tipo da transação</option>
+                <option value="">Pagamento</option>
+                <option value="">Cobrança</option>
+            </select>
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary" (click)="novoLeioute()">Novo</button>
+            <button type="button" class="btn btn-light" (click)="buscar()">Buscar</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+                <ngb-panel title="Header">
+                    <ng-template ngbPanelContent>
+                        <table class="table">
+                            <thead class="thead-dark table-striped">
+                                <tr>
+                                    <th scope="col">Posição De</th>
+                                    <th scope="col">Posição Até</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Tipo Campo</th>
+                                    <th scope="col">Obrigatório</th>
+                                    <th scope="col">Valor esperado</th>
+                                    <th scope="col">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>0</th>
+                                    <td>10</td>
+                                    <td>caixa de texto</td>
+                                    <td>Alfanumérico</td>
+                                    <td>Sim</td>
+                                    <td>--</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
+                                            <span class="glyphicon glyphicon-trash"></span> Alterar
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                                            <span class="glyphicon glyphicon-trash"></span> Excluir
+                                        </button>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <th>20</th>
+                                    <td>30</td>
+                                    <td>caixa de texto</td>
+                                    <td>Alfanumérico</td>
+                                    <td>Sim</td>
+                                    <td>--</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
+                                            <span class="glyphicon glyphicon-trash"></span> Alterar
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                                            <span class="glyphicon glyphicon-trash"></span> Excluir
+                                        </button>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <th>30</th>
+                                    <td>40</td>
+                                    <td>caixa de texto</td>
+                                    <td>Alfanumérico</td>
+                                    <td>Sim</td>
+                                    <td>--</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
+                                            <span class="glyphicon glyphicon-trash"></span> Alterar
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                                            <span class="glyphicon glyphicon-trash"></span> Excluir
+                                        </button>
+                                    </td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </ng-template>
+                </ngb-panel>  
+                <ngb-panel title="Detalhe">
+                    <ng-template ngbPanelContent>
+                        <table class="table">
+                            <thead class="thead-dark table-striped">
+                                <tr>
+                                    <th scope="col">Posição De</th>
+                                    <th scope="col">Posição Até</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Tipo Campo</th>
+                                    <th scope="col">Obrigatório</th>
+                                    <th scope="col">Valor esperado</th>
+                                    <th scope="col">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>0</th>
+                                    <td>10</td>
+                                    <td>caixa de texto</td>
+                                    <td>Alfanumérico</td>
+                                    <td>Sim</td>
+                                    <td>--</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
+                                            <span class="glyphicon glyphicon-trash"></span> Alterar
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                                            <span class="glyphicon glyphicon-trash"></span> Excluir
+                                        </button>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <th>20</th>
+                                    <td>30</td>
+                                    <td>caixa de texto</td>
+                                    <td>Alfanumérico</td>
+                                    <td>Sim</td>
+                                    <td>--</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
+                                            <span class="glyphicon glyphicon-trash"></span> Alterar
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                                            <span class="glyphicon glyphicon-trash"></span> Excluir
+                                        </button>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <th>30</th>
+                                    <td>40</td>
+                                    <td>caixa de texto</td>
+                                    <td>Alfanumérico</td>
+                                    <td>Sim</td>
+                                    <td>--</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
+                                            <span class="glyphicon glyphicon-trash"></span> Alterar
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                                            <span class="glyphicon glyphicon-trash"></span> Excluir
+                                        </button>
+                                    </td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </ng-template>
+                </ngb-panel>  
+                <ngb-panel title="Trailer">
+                    <ng-template ngbPanelContent>
+                        <table class="table">
+                            <thead class="thead-dark table-striped">
+                                <tr>
+                                    <th scope="col">Posição De</th>
+                                    <th scope="col">Posição Até</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Tipo Campo</th>
+                                    <th scope="col">Obrigatório</th>
+                                    <th scope="col">Valor esperado</th>
+                                    <th scope="col">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>0</th>
+                                    <td>10</td>
+                                    <td>caixa de texto</td>
+                                    <td>Alfanumérico</td>
+                                    <td>Sim</td>
+                                    <td>--</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
+                                            <span class="glyphicon glyphicon-trash"></span> Alterar
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                                            <span class="glyphicon glyphicon-trash"></span> Excluir
+                                        </button>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <th>20</th>
+                                    <td>30</td>
+                                    <td>caixa de texto</td>
+                                    <td>Alfanumérico</td>
+                                    <td>Sim</td>
+                                    <td>--</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
+                                            <span class="glyphicon glyphicon-trash"></span> Alterar
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                                            <span class="glyphicon glyphicon-trash"></span> Excluir
+                                        </button>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <th>30</th>
+                                    <td>40</td>
+                                    <td>caixa de texto</td>
+                                    <td>Alfanumérico</td>
+                                    <td>Sim</td>
+                                    <td>--</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
+                                            <span class="glyphicon glyphicon-trash"></span> Alterar
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                                            <span class="glyphicon glyphicon-trash"></span> Excluir
+                                        </button>
+                                    </td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </ng-template>
+                </ngb-panel>  
+            </ngb-accordion>
+        </div>
+    </div>
+</div>

@@ -96,6 +96,7 @@
       min-height: 80px;
       display: flex;
       display: -webkit-flex; 
+      margin-bottom: 10px;
   }
   div.errors {
       -webkit-flex: 0 0 auto;
@@ -118,3 +119,33 @@
       list-style-type: disc;
   }
     
+  .container-sucesso {
+    border: solid 1px green;
+    min-height: 80px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+    margin-bottom: 10px;
+}
+
+
+div.sucesso {
+  -webkit-flex: 0 0 auto;
+  flex: 1 1 auto;
+  order: 2;
+  padding: 20px;
+  line-height: 18pt;
+}
+
+.sucesso h6 {
+  color: green;
+  font-weight: 600;
+  letter-spacing: 0;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.sucesso hr {
+  border-top: solid 1px green;
+}

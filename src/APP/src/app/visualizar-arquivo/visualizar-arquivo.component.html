@@ -81,6 +81,9 @@
                             <button type="button" class="btn btn-secondary btn-s">
                                 <span class="glyphicon glyphicon-trash"></span> Gerar Boletos
                             </button>
+                            <button type="button" class="btn btn-secondary btn-s" (click)="openLg(content)">
+                                <span class="glyphicon glyphicon-trash"></span> Detalhes
+                            </button>
                         </td>
                     </tr>
                     <tr>
@@ -97,6 +100,9 @@
                             </button>
                             <button type="button" class="btn btn-secondary btn-s">
                                 <span class="glyphicon glyphicon-trash"></span> Gerar Boletos
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-s" (click)="openLg(content)">
+                                <span class="glyphicon glyphicon-trash"></span> Detalhes
                             </button>
                         </td>
                     </tr>
@@ -115,6 +121,9 @@
                             <button type="button" class="btn btn-secondary btn-s">
                                 <span class="glyphicon glyphicon-trash"></span> Gerar Boletos
                             </button>
+                            <button type="button" class="btn btn-secondary btn-s" (click)="openLg(content)">
+                                <span class="glyphicon glyphicon-trash"></span> Detalhes
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -122,3 +131,81 @@
         </div>
     </div>
 </div>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Detalhes do arquivo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <ul>
+                <li>
+                    Header:
+                    <div class="container-errors">
+                        <div class="errors">
+                            <h6>
+                                Foram encontradas (1) falhas no arquivo enviado.
+                            </h6>
+                            <hr *ngIf="errors">
+                            <ul *ngIf="errors" style="color: red">
+                                <li>
+                                    Posição 10 - Posição 20, Linha 1 : esperado valor numérico, campo: CNPJ
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    Detalhes:
+                    <div class="container-errors">
+                        <div class="errors">
+                            <h6>
+                                Foram encontradas (4) falhas no arquivo enviado.
+                            </h6>
+                            <hr *ngIf="errors">
+                            <ul *ngIf="errors" style="color: red">
+                                <li *ngFor="let error of errors">
+                                    {{error.mensagem}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="container-sucesso">
+                        <div class="sucesso">
+                            <h6>
+                                Foram encontradas (2) linhas válidas no arquivo enviado.
+                            </h6>
+                            <hr *ngIf="sucessos">
+                            <ul *ngIf="sucessos" style="color: green">
+                                <li *ngFor="let sucesso of sucessos">
+                                    {{sucesso.mensagem}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    Trailer:
+                        <div class="container-sucesso">
+                            <div class="sucesso">
+                                <h6>
+                                    Foram encontradas (1) linhas válidas no arquivo enviado.
+                                </h6>
+                                <hr *ngIf="sucessos">
+                                <ul *ngIf="sucessos" style="color: green">
+                                    <li>
+                                        Posição 10 - Posição 20, Linha 300 : esperado valor numérico
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
+    </div>
+</ng-template>

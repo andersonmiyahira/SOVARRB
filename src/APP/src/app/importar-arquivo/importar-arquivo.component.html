@@ -87,6 +87,76 @@
             <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
                 <ngb-panel title="REM01.txt">
                     <ng-template ngbPanelContent>
+                        <div>
+                            <ul>
+                                <li>
+                                    Header:
+                                    <div class="container-errors">
+                                        <div class="errors">
+                                            <h6>
+                                                Foram encontradas (1) falhas no arquivo enviado.
+                                            </h6>
+                                            <hr *ngIf="errors">
+                                            <ul *ngIf="errors" style="color: red">
+                                                <li>
+                                                    Posição 10 - Posição 20, Linha 1 : esperado valor numérico, campo: CNPJ
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    Detalhes:
+                                    <div class="container-errors">
+                                        <div class="errors">
+                                            <h6>
+                                                Foram encontradas (4) falhas no arquivo enviado.
+                                            </h6>
+                                            <hr *ngIf="errors">
+                                            <ul *ngIf="errors" style="color: red">
+                                                <li *ngFor="let error of errors">
+                                                    {{error.mensagem}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="container-sucesso">
+                                        <div class="sucesso">
+                                            <h6>
+                                                Foram encontradas (2) linhas válidas no arquivo enviado.
+                                            </h6>
+                                            <hr *ngIf="sucessos">
+                                            <ul *ngIf="sucessos" style="color: green">
+                                                <li *ngFor="let sucesso of sucessos">
+                                                    {{sucesso.mensagem}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    Trailer:
+                                    <div class="container-sucesso">
+                                        <div class="sucesso">
+                                            <h6>
+                                                Foram encontradas (1) linhas válidas no arquivo enviado.
+                                            </h6>
+                                            <hr *ngIf="sucessos">
+                                            <ul *ngIf="sucessos" style="color: green">
+                                                <li>
+                                                    Posição 10 - Posição 20, Linha 300 : esperado valor numérico
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+
+                <!-- <ngb-panel title="REM01.txt">
+                    <ng-template ngbPanelContent>
                             <div class="container-errors">
                                     <div class="icon">
                                         <i class="far fa-times-circle fa-3x"></i>
@@ -120,7 +190,7 @@
                             </div>
                         </div>
                     </ng-template>
-                </ngb-panel>
+                </ngb-panel> -->
             </ngb-accordion>
         </div>
     </div>

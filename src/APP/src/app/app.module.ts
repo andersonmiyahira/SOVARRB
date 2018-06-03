@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from './data/in-memory-data.service';
 
 import { AppRoutingModule } from './routes/app-routing.module';
 import { ApiService } from './services/api.service';
@@ -26,6 +27,15 @@ import { CadastrarUsuarioService } from './cadastrar-usuario/cadastrar-usuario.s
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { EsqueciSenhaService } from './esqueci-senha/esqueci-senha.service';
 
+//componentes e servicos da area restrita de adm
+import { BancoComponent } from './telas-adm/banco/banco.component';
+import { BancoService } from './telas-adm/banco/banco.service';
+import { TipoSegmentoComponent } from './telas-adm/tipo-segmento/tipo-segmento.component';
+import { TipoSegmentoService } from './telas-adm/tipo-segmento/tipo-segmento.service';
+import { LeiouteComponent } from './telas-adm/leioute/listar/leioute-lista.component';
+import { LeiouteService } from './telas-adm/leioute/leioute.service';
+import { LeiouteCadastrarComponent } from './telas-adm/leioute/cadastrar/leioute-cadastrar.component';
+
 
 @NgModule({
   imports: [
@@ -35,6 +45,11 @@ import { EsqueciSenhaService } from './esqueci-senha/esqueci-senha.service';
     HttpClientModule,
     FileUploadModule,
     SelectModule,
+
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    ),
+
     NgbModule.forRoot()
   ],
   declarations: [
@@ -48,7 +63,12 @@ import { EsqueciSenhaService } from './esqueci-senha/esqueci-senha.service';
     CadastrarUsuarioComponent,
     EsqueciSenhaComponent,
     
-    NavBarComponent 
+    NavBarComponent ,
+
+    BancoComponent,
+    TipoSegmentoComponent,
+    LeiouteComponent,
+    LeiouteCadastrarComponent
   ],
   providers: [
     ImportarArquivoService, 
@@ -56,6 +76,11 @@ import { EsqueciSenhaService } from './esqueci-senha/esqueci-senha.service';
     LoginService,
     CadastrarUsuarioService,
     EsqueciSenhaService,
+
+    BancoService,
+    TipoSegmentoService,  
+    LeiouteService,
+
     ApiService
   ],
   bootstrap: [AppComponent]

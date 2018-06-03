@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from './data/in-memory-data.service';
 
 import { AppRoutingModule } from './routes/app-routing.module';
 import { ApiService } from './services/api.service';
@@ -44,6 +45,11 @@ import { LeiouteService } from './telas-adm/leioute/leioute-lista.service';
     HttpClientModule,
     FileUploadModule,
     SelectModule,
+
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    ),
+
     NgbModule.forRoot()
   ],
   declarations: [

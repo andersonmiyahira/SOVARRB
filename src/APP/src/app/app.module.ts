@@ -35,7 +35,7 @@ import { TipoSegmentoService } from './telas-adm/tipo-segmento/tipo-segmento.ser
 import { LeiouteComponent } from './telas-adm/leioute/listar/leioute-lista.component';
 import { LeiouteService } from './telas-adm/leioute/leioute.service';
 import { LeiouteCadastrarComponent } from './telas-adm/leioute/cadastrar/leioute-cadastrar.component';
-
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   imports: [
@@ -45,6 +45,7 @@ import { LeiouteCadastrarComponent } from './telas-adm/leioute/cadastrar/leioute
     HttpClientModule,
     FileUploadModule,
     SelectModule,
+    Ng2SmartTableModule,
 
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }

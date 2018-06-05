@@ -5,7 +5,7 @@ export class InMemoryDataService implements InMemoryDbService {
     const banco = [
       { id: 11, descricao: 'Itaú' },
       { id: 12, descricao: 'Santander' },
-      { id: 13, descricao: 'Bradesco' }       
+      { id: 13, descricao: 'Bradesco' }
     ];
 
     const tipoCNAB = [

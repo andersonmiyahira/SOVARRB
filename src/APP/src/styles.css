@@ -39,7 +39,7 @@ button:disabled {
 }
 
 /* Navigation link styles */
-nav a {
+/* nav a {
   padding: 5px 10px;
   text-decoration: none;
   margin-right: 10px;
@@ -57,7 +57,7 @@ nav a:hover {
 }
 nav a.active {
   color: #039be5;
-}
+} */
 
 /* everywhere else */
 * {

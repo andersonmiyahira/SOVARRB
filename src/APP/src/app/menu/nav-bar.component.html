@@ -1,29 +1,38 @@
-<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-    <div class="container">
-        <ul class="nav navbar-nav">
-            <li>
-                <a routerLink="/importar-arquivo">Validar</a>
-            </li>
-            <li>
-                <a routerLink="/visualizar-arquivo">Visualizar</a>
-            </li>
-            <li>
-                <a routerLink="/banco">Banco</a>
-            </li>
-            <li>
-                <a routerLink="/tipo-segmento">Segmento</a>
-            </li>
-            <li>
-                <a routerLink="/leioute">Leioute</a>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <!-- <li>
-                <a routerLink="/cadastrar-usuario">Cadastrar</a>
-            </li> -->
-            <li>
-                <a routerLink="/login">Log in</a>
-            </li>
-        </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">Navbar w/ text</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/importar-arquivo">Validar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/visualizar-arquivo">Visualizar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/banco">Banco</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/tipo-segmento">Segmento</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/leioute">Leioute</a>
+        </li>
+      </ul>
+
+      <span class="navbar-text">
+        <a class="nav-link" routerLink="/login">Log in</a>
+      </span>
     </div>
+  </div>
 </nav>
+

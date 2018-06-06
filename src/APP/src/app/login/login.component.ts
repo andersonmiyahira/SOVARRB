@@ -3,6 +3,7 @@ import { LoginService } from './login.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LocalStorageService } from '../core/local-storage.service';
 import { Login } from './login.model';
+import { EventosService } from '../core/eventos.service';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
                                 && x["senha"] == this.login.senha);
 
       if(usu && usu.length > 0) { 
-        localStorage.setItem("login", "1");
+        localStorage.setItem("logado", "1");
         localStorage.setItem("nomeLogged", usu[0]["nome"]);
         localStorage.setItem("emailLogged", usu[0]["email"]);
         localStorage.setItem("ehAdministradorLogged", usu[0]["ehAdministrador"]);
@@ -39,6 +40,8 @@ export class LoginComponent implements OnInit {
         localStorage.clear();
         this.usuarioEncontrado = false;
       }
+
+      EventosService.realizouLogin.emit();
     });
   }
 }

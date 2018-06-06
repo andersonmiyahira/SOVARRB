@@ -15,7 +15,6 @@ import { SelectModule } from 'ng2-select';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ImportarArquivoComponent } from './importar-arquivo/importar-arquivo.component';
-import { VisualizarBoletosComponent } from './visualizar-boletos/visualizar-boletos.component';
 import { ImportarArquivoService } from './importar-arquivo/importar-arquivo.service';
 import { NavBarComponent } from './menu/nav-bar.component';
 import { LoginComponent } from './login/login.component';
@@ -37,6 +36,7 @@ import { LeiouteService } from './telas-adm/leioute/leioute.service';
 import { LeiouteCadastrarComponent } from './telas-adm/leioute/cadastrar/leioute-cadastrar.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { LocalStorageService } from './core/local-storage.service';
+import { EventosService } from './core/eventos.service';
 
 @NgModule({
   imports: [
@@ -59,7 +59,6 @@ import { LocalStorageService } from './core/local-storage.service';
     DashboardComponent,
 
     ImportarArquivoComponent,
-    VisualizarBoletosComponent,
     VisualizarArquivoComponent,
     LoginComponent,
     CadastrarUsuarioComponent,
@@ -83,6 +82,7 @@ import { LocalStorageService } from './core/local-storage.service';
     TipoSegmentoService,  
     LeiouteService,
     LocalStorageService,
+    EventosService,
     ApiService
   ],
   bootstrap: [AppComponent]

@@ -12,25 +12,28 @@
             <span class="sr-only">(current)</span>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="logado">
           <a class="nav-link" routerLink="/importar-arquivo">Validar</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="logado">
           <a class="nav-link" routerLink="/visualizar-arquivo">Visualizar</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="logado && ehAdministrador">
           <a class="nav-link" routerLink="/banco">Banco</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="logado && ehAdministrador">
           <a class="nav-link" routerLink="/tipo-segmento">Segmento</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="logado && ehAdministrador">
           <a class="nav-link" routerLink="/leioute">Leioute</a>
         </li>
       </ul>
 
-      <span class="navbar-text">
+      <span class="navbar-text" *ngIf="!logado">
         <a class="nav-link" routerLink="/login">Log in</a>
+      </span>
+      <span class="navbar-text" *ngIf="logado">
+        <a class="nav-link" (click)="logout()">Log out</a>
       </span>
     </div>
   </div>

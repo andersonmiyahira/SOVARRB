@@ -37,6 +37,7 @@ import { LeiouteCadastrarComponent } from './telas-adm/leioute/cadastrar/leioute
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { LocalStorageService } from './core/local-storage.service';
 import { EventosService } from './core/eventos.service';
+import { AuthGuardService } from './core/auth-guard.service';
 
 @NgModule({
   imports: [
@@ -83,6 +84,7 @@ import { EventosService } from './core/eventos.service';
     LeiouteService,
     LocalStorageService,
     EventosService,
+    AuthGuardService,
     ApiService
   ],
   bootstrap: [AppComponent]

@@ -11,19 +11,20 @@ import { TipoSegmentoComponent } from '../telas-adm/tipo-segmento/tipo-segmento.
 import { LeiouteComponent } from '../telas-adm/leioute/listar/leioute-lista.component';
 import { LeiouteCadastrarComponent } from '../telas-adm/leioute/cadastrar/leioute-cadastrar.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { AuthGuardService } from '../core/auth-guard.service';
 
 const routes: Routes = [
   //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'importar-arquivo', component: ImportarArquivoComponent },
-  { path: 'visualizar-arquivo', component: VisualizarArquivoComponent },
+  { path: 'importar-arquivo', component: ImportarArquivoComponent, canActivate: [AuthGuardService] },
+  { path: 'visualizar-arquivo', component: VisualizarArquivoComponent, canActivate: [AuthGuardService] },
   { path: 'cadastrar-usuario', component: CadastrarUsuarioComponent },
   { path: 'login', component: LoginComponent },
   { path: 'esqueci-senha', component: EsqueciSenhaComponent },
-  { path: 'banco', component: BancoComponent },
-  { path: 'tipo-segmento', component: TipoSegmentoComponent },
-  { path: 'leioute', component: LeiouteComponent },
-  { path: 'leioute-cadastrar', component: LeiouteCadastrarComponent },
+  { path: 'banco', component: BancoComponent, canActivate: [AuthGuardService] },
+  { path: 'tipo-segmento', component: TipoSegmentoComponent, canActivate: [AuthGuardService] },
+  { path: 'leioute', component: LeiouteComponent, canActivate: [AuthGuardService] },
+  { path: 'leioute-cadastrar', component: LeiouteCadastrarComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({

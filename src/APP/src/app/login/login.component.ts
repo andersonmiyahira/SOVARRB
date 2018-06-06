@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LocalStorageService } from '../core/local-storage.service';
 import { Login } from './login.model';
 import { EventosService } from '../core/eventos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,9 @@ export class LoginComponent implements OnInit {
   login: Login;
 
   constructor(private loginService: LoginService,
-              private localStorage: LocalStorageService) {
+              private localStorage: LocalStorageService,
+              private router: Router
+            ) {
     this.login = new Login();
     this.usuarioEncontrado = true;
   }
@@ -42,6 +45,9 @@ export class LoginComponent implements OnInit {
       }
 
       EventosService.realizouLogin.emit();
+      if(usu && usu.length > 0) {
+        this.router.navigate(['./dashboard']);
+      }
     });
   }
 }

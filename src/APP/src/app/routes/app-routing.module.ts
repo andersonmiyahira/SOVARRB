@@ -10,9 +10,11 @@ import { BancoComponent } from '../telas-adm/banco/banco.component';
 import { TipoSegmentoComponent } from '../telas-adm/tipo-segmento/tipo-segmento.component';
 import { LeiouteComponent } from '../telas-adm/leioute/listar/leioute-lista.component';
 import { LeiouteCadastrarComponent } from '../telas-adm/leioute/cadastrar/leioute-cadastrar.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'importar-arquivo', component: ImportarArquivoComponent },
   { path: 'visualizar-arquivo', component: VisualizarArquivoComponent },
   { path: 'cadastrar-usuario', component: CadastrarUsuarioComponent },

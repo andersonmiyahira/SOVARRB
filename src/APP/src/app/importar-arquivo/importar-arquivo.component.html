@@ -42,9 +42,9 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th width="50%">Nome</th>
-                  <th>Status</th>
-                  <th style="width: 100px;text-align: center;">Ações</th>
+                  <th width="70%">Nome</th>
+                  <th width="15%">Status</th>
+                  <th style="width: 15%;text-align: center;">Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -54,7 +54,7 @@
                   </td>
                   <td class="text-center">
                     <span *ngIf="item.isSuccess">
-                      <i class="glyphicon glyphicon-ok"></i>
+                      <i class="fas fa-check"></i>
                     </span>
                     <span *ngIf="item.isError">
                       <i class="glyphicon glyphicon-remove"></i>

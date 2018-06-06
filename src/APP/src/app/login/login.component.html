@@ -2,13 +2,14 @@
   <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Fazer login</h1>
   <label for="inputEmail" class="sr-only">E-mail</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="E-mail" required autofocus data-val="true" data-val-email="The Email field is not a valid e-mail address."
+  <input type="email" [(ngModel)]="login.email" id="inputEmail" class="form-control" placeholder="E-mail" required autofocus data-val="true" data-val-email="The Email field is not a valid e-mail address."
     data-val-required="The Email field is required." id="Input_Email" name="Input.Email" value="">
   <label for="inputPassword" class="sr-only">Senha</label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required data-val="true" data-val-required="The Password field is required."
+  <input [(ngModel)]="login.senha" type="password" id="inputPassword" class="form-control" placeholder="Senha" required data-val="true" data-val-required="The Password field is required."
     id="Input_Password" name="Input.Password">
   <span class="text-danger field-validation-valid" data-valmsg-for="Input.Password" data-valmsg-replace="true"></span>
-  <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Entrar</button>
+  <span class="text-danger field-validation-valid" *ngIf="!usuarioEncontrado">Usuário/Senha não encontrado.</span>
+  <button class="btn btn-lg btn-primary btn-block mb-3" type="submit" (click)="logarFake()">Entrar</button>
   <div class="options mb-3">
     <label>
       <a routerLink="/esqueci-senha">Esqueceu a senha?</a>

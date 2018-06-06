@@ -1,0 +1,29 @@
+.navbar {
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.nav-item a{
+  padding: 1rem;
+  color: #222;
+}
+
+.nav-item a:hover {
+  background: #0069d9;
+  position: relative;
+  color: #fff;
+}
+
+.nav-item a:hover::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 4px;
+  background: #003f83;
+}
+.nav-right {
+  padding-top: 0;
+  padding-bottom: 0;
+}

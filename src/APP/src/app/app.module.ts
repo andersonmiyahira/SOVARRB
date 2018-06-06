@@ -36,6 +36,7 @@ import { LeiouteComponent } from './telas-adm/leioute/listar/leioute-lista.compo
 import { LeiouteService } from './telas-adm/leioute/leioute.service';
 import { LeiouteCadastrarComponent } from './telas-adm/leioute/cadastrar/leioute-cadastrar.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { LocalStorageService } from './core/local-storage.service';
 
 @NgModule({
   imports: [
@@ -81,7 +82,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     BancoService,
     TipoSegmentoService,  
     LeiouteService,
-
+    LocalStorageService,
     ApiService
   ],
   bootstrap: [AppComponent]

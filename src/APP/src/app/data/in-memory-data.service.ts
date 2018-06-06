@@ -13,10 +13,22 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 2, descricao: '400' }
     ];
 
+    const login = [{
+      nome: 'Anderson',
+      email: 'anderson@gmail.com',
+      senha: '123',
+      ehAdministrador: 1
+    },{
+      nome: 'Teste',
+      email: 'teste@gmail.com',
+      senha: '123',
+      ehAdministrador: 0
+    }]
 
     return {
       banco: banco,
-      tipoCNAB: tipoCNAB
+      tipoCNAB: tipoCNAB,
+      login: login
     };
   }
 }

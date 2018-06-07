@@ -43,7 +43,7 @@
               <thead>
                 <tr>
                   <th width="70%">Nome</th>
-                  <th width="15%">Status</th>
+                  <th width="15%;text-align: center;">Status</th>
                   <th style="width: 15%;text-align: center;">Ações</th>
                 </tr>
               </thead>
@@ -54,10 +54,10 @@
                   </td>
                   <td class="text-center">
                     <span *ngIf="item.isSuccess">
-                      <i class="fas fa-check"></i>
+                      <i class="fas fa-check txt-green"></i>
                     </span>
                     <span *ngIf="item.isError">
-                      <i class="glyphicon glyphicon-remove"></i>
+                      <i class="fas fa-times txt-red"></i>
                     </span>
                   </td>
                   <td nowrap style="text-align: center;">

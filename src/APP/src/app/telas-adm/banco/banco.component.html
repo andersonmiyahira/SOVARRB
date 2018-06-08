@@ -15,39 +15,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Santander</td>
-                <td>01/01/2018 18:00</td>
-                <td>Ativo</td>
-                <td>
-                  <button type="button" class="btn btn-primary btn-sm" (click)="novo(content)" ngbTooltip="Editar">
-                    <span class="fas fa-edit"></span>
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm" (click)="exclude(excluir)" ngbTooltip="Excluir">
-                    <span class="fas fa-trash-alt"></span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Bradesco</td>
-                <td>01/01/2018 18:00</td>
-                <td>Ativo</td>
-                <td>
-                  <button type="button" class="btn btn-primary btn-sm" (click)="novo(content)" ngbTooltip="Editar">
-                    <span class="fas fa-edit"></span>
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm" (click)="exclude(excluir)" ngbTooltip="Excluir">
-                    <span class="fas fa-trash-alt"></span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Itaú</td>
-                <td>01/01/2018 18:00</td>
-                <td>Ativo</td>
+              <tr *ngFor="let banco of bancos">
+                <th scope="row">{{banco.id}}</th>
+                <td>{{banco.descricao}}</td>
+                <td>{{banco.dataCadastro}}</td>
+                <td>{{banco.status}}</td>
                 <td>
                   <button type="button" class="btn btn-primary btn-sm" (click)="novo(content)" ngbTooltip="Editar">
                     <span class="fas fa-edit"></span>

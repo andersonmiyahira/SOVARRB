@@ -8,12 +8,20 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./tipo-segmento.component.css']
 })
 export class TipoSegmentoComponent implements OnInit {
+  segmentos:any;
 
   constructor(private tipoSegmentoService: TipoSegmentoService,
               private modalService: NgbModal) {
   }
 
   ngOnInit() {
+    this.obterSegmentos();
+  }
+
+  obterSegmentos() {
+    this.tipoSegmentoService.obterSegmentos().subscribe(response => {
+      this.segmentos = response;
+    });
   }
 
   novo(content) {

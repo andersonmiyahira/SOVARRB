@@ -9,12 +9,19 @@ import { BancoService } from './banco.service';
   styleUrls: ['./banco.component.css']
 })
 export class BancoComponent implements OnInit {
-
+  bancos: any;
   constructor(private bancoService: BancoService,
               private modalService: NgbModal) {
   }
 
   ngOnInit() {
+    this.obterBancos();
+  }
+
+  obterBancos() {
+    this.bancoService.obterBancos().subscribe(response => {
+      this.bancos = response;
+    });
   }
   
   novo(content) {

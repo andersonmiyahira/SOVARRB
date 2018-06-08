@@ -57,13 +57,45 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
 
     const bancoGetAll = [
-
-
+      {
+        id: 1,
+        descricao: "Itaú",
+        dataCadastro: "01/01/2018 18:00",
+        status: "Ativo"
+      },
+      {
+        id: 2,
+        descricao: "Santander",
+        dataCadastro: "03/01/2018 15:00",
+        status: "Ativo"
+      },
+      {
+        id: 3,
+        descricao: "Banco do Brasil",
+        dataCadastro: "03/01/2018 15:00",
+        status: "Ativo"
+      }
     ];
 
     const segmentoGetAll = [
-      
-
+      {
+        id: 1,
+        descricao: "Segmento Q",
+        dataCadastro: "01/01/2018 18:00",
+        status: "Ativo"
+      },
+      {
+        id: 2,
+        descricao: "Segmento R",
+        dataCadastro: "03/01/2018 15:00",
+        status: "Ativo"
+      },
+      {
+        id: 3,
+        descricao: "Segmento S",
+        dataCadastro: "03/01/2018 15:00",
+        status: "Ativo"
+      }
     ];
 
     return {

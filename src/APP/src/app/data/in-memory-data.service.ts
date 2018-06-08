@@ -23,12 +23,56 @@ export class InMemoryDataService implements InMemoryDbService {
       email: 'teste@gmail.com',
       senha: '123',
       ehAdministrador: 0
-    }]
+    }];
+
+    const arquivosGetAll = [
+      {
+        id:1,
+        nome: "REM01.txt",
+        dataImportacao: "01/01/2018 18:00",
+        tamanho: "20kb",
+        tipo: "CNAB 240",
+        banco: "Itaú",
+        validado: "Sim"
+      },
+      {
+        id: 2,
+        nome: "REM02.txt",
+        dataImportacao: "02/01/2018 18:00",
+        tamanho: "20kb",
+        tipo: "CNAB 240",
+        banco: "Santander",
+        validado: "Sim"
+      },
+      {
+        id:3,
+        nome: "REM03.txt",
+        dataImportacao: "03/01/2018 15:00",
+        tamanho: "220kb",
+        tipo: "CNAB 400",
+        banco: "Banco do Brasil",
+        validado: "Sim"
+      }
+
+    ];
+
+    const bancoGetAll = [
+
+
+    ];
+
+    const segmentoGetAll = [
+      
+
+    ];
 
     return {
       banco: banco,
       tipoCNAB: tipoCNAB,
-      login: login
+      login: login,
+      arquivosGetAll: arquivosGetAll,
+      bancoGetAll: bancoGetAll,
+      segmentoGetAll: segmentoGetAll
     };
   }
 }

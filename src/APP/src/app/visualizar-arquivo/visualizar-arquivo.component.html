@@ -75,14 +75,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>REM01.txt</td>
-                <td>01/01/2018 18:00</td>
-                <td>10kb</td>
-                <td>CNAB 240</td>
-                <td>Itaú</td>
-                <td>Sim</td>
+              <tr *ngFor="let arquivo of arquivos">
+                <th scope="row">{{arquivo.id}}</th>
+                <td>{{arquivo.nome}}</td>
+                <td>{{arquivo.dataImportacao}}</td>
+                <td>{{arquivo.tamanho}}</td>
+                <td>{{arquivo.tipo}}</td>
+                <td>{{arquivo.banco}}</td>
+                <td>{{arquivo.validado}}</td>
                 <td style="text-align:center;">
                   <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Download" data-toggle="tooltip" data-placement="top">
                     <span class="fas fa-cloud-download-alt"></span>
@@ -95,49 +95,7 @@
                     <span class="fas fa-info"></span>
                   </button>
                 </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>REM02.txt</td>
-                <td>01/01/2018 19:00</td>
-                <td>100kb</td>
-                <td>CNAB 400</td>
-                <td>Banco do Brasil</td>
-                <td>Não</td>
-                <td style="text-align:center;">
-                  <button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" ngbTooltip="Download">
-                    <span class="fas fa-cloud-download-alt"></span>
-                  </button>
-                  <button type="button" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" ngbTooltip="Gerar Boletos">
-                    <span class="fas fa-barcode"></span>
-                  </button>
-                  <button type="button" class="btn btn-secondary btn-sm" (click)="openLg(content)" data-toggle="tooltip" data-placement="top"
-                  ngbTooltip="Ver Detalhes">
-                    <span class="fas fa-info"></span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>REM03.txt</td>
-                <td>01/01/2018 18:30</td>
-                <td>300kb</td>
-                <td>CNAB 240</td>
-                <td>Santander</td>
-                <td>Não</td>
-                <td style="text-align:center;">
-                  <button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" ngbTooltip="Download">
-                    <span class="fas fa-cloud-download-alt"></span>
-                  </button>
-                  <button type="button" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" ngbTooltip="Gerar Boletos">
-                    <span class="fas fa-barcode"></span>
-                  </button>
-                  <button type="button" class="btn btn-secondary btn-sm" (click)="openLg(content)" data-toggle="tooltip" data-placement="top"
-                  ngbTooltip="Ver Detalhes">
-                    <span class="fas fa-info"></span>
-                  </button>
-                </td>
-              </tr>
+              </tr> 
             </tbody>
           </table>
         </div>

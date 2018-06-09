@@ -70,7 +70,7 @@
               <tbody>
                 <tr>
                   <td colspan="3">
-                    <button type="button" class="btn btn-success btn-sm" (click)="saveUpload()" [disabled]="!uploader.getNotUploadedItems().length">
+                    <button type="button" class="btn btn-success btn-sm" (click)="saveUpload(sucesso)" [disabled]="!uploader.getNotUploadedItems().length">
                       <span class="glyphicon glyphicon-upload"></span> Enviar e Validar
                     </button>
                     <button type="button" class="btn btn-danger btn-sm" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
@@ -105,12 +105,25 @@
                           <div class="container-errors">
                             <div class="errors">
                               <h6>
-                                Foram encontradas (1) falhas no arquivo enviado.
+                                Foram encontradas ({{mensagens.header.erro.length}}) falhas no arquivo enviado.
                               </h6>
-                              <hr *ngIf="errors">
-                              <ul *ngIf="errors" style="color: red">
-                                <li>
-                                  Posição 10 - Posição 20, Linha 1 : esperado valor numérico, campo: CNPJ
+                              <hr *ngIf="mensagens.header.erro && mensagens.header.erro.length > 0">
+                              <ul *ngIf="mensagens.header.erro && mensagens.header.erro.length > 0" style="color: red">
+                                <li *ngFor="let erros of mensagens.header.erro">
+                                  {{erros.mensagem}}
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="container-sucesso" *ngIf="mensagens.header.sucesso.length > 0">
+                            <div class="sucesso">
+                              <h6>
+                                Foram encontradas ({{mensagens.header.sucesso.length}}) linhas válidas no arquivo enviado.
+                              </h6>
+                              <hr *ngIf="mensagens.header.sucesso && mensagens.header.sucesso.length > 0">
+                              <ul *ngIf="mensagens.header.sucesso && mensagens.header.sucesso.length > 0" style="color: green">
+                                <li *ngFor="let sucesso of mensagens.header.sucesso">
+                                  {{sucesso.mensagem}}
                                 </li>
                               </ul>
                             </div>
@@ -121,11 +134,11 @@
                           <div class="container-errors">
                             <div class="errors">
                               <h6>
-                                Foram encontradas (4) falhas no arquivo enviado.
+                                Foram encontradas ({{mensagens.detalhe.erro.length}}) falhas no arquivo enviado.
                               </h6>
-                              <hr *ngIf="errors">
-                              <ul *ngIf="errors" style="color: red">
-                                <li *ngFor="let error of errors">
+                              <hr *ngIf="mensagens.detalhe.erro && mensagens.detalhe.erro.length > 0">
+                              <ul *ngIf="mensagens.detalhe.erro && mensagens.detalhe.erro.length > 0" style="color: red">
+                                <li *ngFor="let error of mensagens.detalhe.erro">
                                   {{error.mensagem}}
                                 </li>
                               </ul>
@@ -134,11 +147,11 @@
                           <div class="container-sucesso">
                             <div class="sucesso">
                               <h6>
-                                Foram encontradas (2) linhas válidas no arquivo enviado.
+                                Foram encontradas ({{mensagens.detalhe.sucesso.length}}) linhas válidas no arquivo enviado.
                               </h6>
-                              <hr *ngIf="sucessos">
-                              <ul *ngIf="sucessos" style="color: green">
-                                <li *ngFor="let sucesso of sucessos">
+                              <hr *ngIf="mensagens.detalhe.sucesso && mensagens.detalhe.sucesso.length > 0">
+                              <ul *ngIf="mensagens.detalhe.sucesso && mensagens.detalhe.sucesso.length > 0" style="color: green">
+                                <li *ngFor="let sucesso of mensagens.detalhe.sucesso">
                                   {{sucesso.mensagem}}
                                 </li>
                               </ul>
@@ -147,15 +160,28 @@
                         </li>
                         <li>
                           <h3>Trailer:</h3>
+                          <div class="container-errors">
+                              <div class="errors">
+                                <h6>
+                                  Foram encontradas ({{mensagens.trailer.erro.length}}) falhas no arquivo enviado.
+                                </h6>
+                                <hr *ngIf="mensagens.trailer.erro && mensagens.trailer.erro.length > 0">
+                                <ul *ngIf="mensagens.trailer.erro && mensagens.trailer.erro.length > 0" style="color: red">
+                                  <li *ngFor="let error of mensagens.trailer.erro">
+                                    {{error.mensagem}}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
                           <div class="container-sucesso">
                             <div class="sucesso">
                               <h6>
-                                Foram encontradas (1) linhas válidas no arquivo enviado.
+                                Foram encontradas ({{mensagens.trailer.sucesso.length}}) linhas válidas no arquivo enviado.
                               </h6>
-                              <hr *ngIf="sucessos">
-                              <ul *ngIf="sucessos" style="color: green">
-                                <li>
-                                  Posição 10 - Posição 20, Linha 300 : esperado valor numérico
+                              <hr *ngIf="mensagens.trailer.sucesso && mensagens.trailer.sucesso.length > 0">
+                              <ul *ngIf="mensagens.trailer.sucesso  && mensagens.trailer.sucesso.length > 0" style="color: green">
+                                <li *ngFor="let sucesso of mensagens.trailer.sucesso">
+                                  {{sucesso.mensagem}}
                                 </li>
                               </ul>
                             </div>
@@ -165,43 +191,6 @@
                     </div>
                   </ng-template>
                 </ngb-panel>
-
-                <!-- <ngb-panel title="REM01.txt">
-                                    <ng-template ngbPanelContent>
-                                            <div class="container-errors">
-                                                    <div class="icon">
-                                                        <i class="far fa-times-circle fa-3x"></i>
-                                                    </div>
-                                                    <div class="errors">
-                                                        <h6>
-                                                            Foram encontradas (10) falhas no arquivo enviado.
-                                                        </h6>
-                                                        <hr *ngIf="errors">
-                                                        <ul *ngIf="errors">
-                                                            <li *ngFor="let error of errors">{{error.mensagem}}</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                    </ng-template>
-                                </ngb-panel>
-                                <ngb-panel title="REM01.txt">
-                                    <ng-template ngbPanelContent>
-                                        <div class="container-errors">
-                                            <div class="icon">
-                                                <i class="far fa-times-circle fa-3x"></i>
-                                            </div>
-                                            <div class="errors">
-                                                <h6>
-                                                    Foram encontradas (10) falhas no arquivo enviado.
-                                                </h6>
-                                                <hr *ngIf="errors">
-                                                <ul *ngIf="errors">
-                                                    <li *ngFor="let error of errors">{{error.mensagem}}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </ng-template>
-                                </ngb-panel> -->
               </ngb-accordion>
             </div>
           </div>
@@ -210,3 +199,26 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #sucesso let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Importação de Arquivo(s)</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <div class="row">
+        <div class="col-md-12">
+          Arquivo(s) importado(s) com sucesso!
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" (click)="c('Close click')">Ok</button>
+    <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
+  </div>
+</ng-template>

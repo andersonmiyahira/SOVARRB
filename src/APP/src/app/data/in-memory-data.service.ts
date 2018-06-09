@@ -15,19 +15,19 @@ export class InMemoryDataService implements InMemoryDbService {
 
     const login = [{
       nome: 'Anderson',
-      email: 'anderson@gmail.com',
+      email: 'adm@gmail.com',
       senha: '123',
       ehAdministrador: 1
-    },{
+    }, {
       nome: 'Teste',
-      email: 'teste@gmail.com',
+      email: 'user@gmail.com',
       senha: '123',
       ehAdministrador: 0
     }];
 
     const arquivosGetAll = [
       {
-        id:1,
+        id: 1,
         nome: "REM01.txt",
         dataImportacao: "01/01/2018 18:00",
         tamanho: "20kb",
@@ -45,7 +45,7 @@ export class InMemoryDataService implements InMemoryDbService {
         validado: "Sim"
       },
       {
-        id:3,
+        id: 3,
         nome: "REM03.txt",
         dataImportacao: "03/01/2018 15:00",
         tamanho: "220kb",
@@ -98,13 +98,25 @@ export class InMemoryDataService implements InMemoryDbService {
       }
     ];
 
+    const resultadoValidacao = [
+      { tipo: 1, mensagem: "Linha 1, Posição 10 - Posição 20 : Esperado Valor Numérico, campo: CNPJ", ehValido: false },
+      { tipo: 2, mensagem: "Linha 2, Posição 10 - Posição 15 : Formato de Data Incorreto", ehValido: false },
+      { tipo: 2, mensagem: "Linha 3, Posição 15 - Posição 30: Esperado Valor Numérico", ehValido: false },
+      { tipo: 2, mensagem: "Linha 3, Posição 30 - Posição 35: Esperado Valor Numérico", ehValido: false },
+      { tipo: 2, mensagem: "Linha 3, Posição 30 - Posição 38: Esperado Valor Numérico", ehValido: true },
+      { tipo: 2, mensagem: "Linha 4, Posição 38 - Posição 45: Formato de Data Correto", ehValido: true },
+      { tipo: 2, mensagem: "Linha 5, Posição 45 - Posição 50: Formato de Data Correto", ehValido: true },
+      { tipo: 3, mensagem: "Linha 6, Posição 10 - Posição 20: Esperado Valor Numérico", ehValido: false }
+    ]
+
     return {
       banco: banco,
       tipoCNAB: tipoCNAB,
       login: login,
       arquivosGetAll: arquivosGetAll,
       bancoGetAll: bancoGetAll,
-      segmentoGetAll: segmentoGetAll
+      segmentoGetAll: segmentoGetAll,
+      resultadoValidacao: resultadoValidacao
     };
   }
 }

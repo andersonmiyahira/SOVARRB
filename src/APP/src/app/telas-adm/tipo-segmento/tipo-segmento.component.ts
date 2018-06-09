@@ -9,9 +9,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class TipoSegmentoComponent implements OnInit {
   segmentos:any;
+  id: number;
 
   constructor(private tipoSegmentoService: TipoSegmentoService,
               private modalService: NgbModal) {
+                this.id = 0;
   }
 
   ngOnInit() {
@@ -24,11 +26,17 @@ export class TipoSegmentoComponent implements OnInit {
     });
   }
 
-  novo(content) {
+  editarOpenModal(content, idSegmento) {
+    this.id = idSegmento;
     this.modalService.open(content, { size: 'lg' });
   }
 
-  exclude(excluir) {
+  novoOpenModal(content) {
+    this.id = 0;
+    this.modalService.open(content, { size: 'lg' });
+  }
+
+  excludeOpenModal(excluir) {
     this.modalService.open(excluir, { size: 'lg' });
   }
 }

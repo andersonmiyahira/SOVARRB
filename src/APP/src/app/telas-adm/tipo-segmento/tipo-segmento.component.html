@@ -21,10 +21,10 @@
                 <td>{{segmento.dataCadastro}}</td>
                 <td>{{segmento.status}}</td>
                 <td>
-                  <button type="button" class="btn btn-primary btn-sm" (click)="novo(content)" ngbTooltip="Editar">
+                  <button type="button" class="btn btn-primary btn-sm" (click)="editarOpenModal(content, segmento.id)" ngbTooltip="Editar">
                     <span class="fas fa-edit"></span>
                   </button>
-                  <button type="button" class="btn btn-danger btn-sm" (click)="exclude(excluir)" ngbTooltip="Excluir">
+                  <button type="button" class="btn btn-danger btn-sm" (click)="excludeOpenModal(excluir)" ngbTooltip="Excluir">
                     <span class="fas fa-trash-alt"></span>
                   </button>
                 </td>
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="card-footer text-muted">
-      <button type="button" class="btn btn-primary" (click)="novo(content)">
+      <button type="button" class="btn btn-primary" (click)="novoOpenModal(content)">
         <span class="glyphicon glyphicon-trash"></span> Novo
       </button>
     </div>
@@ -44,7 +44,7 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title">Novo Segmento</h4>
+    <h4 class="modal-title">{{id == 0 ? 'Novo' : 'Editar' }} Segmento</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>

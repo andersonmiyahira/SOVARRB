@@ -27,7 +27,7 @@
     <div class="row">
         <div class="col-md-12">
             <button type="submit" class="btn btn-primary" (click)="novoLeioute()">Novo</button>
-            <button type="button" class="btn btn-light" (click)="buscar()">Buscar</button>
+            <button type="button" class="btn btn-light" (click)="buscarLeioute()">Buscar</button>
         </div>
     </div>
 
@@ -49,44 +49,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>0</th>
-                                    <td>10</td>
-                                    <td>caixa de texto</td>
-                                    <td>Alfanumérico</td>
-                                    <td>Sim</td>
-                                    <td>--</td>
-                                    <!-- <td>
-                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
-                                            <span class="glyphicon glyphicon-trash"></span> Alterar
-                                        </button>
-                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
-                                            <span class="glyphicon glyphicon-trash"></span> Excluir
-                                        </button>
-                                    </td> -->
-                                </tr>
-                                <tr>
-                                    <th>20</th>
-                                    <td>30</td>
-                                    <td>caixa de texto</td>
-                                    <td>Alfanumérico</td>
-                                    <td>Sim</td>
-                                    <td>--</td>
-                                    <!-- <td>
-                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
-                                            <span class="glyphicon glyphicon-trash"></span> Alterar
-                                        </button>
-                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
-                                            <span class="glyphicon glyphicon-trash"></span> Excluir
-                                        </button>
-                                    </td> -->
-                                </tr>
-                                <tr>
-                                    <th>30</th>
-                                    <td>40</td>
-                                    <td>caixa de texto</td>
-                                    <td>Alfanumérico</td>
-                                    <td>Sim</td>
+                                <tr *ngFor="let header of leioutes.header">
+                                    <th>{{header.posicaoDe}}</th>
+                                    <td>{{header.posicaoAte}}</td>
+                                    <td>{{header.descricao}}</td>
+                                    <td>{{header.tipoCampo}}</td>
+                                    <td>{{header.obrigatorio}}</td>
                                     <td>--</td>
                                     <!-- <td>
                                         <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
@@ -116,53 +84,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>0</th>
-                                    <td>10</td>
-                                    <td>caixa de texto</td>
-                                    <td>Alfanumérico</td>
-                                    <td>Sim</td>
+                                <tr *ngFor="let header of leioutes.header">
+                                    <th>{{header.posicaoDe}}</th>
+                                    <td>{{header.posicaoAte}}</td>
+                                    <td>{{header.descricao}}</td>
+                                    <td>{{header.tipoCampo}}</td>
+                                    <td>{{header.obrigatorio}}</td>
                                     <td>--</td>
                                     <!-- <td>
-                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
-                                            <span class="glyphicon glyphicon-trash"></span> Alterar
-                                        </button>
-                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
-                                            <span class="glyphicon glyphicon-trash"></span> Excluir
-                                        </button>
-                                    </td> -->
-                                </tr>
-                                <tr>
-                                    <th>20</th>
-                                    <td>30</td>
-                                    <td>caixa de texto</td>
-                                    <td>Alfanumérico</td>
-                                    <td>Sim</td>
-                                    <td>--</td>
-                                    <!-- <td>
-                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
-                                            <span class="glyphicon glyphicon-trash"></span> Alterar
-                                        </button>
-                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
-                                            <span class="glyphicon glyphicon-trash"></span> Excluir
-                                        </button>
-                                    </td> -->
-                                </tr>
-                                <tr>
-                                    <th>30</th>
-                                    <td>40</td>
-                                    <td>caixa de texto</td>
-                                    <td>Alfanumérico</td>
-                                    <td>Sim</td>
-                                    <td>--</td>
-                                    <!-- <td>
-                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
-                                            <span class="glyphicon glyphicon-trash"></span> Alterar
-                                        </button>
-                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
-                                            <span class="glyphicon glyphicon-trash"></span> Excluir
-                                        </button>
-                                    </td> -->
+                                                <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
+                                                    <span class="glyphicon glyphicon-trash"></span> Alterar
+                                                </button>
+                                                <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                                                    <span class="glyphicon glyphicon-trash"></span> Excluir
+                                                </button>
+                                            </td> -->
                                 </tr>
                             </tbody>
                         </table>
@@ -183,53 +119,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>0</th>
-                                    <td>10</td>
-                                    <td>caixa de texto</td>
-                                    <td>Alfanumérico</td>
-                                    <td>Sim</td>
+                                <tr *ngFor="let header of leioutes.header">
+                                    <th>{{header.posicaoDe}}</th>
+                                    <td>{{header.posicaoAte}}</td>
+                                    <td>{{header.descricao}}</td>
+                                    <td>{{header.tipoCampo}}</td>
+                                    <td>{{header.obrigatorio}}</td>
                                     <td>--</td>
                                     <!-- <td>
-                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
-                                            <span class="glyphicon glyphicon-trash"></span> Alterar
-                                        </button>
-                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
-                                            <span class="glyphicon glyphicon-trash"></span> Excluir
-                                        </button>
-                                    </td> -->
-                                </tr>
-                                <tr>
-                                    <th>20</th>
-                                    <td>30</td>
-                                    <td>caixa de texto</td>
-                                    <td>Alfanumérico</td>
-                                    <td>Sim</td>
-                                    <td>--</td>
-                                    <!-- <td>
-                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
-                                            <span class="glyphicon glyphicon-trash"></span> Alterar
-                                        </button>
-                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
-                                            <span class="glyphicon glyphicon-trash"></span> Excluir
-                                        </button>
-                                    </td> -->
-                                </tr>
-                                <tr>
-                                    <th>30</th>
-                                    <td>40</td>
-                                    <td>caixa de texto</td>
-                                    <td>Alfanumérico</td>
-                                    <td>Sim</td>
-                                    <td>--</td>
-                                    <!-- <td>
-                                        <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
-                                            <span class="glyphicon glyphicon-trash"></span> Alterar
-                                        </button>
-                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
-                                            <span class="glyphicon glyphicon-trash"></span> Excluir
-                                        </button>
-                                    </td> -->
+                                                <button type="button" class="btn btn-primary btn-s" (click)="novo(content)">
+                                                    <span class="glyphicon glyphicon-trash"></span> Alterar
+                                                </button>
+                                                <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                                                    <span class="glyphicon glyphicon-trash"></span> Excluir
+                                                </button>
+                                            </td> -->
                                 </tr>
                             </tbody>
                         </table>
@@ -239,3 +143,26 @@
         </div>
     </div>
 </div>
+
+
+<ng-template #detalhesValorEsperado let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Detalhes Valor Esperado</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" (click)="excluir()"></button>
+        <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
+    </div>
+</ng-template>

@@ -110,6 +110,15 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
 
     const leioutes = [
+      { tipo: 1, posicaoDe: 0, posicaoAte: 10, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
+      { tipo: 1, posicaoDe: 20, posicaoAte: 30, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
+      { tipo: 1, posicaoDe: 30, posicaoAte: 40, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
+      { tipo: 2, posicaoDe: 0, posicaoAte: 10, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
+      { tipo: 2, posicaoDe: 20, posicaoAte: 30, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
+      { tipo: 2, posicaoDe: 30, posicaoAte: 40, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
+      { tipo: 3, posicaoDe: 0, posicaoAte: 10, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
+      { tipo: 3, posicaoDe: 20, posicaoAte: 30, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
+      { tipo: 3, posicaoDe: 30, posicaoAte: 40, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"}     
 
     ]
 
@@ -120,7 +129,8 @@ export class InMemoryDataService implements InMemoryDbService {
       arquivosGetAll: arquivosGetAll,
       bancoGetAll: bancoGetAll,
       segmentoGetAll: segmentoGetAll,
-      resultadoValidacao: resultadoValidacao
+      resultadoValidacao: resultadoValidacao,
+      leioutes: leioutes
     };
   }
 }

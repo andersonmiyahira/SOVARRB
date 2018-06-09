@@ -11,10 +11,16 @@ import { ImportarArquivoService } from '../../../importar-arquivo/importar-arqui
 export class LeiouteComponent implements OnInit {
   bancos: any;
   cnabs: any;
+  leioutes: any;
+
 
   constructor(private router: Router, 
               private LeiouteService: LeiouteService,
               private importarArquivoService: ImportarArquivoService) {
+                this.leioutes = {};
+                this.leioutes.header = [];
+                this.leioutes.detalhe = [];
+                this.leioutes.trailer = [];
   }
 
   ngOnInit() {
@@ -27,7 +33,7 @@ export class LeiouteComponent implements OnInit {
   }
 
   buscarLeioute() {
-
+    this.obterLeioutes();
   }
 
   obterBancos() {
@@ -39,6 +45,14 @@ export class LeiouteComponent implements OnInit {
   obterCNAB() {
     this.importarArquivoService.obterTipoCNAB().subscribe(response => {
       this.cnabs = response;
+    });
+  }
+
+  obterLeioutes(){
+    this.LeiouteService.obterLeioutes().subscribe(response => {
+      this.leioutes.header = response.filter(x => x["tipo"] == 1);
+      this.leioutes.detalhe = response.filter(x => x["tipo"] == 2);
+      this.leioutes.trailer = response.filter(x => x["tipo"] == 3);
     });
   }
  

@@ -10,8 +10,11 @@ import { BancoService } from './banco.service';
 })
 export class BancoComponent implements OnInit {
   bancos: any;
+  id: number;
+
   constructor(private bancoService: BancoService,
               private modalService: NgbModal) {
+      this.id = 0;
   }
 
   ngOnInit() {
@@ -24,12 +27,27 @@ export class BancoComponent implements OnInit {
     });
   }
   
-  novo(content) {
+  novoOpenModal(content) {
+    this.id = 0;
     this.modalService.open(content, { size: 'lg' });
   }
 
-  exclude(excluir) {
+  editarOpenModal(content, idBanco) {
+    this.id = idBanco;
+    this.modalService.open(content, { size: 'lg' });
+  }
+
+  excludeOpenModal(excluir, banco) {
+    //this.bancos.splice(banco);
     this.modalService.open(excluir, { size: 'lg' });
+  }
+
+  excluir() {
+
+  }
+
+  salvar() {
+
   }
  
 }

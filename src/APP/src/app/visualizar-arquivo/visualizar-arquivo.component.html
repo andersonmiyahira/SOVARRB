@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-md-3">
           <label for="cbBanco">Data importação
-            <strong>de</strong>
+            <strong>De</strong>
           </label>
           <div class="form-group">
             <div class="input-group">
@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-3">
           <label for="cbBanco">Data importação
-            <strong>até</strong>
+            <strong>Até</strong>
           </label>
           <div class="form-group">
             <div class="input-group">
@@ -50,8 +50,8 @@
       </div>
     </div>
     <div class="card-footer text-muted">
-      <button type="button" class="btn btn-primary btn-sm">
-        <span class="glyphicon glyphicon-trash"></span> Filtrar
+      <button type="button" class="btn btn-primary btn-sm"  (click)="obterArquivos()">
+        <span class="glyphicon glyphicon-trash"></span> Buscar
       </button>
     </div>
   </div>
@@ -84,7 +84,7 @@
                 <td>{{arquivo.banco}}</td>
                 <td>{{arquivo.validado}}</td>
                 <td style="text-align:center;">
-                  <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Download" data-toggle="tooltip" data-placement="top">
+                  <button type="button" class="btn btn-primary btn-sm" download="mytextdocument" (click)="downloadArquivo()" ngbTooltip="Download" data-toggle="tooltip" data-placement="top">
                     <span class="fas fa-cloud-download-alt"></span>
                   </button>
                   <button type="button" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" ngbTooltip="Gerar Boletos">
@@ -113,71 +113,97 @@
     </button>
   </div>
   <div class="modal-body">
-    <div class="list-alerts">
-      <ul>
-        <li>
-          <h3>Header:</h3>
-          <div class="container-errors">
-            <div class="errors">
-              <h6>
-                Foram encontradas (1) falhas no arquivo enviado.
-              </h6>
-              <hr *ngIf="errors">
-              <ul *ngIf="errors" style="color: red">
-                <li>
-                  Posição 10 - Posição 20, Linha 1 : esperado valor numérico, campo: CNPJ
-                </li>
-              </ul>
-            </div>
-          </div>
-        </li>
-        <li>
-          <h3>Detalhes:</h3>
-          <div class="container-errors">
-            <div class="errors">
-              <h6>
-                Foram encontradas (4) falhas no arquivo enviado.
-              </h6>
-              <hr *ngIf="errors">
-              <ul *ngIf="errors" style="color: red">
-                <li *ngFor="let error of errors">
-                  {{error.mensagem}}
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="container-sucesso">
-            <div class="sucesso">
-              <h6>
-                Foram encontradas (2) linhas válidas no arquivo enviado.
-              </h6>
-              <hr *ngIf="sucessos">
-              <ul *ngIf="sucessos" style="color: green">
-                <li *ngFor="let sucesso of sucessos">
-                  {{sucesso.mensagem}}
-                </li>
-              </ul>
-            </div>
-          </div>
-        </li>
-        <li>
-          <h3>Trailer:</h3>
-          <div class="container-sucesso">
-            <div class="sucesso">
-              <h6>
-                Foram encontradas (1) linhas válidas no arquivo enviado.
-              </h6>
-              <hr *ngIf="sucessos">
-              <ul *ngIf="sucessos" style="color: green">
-                <li>
-                  Posição 10 - Posição 20, Linha 300 : esperado valor numérico
-                </li>
-              </ul>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
+      <div class="list-alerts">
+          <ul>
+            <li>
+              <h3>Header:</h3>
+              <div class="container-errors">
+                <div class="errors">
+                  <h6>
+                    Foram encontradas ({{mensagens.header.erro.length}}) falhas no arquivo enviado.
+                  </h6>
+                  <hr *ngIf="mensagens.header.erro && mensagens.header.erro.length > 0">
+                  <ul *ngIf="mensagens.header.erro && mensagens.header.erro.length > 0" style="color: red">
+                    <li *ngFor="let erros of mensagens.header.erro">
+                      {{erros.mensagem}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="container-sucesso" *ngIf="mensagens.header.sucesso.length > 0">
+                <div class="sucesso">
+                  <h6>
+                    Foram encontradas ({{mensagens.header.sucesso.length}}) linhas válidas no arquivo enviado.
+                  </h6>
+                  <hr *ngIf="mensagens.header.sucesso && mensagens.header.sucesso.length > 0">
+                  <ul *ngIf="mensagens.header.sucesso && mensagens.header.sucesso.length > 0" style="color: green">
+                    <li *ngFor="let sucesso of mensagens.header.sucesso">
+                      {{sucesso.mensagem}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li>
+              <h3>Detalhes:</h3>
+              <div class="container-errors">
+                <div class="errors">
+                  <h6>
+                    Foram encontradas ({{mensagens.detalhe.erro.length}}) falhas no arquivo enviado.
+                  </h6>
+                  <hr *ngIf="mensagens.detalhe.erro && mensagens.detalhe.erro.length > 0">
+                  <ul *ngIf="mensagens.detalhe.erro && mensagens.detalhe.erro.length > 0" style="color: red">
+                    <li *ngFor="let error of mensagens.detalhe.erro">
+                      {{error.mensagem}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="container-sucesso">
+                <div class="sucesso">
+                  <h6>
+                    Foram encontradas ({{mensagens.detalhe.sucesso.length}}) linhas válidas no arquivo enviado.
+                  </h6>
+                  <hr *ngIf="mensagens.detalhe.sucesso && mensagens.detalhe.sucesso.length > 0">
+                  <ul *ngIf="mensagens.detalhe.sucesso && mensagens.detalhe.sucesso.length > 0" style="color: green">
+                    <li *ngFor="let sucesso of mensagens.detalhe.sucesso">
+                      {{sucesso.mensagem}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li>
+              <h3>Trailer:</h3>
+              <div class="container-errors">
+                  <div class="errors">
+                    <h6>
+                      Foram encontradas ({{mensagens.trailer.erro.length}}) falhas no arquivo enviado.
+                    </h6>
+                    <hr *ngIf="mensagens.trailer.erro && mensagens.trailer.erro.length > 0">
+                    <ul *ngIf="mensagens.trailer.erro && mensagens.trailer.erro.length > 0" style="color: red">
+                      <li *ngFor="let error of mensagens.trailer.erro">
+                        {{error.mensagem}}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              <div class="container-sucesso">
+                <div class="sucesso">
+                  <h6>
+                    Foram encontradas ({{mensagens.trailer.sucesso.length}}) linhas válidas no arquivo enviado.
+                  </h6>
+                  <hr *ngIf="mensagens.trailer.sucesso && mensagens.trailer.sucesso.length > 0">
+                  <ul *ngIf="mensagens.trailer.sucesso  && mensagens.trailer.sucesso.length > 0" style="color: green">
+                    <li *ngFor="let sucesso of mensagens.trailer.sucesso">
+                      {{sucesso.mensagem}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>

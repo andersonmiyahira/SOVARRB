@@ -54,9 +54,9 @@ export class ImportarArquivoComponent implements OnInit {
     // });
     // this.importarArquivoService.upload(rawFiles, this.importar.bancoId)
     //   .subscribe(res => {
-    //     this.uploader.queue.forEach(element => {
-    //       element.isSuccess = true;
-    //     });
+        this.uploader.queue.forEach(element => {
+          element.isSuccess = true;
+        });
         //this.fileInput.nativeElement.value = "";
         this.arquivosValidados = true;
         this.modalService.open(sucesso, { size: 'lg' });

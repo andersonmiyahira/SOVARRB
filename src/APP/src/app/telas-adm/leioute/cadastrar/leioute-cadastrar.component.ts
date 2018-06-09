@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import { LeiouteService } from '../leioute.service';
 import { Ng2SmartTableModule, ViewCell, LocalDataSource } from 'ng2-smart-table';
+import { ImportarArquivoService } from '../../../importar-arquivo/importar-arquivo.service';
 
 @Component({
   selector: 'app-leioute-cadastrar',
@@ -8,14 +9,32 @@ import { Ng2SmartTableModule, ViewCell, LocalDataSource } from 'ng2-smart-table'
   styleUrls: ['./leioute-cadastrar.component.css']
 })
 export class LeiouteCadastrarComponent implements OnInit {
+  bancos: any;
+  cnabs: any;
+
   settings: any;
   data: LocalDataSource;
 
-  constructor(private leiouteService: LeiouteService) {
+  constructor(private leiouteService: LeiouteService, 
+              private importarArquivoService: ImportarArquivoService) {
+  }
+
+  obterBancos() {
+    this.importarArquivoService.obterBancos().subscribe(response => {
+      this.bancos = response;
+    });
+  }
+
+  obterCNAB() {
+    this.importarArquivoService.obterTipoCNAB().subscribe(response => {
+      this.cnabs = response;
+    });
   }
 
   ngOnInit() {
     this.initSettings();
+    this.obterBancos();
+    this.obterCNAB();
   }
 
   initSettings() {

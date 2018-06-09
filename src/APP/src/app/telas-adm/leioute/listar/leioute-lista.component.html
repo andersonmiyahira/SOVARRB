@@ -5,16 +5,14 @@
             <label for="cbBanco">Banco</label>
             <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
                 <option selected="selected" value="">Selecione o banco</option>
-                <option value="">Itaú</option>
-                <option value="">Santander</option>
+                <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
             </select>
         </div>
         <div class="col-md-4">
             <label for="cbCNAB">CNAB</label>
             <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
                 <option selected="selected" value="">Selecione o tipo do arquivo</option>
-                <option value="">240</option>
-                <option value="">400</option>
+                <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
             </select>
         </div>
         <div class="col-md-4">
@@ -25,7 +23,7 @@
                 <option value="">Cobrança</option>
             </select>
         </div>
-    </div> 
+    </div>
     <div class="row">
         <div class="col-md-12">
             <button type="submit" class="btn btn-primary" (click)="novoLeioute()">Novo</button>
@@ -66,7 +64,7 @@
                                             <span class="glyphicon glyphicon-trash"></span> Excluir
                                         </button>
                                     </td> -->
-                                </tr> 
+                                </tr>
                                 <tr>
                                     <th>20</th>
                                     <td>30</td>
@@ -82,7 +80,7 @@
                                             <span class="glyphicon glyphicon-trash"></span> Excluir
                                         </button>
                                     </td> -->
-                                </tr> 
+                                </tr>
                                 <tr>
                                     <th>30</th>
                                     <td>40</td>
@@ -98,11 +96,11 @@
                                             <span class="glyphicon glyphicon-trash"></span> Excluir
                                         </button>
                                     </td> -->
-                                </tr> 
+                                </tr>
                             </tbody>
                         </table>
                     </ng-template>
-                </ngb-panel>  
+                </ngb-panel>
                 <ngb-panel title="Detalhe">
                     <ng-template ngbPanelContent>
                         <table class="table">
@@ -133,7 +131,7 @@
                                             <span class="glyphicon glyphicon-trash"></span> Excluir
                                         </button>
                                     </td> -->
-                                </tr> 
+                                </tr>
                                 <tr>
                                     <th>20</th>
                                     <td>30</td>
@@ -149,7 +147,7 @@
                                             <span class="glyphicon glyphicon-trash"></span> Excluir
                                         </button>
                                     </td> -->
-                                </tr> 
+                                </tr>
                                 <tr>
                                     <th>30</th>
                                     <td>40</td>
@@ -165,11 +163,11 @@
                                             <span class="glyphicon glyphicon-trash"></span> Excluir
                                         </button>
                                     </td> -->
-                                </tr> 
+                                </tr>
                             </tbody>
                         </table>
                     </ng-template>
-                </ngb-panel>  
+                </ngb-panel>
                 <ngb-panel title="Trailer">
                     <ng-template ngbPanelContent>
                         <table class="table">
@@ -200,7 +198,7 @@
                                             <span class="glyphicon glyphicon-trash"></span> Excluir
                                         </button>
                                     </td> -->
-                                </tr> 
+                                </tr>
                                 <tr>
                                     <th>20</th>
                                     <td>30</td>
@@ -216,7 +214,7 @@
                                             <span class="glyphicon glyphicon-trash"></span> Excluir
                                         </button>
                                     </td> -->
-                                </tr> 
+                                </tr>
                                 <tr>
                                     <th>30</th>
                                     <td>40</td>
@@ -232,11 +230,11 @@
                                             <span class="glyphicon glyphicon-trash"></span> Excluir
                                         </button>
                                     </td> -->
-                                </tr> 
+                                </tr>
                             </tbody>
                         </table>
                     </ng-template>
-                </ngb-panel>  
+                </ngb-panel>
             </ngb-accordion>
         </div>
     </div>

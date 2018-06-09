@@ -5,16 +5,14 @@
             <label for="cbBanco">Banco</label>
             <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
                 <option selected="selected" value="">Selecione o banco</option>
-                <option value="">Itaú</option>
-                <option value="">Santander</option>
+                <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
             </select>
         </div>
         <div class="col-md-4">
             <label for="cbCNAB">CNAB</label>
             <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
                 <option selected="selected" value="">Selecione o tipo do arquivo</option>
-                <option value="">240</option>
-                <option value="">400</option>
+                <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
             </select>
         </div>
         <div class="col-md-4">

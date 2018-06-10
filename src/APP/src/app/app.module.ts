@@ -11,6 +11,7 @@ import { AppRoutingModule } from './routes/app-routing.module';
 import { ApiService } from './services/api.service';
 import { FileUploadModule } from 'ng2-file-upload';
 import { SelectModule } from 'ng2-select';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -48,6 +49,7 @@ import { AuthGuardService } from './core/auth-guard.service';
     FileUploadModule,
     SelectModule,
     Ng2SmartTableModule,
+    MultiselectDropdownModule,
 
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }

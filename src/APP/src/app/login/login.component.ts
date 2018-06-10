@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
 
       EventosService.realizouLogin.emit();
       if(usu && usu.length > 0) {
-        this.router.navigate(['./dashboard']);
+        this.router.navigate(['./importar-arquivo']);
       }
     });
   }

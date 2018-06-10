@@ -55,7 +55,11 @@
                                     <td>{{header.descricao}}</td>
                                     <td>{{header.tipoCampo}}</td>
                                     <td>{{header.obrigatorio}}</td>
-                                    <td>--</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-s" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
+                                            <span class="glyphicon glyphicon-trash"></span> Detalhes
+                                        </button>
+                                    </td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-s" (click)="editar(editarModal)">
                                             <span class="glyphicon glyphicon-trash"></span> Alterar
@@ -90,7 +94,11 @@
                                     <td>{{detalhe.descricao}}</td>
                                     <td>{{detalhe.tipoCampo}}</td>
                                     <td>{{detalhe.obrigatorio}}</td>
-                                    <td>--</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-s" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
+                                            <span class="glyphicon glyphicon-trash"></span> Detalhes
+                                        </button>
+                                    </td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-s" (click)="editar(editarModal)">
                                             <span class="glyphicon glyphicon-trash"></span> Alterar
@@ -115,7 +123,7 @@
                                     <th scope="col">Tipo Campo</th>
                                     <th scope="col">Obrigatório</th>
                                     <th scope="col">Valor esperado</th>
-                                    <!-- <th scope="col">Ações</th> -->
+                                    <th scope="col">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -125,7 +133,11 @@
                                     <td>{{trailer.descricao}}</td>
                                     <td>{{trailer.tipoCampo}}</td>
                                     <td>{{trailer.obrigatorio}}</td>
-                                    <td>--</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-s" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
+                                            <span class="glyphicon glyphicon-trash"></span> Detalhes
+                                        </button>
+                                    </td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-s" (click)="editar(editarModal)">
                                             <span class="glyphicon glyphicon-trash"></span> Alterar
@@ -159,49 +171,50 @@
                 <div class="col-md-12">
                     <div class="col-md-12">
                         <form method="post" action="/" novalidate="novalidate">
-                          <div class="text-danger validation-summary-valid" data-valmsg-summary="true">
-                            <ul>
-                              <li style="display:none"></li>
-                            </ul>
-                          </div>
-                          <div class="form-group">
-                            <label for="Input_Email">Posição De</label>
-                            <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="Input_Email">Posição Até</label>
-                            <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="Input_Email">Descrição</label>
-                            <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
-                          </div>
-                          <div class="form-group">
-                            <label for="cbCNAB">Tipo Campo</label>
-                            <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
-                              <option selected="selected" value="1">Numérico</option>
-                              <option value="2">Alfanumérico</option>
-                              <option value="3">Data(aaaammdd)</option>
-                              <option value="4">Data(ddmmaa)</option>
-                              <option value="5">Data(ddmmaaaa)</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="cbCNAB">Obrigatório</label>
-                            <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+                            <div class="text-danger validation-summary-valid" data-valmsg-summary="true">
+                                <ul>
+                                    <li style="display:none"></li>
+                                </ul>
+                            </div>
+                            <div class="form-group">
+                                <label for="Input_Email">Posição De</label>
+                                <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="Input_Email">Posição Até</label>
+                                <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="Input_Email">Descrição</label>
+                                <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="cbCNAB">Tipo Campo</label>
+                                <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+                                    <option selected="selected" value="1">Numérico</option>
+                                    <option value="2">Alfanumérico</option>
+                                    <option value="3">Data(aaaammdd)</option>
+                                    <option value="4">Data(ddmmaa)</option>
+                                    <option value="5">Data(ddmmaaaa)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="cbCNAB">Obrigatório</label>
+                                <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+                                    <option selected="selected" value="1">Sim</option>
+                                    <option value="2">Não</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="valorEsperado">Valor esperado</label>
+                                <ss-multiselect-dropdown [options]="valoresEsperados" style="display: inherit;width: 100%" [(ngModel)]="optionsModel"></ss-multiselect-dropdown>
+                                <!-- <select multiple id="valorEsperado" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
                               <option selected="selected" value="1">Sim</option>
                               <option value="2">Não</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="valorEsperado">Valor esperado</label>
-                            <select multiple id="valorEsperado" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
-                              <option selected="selected" value="1">Sim</option>
-                              <option value="2">Não</option>
-                            </select>
-                          </div>
+                            </select> -->
+                            </div>
                         </form>
-                      </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -215,29 +228,7 @@
 
 <ng-template #excluir let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h4 class="modal-title">Excluir Banco</h4>
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div>
-        <div class="row">
-          <div class="col-md-12">
-            Tem certeza que deseja excluir?
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-primary" (click)="c('Close click')">Sim</button>
-      <button type="button" class="btn btn-light" (click)="c('Close click')">Não</button>
-    </div>
-  </ng-template>
-
-<ng-template #detalhesValorEsperado let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title">Detalhes Valor Esperado</h4>
+        <h4 class="modal-title">Excluir Banco</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -246,13 +237,44 @@
         <div>
             <div class="row">
                 <div class="col-md-12">
-
+                    Tem certeza que deseja excluir?
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" (click)="excluir()"></button>
+        <button type="submit" class="btn btn-primary" (click)="c('Close click')">Sim</button>
+        <button type="button" class="btn btn-light" (click)="c('Close click')">Não</button>
+    </div>
+</ng-template>
+
+<ng-template #detalhesValorEsperado let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Valor(es) Esperado(s)</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                        <ul>
+                            <li>
+                                Option1
+                            </li>
+                            <li>
+                                Option2
+                            </li>
+                            <li>
+                                Option3
+                            </li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
     </div>
 </ng-template>

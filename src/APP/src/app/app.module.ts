@@ -39,6 +39,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { LocalStorageService } from './core/local-storage.service';
 import { EventosService } from './core/eventos.service';
 import { AuthGuardService } from './core/auth-guard.service';
+import { ButtonViewComponent } from './telas-adm/leioute/components/ng2-smart-table-button.component';
+import { MultiSelectComponent } from './telas-adm/leioute/components/multi-select.component';
+import { ButtonEditComponent } from './telas-adm/leioute/components/ng2-smart-table-button-edit.component';
 
 @NgModule({
   imports: [
@@ -66,13 +69,25 @@ import { AuthGuardService } from './core/auth-guard.service';
     LoginComponent,
     CadastrarUsuarioComponent,
     EsqueciSenhaComponent,
-    
-    NavBarComponent ,
+    ButtonViewComponent,
+    ButtonEditComponent,
+    NavBarComponent,
+    MultiSelectComponent,
 
     BancoComponent,
     TipoSegmentoComponent,
     LeiouteComponent,
     LeiouteCadastrarComponent
+  ],
+  entryComponents:[
+    ButtonViewComponent,
+    ButtonEditComponent,
+    MultiSelectComponent
+  ],
+  exports:[
+    ButtonViewComponent,
+    ButtonEditComponent,
+    MultiSelectComponent
   ],
   providers: [
     ImportarArquivoService, 

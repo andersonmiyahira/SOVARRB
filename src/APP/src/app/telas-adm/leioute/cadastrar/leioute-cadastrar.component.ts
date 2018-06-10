@@ -1,22 +1,39 @@
-import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { LeiouteService } from '../leioute.service';
-import { Ng2SmartTableModule, ViewCell, LocalDataSource } from 'ng2-smart-table';
+import { LocalDataSource } from 'ng2-smart-table';
 import { ImportarArquivoService } from '../../../importar-arquivo/importar-arquivo.service';
+import { ButtonViewComponent } from '../components/ng2-smart-table-button.component';
+import { MultiSelectComponent } from '../components/multi-select.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
+import { EventosService } from '../../../core/eventos.service';
+import { ButtonEditComponent } from '../components/ng2-smart-table-button-edit.component';
 
 @Component({
   selector: 'app-leioute-cadastrar',
   templateUrl: './leioute-cadastrar.component.html',
   styleUrls: ['./leioute-cadastrar.component.css']
 })
-export class LeiouteCadastrarComponent implements OnInit {
+export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
+ 
+  @ViewChild('detalhesValorEsperado') public childModal: NgbModal;
+
+  private abrirModalEvent$: Subscription;
+  private abrirModalEditEvent$: Subscription;
+
+
   bancos: any;
   cnabs: any;
 
   settings: any;
   data: LocalDataSource;
 
-  constructor(private leiouteService: LeiouteService, 
-              private importarArquivoService: ImportarArquivoService) {
+  listValorEsperado: boolean;
+
+  constructor(private leiouteService: LeiouteService,
+    private importarArquivoService: ImportarArquivoService,
+    private modalService: NgbModal) {
+      this.listValorEsperado = true;
   }
 
   obterBancos() {
@@ -35,6 +52,22 @@ export class LeiouteCadastrarComponent implements OnInit {
     this.initSettings();
     this.obterBancos();
     this.obterCNAB();
+    this.cadastrarEventoAbrirModal();
+  }
+
+  ngOnDestroy(): void {
+    if (this.abrirModalEvent$) this.abrirModalEvent$.unsubscribe();
+    if (this.abrirModalEditEvent$) this.abrirModalEditEvent$.unsubscribe();
+  }
+
+  private cadastrarEventoAbrirModal() {
+    this.abrirModalEvent$ = EventosService.abriuModalValorEsperado.subscribe(() => {
+      this.abriModalValorEsperado();
+    });
+
+    this.abrirModalEditEvent$ = EventosService.abriuModalValorEsperadoEdit.subscribe(() => {
+      this.abriModalValorEsperadoEdit();
+    });
   }
 
   initSettings() {
@@ -66,8 +99,8 @@ export class LeiouteCadastrarComponent implements OnInit {
         },
         tipoCampo: {
           title: 'Tipo do Campo', filter: false,
-          valuePrepareFunction: (cell, row) => {             
-            switch(row.tipoCampo){
+          valuePrepareFunction: (cell, row) => {
+            switch (row.tipoCampo) {
               case "1": return "Numérico";
               case "2": return "Alfanumérico";
               case "3": return "Data(aaaammdd)";
@@ -102,57 +135,44 @@ export class LeiouteCadastrarComponent implements OnInit {
 
         },
         valorEsperado: {
-          title: 'Valor Esperado', filter: false, type: 'html', 
+          title: 'Valor Esperado', filter: false
+          , type: 'custom',
+          renderComponent: ButtonViewComponent,
+          onComponentInitFunction(instance) { 
+          },
           editor: {
             type: 'custom',
-            renderComponent: ButtonViewComponent
+            component: ButtonEditComponent
           }
         }
       }
     };
 
-    this.data = new LocalDataSource(); 
+    this.data = new LocalDataSource();
   }
 
 
-  salvarNovoLeioute(){
+  salvarNovoLeioute() {
     this.data.add({
-        posicaoDe: 0,
-        posicaoAte: 0,
-        descricao: '',
-        tipoCampo: "1",
-        obrigatorio: "2",
-        valorEsperado: '<a class="btn btn-primary" href="javascript:;" (click)="selecionarValorEsperado()">Selecionar</a>'
+      posicaoDe: 0,
+      posicaoAte: 0,
+      descricao: '',
+      tipoCampo: "1",
+      obrigatorio: "2",
+      valorEsperado: '<a class="btn btn-primary" href="javascript:;" (click)="selecionarValorEsperado()">Selecionar</a>'
     });
     this.data.refresh();
   }
+  
+  abriModalValorEsperado() {
+    this.listValorEsperado = true;
+    this.modalService.open(this.childModal, { size: 'lg' });
+  }
 
-  selecionarValorEsperado(){
-    alert(1)
+  abriModalValorEsperadoEdit() {
+    this.listValorEsperado = false;
+    this.modalService.open(this.childModal, { size: 'lg' });
   }
 }
 
 
-
-@Component({
-  selector: 'button-view',
-  template: `
-    <button (click)="onClick()">{{ renderValue }}</button>
-  `,
-})
-export class ButtonViewComponent implements ViewCell, OnInit {
-  renderValue: string;
-
-  @Input() value: string | number;
-  @Input() rowData: any;
-
-  @Output() save: EventEmitter<any> = new EventEmitter();
-
-  ngOnInit() {
-    this.renderValue = this.value.toString().toUpperCase();
-  }
-
-  onClick() {
-    this.save.emit(this.rowData);
-  }
-}

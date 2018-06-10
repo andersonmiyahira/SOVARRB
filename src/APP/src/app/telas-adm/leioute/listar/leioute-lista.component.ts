@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LeiouteService } from '../leioute.service';
 import { Router } from "@angular/router";
 import { ImportarArquivoService } from '../../../importar-arquivo/importar-arquivo.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-leioute-lista',
@@ -16,7 +17,8 @@ export class LeiouteComponent implements OnInit {
 
   constructor(private router: Router, 
               private LeiouteService: LeiouteService,
-              private importarArquivoService: ImportarArquivoService) {
+              private importarArquivoService: ImportarArquivoService,
+              private modalService: NgbModal) {
                 this.leioutes = {};
                 this.leioutes.header = [];
                 this.leioutes.detalhe = [];
@@ -40,6 +42,14 @@ export class LeiouteComponent implements OnInit {
     this.importarArquivoService.obterBancos().subscribe(response => {
       this.bancos = response;
     });
+  }
+
+  editar(editarModal){
+    this.modalService.open(editarModal, { size: 'lg' });
+  }
+
+  exclude(excluir, banco) {
+    this.modalService.open(excluir, { size: 'lg' });
   }
 
   obterCNAB() {

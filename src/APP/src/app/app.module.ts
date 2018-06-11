@@ -42,6 +42,8 @@ import { AuthGuardService } from './core/auth-guard.service';
 import { ButtonViewComponent } from './telas-adm/leioute/components/ng2-smart-table-button.component';
 import { MultiSelectComponent } from './telas-adm/leioute/components/multi-select.component';
 import { ButtonEditComponent } from './telas-adm/leioute/components/ng2-smart-table-button-edit.component';
+import { ValorEsperadoBancoComponent } from './telas-adm/valor-esperado-banco/valor-esperado-banco.component';
+import { ValorEsperadoBancoService } from './telas-adm/valor-esperado-banco/valor-esperado-banco.service';
 
 @NgModule({
   imports: [
@@ -69,6 +71,8 @@ import { ButtonEditComponent } from './telas-adm/leioute/components/ng2-smart-ta
     LoginComponent,
     CadastrarUsuarioComponent,
     EsqueciSenhaComponent,
+    ValorEsperadoBancoComponent,
+
     ButtonViewComponent,
     ButtonEditComponent,
     NavBarComponent,
@@ -100,6 +104,9 @@ import { ButtonEditComponent } from './telas-adm/leioute/components/ng2-smart-ta
     TipoSegmentoService,  
     LeiouteService,
     LocalStorageService,
+    ValorEsperadoBancoService,
+
+
     EventosService,
     AuthGuardService,
     ApiService

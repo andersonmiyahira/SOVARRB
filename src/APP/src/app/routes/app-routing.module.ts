@@ -12,6 +12,7 @@ import { LeiouteComponent } from '../telas-adm/leioute/listar/leioute-lista.comp
 import { LeiouteCadastrarComponent } from '../telas-adm/leioute/cadastrar/leioute-cadastrar.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { AuthGuardService } from '../core/auth-guard.service';
+import { ValorEsperadoBancoComponent } from '../telas-adm/valor-esperado-banco/valor-esperado-banco.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'banco', component: BancoComponent, canActivate: [AuthGuardService] },
   { path: 'tipo-segmento', component: TipoSegmentoComponent, canActivate: [AuthGuardService] },
   { path: 'leioute', component: LeiouteComponent, canActivate: [AuthGuardService] },
+  { path: 'valor-esperado', component: ValorEsperadoBancoComponent, canActivate: [AuthGuardService] },
   { path: 'leioute-cadastrar', component: LeiouteCadastrarComponent, canActivate: [AuthGuardService] },
 ];
 

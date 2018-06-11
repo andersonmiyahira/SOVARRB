@@ -77,6 +77,30 @@ export class InMemoryDataService implements InMemoryDbService {
       }
     ];
 
+    const valorEsperadoGetAll = [
+      {
+        id: 1,
+        descricao: "option1",
+        dataCadastro: "01/01/2018 18:00",
+        status: "Ativo",
+        banco: "Santander"
+      },
+      {
+        id: 2,
+        descricao: "option2",
+        dataCadastro: "03/01/2018 15:00",
+        status: "Ativo",
+        banco: "Itaú"
+      },
+      {
+        id: 3,
+        descricao: "ooption3",
+        dataCadastro: "03/01/2018 15:00",
+        status: "Ativo",
+        banco: "Itaú"
+      }
+    ];
+
     const segmentoGetAll = [
       {
         id: 1,
@@ -130,7 +154,8 @@ export class InMemoryDataService implements InMemoryDbService {
       bancoGetAll: bancoGetAll,
       segmentoGetAll: segmentoGetAll,
       resultadoValidacao: resultadoValidacao,
-      leioutes: leioutes
+      leioutes: leioutes,
+      valorEsperadoGetAll: valorEsperadoGetAll
     };
   }
 }

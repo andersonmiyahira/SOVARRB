@@ -12,19 +12,28 @@ export class ValorEsperadoBancoService {
 
   obterBancos() {
     // return this.apiService.get("http://localhost:52854/api/banco");
- 
-    return this.http.get<any[]>("http://localhost:52854/api/bancoGetAll")
-    .pipe(
-      //tap(banco => console.log(`fetched bancos`))
-    );
-   }
 
-   obterValoresEsperados() {
+    return this.http.get<any[]>("http://localhost:52854/api/bancoGetAll")
+      .pipe(
+        //tap(banco => console.log(`fetched bancos`))
+      );
+  }
+
+  obterTipoCNAB() {
+    //return this.apiService.get("http://localhost:52854/api/TipoCNAB");
+
+    return this.http.get<any[]>("http://localhost:52854/api/tipoCNAB")
+      .pipe(
+        //tap(cnab => {})
+      );
+  }
+
+  obterValoresEsperados() {
     // return this.apiService.get("http://localhost:52854/api/banco");
- 
+
     return this.http.get<any[]>("http://localhost:52854/api/valorEsperadoGetAll")
-    .pipe(
-      //tap(banco => console.log(`fetched bancos`))
-    );
-   }
+      .pipe(
+        //tap(banco => console.log(`fetched bancos`))
+      );
+  }
 }

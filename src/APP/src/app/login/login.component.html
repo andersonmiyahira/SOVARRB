@@ -8,7 +8,7 @@
   <input [(ngModel)]="login.senha" type="password" id="inputPassword" class="form-control" placeholder="Senha" required data-val="true" data-val-required="The Password field is required."
     id="Input_Password" name="Input.Password">
   <span class="text-danger field-validation-valid" data-valmsg-for="Input.Password" data-valmsg-replace="true"></span>
-  <span class="text-danger field-validation-valid" *ngIf="!usuarioEncontrado">Usuário/Senha não encontrado.</span>
+  <span class="text-danger field-validation-valid" *ngIf="!usuarioEncontrado">Usuário/Senha incorreto(s).</span>
   <button class="btn btn-lg btn-primary btn-block mb-3" type="submit" (click)="logarFake()">Entrar</button>
   <div class="options mb-3">
     <label>

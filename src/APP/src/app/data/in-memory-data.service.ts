@@ -32,6 +32,7 @@ export class InMemoryDataService implements InMemoryDbService {
         dataImportacao: "01/01/2018 18:00",
         tamanho: "20kb",
         tipo: "CNAB 240",
+        tipoArquivo: "Remessa",
         banco: "Itaú",
         validado: "Sim"
       },
@@ -41,6 +42,7 @@ export class InMemoryDataService implements InMemoryDbService {
         dataImportacao: "02/01/2018 18:00",
         tamanho: "20kb",
         tipo: "CNAB 240",
+        tipoArquivo: "Remessa",
         banco: "Santander",
         validado: "Sim"
       },
@@ -50,6 +52,7 @@ export class InMemoryDataService implements InMemoryDbService {
         dataImportacao: "03/01/2018 15:00",
         tamanho: "220kb",
         tipo: "CNAB 400",
+        tipoArquivo: "Retorno bancário",
         banco: "Banco do Brasil",
         validado: "Sim"
       }

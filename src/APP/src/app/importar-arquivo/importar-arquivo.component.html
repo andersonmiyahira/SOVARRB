@@ -4,20 +4,28 @@
     <!-- <div class="card-header">Validar Arquivos</div> -->
     <div class="card-body">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="cbBanco">Banco</label>
           <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
             <option selected="selected" value="">Selecione o banco</option>
             <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
           </select>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="cbCNAB">CNAB</label>
           <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
-            <option selected="selected" value="">Selecione o tipo do arquivo</option>
+            <option selected="selected" value="">Selecione o tipo do CNAB</option>
             <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
           </select>
         </div>
+        <div class="col-md-4">
+            <label for="cbTipo">Tipo</label>
+            <select id="cbTipo" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+              <option selected="selected" value="">Selecione o tipo do arquivo</option>
+              <option value="">Remessa</option>
+              <option value="">Retorno Bancário</option>
+            </select>
+          </div>
       </div>
     </div>
   </div>
@@ -102,7 +110,7 @@
                       <ul>
                         <li>
                           <h3>Header:</h3>
-                          <div class="container-errors">
+                          <div class="container-errors" *ngIf="mensagens.header.erro.length > 0">
                             <div class="errors">
                               <h6>
                                 Foram encontradas ({{mensagens.header.erro.length}}) falhas no arquivo enviado.
@@ -131,7 +139,7 @@
                         </li>
                         <li>
                           <h3>Detalhes:</h3>
-                          <div class="container-errors">
+                          <div class="container-errors" *ngIf="mensagens.detalhe.erro.length > 0">
                             <div class="errors">
                               <h6>
                                 Foram encontradas ({{mensagens.detalhe.erro.length}}) falhas no arquivo enviado.
@@ -144,7 +152,7 @@
                               </ul>
                             </div>
                           </div>
-                          <div class="container-sucesso">
+                          <div class="container-sucesso" *ngIf="mensagens.detalhe.sucesso.length > 0">
                             <div class="sucesso">
                               <h6>
                                 Foram encontradas ({{mensagens.detalhe.sucesso.length}}) linhas válidas no arquivo enviado.
@@ -160,7 +168,7 @@
                         </li>
                         <li>
                           <h3>Trailer:</h3>
-                          <div class="container-errors">
+                          <div class="container-errors" *ngIf="mensagens.trailer.erro.length > 0">
                               <div class="errors">
                                 <h6>
                                   Foram encontradas ({{mensagens.trailer.erro.length}}) falhas no arquivo enviado.
@@ -173,7 +181,7 @@
                                 </ul>
                               </div>
                             </div>
-                          <div class="container-sucesso">
+                          <div class="container-sucesso" *ngIf="mensagens.trailer.sucesso.length > 0">
                             <div class="sucesso">
                               <h6>
                                 Foram encontradas ({{mensagens.trailer.sucesso.length}}) linhas válidas no arquivo enviado.

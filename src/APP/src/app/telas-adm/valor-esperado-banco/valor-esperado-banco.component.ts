@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FileUploader } from 'ng2-file-upload';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ValorEsperadoBancoService } from './valor-esperado-banco.service';
 
 @Component({
@@ -10,6 +9,7 @@ import { ValorEsperadoBancoService } from './valor-esperado-banco.service';
 })
 export class ValorEsperadoBancoComponent implements OnInit {
   bancos: any;
+  cnabs: any;
   valoresEsperados: any;
 
   id: number;
@@ -23,11 +23,18 @@ export class ValorEsperadoBancoComponent implements OnInit {
   ngOnInit() {
     this.obterBancos();
     this.obterValoresEsperados();
+    this.obterCNABS();
   }
 
   obterBancos() {
     this.valorEsperadoBancoService.obterBancos().subscribe(response => {
       this.bancos = response;
+    });
+  }
+
+  obterCNABS() {
+    this.valorEsperadoBancoService.obterTipoCNAB().subscribe(response => {
+      this.cnabs = response;
     });
   }
 

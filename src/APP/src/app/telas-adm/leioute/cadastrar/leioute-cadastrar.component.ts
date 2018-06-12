@@ -21,6 +21,8 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
   private abrirModalEvent$: Subscription;
   private abrirModalEditEvent$: Subscription;
 
+  cnabSelecionado?: number;
+  tipoRegistroSelecionado?: number;
 
   bancos: any;
   cnabs: any;
@@ -34,6 +36,8 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
     private importarArquivoService: ImportarArquivoService,
     private modalService: NgbModal) {
       this.listValorEsperado = true;
+      this.cnabSelecionado = 0;
+      this.tipoRegistroSelecionado = 0;
   }
 
   obterBancos() {

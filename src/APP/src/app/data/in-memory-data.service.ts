@@ -84,6 +84,9 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 1,
         descricao: "option1",
+        valor: "02",
+        cnab:"240",
+        tipoArquivo:"Remessa",
         dataCadastro: "01/01/2018 18:00",
         status: "Ativo",
         banco: "Santander"
@@ -91,6 +94,9 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 2,
         descricao: "option2",
+        valor: "03",
+        cnab:"240",
+        tipoArquivo:"Remessa",
         dataCadastro: "03/01/2018 15:00",
         status: "Ativo",
         banco: "Itaú"
@@ -98,6 +104,9 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 3,
         descricao: "ooption3",
+        valor: "04",
+        cnab:"400",
+        tipoArquivo:"Retorno",
         dataCadastro: "03/01/2018 15:00",
         status: "Ativo",
         banco: "Itaú"

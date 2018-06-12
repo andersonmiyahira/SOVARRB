@@ -9,7 +9,10 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Descrição</th>
+                <th scope="col">Valor</th>
                 <th scope="col">Banco</th>
+                <th scope="col">CNAB</th>
+                <th scope="col">Tipo</th>
                 <th scope="col">Data Cadastro</th>
                 <th scope="col">Status</th>
                 <th scope="col" style="width:100px;text-align: center;">Ações</th>
@@ -19,6 +22,9 @@
               <tr *ngFor="let valorEsperado of valoresEsperados">
                 <th scope="row">{{valorEsperado.id}}</th>
                 <td>{{valorEsperado.descricao}}</td>
+                <td>{{valorEsperado.valor}}</td>
+                <td>{{valorEsperado.tipoArquivo}}</td>
+                <td>{{valorEsperado.cnab}}</td>
                 <td>{{valorEsperado.banco}}</td>
                 <td>{{valorEsperado.dataCadastro}}</td>
                 <td>{{valorEsperado.status}}</td>

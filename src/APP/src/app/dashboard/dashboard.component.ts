@@ -10,10 +10,8 @@ export class DashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.getHeroes();
-  }
-
-  getHeroes(): void {
     
   }
+
+  
 }

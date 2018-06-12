@@ -9,4 +9,13 @@ export class BancoService {
   constructor(private http: HttpClient,
     private apiService: ApiService) {
   }
+
+  obterBancos() {
+    // return this.apiService.get("http://localhost:52854/api/banco");
+ 
+    return this.http.get<any[]>("http://localhost:52854/api/bancoGetAll")
+    .pipe(
+      //tap(banco => console.log(`fetched bancos`))
+    );
+   }
 }

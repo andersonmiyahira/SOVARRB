@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { VisualizarArquivoService } from './visualizar-arquivo.service';
 import { NgbModule, NgbDatepickerModule, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ImportarArquivoService } from '../importar-arquivo/importar-arquivo.service';
 
 @Component({
   selector: 'app-visualizar-arquivo',
@@ -10,34 +11,73 @@ import { NgbModule, NgbDatepickerModule, NgbModal, ModalDismissReasons } from '@
 
 export class VisualizarArquivoComponent implements OnInit {
   logoDatePickerUrl = "../../assets/img/calendar-icon.svg";
-  errors: any;
-  sucessos: any;
+  fileURL = "http://localhost:4200/assets/files/REM01.txt";
 
-  constructor(private VisualizarArquivoService: VisualizarArquivoService,
-              private modalService: NgbModal) {
-                this.errors = new Array<any>();
-                this.sucessos = new Array<any>();
+  arquivos: any;
+  bancos: any;
+  cnabs: any;
+  mensagens: any;
+
+  constructor(private visualizarArquivoService: VisualizarArquivoService,
+    private importarArquivoService: ImportarArquivoService,
+    private modalService: NgbModal) {
+    this.mensagens = {};
   }
 
   ngOnInit() {
-    this.carregarErros();
-    this.carregarSucessos();
+    this.obterResultadoValidacao();
+    this.obterCNAB();
+    this.obterBancos();
   }
 
   openLg(content) {
     this.modalService.open(content, { size: 'lg' });
   }
 
-  carregarErros() {
-    this.errors.push({ tipo:"Header", mensagem: "Posição 10 - Posição 20, Linha 100: formato de data errada", ehSucesso : false});
-    this.errors.push({ tipo:"Detalhe", mensagem: "Posição 20 - Posição 25, Linha 102: formato de data errada", ehSucesso: false});   
-    this.errors.push({ tipo:"Detalhe", mensagem: "Posição 25 - Posição 30, Linha 109: formato de data errada", ehSucesso: false});   
-    this.errors.push({ tipo:"Footer", mensagem: "Posição 30 - Posição 38, Linha 110: esperado valor numerico", ehSucesso: false});      
-    
+  downloadArquivo() {
+    window.open(this.fileURL, "_blank");
   }
 
-  carregarSucessos(){
-    this.sucessos.push({ tipo:"Detalhe", mensagem: "Posição 31 - Posição 35, Linha 111", ehSucesso: true}); 
-    this.sucessos.push({ tipo:"Detalhe", mensagem: "Posição 32 - Posição 40, Linha 112", ehSucesso: true}); 
+  obterArquivos() {
+    this.visualizarArquivoService.obterArquivos().subscribe(res => {
+      this.arquivos = res;
+    });
+  }
+
+  obterBancos() {
+    this.visualizarArquivoService.obterBancos().subscribe(response => {
+      this.bancos = response;
+    });
+  }
+
+  obterCNAB() {
+    this.visualizarArquivoService.obterTipoCNAB().subscribe(response => {
+      this.cnabs = response;
+    });
+  }
+
+  obterResultadoValidacao() {
+    this.importarArquivoService.obterResultadoValidacao(1).subscribe(response => {
+      this.mensagens.header = {};
+      this.mensagens.header.sucesso = [];
+      this.mensagens.header.erro = [];
+
+      this.mensagens.detalhe = {};
+      this.mensagens.detalhe.sucesso = [];
+      this.mensagens.detalhe.erro = [];
+
+      this.mensagens.trailer = {};
+      this.mensagens.trailer.sucesso = [];
+      this.mensagens.trailer.erro = [];
+
+      this.mensagens.header.sucesso = response.filter(x => x["tipo"] == 1 && x["ehValido"] == true);
+      this.mensagens.header.erro = response.filter(x => x["tipo"] == 1 && x["ehValido"] == false);
+
+      this.mensagens.detalhe.sucesso = response.filter(x => x["tipo"] == 2 && x["ehValido"] == true);
+      this.mensagens.detalhe.erro = response.filter(x => x["tipo"] == 2 && x["ehValido"] == false);
+
+      this.mensagens.trailer.sucesso = response.filter(x => x["tipo"] == 3 && x["ehValido"] == true);
+      this.mensagens.trailer.erro = response.filter(x => x["tipo"] == 3 && x["ehValido"] == false);
+    });
   }
 }

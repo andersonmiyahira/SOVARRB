@@ -7,6 +7,7 @@ import { tap, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ImportarArquivoService {
+  
   constructor(private http: HttpClient,
     private apiService: ApiService) {
   }
@@ -34,7 +35,7 @@ export class ImportarArquivoService {
 
    return this.http.get<any[]>("http://localhost:52854/api/banco")
    .pipe(
-     tap(banco => console.log(`fetched bancos`))
+     tap(banco => {})
    );
   }
 
@@ -43,7 +44,14 @@ export class ImportarArquivoService {
 
     return this.http.get<any[]>("http://localhost:52854/api/tipoCNAB")
     .pipe(
-      tap(cnab => console.log(`fetched cnab`))
+      tap(cnab => {})
+    );
+  }
+
+  obterResultadoValidacao(id: number): any {
+    return this.http.get<any[]>("http://localhost:52854/api/resultadoValidacao")
+    .pipe(
+      tap(()=>{})
     );
   }
 }

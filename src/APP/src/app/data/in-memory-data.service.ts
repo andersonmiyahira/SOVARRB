@@ -3,9 +3,9 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const banco = [
-      { id: 11, descricao: 'Itaú' },
-      { id: 12, descricao: 'Santander' },
-      { id: 13, descricao: 'Bradesco' }
+      { id: 341, descricao: 'Itaú' },
+      { id: 33, descricao: 'Santander' },
+      { id: 237, descricao: 'Bradesco' }
     ];
 
     const tipoCNAB = [
@@ -61,19 +61,19 @@ export class InMemoryDataService implements InMemoryDbService {
 
     const bancoGetAll = [
       {
-        id: 1,
+        id: 341,
         descricao: "Itaú",
         dataCadastro: "01/01/2018 18:00",
         status: "Ativo"
       },
       {
-        id: 2,
+        id: 33,
         descricao: "Santander",
         dataCadastro: "03/01/2018 15:00",
         status: "Ativo"
       },
       {
-        id: 3,
+        id: 237,
         descricao: "Banco do Brasil",
         dataCadastro: "03/01/2018 15:00",
         status: "Ativo"
@@ -85,8 +85,8 @@ export class InMemoryDataService implements InMemoryDbService {
         id: 1,
         descricao: "option1",
         valor: "02",
-        cnab:"240",
-        tipoArquivo:"Remessa",
+        cnab: "240",
+        tipoArquivo: "Remessa",
         dataCadastro: "01/01/2018 18:00",
         status: "Ativo",
         banco: "Santander"
@@ -95,8 +95,8 @@ export class InMemoryDataService implements InMemoryDbService {
         id: 2,
         descricao: "option2",
         valor: "03",
-        cnab:"240",
-        tipoArquivo:"Remessa",
+        cnab: "240",
+        tipoArquivo: "Remessa",
         dataCadastro: "03/01/2018 15:00",
         status: "Ativo",
         banco: "Itaú"
@@ -105,8 +105,8 @@ export class InMemoryDataService implements InMemoryDbService {
         id: 3,
         descricao: "ooption3",
         valor: "04",
-        cnab:"400",
-        tipoArquivo:"Retorno",
+        cnab: "400",
+        tipoArquivo: "Retorno",
         dataCadastro: "03/01/2018 15:00",
         status: "Ativo",
         banco: "Itaú"
@@ -117,18 +117,21 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 1,
         descricao: "Segmento Q",
+        banco: "Itaú",
         dataCadastro: "01/01/2018 18:00",
         status: "Ativo"
       },
       {
         id: 2,
         descricao: "Segmento R",
+        banco: "Santander",
         dataCadastro: "03/01/2018 15:00",
         status: "Ativo"
       },
       {
         id: 3,
         descricao: "Segmento S",
+        banco: "Bradesco",
         dataCadastro: "03/01/2018 15:00",
         status: "Ativo"
       }
@@ -146,15 +149,15 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
 
     const leioutes = [
-      { tipo: 1, posicaoDe: 0, posicaoAte: 10, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
-      { tipo: 1, posicaoDe: 20, posicaoAte: 30, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
-      { tipo: 1, posicaoDe: 30, posicaoAte: 40, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
-      { tipo: 2, posicaoDe: 0, posicaoAte: 10, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
-      { tipo: 2, posicaoDe: 20, posicaoAte: 30, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
-      { tipo: 2, posicaoDe: 30, posicaoAte: 40, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
-      { tipo: 3, posicaoDe: 0, posicaoAte: 10, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
-      { tipo: 3, posicaoDe: 20, posicaoAte: 30, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"},
-      { tipo: 3, posicaoDe: 30, posicaoAte: 40, descricao:"Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim"}     
+      { tipo: 1, posicaoDe: 0, posicaoAte: 10, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" },
+      { tipo: 1, posicaoDe: 20, posicaoAte: 30, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" },
+      { tipo: 1, posicaoDe: 30, posicaoAte: 40, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" },
+      { tipo: 2, posicaoDe: 0, posicaoAte: 10, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" },
+      { tipo: 2, posicaoDe: 20, posicaoAte: 30, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" },
+      { tipo: 2, posicaoDe: 30, posicaoAte: 40, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" },
+      { tipo: 3, posicaoDe: 0, posicaoAte: 10, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" },
+      { tipo: 3, posicaoDe: 20, posicaoAte: 30, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" },
+      { tipo: 3, posicaoDe: 30, posicaoAte: 40, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" }
 
     ]
 

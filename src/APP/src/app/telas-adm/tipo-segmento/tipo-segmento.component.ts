@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TipoSegmentoService } from './tipo-segmento.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BancoService } from '../banco/banco.service';
 
 @Component({
   selector: 'app-tipo-segmento',
@@ -8,16 +9,19 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./tipo-segmento.component.css']
 })
 export class TipoSegmentoComponent implements OnInit {
-  segmentos:any;
+  bancos: any;
+  segmentos: any;
   id: number;
 
   constructor(private tipoSegmentoService: TipoSegmentoService,
+              private bancoService: BancoService,
               private modalService: NgbModal) {
                 this.id = 0;
   }
 
   ngOnInit() {
     this.obterSegmentos();
+    this.obterBancos();
   }
 
   obterSegmentos() {
@@ -25,6 +29,14 @@ export class TipoSegmentoComponent implements OnInit {
       this.segmentos = response;
     });
   }
+
+  
+  obterBancos() {
+    this.bancoService.obterBancos().subscribe(response => {
+      this.bancos = response;
+    });
+  }
+  
 
   editarOpenModal(content, idSegmento) {
     this.id = idSegmento;

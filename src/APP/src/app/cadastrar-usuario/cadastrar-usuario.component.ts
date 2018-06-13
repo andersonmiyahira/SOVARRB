@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CadastrarUsuarioService } from './cadastrar-usuario.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploader } from 'ng2-file-upload';
- 
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-cadastrar-usuario',
@@ -10,11 +11,16 @@ import { FileUploader } from 'ng2-file-upload';
   styleUrls: ['./cadastrar-usuario.component.css']
 })
 export class CadastrarUsuarioComponent implements OnInit {
-  constructor(private importarArquivoService: CadastrarUsuarioService) {
-    
+  constructor(private importarArquivoService: CadastrarUsuarioService,
+    private route: Router) {
+
   }
 
   ngOnInit() {
-     
+
+  }
+
+  direcionaLogin() {
+    this.route.navigate(['/login']);
   }
 }

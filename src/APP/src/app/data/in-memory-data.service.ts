@@ -142,7 +142,6 @@ export class InMemoryDataService implements InMemoryDbService {
       { tipo: 2, mensagem: "Linha 2, Posição 10 - Posição 15, Esperado: data(ddmmyyyy) - Encontrado: data(mmddyyyy)", ehValido: false },
       { tipo: 2, mensagem: "Linha 3, Posição 15 - Posição 30, Esperado: Valor Numérico - Encontrado: 'CAN'", ehValido: false },
       { tipo: 2, mensagem: "Linha 3, Posição 30 - Posição 35,  Esperado: Valor Numérico - Encontrado: 'XYZ'", ehValido: false },
-      { tipo: 2, mensagem: "Linha 3 - OK", ehValido: true },
       { tipo: 2, mensagem: "Linha 4 - OK", ehValido: true },
       { tipo: 2, mensagem: "Linha 5 - OK", ehValido: true },
       { tipo: 3, mensagem: "Linha 6, Posição 10 - Posição 20, Esperado: Valor Numérico - Encontrado: 'ABC'", ehValido: false }
@@ -154,7 +153,6 @@ export class InMemoryDataService implements InMemoryDbService {
       { tipo: 1, posicaoDe: 30, posicaoAte: 40, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" },
       { tipo: 2, posicaoDe: 0, posicaoAte: 10, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" },
       { tipo: 2, posicaoDe: 20, posicaoAte: 30, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" },
-      { tipo: 2, posicaoDe: 30, posicaoAte: 40, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" },
       { tipo: 3, posicaoDe: 0, posicaoAte: 10, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" },
       { tipo: 3, posicaoDe: 20, posicaoAte: 30, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" },
       { tipo: 3, posicaoDe: 30, posicaoAte: 40, descricao: "Caixa de texto", tipoCampo: "Alfanumérico", obrigatorio: "Sim" }

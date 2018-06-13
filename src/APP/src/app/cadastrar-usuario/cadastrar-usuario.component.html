@@ -19,7 +19,7 @@
   <input class="form-control confirm-password" type="password" placeholder="Confirmar Senha" data-val="true" data-val-equalto="The password and confirmation password do not match."
     data-val-equalto-other="*.Password" id="Input_ConfirmPassword" name="Input.ConfirmPassword">
   <span class="text-danger field-validation-valid" data-valmsg-for="Input.ConfirmPassword" data-valmsg-replace="true"></span>
-  <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Cadastrar</button>
+  <button class="btn btn-lg btn-primary btn-block mb-3" type="submit" (click)="direcionaLogin()">Cadastrar</button>
   <div class="options mb-3">
     <label>
       <a routerLink="/login">Já tem uma conta? Faça o login</a>

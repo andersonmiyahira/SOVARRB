@@ -3,62 +3,66 @@
   <div class="card bg-light mb-3">
     <div class="card-body">
       <div class="row">
-        <div class="col-md-4">
-          <label for="cbBanco">Tipo</label>
-          <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
-            <option selected="selected" value="">Selecione o tipo do arquivo</option>
-            <option value="">Remessa</option>
-            <option value="">Retorno Bancário</option>
-          </select>
-        </div>
-        <div class="col-md-4">
-          <label for="cbBanco">Banco</label>
-          <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
-            <option selected="selected" value="">Selecione o banco</option>
-            <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
-          </select>
-        </div>
-        <div class="col-md-4">
-          <label for="cbCNAB">CNAB</label>
-          <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
-            <option selected="selected" value="">Selecione o tipo do arquivo</option>
-            <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
-          </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <label for="cbBanco">Data importação
-            <strong>De</strong>
-          </label>
-          <div class="form-group">
-            <div class="input-group">
-              <input class="form-control" placeholder="yyyy-mm-dd" name="dpDe" [(ngModel)]="model1" ngbDatepicker #de="ngbDatepicker">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" (click)="de.toggle()" type="button">
-                  <img src="{{logoDatePickerUrl}}" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
-                </button>
+        <div class="col-md-5">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="cbBanco">Data importação
+                <strong>De</strong>
+              </label>
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd" name="dpDe" [(ngModel)]="model1" ngbDatepicker #de="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="de.toggle()" type="button">
+                      <img src="{{logoDatePickerUrl}}" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="cbBanco">Data importação
+                <strong>Até</strong>
+              </label>
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd" name="dpAte" [(ngModel)]="model2" ngbDatepicker #ate="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="ate.toggle()" type="button">
+                      <img src="{{logoDatePickerUrl}}" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <label for="cbBanco">Data importação
-            <strong>Até</strong>
-          </label>
-          <div class="form-group">
-            <div class="input-group">
-              <input class="form-control" placeholder="yyyy-mm-dd" name="dpAte" [(ngModel)]="model2" ngbDatepicker #ate="ngbDatepicker">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" (click)="ate.toggle()" type="button">
-                  <img src="{{logoDatePickerUrl}}" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
-                </button>
-              </div>
+        <div class="col-md-7">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="cbBanco">Tipo</label>
+              <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option selected="selected" value="">Selecione o tipo do arquivo</option>
+                <option value="">Remessa</option>
+                <option value="">Retorno Bancário</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="cbBanco">Banco</label>
+              <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option selected="selected" value="">Selecione o banco</option>
+                <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="cbCNAB">CNAB</label>
+              <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option selected="selected" value="">Selecione o tipo do arquivo</option>
+                <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
+              </select>
             </div>
           </div>
         </div>
-
-        <div class="col-md-4"></div>
       </div>
     </div>
     <div class="card-footer text-muted text-right">

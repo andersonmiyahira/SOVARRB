@@ -49,6 +49,6 @@ export class TipoSegmentoComponent implements OnInit {
   }
 
   excludeOpenModal(excluir) {
-    this.modalService.open(excluir, { size: 'lg' });
+    this.modalService.open(excluir, { size: 'sm' });
   }
 }

@@ -61,7 +61,7 @@ export class LeiouteComponent implements OnInit {
   }
 
   exclude(excluir, banco) {
-    this.modalService.open(excluir, { size: 'lg' });
+    this.modalService.open(excluir, { size: 'sm' });
   }
 
   obterCNAB() {

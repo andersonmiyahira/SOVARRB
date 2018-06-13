@@ -116,4 +116,7 @@ nav a.active {
 .txt-green{color:#00ac5c}
 .txt-red{color:#cf2020}
 
+.bg-danger .modal-title{color:#fff;font-size: 1rem;font-weight: bold;}
+.bg-danger .close span{color:#fff;}
+
 /* END - COMPONENTS*/

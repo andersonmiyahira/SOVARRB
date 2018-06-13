@@ -39,7 +39,7 @@ export class BancoComponent implements OnInit {
 
   excludeOpenModal(excluir, banco) {
     //this.bancos.splice(banco);
-    this.modalService.open(excluir, { size: 'lg' });
+    this.modalService.open(excluir, { size: 'sm' });
   }
 
   excluir() {

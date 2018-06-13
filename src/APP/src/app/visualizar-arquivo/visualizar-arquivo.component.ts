@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { VisualizarArquivoService } from './visualizar-arquivo.service';
 import { NgbModule, NgbDatepickerModule, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ImportarArquivoService } from '../importar-arquivo/importar-arquivo.service';
+import { IMultiSelectOption, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
 
 @Component({
   selector: 'app-visualizar-arquivo',
@@ -12,6 +13,15 @@ import { ImportarArquivoService } from '../importar-arquivo/importar-arquivo.ser
 export class VisualizarArquivoComponent implements OnInit {
   logoDatePickerUrl = "../../assets/img/calendar-icon.svg";
   fileURL = "http://localhost:4200/assets/files/REM01.txt";
+
+  optionsModel: number[];
+  valoresEsperados: IMultiSelectOption[];
+  mySettings: IMultiSelectSettings = {
+    enableSearch: true,
+    buttonClasses: 'btn btn-primary btn-sm',
+    dynamicTitleMaxItems: 3,
+    displayAllSelectedText: true
+};
 
   arquivos: any;
   bancos: any;
@@ -28,10 +38,15 @@ export class VisualizarArquivoComponent implements OnInit {
     this.obterResultadoValidacao();
     this.obterCNAB();
     this.obterBancos();
+    this.obterValoresEsperados();
   }
 
   openLg(content) {
     this.modalService.open(content, { size: 'lg' });
+  }
+
+  openBoletao(Boletao) {
+    this.modalService.open(Boletao, { size: 'sm' });
   }
 
   downloadArquivo() {
@@ -42,6 +57,18 @@ export class VisualizarArquivoComponent implements OnInit {
     this.visualizarArquivoService.obterArquivos().subscribe(res => {
       this.arquivos = res;
     });
+  }
+
+  obterValoresEsperados() {
+    
+    this.valoresEsperados = [
+      { id: 1, name: 'Boleto 1' },
+      { id: 2, name: 'Boleto 2' },
+      { id: 3, name: 'Boleto 3' },
+      { id: 4, name: 'Boleto 4' },
+      { id: 5, name: 'Boleto 5' },
+      { id: 6, name: 'Boleto 6' }
+    ]
   }
 
   obterBancos() {

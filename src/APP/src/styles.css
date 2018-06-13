@@ -119,4 +119,10 @@ nav a.active {
 .bg-danger .modal-title{color:#fff;font-size: 1rem;font-weight: bold;}
 .bg-danger .close span{color:#fff;}
 
+
+.bg-primary .modal-title{color:#fff;font-size: 1rem;font-weight: bold;}
+.bg-primary .close span{color:#fff;}
+
+.bg-success .modal-title{color:#fff;font-size: 1rem;font-weight: bold;}
+.bg-success .close span{color:#fff;}
 /* END - COMPONENTS*/

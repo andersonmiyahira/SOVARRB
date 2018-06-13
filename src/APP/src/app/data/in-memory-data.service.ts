@@ -138,14 +138,14 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
 
     const resultadoValidacao = [
-      { tipo: 1, mensagem: "Linha 1, Posição 10 - Posição 20 : Esperado Valor Numérico, campo: CNPJ", ehValido: false },
-      { tipo: 2, mensagem: "Linha 2, Posição 10 - Posição 15 : Formato de Data Incorreto", ehValido: false },
-      { tipo: 2, mensagem: "Linha 3, Posição 15 - Posição 30: Esperado Valor Numérico", ehValido: false },
-      { tipo: 2, mensagem: "Linha 3, Posição 30 - Posição 35: Esperado Valor Numérico", ehValido: false },
-      { tipo: 2, mensagem: "Linha 3, Posição 30 - Posição 38: Esperado Valor Numérico", ehValido: true },
-      { tipo: 2, mensagem: "Linha 4, Posição 38 - Posição 45: Formato de Data Correto", ehValido: true },
-      { tipo: 2, mensagem: "Linha 5, Posição 45 - Posição 50: Formato de Data Correto", ehValido: true },
-      { tipo: 3, mensagem: "Linha 6, Posição 10 - Posição 20: Esperado Valor Numérico", ehValido: false }
+      { tipo: 1, mensagem: "Linha 1, Posição 10 - Posição 20, Esperado: Valor Numérico - Encontrado: 'CNPJ'", ehValido: false },
+      { tipo: 2, mensagem: "Linha 2, Posição 10 - Posição 15, Esperado: data(ddmmyyyy) - Encontrado: data(mmddyyyy)", ehValido: false },
+      { tipo: 2, mensagem: "Linha 3, Posição 15 - Posição 30, Esperado: Valor Numérico - Encontrado: 'CAN'", ehValido: false },
+      { tipo: 2, mensagem: "Linha 3, Posição 30 - Posição 35,  Esperado: Valor Numérico - Encontrado: 'XYZ'", ehValido: false },
+      { tipo: 2, mensagem: "Linha 3 - OK", ehValido: true },
+      { tipo: 2, mensagem: "Linha 4 - OK", ehValido: true },
+      { tipo: 2, mensagem: "Linha 5 - OK", ehValido: true },
+      { tipo: 3, mensagem: "Linha 6, Posição 10 - Posição 20, Esperado: Valor Numérico - Encontrado: 'ABC'", ehValido: false }
     ];
 
     const leioutes = [

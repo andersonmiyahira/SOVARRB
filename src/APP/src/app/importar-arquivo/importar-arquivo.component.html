@@ -210,8 +210,8 @@
 
 
 <ng-template #sucesso let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">Importação de Arquivo(s)</h4>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title">Sucesso</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -226,7 +226,6 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary" (click)="c('Close click')">Ok</button>
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
+    <button type="submit" class="btn btn-success" (click)="c('Close click')">Ok</button>
   </div>
 </ng-template>

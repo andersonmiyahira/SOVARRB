@@ -125,7 +125,7 @@
 </div>
 
 <ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
+  <div class="modal-header bg-primary">
     <h4 class="modal-title">Detalhes do arquivo</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
@@ -225,13 +225,13 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
+    <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
   </div>
 </ng-template>
 
 
 <ng-template #Boletao let-c="close" let-d="dismiss">
-  <div class="modal-header">
+  <div class="modal-header bg-primary">
     <h4 class="modal-title">Baixar boletos</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>

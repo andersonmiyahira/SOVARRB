@@ -19,13 +19,13 @@
           </select>
         </div>
         <div class="col-md-4">
-            <label for="cbTipo">Tipo</label>
-            <select id="cbTipo" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
-              <option selected="selected" value="">Selecione o tipo do arquivo</option>
-              <option value="">Remessa</option>
-              <option value="">Retorno Bancário</option>
-            </select>
-          </div>
+          <label for="cbTipo">Tipo</label>
+          <select id="cbTipo" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+            <option selected="selected" value="">Selecione o tipo do arquivo</option>
+            <option value="">Remessa</option>
+            <option value="">Retorno Bancário</option>
+          </select>
+        </div>
       </div>
     </div>
   </div>
@@ -69,7 +69,7 @@
                     </span>
                   </td>
                   <td nowrap style="text-align: center;">
-                    <button type="button" class="btn btn-danger btn-sm tooltip-icon-trash-top" (click)="item.remove()">
+                    <button type="button" class="btn btn-danger btn-sm" (click)="item.remove()" data-toggle="tooltip" data-placement="top" ngbTooltip="Excluir">
                       <i class="fas fa-trash-alt"></i>
                     </button>
                   </td>
@@ -102,7 +102,21 @@
         <div class="col-md-12 no-p">
           <div class="row" *ngIf="arquivosValidados">
             <div class="col-md-12">
-              <h2>Resultado</h2>
+              <div class="row mb-3">
+                <div class="col-md-8">
+                  <h2>Resultado</h2>
+                </div>
+                <div class="col-md-4 text-right">
+                    <form class="form-inline" style="float:right">
+                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Exibir:</label>
+                        <select class="custom-select my-1" id="inlineFormCustomSelectPref">
+                          <option selected>Todos</option>
+                          <option value="1">Sucessos</option>
+                          <option value="2">Erros</option>
+                        </select>
+                      </form>
+                </div>
+              </div>
               <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
                 <ngb-panel title="REM01.txt">
                   <ng-template ngbPanelContent>
@@ -169,18 +183,18 @@
                         <li>
                           <h3>Trailer:</h3>
                           <div class="container-errors" *ngIf="mensagens.trailer.erro.length > 0">
-                              <div class="errors">
-                                <h6>
-                                  Foram encontradas ({{mensagens.trailer.erro.length}}) falhas no arquivo enviado.
-                                </h6>
-                                <hr *ngIf="mensagens.trailer.erro && mensagens.trailer.erro.length > 0">
-                                <ul *ngIf="mensagens.trailer.erro && mensagens.trailer.erro.length > 0" style="color: red">
-                                  <li *ngFor="let error of mensagens.trailer.erro">
-                                    {{error.mensagem}}
-                                  </li>
-                                </ul>
-                              </div>
+                            <div class="errors">
+                              <h6>
+                                Foram encontradas ({{mensagens.trailer.erro.length}}) falhas no arquivo enviado.
+                              </h6>
+                              <hr *ngIf="mensagens.trailer.erro && mensagens.trailer.erro.length > 0">
+                              <ul *ngIf="mensagens.trailer.erro && mensagens.trailer.erro.length > 0" style="color: red">
+                                <li *ngFor="let error of mensagens.trailer.erro">
+                                  {{error.mensagem}}
+                                </li>
+                              </ul>
                             </div>
+                          </div>
                           <div class="container-sucesso" *ngIf="mensagens.trailer.sucesso.length > 0">
                             <div class="sucesso">
                               <h6>

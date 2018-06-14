@@ -1,280 +1,286 @@
-<h3>Cadastrar Leioute</h3>
 <div class="container">
-    <div class="row">
+  <h2>Cadastrar Leioute</h2>
+  <div class="card bg-light mb-3">
+    <div class="card-body">
+      <div class="row">
         <div class="col-md-4">
-            <label for="cbBanco">Banco</label>
-            <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
-                <option selected="selected" value="">Selecione o banco</option>
-                <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
-            </select>
+          <label for="cbBanco">Banco</label>
+          <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+            <option selected="selected" value="">Selecione o banco</option>
+            <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
+          </select>
         </div>
         <div class="col-md-4">
-            <label for="cbCNAB">CNAB</label>
-            <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
-                <option selected="selected" value="">Selecione o tipo do arquivo</option>
-                <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
-            </select>
+          <label for="cbCNAB">CNAB</label>
+          <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+            <option selected="selected" value="">Selecione o tipo do arquivo</option>
+            <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
+          </select>
         </div>
         <div class="col-md-4">
-            <label for="cbCNAB">Tipo de transação</label>
-            <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
-                <option selected="selected" value="">Selecione o tipo da transação</option>
-                <option value="">Pagamento</option>
-                <option value="">Cobrança</option>
-            </select>
+          <label for="cbCNAB">Tipo de transação</label>
+          <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+            <option selected="selected" value="">Selecione o tipo da transação</option>
+            <option value="">Pagamento</option>
+            <option value="">Cobrança</option>
+          </select>
         </div>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <button type="submit" class="btn btn-primary" (click)="novoLeioute()">Novo</button>
-            <button type="button" class="btn btn-light" (click)="buscarLeioute()">Buscar</button>
-        </div>
+    <div class="card-footer text-muted text-right">
+      <button type="submit" class="btn btn-primary" (click)="novoLeioute()" style="position:absolute;left:20px;">Novo</button>
+      <button type="button" class="btn btn-light" (click)="buscarLeioute()">Buscar</button>
     </div>
+  </div>
 
-    <div class="row">
+  <div class="card bg-light mb-3">
+    <div class="card-header">Arquivos filtrados</div>
+    <div class="card-body">
+      <div class="row">
         <div class="col-md-12">
-            <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-                <ngb-panel title="Header">
-                    <ng-template ngbPanelContent>
-                        <table class="table">
-                            <thead class="thead-dark table-striped">
-                                <tr>
-                                    <th scope="col">Posição De</th>
-                                    <th scope="col">Posição Até</th>
-                                    <th scope="col">Descrição</th>
-                                    <th scope="col">Tipo Campo</th>
-                                    <th scope="col">Obrigatório</th>
-                                    <th scope="col">Valor esperado</th>
-                                    <th scope="col">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let header of leioutes.header">
-                                    <th>{{header.posicaoDe}}</th>
-                                    <td>{{header.posicaoAte}}</td>
-                                    <td>{{header.descricao}}</td>
-                                    <td>{{header.tipoCampo}}</td>
-                                    <td>{{header.obrigatorio}}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-s" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
-                                            <span class="glyphicon glyphicon-trash"></span> Detalhes
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-s" (click)="editar(editarModal)">
-                                            <span class="glyphicon glyphicon-trash"></span> Alterar
-                                        </button>
-                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
-                                            <span class="glyphicon glyphicon-trash"></span> Excluir
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </ng-template>
-                </ngb-panel>
-                <ngb-panel title="Detalhe">
-                    <ng-template ngbPanelContent>
-                        <table class="table">
-                            <thead class="thead-dark table-striped">
-                                <tr>
-                                    <th scope="col">Posição De</th>
-                                    <th scope="col">Posição Até</th>
-                                    <th scope="col">Descrição</th>
-                                    <th scope="col">Tipo Campo</th>
-                                    <th scope="col">Obrigatório</th>
-                                    <th scope="col">Valor esperado</th>
-                                    <th scope="col">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let detalhe of leioutes.detalhe">
-                                    <th>{{detalhe.posicaoDe}}</th>
-                                    <td>{{detalhe.posicaoAte}}</td>
-                                    <td>{{detalhe.descricao}}</td>
-                                    <td>{{detalhe.tipoCampo}}</td>
-                                    <td>{{detalhe.obrigatorio}}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-s" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
-                                            <span class="glyphicon glyphicon-trash"></span> Detalhes
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-s" (click)="editar(editarModal)">
-                                            <span class="glyphicon glyphicon-trash"></span> Alterar
-                                        </button>
-                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
-                                            <span class="glyphicon glyphicon-trash"></span> Excluir
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </ng-template>
-                </ngb-panel>
-                <ngb-panel title="Trailer">
-                    <ng-template ngbPanelContent>
-                        <table class="table">
-                            <thead class="thead-dark table-striped">
-                                <tr>
-                                    <th scope="col">Posição De</th>
-                                    <th scope="col">Posição Até</th>
-                                    <th scope="col">Descrição</th>
-                                    <th scope="col">Tipo Campo</th>
-                                    <th scope="col">Obrigatório</th>
-                                    <th scope="col">Valor esperado</th>
-                                    <th scope="col">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let trailer of leioutes.trailer">
-                                    <th>{{trailer.posicaoDe}}</th>
-                                    <td>{{trailer.posicaoAte}}</td>
-                                    <td>{{trailer.descricao}}</td>
-                                    <td>{{trailer.tipoCampo}}</td>
-                                    <td>{{trailer.obrigatorio}}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-s" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
-                                            <span class="glyphicon glyphicon-trash"></span> Detalhes
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-s" (click)="editar(editarModal)">
-                                            <span class="glyphicon glyphicon-trash"></span> Alterar
-                                        </button>
-                                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
-                                            <span class="glyphicon glyphicon-trash"></span> Excluir
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </ng-template>
-                </ngb-panel>
-            </ngb-accordion>
+          <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+            <ngb-panel title="Header">
+              <ng-template ngbPanelContent>
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Posição De</th>
+                      <th scope="col">Posição Até</th>
+                      <th scope="col">Descrição</th>
+                      <th scope="col">Tipo Campo</th>
+                      <th scope="col">Obrigatório</th>
+                      <th scope="col">Valor esperado</th>
+                      <th scope="col">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let header of leioutes.header">
+                      <th>{{header.posicaoDe}}</th>
+                      <td>{{header.posicaoAte}}</td>
+                      <td>{{header.descricao}}</td>
+                      <td>{{header.tipoCampo}}</td>
+                      <td>{{header.obrigatorio}}</td>
+                      <td>
+                        <button type="button" class="btn btn-primary btn-s" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
+                          <span class="glyphicon glyphicon-trash"></span> Detalhes
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-primary btn-s" (click)="editar(editarModal)">
+                          <span class="glyphicon glyphicon-trash"></span> Alterar
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                          <span class="glyphicon glyphicon-trash"></span> Excluir
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel title="Detalhe">
+              <ng-template ngbPanelContent>
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Posição De</th>
+                      <th scope="col">Posição Até</th>
+                      <th scope="col">Descrição</th>
+                      <th scope="col">Tipo Campo</th>
+                      <th scope="col">Obrigatório</th>
+                      <th scope="col">Valor esperado</th>
+                      <th scope="col">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let detalhe of leioutes.detalhe">
+                      <th>{{detalhe.posicaoDe}}</th>
+                      <td>{{detalhe.posicaoAte}}</td>
+                      <td>{{detalhe.descricao}}</td>
+                      <td>{{detalhe.tipoCampo}}</td>
+                      <td>{{detalhe.obrigatorio}}</td>
+                      <td>
+                        <button type="button" class="btn btn-primary btn-s" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
+                          <span class="glyphicon glyphicon-trash"></span> Detalhes
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-primary btn-s" (click)="editar(editarModal)">
+                          <span class="glyphicon glyphicon-trash"></span> Alterar
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                          <span class="glyphicon glyphicon-trash"></span> Excluir
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel title="Trailer">
+              <ng-template ngbPanelContent>
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Posição De</th>
+                      <th scope="col">Posição Até</th>
+                      <th scope="col">Descrição</th>
+                      <th scope="col">Tipo Campo</th>
+                      <th scope="col">Obrigatório</th>
+                      <th scope="col">Valor esperado</th>
+                      <th scope="col">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let trailer of leioutes.trailer">
+                      <th>{{trailer.posicaoDe}}</th>
+                      <td>{{trailer.posicaoAte}}</td>
+                      <td>{{trailer.descricao}}</td>
+                      <td>{{trailer.tipoCampo}}</td>
+                      <td>{{trailer.obrigatorio}}</td>
+                      <td>
+                        <button type="button" class="btn btn-primary btn-s" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
+                          <span class="glyphicon glyphicon-trash"></span> Detalhes
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-primary btn-s" (click)="editar(editarModal)">
+                          <span class="glyphicon glyphicon-trash"></span> Alterar
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
+                          <span class="glyphicon glyphicon-trash"></span> Excluir
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 
-
 <ng-template #editarModal let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title">Editar Parâmetro</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <form method="post" action="/" novalidate="novalidate">
-                            <div class="text-danger validation-summary-valid" data-valmsg-summary="true">
-                                <ul>
-                                    <li style="display:none"></li>
-                                </ul>
-                            </div>
-                            <div class="form-group">
-                                <label for="Input_Email">Posição De</label>
-                                <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
-                            </div>
-                            <div class="form-group">
-                                <label for="Input_Email">Posição Até</label>
-                                <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
-                            </div>
-                            <div class="form-group">
-                                <label for="Input_Email">Descrição</label>
-                                <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
-                            </div>
-                            <div class="form-group">
-                                <label for="cbCNAB">Tipo Campo</label>
-                                <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
-                                    <option selected="selected" value="1">Numérico</option>
-                                    <option value="2">Alfanumérico</option>
-                                    <option value="3">Data(aaaammdd)</option>
-                                    <option value="4">Data(ddmmaa)</option>
-                                    <option value="5">Data(ddmmaaaa)</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="cbCNAB">Obrigatório</label>
-                                <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
-                                    <option selected="selected" value="1">Sim</option>
-                                    <option value="2">Não</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="valorEsperado">Valor esperado</label>
-                                <ss-multiselect-dropdown [options]="valoresEsperados" style="display: inherit;width: 100%" [(ngModel)]="optionsModel"></ss-multiselect-dropdown>
-                                <!-- <select multiple id="valorEsperado" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+  <div class="modal-header">
+    <h4 class="modal-title">Editar Parâmetro</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-12">
+            <form method="post" action="/" novalidate="novalidate">
+              <div class="text-danger validation-summary-valid" data-valmsg-summary="true">
+                <ul>
+                  <li style="display:none"></li>
+                </ul>
+              </div>
+              <div class="form-group">
+                <label for="Input_Email">Posição De</label>
+                <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
+              </div>
+              <div class="form-group">
+                <label for="Input_Email">Posição Até</label>
+                <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
+              </div>
+              <div class="form-group">
+                <label for="Input_Email">Descrição</label>
+                <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
+              </div>
+              <div class="form-group">
+                <label for="cbCNAB">Tipo Campo</label>
+                <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+                  <option selected="selected" value="1">Numérico</option>
+                  <option value="2">Alfanumérico</option>
+                  <option value="3">Data(aaaammdd)</option>
+                  <option value="4">Data(ddmmaa)</option>
+                  <option value="5">Data(ddmmaaaa)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="cbCNAB">Obrigatório</label>
+                <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+                  <option selected="selected" value="1">Sim</option>
+                  <option value="2">Não</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="valorEsperado">Valor esperado</label>
+                <ss-multiselect-dropdown [options]="valoresEsperados" style="display: inherit;width: 100%" [(ngModel)]="optionsModel"></ss-multiselect-dropdown>
+                <!-- <select multiple id="valorEsperado" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
                               <option selected="selected" value="1">Sim</option>
                               <option value="2">Não</option>
                             </select> -->
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" (click)="c('Close click')">Salvar</button>
-        <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
-    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" (click)="c('Close click')">Salvar</button>
+    <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
+  </div>
 </ng-template>
 
 
 <ng-template #excluir let-c="close" let-d="dismiss">
-    <div class="modal-header bg-danger">
-        <h4 class="modal-title">Excluir Banco</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <div>
-            <div class="row">
-                <div class="col-md-12">
-                    Tem certeza que deseja excluir?
-                </div>
-            </div>
+  <div class="modal-header bg-danger">
+    <h4 class="modal-title">Excluir Banco</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <div class="row">
+        <div class="col-md-12">
+          Tem certeza que deseja excluir?
         </div>
+      </div>
     </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-danger" (click)="c('Close click')">Sim</button>
-        <button type="button" class="btn btn-light" (click)="c('Close click')">Não</button>
-    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-danger" (click)="c('Close click')">Sim</button>
+    <button type="button" class="btn btn-light" (click)="c('Close click')">Não</button>
+  </div>
 </ng-template>
 
 <ng-template #detalhesValorEsperado let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title">Valor(es) Esperado(s)</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <div>
-            <div class="row">
-                <div class="col-md-12">
-                    <ul>
-                        <li>
-                            Option1
-                        </li>
-                        <li>
-                            Option2
-                        </li>
-                        <li>
-                            Option3
-                        </li>
-                    </ul>
-                </div>
-            </div>
+  <div class="modal-header">
+    <h4 class="modal-title">Valor(es) Esperado(s)</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <div class="row">
+        <div class="col-md-12">
+          <ul>
+            <li>
+              Option1
+            </li>
+            <li>
+              Option2
+            </li>
+            <li>
+              Option3
+            </li>
+          </ul>
         </div>
+      </div>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
-    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
+  </div>
 </ng-template>

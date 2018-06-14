@@ -30,6 +30,8 @@ button {
   font-family: Cambria, Georgia;
 }
 
+.logo-login{margin: 0 0 50px 0}
+
 a {
   cursor: pointer;
   cursor: hand;

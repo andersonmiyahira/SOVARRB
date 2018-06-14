@@ -29,7 +29,7 @@
     </div>
     <div class="card-footer text-muted text-right">
       <button type="submit" class="btn btn-primary" (click)="novoLeioute()" style="position:absolute;left:20px;">Novo</button>
-      <button type="button" class="btn btn-light" (click)="buscarLeioute()">Buscar</button>
+      <button type="button" class="btn btn-secondary" (click)="buscarLeioute()">Buscar</button>
     </div>
   </div>
 
@@ -61,16 +61,16 @@
                       <td>{{header.tipoCampo}}</td>
                       <td>{{header.obrigatorio}}</td>
                       <td>
-                        <button type="button" class="btn btn-primary btn-s" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
                           <span class="glyphicon glyphicon-trash"></span> Detalhes
                         </button>
                       </td>
                       <td>
-                        <button type="button" class="btn btn-primary btn-s" (click)="editar(editarModal)">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="editar(editarModal)">
                           <span class="glyphicon glyphicon-trash"></span> Alterar
                         </button>
-                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
-                          <span class="glyphicon glyphicon-trash"></span> Excluir
+                        <button type="button" class="btn btn-danger btn-sm" (click)="exclude(excluir)" data-toggle="tooltip" data-placement="top" title="Excluir">
+                          <i class="fas fa-trash-alt"></i>
                         </button>
                       </td>
                     </tr>
@@ -100,16 +100,16 @@
                       <td>{{detalhe.tipoCampo}}</td>
                       <td>{{detalhe.obrigatorio}}</td>
                       <td>
-                        <button type="button" class="btn btn-primary btn-s" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
                           <span class="glyphicon glyphicon-trash"></span> Detalhes
                         </button>
                       </td>
                       <td>
-                        <button type="button" class="btn btn-primary btn-s" (click)="editar(editarModal)">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="editar(editarModal)">
                           <span class="glyphicon glyphicon-trash"></span> Alterar
                         </button>
-                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
-                          <span class="glyphicon glyphicon-trash"></span> Excluir
+                        <button type="button" class="btn btn-danger btn-sm" (click)="exclude(excluir)" data-toggle="tooltip" data-placement="top" title="Excluir">
+                          <i class="fas fa-trash-alt"></i>
                         </button>
                       </td>
                     </tr>
@@ -139,16 +139,16 @@
                       <td>{{trailer.tipoCampo}}</td>
                       <td>{{trailer.obrigatorio}}</td>
                       <td>
-                        <button type="button" class="btn btn-primary btn-s" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados(detalhesValorEsperado)">
                           <span class="glyphicon glyphicon-trash"></span> Detalhes
                         </button>
                       </td>
                       <td>
-                        <button type="button" class="btn btn-primary btn-s" (click)="editar(editarModal)">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="editar(editarModal)">
                           <span class="glyphicon glyphicon-trash"></span> Alterar
                         </button>
-                        <button type="button" class="btn btn-secondary btn-s" (click)="exclude(excluir)">
-                          <span class="glyphicon glyphicon-trash"></span> Excluir
+                        <button type="button" class="btn btn-danger btn-sm" (click)="exclude(excluir)" data-toggle="tooltip" data-placement="top" title="Excluir">
+                          <i class="fas fa-trash-alt"></i>
                         </button>
                       </td>
                     </tr>

@@ -1,124 +1,131 @@
-<h3>Cadastrar Leioute</h3>
 <div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <label for="cbBanco">Banco</label>
-            <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
-                <option selected="selected" value="">Selecione o banco</option>
-                <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
-            </select>
+  <h2>Cadastrar Leioute</h2>
+  <div class="card bg-light mb-3">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4 mb-2">
+          <label for="cbBanco">Banco</label>
+          <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+            <option selected="selected" value="">Selecione o banco</option>
+            <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-2">
+          <label for="cbCNAB">CNAB</label>
+          <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;" [(ngModel)]="cnabSelecionado">
+            <option selected="selected" value="0">Selecione o tipo do arquivo</option>
+            <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-2">
+          <label for="cTipoTransascao">Tipo de transação</label>
+          <select id="cTipoTransascao" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+            <option selected="selected" value="">Selecione o tipo da transação</option>
+            <option value="">Pagamento</option>
+            <option value="">Cobrança</option>
+          </select>
         </div>
         <div class="col-md-4">
-            <label for="cbCNAB">CNAB</label>
-            <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;" [(ngModel)]="cnabSelecionado">
-                <option selected="selected" value="0">Selecione o tipo do arquivo</option>
-                <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
-            </select>
-        </div>
-        <div class="col-md-4">
-            <label for="cTipoTransascao">Tipo de transação</label>
-            <select id="cTipoTransascao" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
-                <option selected="selected" value="">Selecione o tipo da transação</option>
-                <option value="">Pagamento</option>
-                <option value="">Cobrança</option>
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <label for="cbTipoRegistro">Tipo do registro</label>
-            <select id="cbTipoRegistro" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;" [(ngModel)]="tipoRegistroSelecionado">
-                <option selected="selected" value="0">Selecione tipo do registro</option>
-                <option value="1">Header</option>
-                <option value="2">Detalhe</option>
-                <option value="3">Trailer</option>
-            </select>
+          <label for="cbTipoRegistro">Tipo do registro</label>
+          <select id="cbTipoRegistro" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;" [(ngModel)]="tipoRegistroSelecionado">
+            <option selected="selected" value="0">Selecione tipo do registro</option>
+            <option value="1">Header</option>
+            <option value="2">Detalhe</option>
+            <option value="3">Trailer</option>
+          </select>
         </div>
         <div class="col-md-4" *ngIf="cnabSelecionado && cnabSelecionado == 1 && tipoRegistroSelecionado && tipoRegistroSelecionado == 2">
-            <label for="cbSegmento">Segmento</label>
-            <select id="cbSegmento" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
-                <option selected="selected" value="">Selecione Segmento</option>
-                <option value="">Segmento P</option>
-                <option value="">Segmento Q</option>
-                <option value="">Segmento R</option>
-                <option value="">Segmento S</option>
-            </select>
+          <label for="cbSegmento">Segmento</label>
+          <select id="cbSegmento" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+            <option selected="selected" value="">Selecione Segmento</option>
+            <option value="">Segmento P</option>
+            <option value="">Segmento Q</option>
+            <option value="">Segmento R</option>
+            <option value="">Segmento S</option>
+          </select>
         </div>
         <div class="col-md-4">
-            <label for="cbTipoRetorno">Tipo</label>
-            <select id="cbTipoRetorno" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
-                <option selected="selected" value="">Selecione o tipo</option>
-                <option value="">Remessa</option>
-                <option value="">Retorno Bancário</option>
-            </select>
+          <label for="cbTipoRetorno">Tipo</label>
+          <select id="cbTipoRetorno" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+            <option selected="selected" value="">Selecione o tipo</option>
+            <option value="">Remessa</option>
+            <option value="">Retorno Bancário</option>
+          </select>
         </div>
+      </div>
     </div>
-    <div class="row">
+    <div class="card-footer text-muted text-right">
+      <div class="row">
         <div class="col-md-12">
-            <button type="submit" class="btn btn-primary" (click)="salvarNovoLeioute()">Salvar</button>
+          <button type="submit" class="btn btn-primary btn-sm" (click)="salvarNovoLeioute()">Salvar</button>
         </div>
+      </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
-        </div>
+  </div>
+  <div class="card bg-light mb-3">
+    <div class="card-header">Lista de Leioutes</div>
+    <div class="card-body">
+      <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
     </div>
+  </div>
 </div>
 
+
+
+
 <ng-template #detalhesValorEsperado let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title">Valor(es) Esperado(s)</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <div>
-            <div class="row">
-                <div class="col-md-12" *ngIf="listValorEsperado">
-                    <ul>
-                        <li>
-                            Option1
-                        </li>
-                        <li>
-                            Option2
-                        </li>
-                        <li>
-                            Option3
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-12 lst-style" *ngIf="!listValorEsperado">
-                    <ul>
-                        <li>
-                            <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                                <input type="checkbox" class="custom-control-input" id="customControlInline1">
-                                <label class="custom-control-label" for="customControlInline1">Opção 1</label>
-                            </div>
-
-                        </li>
-                        <li>
-                            <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                                <input type="checkbox" class="custom-control-input" id="customControlInline2">
-                                <label class="custom-control-label" for="customControlInline2">Opção 2</label>
-                            </div>
-
-                        </li>
-                        <li>
-                            <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                                <input type="checkbox" class="custom-control-input" id="customControlInline3">
-                                <label class="custom-control-label" for="customControlInline3">Opção 3</label>
-                            </div>
-
-                        </li>
-                    </ul>
-                </div>
-            </div>
+  <div class="modal-header">
+    <h4 class="modal-title">Valor(es) Esperado(s)</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <div class="row">
+        <div class="col-md-12" *ngIf="listValorEsperado">
+          <ul>
+            <li>
+              Option1
+            </li>
+            <li>
+              Option2
+            </li>
+            <li>
+              Option3
+            </li>
+          </ul>
         </div>
+        <div class="col-md-12 lst-style" *ngIf="!listValorEsperado">
+          <ul>
+            <li>
+              <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                <input type="checkbox" class="custom-control-input" id="customControlInline1">
+                <label class="custom-control-label" for="customControlInline1">Opção 1</label>
+              </div>
+
+            </li>
+            <li>
+              <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                <input type="checkbox" class="custom-control-input" id="customControlInline2">
+                <label class="custom-control-label" for="customControlInline2">Opção 2</label>
+              </div>
+
+            </li>
+            <li>
+              <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                <input type="checkbox" class="custom-control-input" id="customControlInline3">
+                <label class="custom-control-label" for="customControlInline3">Opção 3</label>
+              </div>
+
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="modal-footer">
-        <button type="submit" *ngIf="!listValorEsperado" class="btn btn-primary" (click)="c('Close click')">Ok</button>
-        <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
-    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" *ngIf="!listValorEsperado" class="btn btn-primary" (click)="c('Close click')">Ok</button>
+    <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
+  </div>
 </ng-template>

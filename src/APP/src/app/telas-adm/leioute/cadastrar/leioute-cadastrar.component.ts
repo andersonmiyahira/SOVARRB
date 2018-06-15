@@ -76,6 +76,10 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
 
   initSettings() {
     this.settings = {
+      hideSubHeader: true,
+      attr:{
+        class: "table table-bordered table-striped"
+      },
       actions: {
         add: false
       },
@@ -141,6 +145,7 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
         valorEsperado: {
           title: 'Valor Esperado', filter: false
           , type: 'custom',
+          width:'150px',
           renderComponent: ButtonViewComponent,
           onComponentInitFunction(instance) { 
           },

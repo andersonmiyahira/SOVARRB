@@ -5,8 +5,8 @@ import { EventosService } from "../../../core/eventos.service";
 @Component({
   selector: 'button-view',
   template: `
-    <button type="button" class="btn btn-primary" (click)="onClick()">
-        <span class="glyphicon glyphicon-trash"></span>Detalhes
+    <button type="button" class="btn btn-primary btn-sm" style="color:#fff;" (click)="onClick()">
+    <i class="fas fa-info-circle"></i> Detalhes
       </button>
     `,
 })

@@ -13,22 +13,22 @@
           </a>
         </li> -->
         <li class="nav-item" *ngIf="logado">
-          <a class="nav-link" routerLink="/importar-arquivo">Validar</a>
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/importar-arquivo">Validar</a>
         </li>
         <li class="nav-item" *ngIf="logado">
-          <a class="nav-link" routerLink="/visualizar-arquivo">Visualizar</a>
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/visualizar-arquivo">Visualizar</a>
         </li>
         <li class="nav-item" *ngIf="logado && ehAdministrador">
-          <a class="nav-link" routerLink="/banco">Banco</a>
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/banco">Banco</a>
         </li>
         <li class="nav-item" *ngIf="logado && ehAdministrador">
-          <a class="nav-link" routerLink="/tipo-segmento">Segmento</a>
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/tipo-segmento">Segmento</a>
         </li>
         <li class="nav-item" *ngIf="logado && ehAdministrador">
-          <a class="nav-link" routerLink="/valor-esperado">Valor Esperado</a>
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/valor-esperado">Valor Esperado</a>
         </li>
         <li class="nav-item" *ngIf="logado && ehAdministrador">
-          <a class="nav-link" routerLink="/leioute">Leioute</a>
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/leioute">Leioute</a>
         </li>
       </ul>
       <ul class="navbar-text nav-right menu-right">

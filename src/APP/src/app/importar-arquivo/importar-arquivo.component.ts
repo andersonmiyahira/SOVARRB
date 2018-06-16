@@ -19,6 +19,7 @@ export class ImportarArquivoComponent implements OnInit {
   mensagens: any; 
 
   arquivosValidados: boolean;
+  exibirResultado: number;
 
   @ViewChild("fileInput") fileInput;
 
@@ -27,12 +28,13 @@ export class ImportarArquivoComponent implements OnInit {
     this.importar = {}; 
     this.arquivosValidados = false;
     this.mensagens = {};
+    this.exibirResultado = 0;
   }
 
   ngOnInit() {
     this.obterBancos();
     this.obterCNAB();
-    this.obterResultadoValidacao();
+    this.obterResultadoValidacao(0);
   }
 
   // carregarErros(){
@@ -66,6 +68,8 @@ export class ImportarArquivoComponent implements OnInit {
   obterBancos() {
     this.importarArquivoService.obterBancos().subscribe(response => {
       this.bancos = response;
+
+     
     });
   }
 
@@ -75,8 +79,11 @@ export class ImportarArquivoComponent implements OnInit {
     });
   }
 
-  obterResultadoValidacao(){
+  obterResultadoValidacao(filter: number){
     this.importarArquivoService.obterResultadoValidacao(1).subscribe(response => {
+      if(filter > 0)
+        response = response.filter(_ => _["ehValido"]===(filter==1));
+
       this.mensagens.header = {};
       this.mensagens.header.sucesso = [];
       this.mensagens.header.erro = [];
@@ -100,6 +107,9 @@ export class ImportarArquivoComponent implements OnInit {
     });
   }
 
+  onExibirChange() {
+    this.obterResultadoValidacao(this.exibirResultado);
+  }
 
   public uploader: FileUploader = new FileUploader({ url: URL });
   public hasBaseDropZoneOver: boolean = false;

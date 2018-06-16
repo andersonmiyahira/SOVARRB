@@ -128,4 +128,8 @@ nav a.active {
 .bg-success .modal-title{color:#fff;font-size: 1rem;font-weight: bold;}
 .bg-success .close span{color:#fff;}
 
+.btn-left {
+  position:absolute;
+  left:20px;
+}
 /* END - COMPONENTS*/

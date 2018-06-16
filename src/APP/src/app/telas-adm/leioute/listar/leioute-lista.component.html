@@ -165,7 +165,7 @@
 
 
 <ng-template #editarModal let-c="close" let-d="dismiss">
-  <div class="modal-header">
+  <div class="modal-header bg-primary">
     <h4 class="modal-title">Editar Parâmetro</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
@@ -226,7 +226,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary" (click)="c('Close click')">Salvar</button>
+    <button type="submit" class="btn btn-primary btn-left" (click)="c('Close click')">Salvar</button>
     <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
   </div>
 </ng-template>
@@ -249,13 +249,13 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-danger" (click)="c('Close click')">Sim</button>
+    <button type="submit" class="btn btn-danger btn-left" (click)="c('Close click')">Sim</button>
     <button type="button" class="btn btn-light" (click)="c('Close click')">Não</button>
   </div>
 </ng-template>
 
 <ng-template #detalhesValorEsperado let-c="close" let-d="dismiss">
-  <div class="modal-header">
+  <div class="modal-header bg-primary">
     <h4 class="modal-title">Valor(es) Esperado(s)</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>

@@ -9,20 +9,45 @@ import { BancoService } from './banco.service';
   styleUrls: ['./banco.component.css']
 })
 export class BancoComponent implements OnInit {
+  bancos: any;
+  id: number;
 
   constructor(private bancoService: BancoService,
               private modalService: NgbModal) {
+      this.id = 0;
   }
 
   ngOnInit() {
+    this.obterBancos();
+  }
+
+  obterBancos() {
+    this.bancoService.obterBancos().subscribe(response => {
+      this.bancos = response;
+    });
   }
   
-  novo(content) {
+  novoOpenModal(content) {
+    this.id = 0;
     this.modalService.open(content, { size: 'lg' });
   }
 
-  exclude(excluir) {
-    this.modalService.open(excluir, { size: 'lg' });
+  editarOpenModal(content, idBanco) {
+    this.id = idBanco;
+    this.modalService.open(content, { size: 'lg' });
+  }
+
+  excludeOpenModal(excluir, banco) {
+    //this.bancos.splice(banco);
+    this.modalService.open(excluir, { size: 'sm' });
+  }
+
+  excluir() {
+
+  }
+
+  salvar() {
+
   }
  
 }

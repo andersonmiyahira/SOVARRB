@@ -1,37 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="logado">
   <div class="container">
-    <a class="navbar-brand" href="#">Navbar w/ text</a>
+    <a class="navbar-brand" routerLink="/importar-arquivo"><img src="../../assets/img/vbanking-logo-cinza.png" /></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard">Home
             <span class="sr-only">(current)</span>
           </a>
+        </li> -->
+        <li class="nav-item" *ngIf="logado">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/importar-arquivo">Validar</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/importar-arquivo">Validar</a>
+        <li class="nav-item" *ngIf="logado">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/visualizar-arquivo">Visualizar</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/visualizar-arquivo">Visualizar</a>
+        <li class="nav-item" *ngIf="logado && ehAdministrador">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/banco">Banco</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/banco">Banco</a>
+        <li class="nav-item" *ngIf="logado && ehAdministrador">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/tipo-segmento">Segmento</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/tipo-segmento">Segmento</a>
+        <li class="nav-item" *ngIf="logado && ehAdministrador">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/valor-esperado">Valor Esperado</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/leioute">Leioute</a>
+        <li class="nav-item" *ngIf="logado && ehAdministrador">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/leioute">Leioute</a>
         </li>
       </ul>
-
-      <span class="navbar-text">
-        <a class="nav-link" routerLink="/login">Log in</a>
-      </span>
+      <ul class="navbar-text nav-right menu-right">
+      <li class="nav-item" *ngIf="!logado">
+        <a class="nav-link" routerLink="/login">Entrar</a>
+      </li>
+      <li class="nav-item" *ngIf="logado">
+        <a class="nav-link" (click)="logout()">Sair</a>
+      </li>
+    </ul>
     </div>
   </div>
 </nav>

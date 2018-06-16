@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ImportarArquivoService } from './importar-arquivo.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploader } from 'ng2-file-upload';
 
 // const URL = '/api/';
@@ -15,39 +15,41 @@ export class ImportarArquivoComponent implements OnInit {
   bancos: any;
   cnabs: any;
   importar: any;
-  errors: any;
-  sucessos: any;
+
+  mensagens: any; 
+
   arquivosValidados: boolean;
+  exibirResultado: number;
 
   @ViewChild("fileInput") fileInput;
 
-  constructor(private importarArquivoService: ImportarArquivoService) {
-    this.importar = {};
-    this.errors = [];
-    this.sucessos = [];
+  constructor(private importarArquivoService: ImportarArquivoService,
+              private modalService: NgbModal) {
+    this.importar = {}; 
     this.arquivosValidados = false;
+    this.mensagens = {};
+    this.exibirResultado = 0;
   }
 
   ngOnInit() {
     this.obterBancos();
     this.obterCNAB();
-    this.carregarErros();
-    this.carregarSucessos();
+    this.obterResultadoValidacao(0);
   }
 
-  carregarErros(){
-      this.errors.push({ mensagem: "Erro! Posição 10 - Linha 100: formato de data errada", ehSucesso : false});
-      this.errors.push({ mensagem: "Erro! Posição 20 - Linha 100: formato de data errada", ehSucesso: false});   
-      this.errors.push({ mensagem: "Erro! Posição 30 - Linha 110: esperado valor numerico"});      
-      this.errors.push({ mensagem: "Sucesso! Posição 30 - Linha 110: OK",  ehSucesso: true}); 
-  }
+  // carregarErros(){
+  //     this.errors.push({ mensagem: "Erro! Posição 10 - Linha 100: formato de data errada", ehSucesso : false});
+  //     this.errors.push({ mensagem: "Erro! Posição 20 - Linha 100: formato de data errada", ehSucesso: false});   
+  //     this.errors.push({ mensagem: "Erro! Posição 30 - Linha 110: esperado valor numerico"});      
+  //     this.errors.push({ mensagem: "Sucesso! Posição 30 - Linha 110: OK",  ehSucesso: true}); 
+  // }
 
-  carregarSucessos(){
-    this.sucessos.push({ tipo:"Detalhe", mensagem: "Posição 31 - Posição 35, Linha 111", ehSucesso: true}); 
-    this.sucessos.push({ tipo:"Detalhe", mensagem: "Posição 32 - Posição 40, Linha 112", ehSucesso: true}); 
-  }
+  // carregarSucessos(){
+  //   this.sucessos.push({ tipo:"Detalhe", mensagem: "Posição 31 - Posição 35, Linha 111", ehSucesso: true}); 
+  //   this.sucessos.push({ tipo:"Detalhe", mensagem: "Posição 32 - Posição 40, Linha 112", ehSucesso: true}); 
+  // }
 
-  saveUpload(): void {
+  saveUpload(sucesso): void {
     // let rawFiles: Array<any> = new Array<any>();
     // this.uploader.queue.forEach(element => {
     //   rawFiles.push(element.file.rawFile);
@@ -58,14 +60,16 @@ export class ImportarArquivoComponent implements OnInit {
           element.isSuccess = true;
         });
         //this.fileInput.nativeElement.value = "";
-        alert('Salvo com sucesso!');
         this.arquivosValidados = true;
-      // });
+        this.modalService.open(sucesso, { size: 'sm' });
+    //});
   }
 
   obterBancos() {
     this.importarArquivoService.obterBancos().subscribe(response => {
       this.bancos = response;
+
+     
     });
   }
 
@@ -73,6 +77,38 @@ export class ImportarArquivoComponent implements OnInit {
     this.importarArquivoService.obterTipoCNAB().subscribe(response => {
       this.cnabs = response;
     });
+  }
+
+  obterResultadoValidacao(filter: number){
+    this.importarArquivoService.obterResultadoValidacao(1).subscribe(response => {
+      if(filter > 0)
+        response = response.filter(_ => _["ehValido"]===(filter==1));
+
+      this.mensagens.header = {};
+      this.mensagens.header.sucesso = [];
+      this.mensagens.header.erro = [];
+
+      this.mensagens.detalhe = {};
+      this.mensagens.detalhe.sucesso = [];
+      this.mensagens.detalhe.erro = [];
+
+      this.mensagens.trailer = {};
+      this.mensagens.trailer.sucesso = [];
+      this.mensagens.trailer.erro = [];
+
+      this.mensagens.header.sucesso = response.filter(x => x["tipo"] == 1 && x["ehValido"] == true);
+      this.mensagens.header.erro = response.filter(x => x["tipo"] == 1 && x["ehValido"] == false);
+
+      this.mensagens.detalhe.sucesso = response.filter(x => x["tipo"] == 2 && x["ehValido"] == true);
+      this.mensagens.detalhe.erro = response.filter(x => x["tipo"] == 2 && x["ehValido"] == false);
+
+      this.mensagens.trailer.sucesso = response.filter(x => x["tipo"] == 3 && x["ehValido"] == true);
+      this.mensagens.trailer.erro = response.filter(x => x["tipo"] == 3 && x["ehValido"] == false);
+    });
+  }
+
+  onExibirChange() {
+    this.obterResultadoValidacao(this.exibirResultado);
   }
 
   public uploader: FileUploader = new FileUploader({ url: URL });

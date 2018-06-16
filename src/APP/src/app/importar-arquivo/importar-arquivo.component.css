@@ -1,32 +1,32 @@
-/* DashboardComponent's private CSS styles */
-[class*='col-'] {
-  float: left;
-  padding-right: 20px;
-  padding-bottom: 20px;
-}
-[class*='col-']:last-of-type {
-  padding-right: 0;
-}
 a {
   text-decoration: none;
 }
-*, *:after, *:before {
+
+*,
+*:after,
+*:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 h3 {
-  text-align: center; margin-bottom: 0;
+  text-align: center;
+  margin-bottom: 0;
 }
+
 h4 {
   position: relative;
 }
+
 .grid {
   margin: 0;
 }
+
 .col-1-4 {
   width: 25%;
 }
+
 .module {
   padding: 20px;
   text-align: center;
@@ -36,22 +36,28 @@ h4 {
   background-color: #607D8B;
   border-radius: 2px;
 }
+
 .module:hover {
   background-color: #EEE;
   cursor: pointer;
   color: #607d8b;
 }
+
 .grid-pad {
   padding: 10px 0;
 }
-.grid-pad > [class*='col-']:last-of-type {
+
+.grid-pad>[class*='col-']:last-of-type {
   padding-right: 20px;
 }
+
 @media (max-width: 600px) {
   .module {
     font-size: 10px;
-    max-height: 75px; }
+    max-height: 75px;
+  }
 }
+
 @media (max-width: 1024px) {
   .grid {
     margin: 0;
@@ -61,15 +67,25 @@ h4 {
   }
 }
 
+.my-drop-zone {
+  border: dotted 3px lightgray;
+}
 
-.my-drop-zone { border: dotted 3px lightgray; }
-.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
-.another-file-over-class { border: dotted 3px green; }
+.nv-file-over {
+  border: dotted 3px red;
+}
+
+/* Default class applied to drop zones on over */
+
+.another-file-over-class {
+  border: dotted 3px green;
+}
 
 .btn-file {
   position: relative;
   overflow: hidden;
 }
+
 .btn-file input[type=file] {
   position: absolute;
   top: 0;
@@ -90,39 +106,60 @@ h4 {
   margin-top: 10px;
 }
 
+.list-alerts ul {
+  margin: 0;
+  padding: 0;
+}
+
+.list-alerts ul li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list-alerts ul li h3 {
+  text-align: left;
+  font-size: 1.2rem;
+}
 
 .container-errors {
-    border: solid 1px red;
-    min-height: 80px;
-    display: flex;
-    display: -webkit-flex; 
-    margin-bottom: 5px;
+  border: solid 1px #f5c6cb;
+  background: #f8d7da;
+  min-height: 80px;
+  display: flex;
+  display: -webkit-flex;
+  margin-bottom: 5px;
   margin-top: 5px;
+  border-radius: 3px;
 }
+.errors hr {
+  border-top: solid 1px #f5c6cb;
+  margin:12px 0 10px 0;
+}
+
+.errors ul li {
+  font-size: 14px;
+}
+
 div.errors {
-    -webkit-flex: 0 0 auto;
-    flex: 1 1 auto;
-    order: 2;
-    padding: 20px;
-    line-height: 18pt;
+  -webkit-flex: 0 0 auto;
+  flex: 1 1 auto;
+  order: 2;
+  padding: 15px;
+  line-height: 18pt;
 }
-h6 {
-    color: red;
-    font-weight: 600;
-    letter-spacing: 0;
-    margin-bottom: 0;
-    font-size: 14px;
+
+.errors h6 {
+  color: red;
+  font-weight: 600;
+  letter-spacing: 0;
+  margin-bottom: 0;
+  font-size: 14px;
 }
-hr {
-    border-top: solid 1px red;
-}
-ul li {
-    list-style-type: disc;
-}
-  
 
 .container-sucesso {
-  border: solid 1px green;
+  border: solid 1px #c3e6cb;
+  background: #d4edda;
   min-height: 80px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -130,25 +167,30 @@ ul li {
   display: -webkit-flex;
   margin-bottom: 5px;
   margin-top: 5px;
+  border-radius: 3px;
 }
 
-
 div.sucesso {
--webkit-flex: 0 0 auto;
-flex: 1 1 auto;
-order: 2;
-padding: 20px;
-line-height: 18pt;
+  -webkit-flex: 0 0 auto;
+  flex: 1 1 auto;
+  order: 2;
+  padding: 15px;
+  line-height: 18pt;
 }
 
 .sucesso h6 {
-color: green;
-font-weight: 600;
-letter-spacing: 0;
-margin-bottom: 0;
-font-size: 14px;
+  color: green;
+  font-weight: 600;
+  letter-spacing: 0;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.sucesso ul li {
+  font-size: 14px;
 }
 
 .sucesso hr {
-border-top: solid 1px green;
+  border-top: solid 1px #c3e6cb;
+  margin:12px 0 10px 0;
 }

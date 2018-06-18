@@ -83,7 +83,7 @@ export class InMemoryDataService implements InMemoryDbService {
     const valorEsperadoGetAll = [
       {
         id: 1,
-        descricao: "option1",
+        descricao: "01 - Remessa",
         valor: "02",
         cnab: "240",
         tipoArquivo: "Remessa",
@@ -93,7 +93,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       {
         id: 2,
-        descricao: "option2",
+        descricao: "02 - Pedido de Baixa",
         valor: "03",
         cnab: "240",
         tipoArquivo: "Remessa",
@@ -103,7 +103,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       {
         id: 3,
-        descricao: "ooption3",
+        descricao: "04 - Concessão",
         valor: "04",
         cnab: "400",
         tipoArquivo: "Retorno",

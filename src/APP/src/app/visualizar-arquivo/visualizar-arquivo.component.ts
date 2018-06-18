@@ -12,7 +12,7 @@ import { IMultiSelectOption, IMultiSelectSettings } from 'angular-2-dropdown-mul
 
 export class VisualizarArquivoComponent implements OnInit {
   logoDatePickerUrl = "../../assets/img/calendar-icon.svg";
-  fileURL = "http://localhost:4200/assets/files/REM01.txt";
+  fileURL = "http://localhost:4200/assets/files/";
 
   optionsModel: number[];
   valoresEsperados: IMultiSelectOption[];
@@ -50,7 +50,11 @@ export class VisualizarArquivoComponent implements OnInit {
   }
 
   downloadArquivo() {
-    window.open(this.fileURL, "_blank");
+    window.open(this.fileURL + "REM01.txt", "_blank");
+  }
+
+  downloadArquivoBoletoPDF(){
+    window.open(this.fileURL + "Boleto1.pdf", "_blank");
   }
 
   obterArquivos() {

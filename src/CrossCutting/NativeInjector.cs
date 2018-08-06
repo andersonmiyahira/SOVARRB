@@ -15,10 +15,6 @@ namespace CrossCutting
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            // Application
-            //services.AddSingleton(Mapper.Configuration);
-            //services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
-
             // Register - Services
             RegisterAppServices(services);
 

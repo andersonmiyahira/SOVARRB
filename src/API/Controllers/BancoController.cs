@@ -24,8 +24,8 @@ namespace API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var bancos = _bancoAppService.GetAll();
-            return Ok(bancos.ToList());
+            var bancos = _bancoAppService.ObterTodosBancos();
+            return Response(bancos);
         }
     }
 }

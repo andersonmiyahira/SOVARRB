@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Application.AppService.Banco;
 using Application.AppService.TipoCNAB;
+using AutoMapper;
 using Domain.Interfaces.Repositories;
 using Infra.Data.Context;
 using Infra.Data.Repositories;
@@ -13,10 +14,10 @@ namespace CrossCutting
     public class NativeInjector
     {
         public static void RegisterServices(IServiceCollection services)
-        { 
+        {
             // Application
             //services.AddSingleton(Mapper.Configuration);
-            //services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<IConfigurationProvider>(), sp.GetService));
+            //services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
 
             // Register - Services
             RegisterAppServices(services);

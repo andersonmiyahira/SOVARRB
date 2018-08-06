@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.ControllerBaseExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +10,7 @@ namespace API.Controllers
 {
     [Produces("application/json")]
     [Route("api/ImportarArquivo")]
-    public class ImportarArquivoController : Controller
+    public class ImportarArquivoController : ApiController
     {
         [HttpPost]
         [Route("File")]

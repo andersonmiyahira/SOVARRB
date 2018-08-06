@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.ControllerBaseExtensions;
 using Application.AppService.Banco;
 using Application.AppService.TipoCNAB;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +12,7 @@ namespace API.Controllers
 {
     [Produces("application/json")]
     [Route("api/TipoCNAB")]
-    public class TipoCNABController : Controller
+    public class TipoCNABController : ApiController
     {
         private readonly ITipoCNABAppService _tipoCNABAppService;
 

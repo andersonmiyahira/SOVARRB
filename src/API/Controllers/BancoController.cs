@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.ControllerBaseExtensions;
 using Application.AppService.Banco;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ namespace API.Controllers
 {
     [Produces("application/json")]
     [Route("api/Banco")]
-    public class BancoController : Controller
+    public class BancoController : ApiController
     {
         private readonly IBancoAppService _bancoAppService;
 

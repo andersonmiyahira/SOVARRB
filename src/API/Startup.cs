@@ -1,33 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Application.AutoMapper;
+using AutoMapper;
 using CrossCutting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.PlatformAbstractions;
+using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
+using System.Reflection;
+using WebApi.Configurations;
 
 namespace API
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
            
             RegisterServices(services);
+
+            RegisterSwagger(services);
         }
 
         // Adding dependencies from another layers (isolated from Presentation)
@@ -50,7 +55,65 @@ namespace API
             {
                 options.Filters.Add(new CorsAuthorizationFilterFactory("SOVARRBPolicy"));
             });
+            //Add automapper references
+            services.AddAutoMapper(typeof(DomainToViewModelProfile), typeof(ViewModelToDomainProfile));
         }
+
+        private void RegisterSwagger(IServiceCollection services)
+        {
+            services.AddWebApi(options =>
+            {
+                options.OutputFormatters.Remove(new XmlDataContractSerializerOutputFormatter());
+                options.UseCentralRoutePrefix(new RouteAttribute("v{api-version:apiVersion}/[controller]"));
+            });
+
+            // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
+            // note: the specified format code will format the version as "'v'major[.minor][-status]"
+            services.AddMvcCore().AddVersionedApiExplorer(o =>
+            {
+                o.GroupNameFormat = "'v'VVV";
+            });
+
+            services.AddApiVersioning(o => o.ReportApiVersions = true);
+
+            services.AddSwaggerGen(options =>
+            {
+                var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
+                foreach (var description in provider.ApiVersionDescriptions)
+                {
+                    options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
+                }
+
+                options.OperationFilter<SwaggerDefaultValues>();
+            });            
+        }
+
+        private Info CreateInfoForApiVersion(ApiVersionDescription description)
+        {
+            var info = new Info()
+            {
+                Version = description.ApiVersion.ToString(),
+                Title = "API SOVARRB",
+                Description = "API",
+                Contact = new Contact { Name = "ADM", Email = "suporte@facens.br", Url = "http://www.facens.br" }
+            };
+
+            return info;
+        }
+
+        /// <summary>
+        /// Returns the path of XML with the comments ///
+        /// </summary>
+        private string XmlCommentsFilePath
+        {
+            get
+            {
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
+                return Path.Combine(basePath, fileName);
+            }
+        }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -59,6 +122,10 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
 
             app.UseMvc();
             app.UseCors(c =>
@@ -66,6 +133,24 @@ namespace API
                 c.AllowAnyHeader();
                 c.AllowAnyMethod();
                 c.AllowAnyOrigin();
+            });
+              
+            app.UseStaticFiles();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.  
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.  
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SOVARRB API V1");
+            });
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                          name: "default",
+                          template: "{controller=Todo}/{action=Index}/{id?}");
             });
         }
     }

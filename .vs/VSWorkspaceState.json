@@ -1,7 +1,18 @@
 {
   "ExpandedNodes": [
-    "\\sql",
-    "\\src"
+    "",
+    "\\src",
+    "\\src\\Application",
+    "\\src\\Application\\AppService",
+    "\\src\\Application\\AppService\\Banco",
+    "\\src\\Application\\ViewModel",
+    "\\src\\Application\\ViewModel\\Request",
+    "\\src\\Domain",
+    "\\src\\Domain\\Entities",
+    "\\src\\Domain\\Interfaces",
+    "\\src\\Domain\\Interfaces\\Services",
+    "\\src\\Domain\\Services"
   ],
+  "SelectedNode": "\\src\\Application\\AppService\\Banco\\BancoAppService.cs",
   "PreviewInSolutionExplorer": false
 }

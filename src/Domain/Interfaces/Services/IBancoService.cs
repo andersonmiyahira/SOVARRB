@@ -1,11 +1,11 @@
 ﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.Interfaces.Services
 {
     public interface IBancoService : IServiceBase<Banco>
     {
+        Banco Salvar(Banco banco);
+        void Excluir(Banco bancoEntitie);
+        Banco ObterPorId(int id);
     }
 }

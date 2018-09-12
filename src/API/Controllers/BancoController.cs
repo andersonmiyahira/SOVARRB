@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using API.ControllerBaseExtensions;
 using Application.AppService.Banco;
-using Microsoft.AspNetCore.Http;
+using Application.ViewModel.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Banco")]
+    [Route("api")]
     public class BancoController : ApiController
     {
         private readonly IBancoAppService _bancoAppService;
@@ -20,12 +19,32 @@ namespace API.Controllers
             this._bancoAppService = bancoAppService;
         }
 
-        // GET api/values
         [HttpGet]
         public IActionResult Get()
         {
             var bancos = _bancoAppService.ObterTodosBancos();
             return Response(bancos);
+        }
+
+        [HttpGet("GetById")]
+        public IActionResult GetById(int id)
+        {
+            var bancos = _bancoAppService.ObterPorId(id);
+            return Response(bancos);
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody]Banco banco)
+        {
+            var bancos = _bancoAppService.Salvar(banco);
+            return Response(bancos);
+        } 
+
+        [HttpDelete]
+        public IActionResult Delete([FromBody]Banco banco)
+        {
+             _bancoAppService.Excluir(banco);
+            return Response();
         }
     }
 }

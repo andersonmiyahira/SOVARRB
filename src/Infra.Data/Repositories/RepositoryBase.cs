@@ -4,45 +4,57 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Infra.Data.Repositories
 {
     public class RepositoryBase<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity : class
     {
-        protected SOVARRBContext Db = new SOVARRBContext();
+        protected SOVARRBContext _context;
+        protected DbSet<TEntity> _dbSet;
+
+        public RepositoryBase(SOVARRBContext context)
+        {
+            this._context = context;
+            this._dbSet = context.Set<TEntity>();
+        }
 
         public void Add(TEntity obj)
         {
-            Db.Set<TEntity>().Add(obj);
-            Db.SaveChanges();
+            _dbSet.Add(obj);
         }
 
         public TEntity GetById(int id)
         {
-            return Db.Set<TEntity>().Find(id);
+            var result = _dbSet.Find(id);
+
+            if (result != null)
+                _context.Entry(result).Reload();
+
+            return result;
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            return Db.Set<TEntity>().ToList();
+            return _dbSet.ToList();
         }
 
         public void Update(TEntity obj)
         {
-            Db.Entry(obj).State = EntityState.Modified;
-            Db.SaveChanges();
+            _context.Entry(obj).State = EntityState.Modified;
         }
 
         public void Remove(TEntity obj)
         {
-            Db.Set<TEntity>().Remove(obj);
-            Db.SaveChanges();
+            if (_context.Entry(obj).State == EntityState.Detached)
+            {
+                _dbSet.Attach(obj);
+            }
+            _dbSet.Remove(obj);
         }
 
         public void Dispose()
         {
-            Db.Dispose();
+            _context.Dispose();
             GC.SuppressFinalize(this);
         }
     }

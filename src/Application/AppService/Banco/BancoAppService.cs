@@ -1,9 +1,7 @@
 ﻿using Application.ViewModel;
 using AutoMapper;
 using Domain.Interfaces.Services;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Application.AppService.Banco
 {
@@ -23,6 +21,23 @@ namespace Application.AppService.Banco
         {
             var bancos = this.GetAll();
             return _mapper.Map<List<BancoViewModel>>(bancos);
+        }
+
+        public BancoViewModel Salvar(ViewModel.Request.Banco banco)
+        {
+            var bancoEntitie = _mapper.Map<Domain.Entities.Banco>(banco);
+            return _mapper.Map<BancoViewModel>(_bancoService.Salvar(bancoEntitie));
+        }
+
+        public void Excluir(ViewModel.Request.Banco banco)
+        {
+            var bancoEntitie = _mapper.Map<Domain.Entities.Banco>(banco);
+            _bancoService.Excluir(bancoEntitie);
+        }
+         
+        public BancoViewModel ObterPorId(int id)
+        {
+            return _mapper.Map<BancoViewModel>(_bancoService.ObterPorId(id));
         }
     }
 }

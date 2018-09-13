@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [Produces("application/json")]
-    [Route("api")]
     public class BancoController : ApiController
     {
         private readonly IBancoAppService _bancoAppService;

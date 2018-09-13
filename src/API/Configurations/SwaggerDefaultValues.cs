@@ -30,4 +30,34 @@ namespace WebApi.Configurations
             }
         }
     }
+
+    //public class FileUploadOperation : IOperationFilter
+    //{
+    //    public void Apply(Operation operation, OperationFilterContext context)
+    //    {
+    //        if (operation.OperationId.ToLower().Contains("importararquivo"))
+    //        {
+    //            operation.Parameters.Clear();
+    //            foreach (var parameter in operation.Parameters.OfType<NonBodyParameter>())
+    //            {
+    //                var description = context.ApiDescription
+    //                                         .ParameterDescriptions
+    //                                         .First(p => p.Name == parameter.Name);
+
+    //                if (parameter.Description == null)
+    //                    parameter.Description = description.ModelMetadata.Description;
+
+    //            }
+    //            operation.Parameters.Add(new NonBodyParameter
+    //            {
+    //                Name = "uploadedFile",
+    //                In = "formData",
+    //                Description = "Upload File",
+    //                Required = true,
+    //                Type = "file"
+    //            });
+    //            operation.Consumes.Add("multipart/form-data");
+    //        }
+    //    }
+    //}
 }

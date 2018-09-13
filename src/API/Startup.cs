@@ -64,7 +64,7 @@ namespace API
             services.AddWebApi(options =>
             {
                 options.OutputFormatters.Remove(new XmlDataContractSerializerOutputFormatter());
-                options.UseCentralRoutePrefix(new RouteAttribute("v{api-version:apiVersion}/[controller]"));
+                options.UseCentralRoutePrefix(new RouteAttribute("api/v{api-version:apiVersion}/[controller]"));
             });
 
             // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
@@ -85,6 +85,7 @@ namespace API
                 }
 
                 options.OperationFilter<SwaggerDefaultValues>();
+                //options.OperationFilter<FileUploadOperation>();
             });            
         }
 

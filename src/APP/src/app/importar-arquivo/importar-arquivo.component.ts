@@ -50,19 +50,19 @@ export class ImportarArquivoComponent implements OnInit {
   // }
 
   saveUpload(sucesso): void {
-    // let rawFiles: Array<any> = new Array<any>();
-    // this.uploader.queue.forEach(element => {
-    //   rawFiles.push(element.file.rawFile);
-    // });
-    // this.importarArquivoService.upload(rawFiles, this.importar.bancoId)
-    //   .subscribe(res => {
+    let rawFiles: Array<any> = new Array<any>();
+    this.uploader.queue.forEach(element => {
+      rawFiles.push(element.file.rawFile);
+    });
+    this.importarArquivoService.upload(rawFiles, 120)
+      .subscribe(res => {
         this.uploader.queue.forEach(element => {
           element.isSuccess = true;
         });
         //this.fileInput.nativeElement.value = "";
         this.arquivosValidados = true;
         this.modalService.open(sucesso, { size: 'sm' });
-    //});
+    });
   }
 
   obterBancos() {

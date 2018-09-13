@@ -6,7 +6,7 @@ namespace Domain.Services
 {
     public class ArquivoService : ServiceBase<Arquivo>, IArquivoService
     {
-        public ArquivoService(IRepositoryBase<Arquivo> repository) : base(repository)
+        public ArquivoService(IArquivoRepository repository) : base(repository)
         {
 
         }

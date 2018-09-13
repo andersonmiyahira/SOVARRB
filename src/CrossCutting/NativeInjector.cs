@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using Application.AppService.Banco;
-using Application.AppService.Importacao;
 using Application.AppService.TipoCNAB;
 using AutoMapper;
 using Domain.Interfaces.Repositories;

@@ -1,6 +1,8 @@
-﻿namespace Domain.Interfaces.Repositories
+﻿using Domain.Entities;
+
+namespace Domain.Interfaces.Repositories
 {
-    public interface IArquivoRepository
+    public interface IArquivoRepository : IRepositoryBase<Arquivo>
     {
     }
 }

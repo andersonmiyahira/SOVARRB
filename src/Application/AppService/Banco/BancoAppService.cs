@@ -41,15 +41,6 @@ namespace Application.AppService.Banco
         public BancoViewModel ObterPorId(int id)
         {
             return _mapper.Map<BancoViewModel>(_bancoService.ObterPorId(id));
-        }
-
-        public void ProcessarArquivo(List<ArquivoImportacao> arquivosImportados)
-        {
-            foreach (var arquivoImportacao in arquivosImportados)
-            {
-                var linhas = TextoHelper.ObterLinhasDoArquivo(arquivoImportacao.File);
-               
-            }
-        }
+        } 
     }
 }

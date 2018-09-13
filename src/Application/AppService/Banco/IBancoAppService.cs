@@ -11,8 +11,5 @@ namespace Application.AppService.Banco
         BancoViewModel ObterPorId(int id);
         BancoViewModel Salvar(ViewModel.Request.Banco banco);
         void Excluir(ViewModel.Request.Banco banco);
-
-        void ProcessarArquivo(List<ArquivoImportacao> arquivosImportados);
-
     }
 }

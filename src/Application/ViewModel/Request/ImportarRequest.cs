@@ -10,7 +10,7 @@ namespace Application.ViewModel.Request
         {
             IdBanco = idBanco;
 
-            ArquivoImportacao = new List<Request.ArquivoImportacao>();
+            ArquivoImportacao = new List<ArquivoImportacao>();
             foreach (var file in formFiles)
             {
                 ArquivoImportacao.Add(new ArquivoImportacao(file.FileName, file.OpenReadStream()));
@@ -18,6 +18,9 @@ namespace Application.ViewModel.Request
         }
 
         public int IdBanco { get; private set; }
+        public int IdTipoCNAB { get; private set; }
+        public int IdTipoBoleto { get; private set; }
+
         public List<ArquivoImportacao> ArquivoImportacao { get; private set; }
     }
 

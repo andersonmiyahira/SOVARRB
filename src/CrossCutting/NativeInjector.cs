@@ -52,6 +52,7 @@ namespace CrossCutting
             services.AddScoped<IBancoRepository, BancoRepository>();
             services.AddScoped<ITipoCNABRepository, TipoCNABRepository>();
             services.AddScoped<IArquivoRepository, ArquivoRepository>();
+            services.AddScoped<ILayoutRepository, LayoutRepository>();
         }
     }
 }

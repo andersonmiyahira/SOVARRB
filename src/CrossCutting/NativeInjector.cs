@@ -49,7 +49,8 @@ namespace CrossCutting
             services.AddScoped<ILogArquivoService, LogArquivoService>();
             services.AddScoped<ITipoCNABService, TipoCNABService>();
             services.AddScoped<ISegmentoService, SegmentoService>();
-            services.AddScoped<IValorEsperadoService, ValorEsperadoService>();            
+            services.AddScoped<IValorEsperadoService, ValorEsperadoService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
         }
 
         private static void RegisterRepositories(IServiceCollection services)
@@ -60,7 +61,8 @@ namespace CrossCutting
             services.AddScoped<ILogArquivoRepository, LogArquivoRepository>();
             services.AddScoped<ITipoCNABRepository, TipoCNABRepository>();
             services.AddScoped<ISegmentoRepository, SegmentoRepository>();
-            services.AddScoped<IValorEsperadoRepository, ValorEsperadoRepository>();            
+            services.AddScoped<IValorEsperadoRepository, ValorEsperadoRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
         }
     }
 }

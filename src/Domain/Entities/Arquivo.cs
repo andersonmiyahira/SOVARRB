@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
@@ -26,6 +27,7 @@ namespace Domain.Entities
         public DateTime DataCadastro { get; private set; }
         public DateTime DataAlteracao { get; private set; }
 
+        [NotMapped]
         public List<string> LinhasArquivo { get; set; }
     }
 }

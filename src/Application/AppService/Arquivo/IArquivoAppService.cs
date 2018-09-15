@@ -1,6 +1,5 @@
 ﻿using Application.AppService.Base;
 using Application.ViewModel.Request;
-using System.Collections.Generic;
 
 namespace Application.AppService.Banco
 {

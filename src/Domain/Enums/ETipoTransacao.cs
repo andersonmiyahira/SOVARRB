@@ -6,7 +6,7 @@ namespace Domain.Enums
     {
         [Description("Pagamento")]
         Pagamento = 1,
-        [Description("Cobranca")]
+        [Description("Cobrança")]
         Cobranca = 2
     }
 }

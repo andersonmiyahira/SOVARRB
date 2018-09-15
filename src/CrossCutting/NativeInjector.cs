@@ -37,31 +37,32 @@ namespace CrossCutting
 
         private static void RegisterAppServices(IServiceCollection services)
         {
-            services.AddScoped<IBancoAppService, BancoAppService>();
-            services.AddScoped<ITipoCNABAppService, TipoCNABAppService>();
             services.AddScoped<IArquivoAppService, ArquivoAppService>();
-            services.AddScoped<IValorEsperadoAppService, ValorEsperadoAppService>();
+            services.AddScoped<IBancoAppService, BancoAppService>();
+            services.AddScoped<ILayoutAppService, LayoutAppService>();
             services.AddScoped<ISegmentoAppService, SegmentoAppService>();
+            services.AddScoped<ITipoCNABAppService, TipoCNABAppService>();            
+            services.AddScoped<IValorEsperadoAppService, ValorEsperadoAppService>();            
         }
 
         private static void RegisterDomainServices(IServiceCollection services)
         {
-            services.AddScoped<IBancoService, BancoService>();
-            services.AddScoped<ITipoCNABService, TipoCNABService>();
             services.AddScoped<IArquivoService, ArquivoService>();
+            services.AddScoped<IBancoService, BancoService>();
             services.AddScoped<ILayoutService, LayoutService>();
-            services.AddScoped<IValorEsperadoService, ValorEsperadoService>();
+            services.AddScoped<ITipoCNABService, TipoCNABService>();
             services.AddScoped<ISegmentoService, SegmentoService>();
+            services.AddScoped<IValorEsperadoService, ValorEsperadoService>();            
         }
 
         private static void RegisterRepositories(IServiceCollection services)
         {
-            services.AddScoped<IBancoRepository, BancoRepository>();
-            services.AddScoped<ITipoCNABRepository, TipoCNABRepository>();
             services.AddScoped<IArquivoRepository, ArquivoRepository>();
+            services.AddScoped<IBancoRepository, BancoRepository>();
             services.AddScoped<ILayoutRepository, LayoutRepository>();
-            services.AddScoped<IValorEsperadoRepository, ValorEsperadoRepository>();
+            services.AddScoped<ITipoCNABRepository, TipoCNABRepository>();
             services.AddScoped<ISegmentoRepository, SegmentoRepository>();
+            services.AddScoped<IValorEsperadoRepository, ValorEsperadoRepository>();            
         }
     }
 }

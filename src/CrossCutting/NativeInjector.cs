@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Application.AppService.Banco;
+﻿using Application.AppService.Banco;
 using Application.AppService.Segmento;
 using Application.AppService.TipoCNAB;
 using Application.AppService.ValorEsperado;
-using AutoMapper;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.Uow;
@@ -50,6 +46,7 @@ namespace CrossCutting
             services.AddScoped<IArquivoService, ArquivoService>();
             services.AddScoped<IBancoService, BancoService>();
             services.AddScoped<ILayoutService, LayoutService>();
+            services.AddScoped<ILogArquivoService, LogArquivoService>();
             services.AddScoped<ITipoCNABService, TipoCNABService>();
             services.AddScoped<ISegmentoService, SegmentoService>();
             services.AddScoped<IValorEsperadoService, ValorEsperadoService>();            
@@ -60,6 +57,7 @@ namespace CrossCutting
             services.AddScoped<IArquivoRepository, ArquivoRepository>();
             services.AddScoped<IBancoRepository, BancoRepository>();
             services.AddScoped<ILayoutRepository, LayoutRepository>();
+            services.AddScoped<ILogArquivoRepository, LogArquivoRepository>();
             services.AddScoped<ITipoCNABRepository, TipoCNABRepository>();
             services.AddScoped<ISegmentoRepository, SegmentoRepository>();
             services.AddScoped<IValorEsperadoRepository, ValorEsperadoRepository>();            

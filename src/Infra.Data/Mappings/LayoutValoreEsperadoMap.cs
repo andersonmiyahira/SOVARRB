@@ -14,13 +14,19 @@ namespace Infra.Data.Mappings
                 .IsRequired();
 
 
-            builder.Property(m => m.IdLayout)
-                .HasColumnName("IdLayout")
+            builder.Property(m => m.LayoutId)
+                .HasColumnName("LayoutId")
                 .IsRequired();
 
-            builder.Property(m => m.IdValorEsperado)
-                .HasColumnName("IdValorEsperado")
+            builder.Property(m => m.ValorEsperadoId)
+                .HasColumnName("ValorEsperadoId")
                 .IsRequired();
+
+            builder
+                .HasOne(x => x.Layout);
+
+            builder
+                .HasOne(x => x.ValorEsperado);
 
             builder.HasKey(o => o.IdLayoutValorEsperado);
         }

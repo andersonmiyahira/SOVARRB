@@ -17,20 +17,20 @@ namespace Infra.Data.Mappings
                    .HasColumnName("Descricao")
                    .IsRequired();
 
-            builder.Property(m => m.valor)
+            builder.Property(m => m.Valor)
                    .HasColumnName("Valor")
                    .IsRequired();
 
-            builder.Property(m => m.IdBanco)
-                   .HasColumnName("IdBanco")
+            builder.Property(m => m.BancoId)
+                   .HasColumnName("BancoId")
                    .IsRequired();
 
-            builder.Property(m => m.IdTipoCNAB)
-                   .HasColumnName("IdTipoCNAB")
+            builder.Property(m => m.TipoCNABId)
+                   .HasColumnName("TipoCNABId")
                    .IsRequired();
 
-            builder.Property(m => m.IdTipoBoleto)
-                   .HasColumnName("IdTipoBoleto")
+            builder.Property(m => m.TipoBoletoId)
+                   .HasColumnName("TipoBoletoId")
                    .IsRequired();
 
             builder.Property(m => m.DataCadastro)
@@ -40,6 +40,13 @@ namespace Infra.Data.Mappings
             builder.Property(m => m.Ativo)
                    .HasColumnName("Ativo")
                    .IsRequired();
+
+            builder
+                   .HasOne(x => x.Banco);
+
+            builder
+                   .HasMany(x => x.LayoutValoresEsperados)
+                   .WithOne(x => x.ValorEsperado);
 
             builder.HasKey(o => o.IdValoreEsperado);
         }

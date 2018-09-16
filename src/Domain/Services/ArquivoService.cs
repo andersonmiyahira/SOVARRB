@@ -22,7 +22,7 @@ namespace Domain.Services
         public void ValidarArquivos(List<Arquivo> arquivos)
         {
             var arquivoReferencia = arquivos.FirstOrDefault();
-            var layout = _layoutRepository.GetAll().ToList();
+            var layout = _layoutRepository.ObterComItens();
 
             foreach (var arquivo in arquivos)
             {

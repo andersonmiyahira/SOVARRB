@@ -14,8 +14,8 @@ namespace Infra.Data.Mappings
                 .HasColumnName("IdSegmento")
                 .IsRequired();
 
-            builder.Property(m => m.IdBanco)
-                .HasColumnName("IdBanco")
+            builder.Property(m => m.BancoId)
+                .HasColumnName("BancoId")
                 .IsRequired();
 
             builder.Property(m => m.Descricao)

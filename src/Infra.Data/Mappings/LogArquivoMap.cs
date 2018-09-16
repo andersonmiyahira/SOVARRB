@@ -13,8 +13,8 @@ namespace Infra.Data.Mappings
                    .HasColumnName("IdLogArquivo")
                    .IsRequired();
 
-            builder.Property(m => m.IdArquivo)
-                   .HasColumnName("IdArquivo")
+            builder.Property(m => m.ArquivoId)
+                   .HasColumnName("ArquivoId")
                    .IsRequired();
 
             builder.Property(m => m.Linha)
@@ -40,8 +40,8 @@ namespace Infra.Data.Mappings
             builder.Property(m => m.Mensagem)
                    .HasColumnName("Mensagem");
 
-            builder.Property(m => m.IdTipoParametro)
-                   .HasColumnName("IdParametro")
+            builder.Property(m => m.TipoParametroId)
+                   .HasColumnName("TipoParametroId")
                    .IsRequired();
 
             builder.HasKey(o => o.IdLogArquivo);

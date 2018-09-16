@@ -6,7 +6,7 @@ namespace Domain.Entities
     {
         public int IdSegmento { get; private set; }
         public string Descricao { get; private set; }
-        public int IdBanco { get; private set; }
+        public int BancoId { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public bool Ativo { get; private set; }
     }

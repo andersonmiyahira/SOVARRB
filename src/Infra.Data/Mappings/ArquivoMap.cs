@@ -14,20 +14,20 @@ namespace Infra.Data.Mappings
                 .HasColumnName("IdArquivo")
                 .IsRequired();
 
-            builder.Property(m => m.IdBanco)
-                .HasColumnName("IdBanco")
+            builder.Property(m => m.BancoId)
+                .HasColumnName("BancoId")
                 .IsRequired();
 
-            builder.Property(m => m.IdTipoBoleto)
-                .HasColumnName("IdTipoBoleto")
+            builder.Property(m => m.TipoBoletoId)
+                .HasColumnName("TipoBoletoId")
                 .IsRequired();
 
-            builder.Property(m => m.IdTipoCNAB)
-                .HasColumnName("IdTipoCNAB")
+            builder.Property(m => m.TipoCNABId)
+                .HasColumnName("TipoCNABId")
                 .IsRequired();
 
-            builder.Property(m => m.IdUsuario)
-                .HasColumnName("IdUsuario")
+            builder.Property(m => m.UsuarioId)
+                .HasColumnName("UsuarioId")
                 .IsRequired();
 
             builder.Property(m => m.NomeArquivoGerado)

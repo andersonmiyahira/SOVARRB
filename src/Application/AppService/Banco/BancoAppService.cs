@@ -20,27 +20,27 @@ namespace Application.AppService.Banco
             _mapper = mapper;
         }
 
-        public ICollection<BancoViewModel> ObterTodosBancos()
+        public ICollection<BancoResponse> ObterTodosBancos()
         {
             var bancos = this.GetAll();
-            return _mapper.Map<List<BancoViewModel>>(bancos);
+            return _mapper.Map<List<BancoResponse>>(bancos);
         }
 
-        public BancoViewModel Salvar(ViewModel.Request.Banco banco)
+        public BancoResponse Salvar(BancoRequest banco)
         {
             var bancoEntitie = _mapper.Map<Domain.Entities.Banco>(banco);
-            return _mapper.Map<BancoViewModel>(_bancoService.Salvar(bancoEntitie));
+            return _mapper.Map<BancoResponse>(_bancoService.Salvar(bancoEntitie));
         }
 
-        public void Excluir(ViewModel.Request.Banco banco)
+        public void Excluir(BancoRequest banco)
         {
             var bancoEntitie = _mapper.Map<Domain.Entities.Banco>(banco);
             _bancoService.Excluir(bancoEntitie);
         }
          
-        public BancoViewModel ObterPorId(int id)
+        public BancoResponse ObterPorId(int id)
         {
-            return _mapper.Map<BancoViewModel>(_bancoService.ObterPorId(id));
+            return _mapper.Map<BancoResponse>(_bancoService.ObterPorId(id));
         } 
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using API.ControllerBaseExtensions;
+﻿using API.ControllerBaseExtensions;
 using Application.AppService.Banco;
 using Application.ViewModel.Request;
 using Microsoft.AspNetCore.Mvc;
@@ -33,14 +30,14 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]Banco banco)
+        public IActionResult Post([FromBody]BancoRequest banco)
         {
             var bancos = _bancoAppService.Salvar(banco);
             return Response(bancos);
         } 
 
         [HttpDelete]
-        public IActionResult Delete([FromBody]Banco banco)
+        public IActionResult Delete([FromBody]BancoRequest banco)
         {
              _bancoAppService.Excluir(banco);
             return Response();

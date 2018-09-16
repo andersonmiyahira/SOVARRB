@@ -7,9 +7,9 @@ namespace Application.AppService.Banco
 {
     public interface IBancoAppService : IAppServiceBase<Domain.Entities.Banco>
     {
-        ICollection<BancoViewModel> ObterTodosBancos();
-        BancoViewModel ObterPorId(int id);
-        BancoViewModel Salvar(ViewModel.Request.Banco banco);
-        void Excluir(ViewModel.Request.Banco banco);
+        ICollection<BancoResponse> ObterTodosBancos();
+        BancoResponse ObterPorId(int id);
+        BancoResponse Salvar(BancoRequest banco);
+        void Excluir(BancoRequest banco);
     }
 }

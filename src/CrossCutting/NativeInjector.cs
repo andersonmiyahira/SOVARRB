@@ -36,7 +36,6 @@ namespace CrossCutting
             services.AddScoped<IBancoAppService, BancoAppService>();
             services.AddScoped<ILayoutAppService, LayoutAppService>();
             services.AddScoped<ISegmentoAppService, SegmentoAppService>();
-            services.AddScoped<ITipoCNABAppService, TipoCNABAppService>();            
             services.AddScoped<IValorEsperadoAppService, ValorEsperadoAppService>();            
         }
 

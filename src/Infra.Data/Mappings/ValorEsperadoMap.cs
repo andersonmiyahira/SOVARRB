@@ -9,8 +9,8 @@ namespace Infra.Data.Mappings
         {
             builder.ToTable("ValorEsperado");
 
-            builder.Property(m => m.IdValoreEsperado)
-                   .HasColumnName("IdValoreEsperado")
+            builder.Property(m => m.IdValorEsperado)
+                   .HasColumnName("IdValorEsperado")
                    .IsRequired();
 
             builder.Property(m => m.Descricao)
@@ -46,9 +46,10 @@ namespace Infra.Data.Mappings
 
             builder
                    .HasMany(x => x.LayoutValoresEsperados)
-                   .WithOne(x => x.ValorEsperado);
+                   .WithOne(x => x.ValorEsperado)
+                   .HasForeignKey(x => x.ValorEsperadoId);
 
-            builder.HasKey(o => o.IdValoreEsperado);
+            builder.HasKey(o => o.IdValorEsperado);
         }
     }
 }

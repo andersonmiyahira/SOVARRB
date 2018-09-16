@@ -5,7 +5,7 @@ namespace Domain.Entities
 {
     public class ValorEsperado
     {
-        public int IdValoreEsperado { get; private set; }
+        public int IdValorEsperado { get; private set; }
         public string Descricao { get; private set; }
         public string Valor { get; private set; }
         public int BancoId { get; private set; }

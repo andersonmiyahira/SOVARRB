@@ -23,10 +23,14 @@ namespace Infra.Data.Mappings
                 .IsRequired();
 
             builder
-                .HasOne(x => x.Layout);
+                .HasOne(x => x.Layout)
+                .WithMany(x => x.LayoutValoresEsperados)
+                .HasForeignKey(x => x.LayoutId);
 
             builder
-                .HasOne(x => x.ValorEsperado);
+                .HasOne(x => x.ValorEsperado)
+                .WithMany(x => x.LayoutValoresEsperados)
+                .HasForeignKey(x => x.ValorEsperadoId);
 
             builder.HasKey(o => o.IdLayoutValorEsperado);
         }

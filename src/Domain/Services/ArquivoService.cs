@@ -58,7 +58,7 @@ namespace Domain.Services
                 // if(linha.tipo == trailer)
                 //ValidarLinha(linha, layoutValidacaoTrailer);
 
-                ValidarLinha(linha, layoutValidacaoHeader);
+                ValidarLinha(linha, layoutValidacaoDetalhe);
             }
         }
 

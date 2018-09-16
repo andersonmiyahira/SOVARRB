@@ -1,4 +1,7 @@
-﻿using AutoMapper;
+﻿using Application.ViewModel.Request;
+using AutoMapper;
+using Domain.Entities;
+using System.Collections.Generic;
 
 namespace Application.AutoMapper
 {
@@ -6,6 +9,14 @@ namespace Application.AutoMapper
     {
         public ViewModelToDomainProfile()
         {
+
         }
+
+        private void Arquivo()
+        {
+            //CreateMap<ImportarRequest, List<Arquivo>>()
+            //        .ForMember(x => x.Add, opt => opt.MapFrom(src => src.));
+        }
+
     }
 }

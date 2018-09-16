@@ -4,14 +4,13 @@ using Domain.Interfaces.Services;
 
 namespace Domain.Services
 {
-    public class ValorEsperadoService : ServiceBase<ValorEsperado>, IValorEsperadoService
+    public class UsuarioService : ServiceBase<Usuario>, IUsuarioService
     {
-        private readonly IValorEsperadoRepository _valorEsperadoRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
 
-        public ValorEsperadoService(IValorEsperadoRepository valorEsperadoRepository) : base(valorEsperadoRepository)
+        public UsuarioService(IUsuarioRepository usuarioRepository) : base(usuarioRepository)
         {
-            this._valorEsperadoRepository = valorEsperadoRepository;
+            this._usuarioRepository = usuarioRepository;
         }
-         
     }
 }

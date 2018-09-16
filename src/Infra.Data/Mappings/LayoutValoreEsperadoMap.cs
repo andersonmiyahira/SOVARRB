@@ -9,10 +9,18 @@ namespace Infra.Data.Mappings
         {
             builder.ToTable("LayoutValorEsperado");
 
-            //builder.Property(m => m.Id)
-            //    .HasColumnName("IdTipoCNAB")
-            //    .IsRequired(); 
+            builder.Property(m => m.IdLayoutValorEsperado)
+                .HasColumnName("IdLayoutValorEsperado")
+                .IsRequired();
 
+
+            builder.Property(m => m.IdLayout)
+                .HasColumnName("IdLayout")
+                .IsRequired();
+
+            builder.Property(m => m.IdValorEsperado)
+                .HasColumnName("IdValorEsperado")
+                .IsRequired();
 
             builder.HasKey(o => o.IdLayoutValorEsperado);
         }

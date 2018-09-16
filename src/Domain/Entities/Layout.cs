@@ -9,7 +9,7 @@ namespace Domain.Entities
         public int IdTipoCNAB { get; protected set; }
         public int IdTipoTransacao { get; protected set; }
         public int IdTipoRegistro { get; protected set; }
-        public int IdSegmento { get; protected set; }
+        public int? IdSegmento { get; protected set; }
         public int IdTipoBoleto { get; protected set; }
         public int PosicaoDe { get; protected set; }
         public int PosicaoAte { get; protected set; }

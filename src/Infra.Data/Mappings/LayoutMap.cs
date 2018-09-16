@@ -31,8 +31,7 @@ namespace Infra.Data.Mappings
                 .IsRequired();
 
             builder.Property(m => m.IdSegmento)
-                .HasColumnName("IdSegmento")
-                .IsRequired();
+                .HasColumnName("IdSegmento");
 
             builder.Property(m => m.IdTipoCampo)
                 .HasColumnName("IdTipoCampo")

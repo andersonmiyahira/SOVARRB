@@ -10,17 +10,5 @@ namespace Application.ViewModel.Request
         public int TipoCNABId { get; set; }
         public int TipoBoletoId { get; set; }
         public List<IFormFile> FormFiles { get; set; }        
-    }
-
-    public class ArquivoImportacao
-    {
-        public ArquivoImportacao(string nome, Stream arquivo)
-        {
-            Nome = nome;
-            ArquivoStream = arquivo;
-        }
-
-        public string Nome { get; set; }
-        public Stream ArquivoStream { get; set; }
-    }
+    }   
 }

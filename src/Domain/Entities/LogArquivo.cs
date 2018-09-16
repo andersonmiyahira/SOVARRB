@@ -4,6 +4,18 @@ namespace Domain.Entities
 {
     public class LogArquivo
     {
+        public LogArquivo(int arquivoId, int linha, int posicaoDe, int posicaoAte, bool ehValido, DateTime dataCadastro, string mensagem, int tipoParametroId)
+        {   
+            ArquivoId = arquivoId;
+            Linha = linha;
+            PosicaoDe = posicaoDe;
+            PosicaoAte = posicaoAte;
+            EhValido = ehValido;
+            DataCadastro = dataCadastro;
+            Mensagem = mensagem;
+            TipoParametroId = tipoParametroId;
+        }
+
         public int IdLogArquivo { get; private set; }
         public int ArquivoId { get; set; }
         public int Linha { get; private set; }

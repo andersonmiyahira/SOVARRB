@@ -24,7 +24,6 @@ namespace Infra.Data.Context
         public DbSet<Segmento> Segmento { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<ValorEsperado> ValorEsperado { get; set; }
-        public DbSet<TipoCNAB> TipoCNAB { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,7 +35,6 @@ namespace Infra.Data.Context
             modelBuilder.ApplyConfiguration(new SegmentoMap());
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new ValorEsperadoMap());
-            modelBuilder.ApplyConfiguration(new TipoCNABMap());
 
             base.OnModelCreating(modelBuilder);
         }

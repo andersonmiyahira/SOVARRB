@@ -1,6 +1,5 @@
 ﻿using Application.AppService.Banco;
 using Application.AppService.Segmento;
-using Application.AppService.TipoCNAB;
 using Application.AppService.ValorEsperado;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
@@ -47,7 +46,6 @@ namespace CrossCutting
             services.AddScoped<IBancoService, BancoService>();
             services.AddScoped<ILayoutService, LayoutService>();
             services.AddScoped<ILogArquivoService, LogArquivoService>();
-            services.AddScoped<ITipoCNABService, TipoCNABService>();
             services.AddScoped<ISegmentoService, SegmentoService>();
             services.AddScoped<IValorEsperadoService, ValorEsperadoService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
@@ -59,7 +57,6 @@ namespace CrossCutting
             services.AddScoped<IBancoRepository, BancoRepository>();
             services.AddScoped<ILayoutRepository, LayoutRepository>();
             services.AddScoped<ILogArquivoRepository, LogArquivoRepository>();
-            services.AddScoped<ITipoCNABRepository, TipoCNABRepository>();
             services.AddScoped<ISegmentoRepository, SegmentoRepository>();
             services.AddScoped<IValorEsperadoRepository, ValorEsperadoRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();

@@ -18,26 +18,26 @@ namespace Infra.Data.Mappings
                 .HasColumnName("BancoId")
                 .IsRequired();
 
-            builder.Property(m => m.IdTipoCNAB)
+            builder.Property(m => m.TipoCNABId)
                 .HasColumnName("TipoCNABId")
                 .IsRequired();
 
-            builder.Property(m => m.IdTipoTransacao)
+            builder.Property(m => m.TipoTransacaoId)
                 .HasColumnName("TipoTransacaoId")
                 .IsRequired();
 
-            builder.Property(m => m.IdTipoRegistro)
+            builder.Property(m => m.TipoRegistroId)
                 .HasColumnName("TipoRegistroId")
                 .IsRequired();
 
-            builder.Property(m => m.IdSegmento)
+            builder.Property(m => m.SegmentoId)
                 .HasColumnName("SegmentoId");
 
-            builder.Property(m => m.IdTipoCampo)
+            builder.Property(m => m.TipoCampoId)
                 .HasColumnName("TipoCampoId")
                 .IsRequired();
 
-            builder.Property(m => m.IdTipoBoleto)
+            builder.Property(m => m.TipoBoletoId)
                 .HasColumnName("TipoBoletoId")
                 .IsRequired();
 

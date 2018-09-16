@@ -7,14 +7,14 @@ namespace Domain.Entities
     {
         public int IdLayout { get; protected set; }
         public int BancoId { get; protected set; }
-        public int IdTipoCNAB { get; protected set; }
-        public int IdTipoTransacao { get; protected set; }
-        public int IdTipoRegistro { get; protected set; }
-        public int? IdSegmento { get; protected set; }
-        public int IdTipoBoleto { get; protected set; }
+        public int TipoCNABId { get; protected set; }
+        public int TipoTransacaoId { get; protected set; }
+        public int TipoRegistroId { get; protected set; }
+        public int? SegmentoId { get; protected set; }
+        public int TipoBoletoId { get; protected set; }
         public int PosicaoDe { get; protected set; }
         public int PosicaoAte { get; protected set; }
-        public int IdTipoCampo { get; protected set; }
+        public int TipoCampoId { get; protected set; }
         public string Descricao { get; protected set; }        
         public DateTime DataCadastro { get; protected set; }
         public bool Obrigatorio { get; protected set; }

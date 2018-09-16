@@ -1,10 +1,10 @@
 ﻿using Domain.Entities;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain.Interfaces.Repositories
 {
     public interface ILayoutRepository : IRepositoryBase<Layout>
     {
-        List<Layout> ObterComItens();
+        IQueryable<Layout> ObterComItens(Arquivo filters);
     }
 }

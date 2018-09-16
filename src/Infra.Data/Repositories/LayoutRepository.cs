@@ -13,14 +13,17 @@ namespace Infra.Data.Repositories
         {
         }
 
-        public List<Layout> ObterComItens()
+        public IQueryable<Layout> ObterComItens(Arquivo filters)
         {
             var query = _dbSet.AsNoTracking()
-                         .Include(_ => _.Banco)
-                         .Include(_ => _.LayoutValoresEsperados)
-                            .ThenInclude(_ => _.ValorEsperado);
+                                  .Include(_ => _.Banco)
+                                  .Include(_ => _.LayoutValoresEsperados)
+                                    .ThenInclude(_ => _.ValorEsperado)
+                              .Where(_ => _.BancoId == filters.BancoId)
+                              .Where(_ => _.TipoCNABId == filters.TipoCNABId)
+                              .Where(_ => _.TipoBoletoId == filters.TipoBoletoId);
 
-            return  query.ToList();            
+            return  query;            
         }
     }
 }

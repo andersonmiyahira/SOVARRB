@@ -54,7 +54,7 @@ export class ImportarArquivoComponent implements OnInit {
     this.uploader.queue.forEach(element => {
       rawFiles.push(element.file.rawFile);
     });
-    this.importarArquivoService.upload(rawFiles, 120)
+    this.importarArquivoService.upload(rawFiles, 120, 2, 1)
       .subscribe(res => {
         this.uploader.queue.forEach(element => {
           element.isSuccess = true;

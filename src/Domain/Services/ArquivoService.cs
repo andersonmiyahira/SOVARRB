@@ -29,7 +29,8 @@ namespace Domain.Services
         public void ValidarArquivos(List<Arquivo> arquivos)
         {
             var arquivoReferencia = arquivos.FirstOrDefault();
-            var layout = _layoutRepository.ObterComItens();
+            var layout = _layoutRepository.ObterComItens(arquivoReferencia)
+                                          .ToList();
 
             foreach (var arquivo in arquivos)
             {
@@ -39,17 +40,17 @@ namespace Domain.Services
 
         private void ValidarArquivo(Arquivo arquivo, List<Layout> layout)
         {
-            var layoutValidacaoHeader = layout.Where(_ => _.IdTipoRegistro == (int)ETipoRegistro.Header)
+            var layoutValidacaoHeader = layout.Where(_ => _.TipoRegistroId == (int)ETipoRegistro.Header)
                                               .OrderBy(_ => _.PosicaoDe)
                                               .ThenBy(_ => _.PosicaoAte)
                                               .ToList();
 
-            var layoutValidacaoDetalhe = layout.Where(_ => _.IdTipoRegistro == (int)ETipoRegistro.Detalhe)
+            var layoutValidacaoDetalhe = layout.Where(_ => _.TipoRegistroId == (int)ETipoRegistro.Detalhe)
                                                .OrderBy(_ => _.PosicaoDe)
                                                .ThenBy(_ => _.PosicaoAte)
                                                .ToList();
 
-            var layoutValidacaoTrailer = layout.Where(_ => _.IdTipoRegistro == (int)ETipoRegistro.Trailer)
+            var layoutValidacaoTrailer = layout.Where(_ => _.TipoRegistroId == (int)ETipoRegistro.Trailer)
                                                .OrderBy(_ => _.PosicaoDe)
                                                .ThenBy(_ => _.PosicaoAte)
                                                .ToList();

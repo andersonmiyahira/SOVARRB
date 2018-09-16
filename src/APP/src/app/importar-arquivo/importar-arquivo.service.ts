@@ -13,12 +13,15 @@ export class ImportarArquivoService {
   }
 
   upload(fileToUpload: any, bancoId: number): Observable<any> {
-    const urlRecurso: string = "ImportarArquivo/File";
+
+    const urlRecurso: string = "ImportarArquivo/Importar";
     let input = new FormData();
 
     input.append("bancoId", bancoId.toString());
+    //input.append("tipoCNABId", tipoCNABId.toString());
+    //input.append("tipoBoletoId", tipoBoletoId.toString());
     for (var i = 0; i < fileToUpload.length; i++) {
-      input.append("formFile", fileToUpload[i]);
+      input.append("formFiles", fileToUpload[i]);
     }
 
     const url = `${environment.urlWebAPI}${urlRecurso}`;

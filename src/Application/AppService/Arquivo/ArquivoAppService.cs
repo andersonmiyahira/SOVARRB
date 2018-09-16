@@ -28,11 +28,11 @@ namespace Application.AppService.Banco
         private List<Arquivo> CriarObjetoDominio(ImportarRequest importarRequest)
         {
             List<Arquivo> arquivos = new List<Arquivo>();
-            foreach (var importacao in importarRequest.ArquivoImportacao)
-            {
-                var linhas = TextoHelper.ObterLinhasDoArquivo(importacao.ArquivoStream);
-                arquivos.Add(new Arquivo(0, importarRequest.IdBanco, importacao.Nome, importarRequest.IdTipoCNAB, importarRequest.IdTipoBoleto, linhas));
-            }
+            //foreach (var importacao in importarRequest.ArquivoImportacao)
+            //{
+            //    var linhas = TextoHelper.ObterLinhasDoArquivo(importacao.ArquivoStream);
+            //    arquivos.Add(new Arquivo(0, importarRequest.IdBanco, importacao.Nome, importarRequest.IdTipoCNAB, importarRequest.IdTipoBoleto, linhas));
+            //}
 
             return arquivos;
         }

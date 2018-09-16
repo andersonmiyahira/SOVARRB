@@ -6,22 +6,10 @@ namespace Application.ViewModel.Request
 {
     public class ImportarRequest
     {
-        public ImportarRequest(int idBanco, List<IFormFile> formFiles)
-        {
-            IdBanco = idBanco;
-
-            ArquivoImportacao = new List<ArquivoImportacao>();
-            foreach (var file in formFiles)
-            {
-                ArquivoImportacao.Add(new ArquivoImportacao(file.FileName, file.OpenReadStream()));
-            }
-        }
-
-        public int IdBanco { get; private set; }
-        public int IdTipoCNAB { get; private set; }
-        public int IdTipoBoleto { get; private set; }
-
-        public List<ArquivoImportacao> ArquivoImportacao { get; private set; }
+        public int BancoId { get; set; }
+        public int TipoCNABId { get; set; }
+        public int TipoBoletoId { get; set; }
+        public List<IFormFile> FormFiles { get; set; }        
     }
 
     public class ArquivoImportacao

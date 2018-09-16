@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Domain.Entities;
 using Domain.Enums;
@@ -17,6 +18,12 @@ namespace Domain.Services
         {
             _arquivoRepository = arquivoRepository;
             _layoutRepository = layoutRepository;
+        }
+
+        public List<Arquivo> ObterComFiltros(Arquivo filtros, DateTime de, DateTime ate)
+        {
+            return _arquivoRepository.ObterComFiltros(filtros, de, ate)
+                                     .ToList();
         }
 
         public void ValidarArquivos(List<Arquivo> arquivos)

@@ -56,9 +56,9 @@ import { ValorEsperadoBancoService } from './telas-adm/valor-esperado-banco/valo
     Ng2SmartTableModule,
     MultiselectDropdownModule,
 
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    ),
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDataService, { dataEncapsulation: false }
+    // ),
 
     NgbModule.forRoot()
   ],

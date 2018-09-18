@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { LeiouteService } from '../leioute.service';
 import { LocalDataSource } from 'ng2-smart-table';
-import { ImportarArquivoService } from '../../../importar-arquivo/importar-arquivo.service';
 import { ButtonViewComponent } from '../components/ng2-smart-table-button.component';
 import { MultiSelectComponent } from '../components/multi-select.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { EventosService } from '../../../core/eventos.service';
-import { ButtonEditComponent } from '../components/ng2-smart-table-button-edit.component';
+import { EventosService } from 'app/core/eventos.service';
+import { ImportarArquivoService } from 'app/telas-gerais/importar-arquivo/importar-arquivo.service';
+import { ButtonEditComponent } from 'app/telas-adm/leioute/components/ng2-smart-table-button-edit.component';
 
 @Component({
   selector: 'app-leioute-cadastrar',

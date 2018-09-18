@@ -1,11 +1,11 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ImportarArquivoComponent } from './../importar-arquivo/importar-arquivo.component';
-import { CadastrarUsuarioComponent } from '../cadastrar-usuario/cadastrar-usuario.component';
+import { ImportarArquivoComponent } from '../telas-gerais/importar-arquivo/importar-arquivo.component';
+import { CadastrarUsuarioComponent } from '../telas-gerais/cadastrar-usuario/cadastrar-usuario.component';
 import { LoginComponent } from '../login/login.component';
-import { VisualizarArquivoComponent } from '../visualizar-arquivo/visualizar-arquivo.component';
-import { EsqueciSenhaComponent } from '../esqueci-senha/esqueci-senha.component';
+import { VisualizarArquivoComponent } from '../telas-gerais/visualizar-arquivo/visualizar-arquivo.component';
+import { EsqueciSenhaComponent } from '../telas-gerais/esqueci-senha/esqueci-senha.component';
 import { BancoComponent } from '../telas-adm/banco/banco.component';
 import { TipoSegmentoComponent } from '../telas-adm/tipo-segmento/tipo-segmento.component';
 import { LeiouteComponent } from '../telas-adm/leioute/listar/leioute-lista.component';

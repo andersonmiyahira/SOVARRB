@@ -13,19 +13,20 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { SelectModule } from 'ng2-select';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
+//componentes e servicos gerais do sistema
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ImportarArquivoComponent } from './importar-arquivo/importar-arquivo.component';
-import { ImportarArquivoService } from './importar-arquivo/importar-arquivo.service';
+import { ImportarArquivoComponent } from './telas-gerais/importar-arquivo/importar-arquivo.component';
+import { ImportarArquivoService } from './telas-gerais/importar-arquivo/importar-arquivo.service';
 import { NavBarComponent } from './menu/nav-bar.component';
 import { LoginComponent } from './login/login.component';
-import { CadastrarUsuarioComponent } from './cadastrar-usuario/cadastrar-usuario.component';
-import { VisualizarArquivoComponent } from './visualizar-arquivo/visualizar-arquivo.component';
-import { VisualizarArquivoService } from './visualizar-arquivo/visualizar-arquivo.service';
+import { CadastrarUsuarioComponent } from './telas-gerais/cadastrar-usuario/cadastrar-usuario.component';
+import { VisualizarArquivoComponent } from './telas-gerais/visualizar-arquivo/visualizar-arquivo.component';
+import { VisualizarArquivoService } from './telas-gerais/visualizar-arquivo/visualizar-arquivo.service';
 import { LoginService } from './login/login.service';
-import { CadastrarUsuarioService } from './cadastrar-usuario/cadastrar-usuario.service';
-import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
-import { EsqueciSenhaService } from './esqueci-senha/esqueci-senha.service';
+import { CadastrarUsuarioService } from './telas-gerais/cadastrar-usuario/cadastrar-usuario.service';
+import { EsqueciSenhaComponent } from './telas-gerais/esqueci-senha/esqueci-senha.component';
+import { EsqueciSenhaService } from './telas-gerais/esqueci-senha/esqueci-senha.service';
 
 //componentes e servicos da area restrita de adm
 import { BancoComponent } from './telas-adm/banco/banco.component';

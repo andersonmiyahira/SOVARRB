@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LeiouteService } from '../leioute.service';
 import { Router } from "@angular/router";
-import { ImportarArquivoService } from '../../../importar-arquivo/importar-arquivo.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
+import { ImportarArquivoService } from 'app/telas-gerais/importar-arquivo/importar-arquivo.service';
 
 @Component({
   selector: 'app-leioute-lista',

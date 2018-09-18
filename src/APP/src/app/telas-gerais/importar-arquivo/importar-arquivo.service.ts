@@ -1,9 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../environments/environment';
-import { ApiService } from '../services/api.service';
 import { tap, catchError } from 'rxjs/operators';
+import { environment } from 'environments/environment';
+import { ApiService } from 'app/services/api.service';
 
 @Injectable()
 export class ImportarArquivoService {

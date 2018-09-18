@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ImportarArquivoService } from './importar-arquivo.service';
 import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploader } from 'ng2-file-upload';
+import { ImportarArquivo } from './models/importar-arquivo';
 
 // const URL = '/api/';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
@@ -50,11 +51,18 @@ export class ImportarArquivoComponent implements OnInit {
   // }
 
   saveUpload(sucesso): void {
-    let rawFiles: Array<any> = new Array<any>();
+
+    let model: ImportarArquivo = new ImportarArquivo();
+
     this.uploader.queue.forEach(element => {
-      rawFiles.push(element.file.rawFile);
+      model.fileToUpload.push(element.file.rawFile);
     });
-    this.importarArquivoService.upload(rawFiles, 120, 2, 1)
+
+    model.bancoId = 120;
+    model.tipoBoletoId = 1;
+    model.tipoCNABId = 1;
+
+    this.importarArquivoService.upload(model)
       .subscribe(res => {
         this.uploader.queue.forEach(element => {
           element.isSuccess = true;

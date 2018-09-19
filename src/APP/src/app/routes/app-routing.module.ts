@@ -1,18 +1,18 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ImportarArquivoComponent } from '../telas-gerais/importar-arquivo/importar-arquivo.component';
-import { CadastrarUsuarioComponent } from '../telas-gerais/cadastrar-usuario/cadastrar-usuario.component';
-import { LoginComponent } from '../login/login.component';
-import { VisualizarArquivoComponent } from '../telas-gerais/visualizar-arquivo/visualizar-arquivo.component';
-import { EsqueciSenhaComponent } from '../telas-gerais/esqueci-senha/esqueci-senha.component';
-import { BancoComponent } from '../telas-adm/banco/banco.component';
-import { TipoSegmentoComponent } from '../telas-adm/tipo-segmento/tipo-segmento.component';
-import { LeiouteComponent } from '../telas-adm/leioute/listar/leioute-lista.component';
-import { LeiouteCadastrarComponent } from '../telas-adm/leioute/cadastrar/leioute-cadastrar.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
-import { AuthGuardService } from '../core/auth-guard.service';
-import { ValorEsperadoBancoComponent } from '../telas-adm/valor-esperado-banco/valor-esperado-banco.component';
+import { ImportarArquivoComponent } from 'app/telas-gerais/importar-arquivo/importar-arquivo.component';
+import { CadastrarUsuarioComponent } from 'app/telas-gerais/cadastrar-usuario/cadastrar-usuario.component';
+import { LoginComponent } from 'app/login/login.component';
+import { VisualizarArquivoComponent } from 'app/telas-gerais/visualizar-arquivo/visualizar-arquivo.component';
+import { EsqueciSenhaComponent } from 'app/telas-gerais/esqueci-senha/esqueci-senha.component';
+import { BancoComponent } from 'app/telas-adm/banco/banco.component';
+import { TipoSegmentoComponent } from 'app/telas-adm/tipo-segmento/tipo-segmento.component';
+import { LeiouteComponent } from 'app/telas-adm/leioute/listar/leioute-lista.component';
+import { LeiouteCadastrarComponent } from 'app/telas-adm/leioute/cadastrar/leioute-cadastrar.component';
+import { DashboardComponent } from 'app/dashboard/dashboard.component';
+import { AuthGuardService } from 'app/core/auth-guard.service';
+import { ValorEsperadoBancoComponent } from 'app/telas-adm/valor-esperado-banco/valor-esperado-banco.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },

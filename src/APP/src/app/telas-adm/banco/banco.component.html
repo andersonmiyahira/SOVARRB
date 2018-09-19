@@ -19,7 +19,7 @@
                 <th scope="row">{{banco.id}}</th>
                 <td>{{banco.descricao}}</td>
                 <td>{{banco.dataCadastro}}</td>
-                <td>{{banco.status}}</td>
+                <td>{{banco.ativo}}</td>
                 <td>
                   <button type="button" class="btn btn-primary btn-sm" (click)="editarOpenModal(content, banco.id)" ngbTooltip="Editar">
                     <span class="fas fa-edit"></span>
@@ -54,23 +54,23 @@
     <div>
       <div class="row">
         <div class="col-md-12">
-          <form method="post" action="/" novalidate="novalidate">
+          <form method="post" action="/" novalidate="novalidate" [formGroup]="form">
             <div class="text-danger validation-summary-valid" data-valmsg-summary="true">
               <ul>
                 <li style="display:none"></li>
               </ul>
             </div>
             <div class="form-group">
-              <label for="Input_Email">Código</label>
-              <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
+              <label>Código</label>
+              <input class="form-control" type="text" [(ngModel)]="model.id" name="id" formControlName="id">
             </div>
             <div class="form-group">
-              <label for="Input_Email">Descrição</label>
-              <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
+              <label>Descrição</label>
+              <input class="form-control" type="text" [(ngModel)]="model.descricao" name="descricao" formControlName="descricao">
             </div>
             <div class="form-group">
-              <label for="cbCNAB">Status</label>
-              <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+              <label for="cbStatus">Status</label>
+              <select id="cbStatus" [(ngModel)]="model.ativo" formControlName="ativo" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
                 <option selected="selected" value="1">Ativo</option>
                 <option value="2">Inativo</option>
               </select>
@@ -81,7 +81,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary btn-left" (click)="salvar('Close click')">Salvar</button>
+    <button type="submit" class="btn btn-primary btn-left" (click)="salvar('Close click')" [disabled]="form.invalid">Salvar</button>
     <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
   </div>
 </ng-template>

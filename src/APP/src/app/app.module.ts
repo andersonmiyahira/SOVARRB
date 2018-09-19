@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -50,6 +50,7 @@ import { ValorEsperadoBancoService } from './telas-adm/valor-esperado-banco/valo
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     FileUploadModule,
@@ -57,9 +58,9 @@ import { ValorEsperadoBancoService } from './telas-adm/valor-esperado-banco/valo
     Ng2SmartTableModule,
     MultiselectDropdownModule,
 
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    ),
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDataService, { dataEncapsulation: false }
+    // ),
 
     NgbModule.forRoot()
   ],

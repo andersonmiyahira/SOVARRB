@@ -3,19 +3,22 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 import { ApiService } from '../../services/api.service';
+import { ServiceBase } from '../../shared/services/service-base';
+import { map } from 'rxjs/operators';
+import { Banco } from './models/banco';
 
 @Injectable()
-export class BancoService {
-  constructor(private http: HttpClient,
-    private apiService: ApiService) {
-  }
+export class BancoService extends ServiceBase{
+
+  constructor(private apiService: ApiService) {
+      super("banco");
+  } 
 
   obterBancos() {
-    // return this.apiService.get("http://localhost:52854/api/banco");
- 
-    return this.http.get<any[]>("http://localhost:52854/api/bancoGetAll")
-    .pipe(
-      //tap(banco => console.log(`fetched bancos`))
-    );
+
+    return this.apiService.get(this.urlAPI).pipe(
+      map((res: any) => {
+        return <Banco[]>res.data;
+      })); 
    }
 }

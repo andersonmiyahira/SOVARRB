@@ -18,8 +18,8 @@
               <tr *ngFor="let banco of bancos">
                 <th scope="row">{{banco.id}}</th>
                 <td>{{banco.descricao}}</td>
-                <td>{{banco.dataCadastro}}</td>
-                <td>{{banco.ativo}}</td>
+                <td>{{banco.dataCadastro | date: 'dd/MM/yyyy'}}</td>
+                <td>{{banco.ativo ? "Sim" : "Não"}}</td>
                 <td>
                   <button type="button" class="btn btn-primary btn-sm" (click)="editarOpenModal(content, banco.id)" ngbTooltip="Editar">
                     <span class="fas fa-edit"></span>

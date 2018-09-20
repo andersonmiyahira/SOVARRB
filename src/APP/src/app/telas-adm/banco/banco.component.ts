@@ -29,7 +29,7 @@ export class BancoComponent implements OnInit {
   }
 
   initFormGroup() {
-    
+
     this.form = new FormGroup({
       id: new FormControl(this.model.id, [
         Validators.required
@@ -39,7 +39,7 @@ export class BancoComponent implements OnInit {
       ]),
       ativo: new FormControl(this.model.ativo, [
         Validators.required
-      ]), 
+      ]),
       language: new FormControl()
     });
   }
@@ -53,28 +53,40 @@ export class BancoComponent implements OnInit {
 
   novoOpenModal(content) {
 
-    this.id = 0;
+    this.model = new Banco();
     this.modalService.open(content, { size: 'lg' });
   }
 
-  editarOpenModal(content, idBanco) {
+  editarOpenModal(content, banco) {
 
-    this.id = idBanco;
+    this.model = banco;
     this.modalService.open(content, { size: 'lg' });
   }
 
-  excludeOpenModal(excluir, banco) {
+  excluirOpenModal(excluir, banco) {
 
-    //this.bancos.splice(banco);
-    this.modalService.open(excluir, { size: 'sm' });
+    this.model = banco;
+    this.modalService.open(excluir, { size: 'sm' })
+      .result.then((result) => {
+        close();
+      });;
   }
 
   excluir() {
 
+    //this.bancoService.excluirBanco(this.model);
+    var indexObjExcluido = this.bancos.findIndex(_ => _.id == this.model.id);
+    this.bancos.splice(indexObjExcluido, 1);
   }
 
   salvar() {
-    console.log(this.model)
+
+    if (this.model.id > 0) {
+      this.bancoService.inserirBanco(this.model);
+    }
+    else {
+      this.bancoService.atualizarBanco(this.model);
+    }
   }
 
 }

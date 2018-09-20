@@ -41,8 +41,11 @@ export class ApiService {
       });
   }
 
-  delete(url: string): Observable<any> {
-    return this.http.delete(url)
+  delete(url: string, id: number): Observable<any> {
+
+    let resource = `${url}${id}`;
+    
+    return this.http.delete(resource)
       .catch(error => {
 
         //this.notificationToastr.error(error);

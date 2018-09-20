@@ -21,10 +21,10 @@
                 <td>{{banco.dataCadastro | date: 'dd/MM/yyyy'}}</td>
                 <td>{{banco.ativo ? "Sim" : "Não"}}</td>
                 <td>
-                  <button type="button" class="btn btn-primary btn-sm" (click)="editarOpenModal(content, banco.id)" ngbTooltip="Editar">
+                  <button type="button" class="btn btn-primary btn-sm" (click)="editarOpenModal(content, banco)" ngbTooltip="Editar">
                     <span class="fas fa-edit"></span>
                   </button>
-                  <button type="button" class="btn btn-danger btn-sm" (click)="excludeOpenModal(excluir)" ngbTooltip="Excluir">
+                  <button type="button" class="btn btn-danger btn-sm" (click)="excluirOpenModal(exclude, banco)" ngbTooltip="Excluir">
                     <span class="fas fa-trash-alt"></span>
                   </button>
                 </td>
@@ -87,7 +87,7 @@
 </ng-template>
 
 
-<ng-template #excluir let-c="close" let-d="dismiss">
+<ng-template #exclude let-c="close" let-d="dismiss">
   <div class="modal-header bg-danger">
     <h4 class="modal-title">Excluir Banco</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -104,7 +104,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-danger btn-left" (click)="excluir()">Sim</button>
+    <button type="button" class="btn btn-danger btn-left" (click)="excluir()">Sim</button>
     <button type="button" class="btn btn-light" (click)="c('Close click')">Não</button>
   </div>
 </ng-template>

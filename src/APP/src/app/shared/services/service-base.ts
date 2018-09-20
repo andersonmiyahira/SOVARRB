@@ -4,10 +4,10 @@ export class ServiceBase {
     urlAPI: string;
 
     constructor(resource: string) {
-       this.urlAPI = this.obterUrlEndpoint(resource);
+        this.urlAPI = this.obterUrlEndpoint(resource);
     }
 
     private obterUrlEndpoint(resource: string) {
         return `${environment.urlWebAPI}${resource}/`;
-      }
+    }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { BancoService } from './banco.service';
 import { Banco } from './models/banco';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -16,6 +16,7 @@ export class BancoComponent implements OnInit {
   id: number;
 
   public form: FormGroup;
+  private modalReference: NgbModalRef;
 
   constructor(private bancoService: BancoService,
     private modalService: NgbModal) {
@@ -54,39 +55,35 @@ export class BancoComponent implements OnInit {
   novoOpenModal(content) {
 
     this.model = new Banco();
-    this.modalService.open(content, { size: 'lg' });
+    this.modalReference = this.modalService.open(content, { size: 'lg' });
   }
 
   editarOpenModal(content, banco) {
 
     this.model = banco;
-    this.modalService.open(content, { size: 'lg' });
+    this.modalReference = this.modalService.open(content, { size: 'lg' });
   }
 
   excluirOpenModal(excluir, banco) {
 
     this.model = banco;
-    this.modalService.open(excluir, { size: 'sm' })
-      .result.then((result) => {
-        close();
-      });;
+    this.modalReference = this.modalService.open(excluir, { size: 'sm' });
   }
 
   excluir() {
 
-    //this.bancoService.excluirBanco(this.model);
-    var indexObjExcluido = this.bancos.findIndex(_ => _.id == this.model.id);
-    this.bancos.splice(indexObjExcluido, 1);
+    this.bancoService.excluirBanco(this.model).subscribe(() => {
+      var indexObjExcluido = this.bancos.findIndex(_ => _.id == this.model.id);
+      this.bancos.splice(indexObjExcluido, 1);
+      this.modalReference.close();
+    });
   }
 
   salvar() {
 
-    if (this.model.id > 0) {
-      this.bancoService.inserirBanco(this.model);
-    }
-    else {
-      this.bancoService.atualizarBanco(this.model);
-    }
-  }
-
+    this.bancoService.salvarBanco(this.model).subscribe(() => {
+      this.obterBancos();
+      this.modalReference.close();
+    });
+  } 
 }

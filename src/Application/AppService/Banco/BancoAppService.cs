@@ -32,10 +32,9 @@ namespace Application.AppService.Banco
             return _mapper.Map<BancoResponse>(_bancoService.Salvar(bancoEntitie));
         }
 
-        public void Excluir(BancoRequest banco)
+        public void Excluir(int id)
         {
-            var bancoEntitie = _mapper.Map<Domain.Entities.Banco>(banco);
-            _bancoService.Excluir(bancoEntitie);
+            _bancoService.ExcluirPorId(id);
         }
          
         public BancoResponse ObterPorId(int id)

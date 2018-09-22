@@ -37,9 +37,9 @@ namespace API.Controllers
         } 
 
         [HttpDelete]
-        public IActionResult Delete([FromBody]BancoRequest banco)
+        public IActionResult Delete(int id)
         {
-             _bancoAppService.Excluir(banco);
+             _bancoAppService.Excluir(id);
             return Response();
         }
     }

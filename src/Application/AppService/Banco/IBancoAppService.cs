@@ -10,6 +10,6 @@ namespace Application.AppService.Banco
         ICollection<BancoResponse> ObterTodosBancos();
         BancoResponse ObterPorId(int id);
         BancoResponse Salvar(BancoRequest banco);
-        void Excluir(BancoRequest banco);
+        void Excluir(int id);
     }
 }

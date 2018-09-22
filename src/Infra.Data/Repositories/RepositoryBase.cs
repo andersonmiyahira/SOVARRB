@@ -52,6 +52,19 @@ namespace Infra.Data.Repositories
             _dbSet.Remove(obj);
         }
 
+
+        public void RemoveById(int id)
+        {
+            var obj = _dbSet.Find(id);
+            if (obj == null) return;
+
+            if (_context.Entry(obj).State == EntityState.Detached)
+            {
+                _dbSet.Attach(obj);
+            }
+            _dbSet.Remove(obj);
+        }
+
         public void Dispose()
         {
             _context.Dispose();

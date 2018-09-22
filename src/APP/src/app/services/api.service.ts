@@ -43,7 +43,7 @@ export class ApiService {
 
   delete(url: string, id: number): Observable<any> {
 
-    let resource = `${url}${id}`;
+    let resource = `${url}?id=${id}`;
     
     return this.http.delete(resource)
       .catch(error => {

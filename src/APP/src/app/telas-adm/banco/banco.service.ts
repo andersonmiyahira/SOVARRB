@@ -20,22 +20,14 @@ export class BancoService extends ServiceBase {
       }));
   }
 
-  inserirBanco(model: Banco) {
+  salvarBanco(model: Banco) {
 
     return this.apiService.post(this.urlAPI, model).pipe(
       map((res: any) => {
         return <Banco>res.data;
       }));
-  }
-
-  atualizarBanco(model: Banco) {
-
-    return this.apiService.put(this.urlAPI, model).pipe(
-      map((res: any) => {
-        return <Banco>res.data;
-      }));
-  }
-
+  } 
+   
   excluirBanco(model: Banco) {
 
     return this.apiService.delete(this.urlAPI, model.id).pipe(

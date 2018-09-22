@@ -44,9 +44,9 @@ namespace API.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete([FromBody]SegmentoRequest segmento)
+        public IActionResult Delete(int id)
         {
-            _segmentoAppService.Excluir(segmento);
+            _segmentoAppService.ExcluirPorId(id);
             return Response();
         }
     }

@@ -18,12 +18,12 @@ namespace Infra.Data.Repositories
             this._dbSet = context.Set<TEntity>();
         }
 
-        public void Add(TEntity obj)
+        public virtual void Add(TEntity obj)
         {
             _dbSet.Add(obj);
         }
 
-        public TEntity GetById(int id)
+        public virtual TEntity GetById(int id)
         {
             var result = _dbSet.Find(id);
 
@@ -33,17 +33,17 @@ namespace Infra.Data.Repositories
             return result;
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             return _dbSet.ToList();
         }
 
-        public void Update(TEntity obj)
+        public virtual void Update(TEntity obj)
         {
             _context.Entry(obj).State = EntityState.Modified;
         }
 
-        public void Remove(TEntity obj)
+        public virtual void Remove(TEntity obj)
         {
             if (_context.Entry(obj).State == EntityState.Detached)
             {
@@ -52,8 +52,7 @@ namespace Infra.Data.Repositories
             _dbSet.Remove(obj);
         }
 
-
-        public void RemoveById(int id)
+        public virtual void RemoveById(int id)
         {
             var obj = _dbSet.Find(id);
             if (obj == null) return;

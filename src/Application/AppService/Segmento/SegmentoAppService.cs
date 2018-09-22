@@ -42,5 +42,10 @@ namespace Application.AppService.Segmento
             var input = _mapper.Map<Domain.Entities.Segmento>(request);
             _segmentoService.Excluir(input);
         }
+
+        public void ExcluirPorId(int id)
+        {
+            _segmentoService.ExcluirPorId(id);
+        }
     }
 }

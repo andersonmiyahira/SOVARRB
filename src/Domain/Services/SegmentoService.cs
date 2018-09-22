@@ -2,6 +2,7 @@
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.Uow;
+using System;
 
 namespace Domain.Services
 {
@@ -19,7 +20,11 @@ namespace Domain.Services
 
         public Segmento Alterar(Segmento segmento)
         {
-            _segmentoRepository.Update(segmento);
+            var obj = _segmentoRepository.ObterPorCodigo(segmento.IdSegmento);
+            obj.SetarDataAlteracao();
+            obj.AlterarDados(segmento.Banco, segmento.Descricao, segmento.Ativo);
+
+            _segmentoRepository.Update(obj);
             _uow.Commit();
 
             return segmento;
@@ -31,8 +36,18 @@ namespace Domain.Services
             _uow.Commit();
         }
 
+        public void ExcluirPorId(int id)
+        {
+            _segmentoRepository.RemoveById(id);
+            _uow.Commit();
+        }
+
         public Segmento Inserir(Segmento segmento)
         {
+            segmento.SetarDataAlteracao();
+            segmento.SetarDataCadastro(DateTime.Now);
+            segmento.LimparBanco();
+
             _segmentoRepository.Add(segmento);
             _uow.Commit();
 

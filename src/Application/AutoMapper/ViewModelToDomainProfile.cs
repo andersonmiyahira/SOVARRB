@@ -10,6 +10,7 @@ namespace Application.AutoMapper
         public ViewModelToDomainProfile()
         {
             Banco();
+            Segmento();
         }
 
         private void Arquivo()
@@ -23,5 +24,9 @@ namespace Application.AutoMapper
             CreateMap<BancoRequest, Banco>();
         }
 
+        private void Segmento()
+        {
+            CreateMap<SegmentoRequest, Segmento>();
+        }
     }
 }

@@ -8,8 +8,7 @@ namespace Application.ViewModel.Request
     {
         public int IdSegmento { get; set; }
         public string Descricao { get; set; }
-        public int BancoId { get;set; }
-        public DateTime DataCadastro { get; set; }
+        public BancoRequest Banco { get;set; }
         public bool Ativo { get; set; }
     }
 }

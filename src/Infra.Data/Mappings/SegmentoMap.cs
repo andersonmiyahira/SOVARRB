@@ -23,13 +23,20 @@ namespace Infra.Data.Mappings
                 .HasMaxLength(100)
                 .IsRequired();
 
+            builder.Property(m => m.Ativo)
+                .HasColumnName("Ativo")
+                .IsRequired();
+
             builder.Property(m => m.DataCadastro)
                 .HasColumnName("DataCadastro")
                 .IsRequired();
 
-            builder.Property(m => m.Ativo)
-                   .HasColumnName("Ativo")
-                   .IsRequired();
+            builder.Property(m => m.DataAlteracao)
+                .HasColumnName("DataAlteracao")
+                .IsRequired();
+
+            builder
+               .HasOne(x => x.Banco);
 
             builder.HasKey(o => o.IdSegmento);
         }

@@ -1,4 +1,5 @@
 import { LayoutValorEsperado } from "./layout-valor-esperado";
+import { Banco } from "../../banco/models/banco";
 
 export class ValorEsperado{
     idValorEsperado: number;
@@ -9,6 +10,8 @@ export class ValorEsperado{
     tipoBoletoId: number;
     dataCadastro: Date;
     ativo: boolean;
-    banco?: any;
+    banco?: Banco;
+    cnabDescricao: string;
+    tipoBoletoDescricao: string;
     layoutValoresEsperados?: Array<LayoutValorEsperado>;
 }

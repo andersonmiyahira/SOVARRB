@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using System.Linq;
+using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.Uow;
@@ -9,7 +10,6 @@ namespace Domain.Services
     {
         private readonly IValorEsperadoRepository _valorEsperadoRepository;
         private readonly IUnitOfWork _uow;
-
 
         public ValorEsperadoService(IValorEsperadoRepository valorEsperadoRepository,
                                     IUnitOfWork uow) : base(valorEsperadoRepository)
@@ -38,6 +38,11 @@ namespace Domain.Services
             _uow.Commit();
 
             return model;
+        }
+
+        public IQueryable<ValorEsperado> ObterPorFiltros(ValorEsperado filters)
+        {
+            return _valorEsperadoRepository.ObterPorFiltros(filters);
         }
     }
 }

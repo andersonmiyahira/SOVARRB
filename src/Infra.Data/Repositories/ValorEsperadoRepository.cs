@@ -12,5 +12,11 @@ namespace Infra.Data.Repositories
         {
 
         }
+
+        public IQueryable<ValorEsperado> ObterPorFiltros(ValorEsperado filters)
+        {
+            return _dbSet.Include(_ => _.Banco)
+                         .Where(_ => filters.BancoId == default(int) || _.BancoId == filters.BancoId);
+        }
     }
 }

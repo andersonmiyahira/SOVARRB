@@ -14,25 +14,25 @@
                 <th scope="col">CNAB</th>
                 <th scope="col">Tipo</th>
                 <th scope="col">Data Cadastro</th>
-                <th scope="col">Status</th>
+                <th scope="col">Ativo</th>
                 <th scope="col" style="width:100px;text-align: center;">Ações</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let valorEsperado of valoresEsperados">
-                <th scope="row">{{valorEsperado.id}}</th>
+                <th scope="row">{{valorEsperado.idValorEsperado}}</th>
                 <td>{{valorEsperado.descricao}}</td>
                 <td>{{valorEsperado.valor}}</td>
-                <td>{{valorEsperado.banco}}</td>
-                <td>{{valorEsperado.cnab}}</td>
-                <td>{{valorEsperado.tipoArquivo}}</td>
-                <td>{{valorEsperado.dataCadastro}}</td>
-                <td>{{valorEsperado.status}}</td>
+                <td>{{valorEsperado.banco.descricao}}</td>
+                <td>{{valorEsperado.cnabDescricao}}</td>
+                <td>{{valorEsperado.tipoBoletoDescricao}}</td>
+                <td>{{valorEsperado.dataCadastro | date: 'dd/MM/yyyy'}}</td>
+                <td>{{valorEsperado.ativo ? "Sim" : "Não"}}</td>
                 <td>
-                  <button type="button" class="btn btn-primary btn-sm" (click)="editarOpenModal(content, valorEsperado.id)" ngbTooltip="Editar">
+                  <button type="button" class="btn btn-primary btn-sm" (click)="editarOpenModal(content, valorEsperado)" ngbTooltip="Editar">
                     <span class="fas fa-edit"></span>
                   </button>
-                  <button type="button" class="btn btn-danger btn-sm" (click)="excludeOpenModal(excluir)" ngbTooltip="Excluir">
+                  <button type="button" class="btn btn-danger btn-sm" (click)="excludeOpenModal(exclude, valorEsperado)" ngbTooltip="Excluir">
                     <span class="fas fa-trash-alt"></span>
                   </button>
                 </td>
@@ -117,7 +117,7 @@
 </ng-template>
 
 
-<ng-template #excluir let-c="close" let-d="dismiss">
+<ng-template #valorEsperado let-c="close" let-d="dismiss">
   <div class="modal-header bg-danger">
     <h4 class="modal-title">Excluir Valor Esperado</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">

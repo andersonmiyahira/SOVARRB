@@ -1,7 +1,11 @@
-﻿using Application.ViewModel.Request;
+﻿using Application.ViewModel.Filters;
+using Application.ViewModel.Request;
 using Application.ViewModel.Response;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain.Interfaces.Services;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Application.AppService.ValorEsperado
 {
@@ -32,6 +36,14 @@ namespace Application.AppService.ValorEsperado
         {
             var entity = _mapper.Map<Domain.Entities.ValorEsperado>(request);
             return _mapper.Map<ValorEsperadoResponse>(_valorEsperadoService.Inserir(entity));
+        }
+
+        public List<ValorEsperadoResponse> ObterPorFiltro(ValorEsperadoFilter filter)
+        {
+            var filters = _mapper.Map<Domain.Entities.ValorEsperado>(filter);
+            //return _mapper.Map<ValorEsperadoResponse>(_valorEsperadoService.ObterPorFiltros(filters));
+
+            return _valorEsperadoService.ObterPorFiltros(filters).ProjectTo<ValorEsperadoResponse>().ToList();
         }
     }
 }

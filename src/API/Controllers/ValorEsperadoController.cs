@@ -1,5 +1,6 @@
 ﻿using API.ControllerBaseExtensions;
 using Application.AppService.ValorEsperado;
+using Application.ViewModel.Filters;
 using Application.ViewModel.Request;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,9 +17,9 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(ValorEsperadoFilter filter)
         {
-            var valorEsperado = _valorEsperadoAppService.GetAll();
+            var valorEsperado = _valorEsperadoAppService.ObterPorFiltro(filter);
             return Response(valorEsperado);
         }
 

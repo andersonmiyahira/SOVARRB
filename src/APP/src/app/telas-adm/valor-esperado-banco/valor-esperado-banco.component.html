@@ -62,47 +62,45 @@
     <div>
       <div class="row">
         <div class="col-md-12">
-          <form method="post" action="/" novalidate="novalidate">
+          <form method="post" action="/" novalidate="novalidate" [formGroup]="form">
             <div class="text-danger validation-summary-valid" data-valmsg-summary="true">
               <ul>
                 <li style="display:none"></li>
               </ul>
             </div>
             <div class="form-group">
-              <label for="Input_Email">Descrição</label>
-              <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
+              <label>Descrição</label>
+              <input class="form-control" type="text" [(ngModel)]="model.descricao" formControlName="descricao">
             </div>
             <div class="form-group">
-              <label for="Input_Email">Valor</label>
-              <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
+              <label>Valor</label>
+              <input class="form-control" type="text"  [(ngModel)]="model.valor" formControlName="valor">
             </div>
             <div class="form-group">
-              <label for="cbCNAB">Banco</label>
-              <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
-                <option selected="selected" value="1">Selecione</option>
+              <label>Banco</label>
+              <select id="cbBanco" formControlName="bancoId" [(ngModel)]="model.bancoId" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
                 <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="cbCNAB">CNAB</label>
-              <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
-                <option selected="selected" value="1">Selecione</option>
-                <option *ngFor="let cnab of cnabs" value="{{cnab.id}}">{{cnab.descricao}}</option>
+              <label>CNAB</label>
+              <select id="cbCNAB" formControlName="tipoCNABId" [(ngModel)]="model.tipoCNABId" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+                <option value="1">CNAB240</option>
+                <option value="2">CNAB400</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="cbCNAB">Tipo</label>
-              <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
-                <option selected="selected" value="1">Selecione</option>
-                <option value="">Remessa</option>
-                <option value="">Retorno Bancário</option>
+              <label>Tipo</label>
+              <select id="cbTipoBoleto" formControlName="tipoBoletoId" [(ngModel)]="model.tipoBoletoId"  class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+                <option value="1">Remessa</option>
+                <option value="2">Retorno Bancário</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="cbCNAB">Status</label>
-              <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
-                <option selected="selected" value="1">Ativo</option>
-                <option value="2">Inativo</option>
+              <label>Status</label>
+              <select id="cbAtivo" [(ngModel)]="model.ativo" formControlName="ativo" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+                <option selected="selected" value="true">Ativo</option>
+                <option value="false">Inativo</option>
               </select>
             </div>
           </form>
@@ -111,13 +109,13 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary btn-left" (click)="c('Close click')">Salvar</button>
+    <button type="submit" class="btn btn-primary btn-left" (click)="salvar()" [disabled]="form.invalid">Salvar</button>
     <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
   </div>
 </ng-template>
 
 
-<ng-template #valorEsperado let-c="close" let-d="dismiss">
+<ng-template #exclude let-c="close" let-d="dismiss">
   <div class="modal-header bg-danger">
     <h4 class="modal-title">Excluir Valor Esperado</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">

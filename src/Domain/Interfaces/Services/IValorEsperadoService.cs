@@ -8,6 +8,6 @@ namespace Domain.Interfaces.Services
         IQueryable<ValorEsperado> ObterPorFiltros(ValorEsperado filters);
         ValorEsperado Inserir(ValorEsperado model);
         ValorEsperado Alterar(ValorEsperado model);
-        void Excluir(ValorEsperado model);
+        void Excluir(int id);
     }
 }

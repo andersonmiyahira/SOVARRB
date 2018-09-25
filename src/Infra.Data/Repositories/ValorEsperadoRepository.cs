@@ -13,6 +13,11 @@ namespace Infra.Data.Repositories
 
         }
 
+        public ValorEsperado ObterPorCodigo(int id)
+        {
+            return _dbSet.AsNoTracking().FirstOrDefault(_ => _.IdValorEsperado == id);
+        }
+
         public IQueryable<ValorEsperado> ObterPorFiltros(ValorEsperado filters)
         {
             return _dbSet.Include(_ => _.Banco)

@@ -9,5 +9,6 @@ namespace Domain.Interfaces.Repositories
     public interface IValorEsperadoRepository : IRepositoryBase<ValorEsperado>
     {
         IQueryable<ValorEsperado> ObterPorFiltros(ValorEsperado filters);
+        ValorEsperado ObterPorCodigo(int id);
     }
 }

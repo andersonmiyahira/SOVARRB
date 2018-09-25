@@ -45,9 +45,9 @@ namespace API.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete([FromBody]ValorEsperadoRequest valorEsperado)
+        public IActionResult Delete(int id)
         {
-            _valorEsperadoAppService.Excluir(valorEsperado);
+            _valorEsperadoAppService.Excluir(id);
             return Response();
         }
     }

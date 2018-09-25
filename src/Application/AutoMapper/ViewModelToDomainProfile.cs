@@ -12,8 +12,9 @@ namespace Application.AutoMapper
         {
             Banco();
             Segmento();
+            ValorEsperado();
 
-            // Map
+            // Map Filters
             ValorEsperadoFilter();
         }
 
@@ -31,6 +32,11 @@ namespace Application.AutoMapper
         private void Segmento()
         {
             CreateMap<SegmentoRequest, Segmento>();
+        }
+
+        private void ValorEsperado()
+        {
+            CreateMap<ValorEsperadoRequest, ValorEsperado>();
         }
 
         private void ValorEsperadoFilter()

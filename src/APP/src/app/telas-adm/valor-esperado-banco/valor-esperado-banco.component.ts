@@ -43,13 +43,21 @@ export class ValorEsperadoBancoComponent implements OnInit {
       descricao: new FormControl(this.model.descricao, [
         Validators.required
       ]),
+      valor: new FormControl(this.model.valor, [
+        Validators.required
+      ]),
+      tipoBoletoId: new FormControl(this.model.tipoBoletoId, [
+        Validators.required
+      ]),
+      tipoCNABId: new FormControl(this.model.tipoCNABId, [
+        Validators.required
+      ]),
       ativo: new FormControl(this.model.ativo, [
         Validators.required
       ]),
       language: new FormControl()
     });
   }
-
 
   obterBancos() {
     this.bancoService.obterBancos().subscribe(response => {
@@ -76,11 +84,13 @@ export class ValorEsperadoBancoComponent implements OnInit {
   }
 
   excludeOpenModal(exclude, valorEsperado) {
-    //this.bancos.splice(banco);
+
+    this.model = valorEsperado;
     this.modalReference = this.modalService.open(exclude, { size: 'sm' });
   }
 
   excluir() {
+
     this.valorEsperadoBancoService.excluirValorEsperado(this.model).subscribe(() => {
       var indexObjExcluido = this.valoresEsperados.findIndex(_ => _.idValorEsperado == this.model.idValorEsperado);
       this.valoresEsperados.splice(indexObjExcluido, 1);
@@ -89,6 +99,7 @@ export class ValorEsperadoBancoComponent implements OnInit {
   }
 
   salvar() {
+    
     if(this.model.idValorEsperado > 0) {
       this.valorEsperadoBancoService.atualizarValorEsperado(this.model).subscribe(() => {
         this.obterValoresEsperados();

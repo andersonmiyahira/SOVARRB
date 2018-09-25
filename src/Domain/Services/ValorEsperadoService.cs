@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
@@ -20,20 +21,28 @@ namespace Domain.Services
 
         public ValorEsperado Alterar(ValorEsperado model)
         {
-            _valorEsperadoRepository.Update(model);
+            var obj = _valorEsperadoRepository.ObterPorCodigo(model.IdValorEsperado);
+            obj.SetarDataAlteracao();
+            obj.AlterarDados(model.Descricao, model.Valor, model.BancoId, model.TipoCNABId, model.TipoBoletoId, model.Ativo);
+
+            _valorEsperadoRepository.Update(obj);
             _uow.Commit();
 
             return model;
         }
 
-        public void Excluir(ValorEsperado model)
+        public void Excluir(int id)
         {
-            _valorEsperadoRepository.Remove(model);
+            _valorEsperadoRepository.RemoveById(id);
             _uow.Commit();
         }
 
         public ValorEsperado Inserir(ValorEsperado model)
         {
+            model.SetarDataAlteracao();
+            model.SetarDataCadastro(DateTime.Now);
+            model.LimparEntidades();
+
             _valorEsperadoRepository.Add(model);
             _uow.Commit();
 

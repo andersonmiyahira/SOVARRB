@@ -26,10 +26,9 @@ namespace Application.AppService.ValorEsperado
             return _mapper.Map<ValorEsperadoResponse>(_valorEsperadoService.Alterar(entity));
         }
 
-        public void Excluir(ValorEsperadoRequest request)
+        public void Excluir(int id)
         {
-            var entity = _mapper.Map<Domain.Entities.ValorEsperado>(request);
-            _valorEsperadoService.Excluir(entity);
+            _valorEsperadoService.Excluir(id);
         }
 
         public ValorEsperadoResponse Inserir(ValorEsperadoRequest request)
@@ -41,8 +40,6 @@ namespace Application.AppService.ValorEsperado
         public List<ValorEsperadoResponse> ObterPorFiltro(ValorEsperadoFilter filter)
         {
             var filters = _mapper.Map<Domain.Entities.ValorEsperado>(filter);
-            //return _mapper.Map<ValorEsperadoResponse>(_valorEsperadoService.ObterPorFiltros(filters));
-
             return _valorEsperadoService.ObterPorFiltros(filters).ProjectTo<ValorEsperadoResponse>().ToList();
         }
     }

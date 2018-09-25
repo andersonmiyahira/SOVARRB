@@ -11,6 +11,6 @@ namespace Application.AppService.ValorEsperado
         List<ValorEsperadoResponse> ObterPorFiltro(ValorEsperadoFilter filter);
         ValorEsperadoResponse Inserir(ValorEsperadoRequest request);
         ValorEsperadoResponse Alterar(ValorEsperadoRequest request);
-        void Excluir(ValorEsperadoRequest request);
+        void Excluir(int id);
     }
 }

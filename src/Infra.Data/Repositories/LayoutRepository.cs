@@ -19,9 +19,9 @@ namespace Infra.Data.Repositories
                                   .Include(_ => _.Banco)
                                   .Include(_ => _.LayoutValoresEsperados)
                                     .ThenInclude(_ => _.ValorEsperado)
-                              .Where(_ => _.BancoId == filters.BancoId)
-                              .Where(_ => _.TipoCNABId == filters.TipoCNABId)
-                              .Where(_ => _.TipoBoletoId == filters.TipoBoletoId);
+                              .Where(_ => _.BancoId != default(int) || _.BancoId == filters.BancoId)
+                              .Where(_ => _.TipoCNABId != default(int) || _.TipoCNABId == filters.TipoCNABId)
+                              .Where(_ => _.TipoBoletoId != default(int) ||  _.TipoBoletoId == filters.TipoBoletoId);
 
             return  query;            
         }

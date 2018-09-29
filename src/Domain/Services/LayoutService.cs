@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using System.Linq;
+using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 
@@ -12,6 +13,10 @@ namespace Domain.Services
         {
             this._layoutRepository = layoutRepository;
         }
-         
+
+        public IQueryable<Layout> ObterPorFiltros(Layout filters)
+        {
+            return _layoutRepository.ObterComItens(new Arquivo(filters.BancoId, filters.TipoCNABId, filters.TipoBoletoId));
+        }
     }
 }

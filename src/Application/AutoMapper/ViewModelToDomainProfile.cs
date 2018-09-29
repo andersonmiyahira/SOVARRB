@@ -2,7 +2,6 @@
 using Application.ViewModel.Request;
 using AutoMapper;
 using Domain.Entities;
-using System.Collections.Generic;
 
 namespace Application.AutoMapper
 {
@@ -16,6 +15,7 @@ namespace Application.AutoMapper
 
             // Map Filters
             ValorEsperadoFilter();
+            LayoutFilter();
         }
 
         private void Arquivo()
@@ -42,6 +42,11 @@ namespace Application.AutoMapper
         private void ValorEsperadoFilter()
         {
             CreateMap<ValorEsperadoFilter, ValorEsperado>();
+        }
+
+        private void LayoutFilter()
+        {
+            CreateMap<LayoutFilter, Layout>();
         }
     }
 }

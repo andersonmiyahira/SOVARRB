@@ -1,22 +1,20 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../environments/environment';
 import { ApiService } from '../../services/api.service';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
+import { ServiceBase } from 'app/shared/services/service-base';
 
 @Injectable()
-export class LeiouteService {
-  constructor(private http: HttpClient,
-    private apiService: ApiService) {
+export class LeiouteService extends ServiceBase {
+  constructor(private apiService: ApiService) {
+    super("layout");
   }
 
 
   obterLeioutes() {
-    // return this.apiService.get("http://localhost:52854/api/banco");
-    return this.http.get<any[]>("http://localhost:52854/api/leioutes")
-    .pipe(
-      tap(banco => {})
-    );
+
+    return this.apiService.get(this.urlAPI).pipe(
+      map((res: any) => {
+        return res.data;
+      }));
    }
 }

@@ -16,6 +16,13 @@ namespace Domain.Entities
             LinhasArquivo = linhasArquivo;
         }
 
+        public Arquivo(int bancoId, int tipoCNABId, int tipoBoletoId)
+        {
+            BancoId = bancoId;
+            TipoCNABId = tipoCNABId;
+            TipoBoletoId = tipoBoletoId;
+        }
+
         public int IdArquivo { get; private set; }
         public int UsuarioId { get; private set; }
         public int BancoId { get; private set; }

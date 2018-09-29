@@ -1,5 +1,6 @@
 ﻿using Application.AppService.Banco;
 using Application.AppService.Segmento;
+using Application.AppService.Layout;
 using Application.AppService.ValorEsperado;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;

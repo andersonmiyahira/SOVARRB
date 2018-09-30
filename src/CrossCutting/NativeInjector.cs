@@ -56,6 +56,7 @@ namespace CrossCutting
             services.AddScoped<IArquivoRepository, ArquivoRepository>();
             services.AddScoped<IBancoRepository, BancoRepository>();
             services.AddScoped<ILayoutRepository, LayoutRepository>();
+            services.AddScoped<ILayoutValorEsperadoRepository, LayoutValorEsperadoRepository>();
             services.AddScoped<ILogArquivoRepository, LogArquivoRepository>();
             services.AddScoped<ISegmentoRepository, SegmentoRepository>();
             services.AddScoped<IValorEsperadoRepository, ValorEsperadoRepository>();

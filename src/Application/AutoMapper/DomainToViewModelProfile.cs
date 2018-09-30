@@ -27,7 +27,8 @@ namespace Application.AutoMapper
         {
 
             CreateMap<Layout, LayoutResponse>()
-               .ForMember(x => x.TipoCampoDescricao, opt => opt.MapFrom(src => ((ETipoCampo)Enum.ToObject(typeof(ETipoCampo), src.TipoCampoId)).GetDescription() ));
-        } 
+               .ForMember(x => x.TipoCampoDescricao, opt => opt.MapFrom(src => ((ETipoCampo)Enum.ToObject(typeof(ETipoCampo), src.TipoCampoId)).GetDescription()))
+               .ForMember(x => x.ValoresEsperados, opt => opt.MapFrom(src => src.LayoutValoresEsperados));
+        }  
     }
 }

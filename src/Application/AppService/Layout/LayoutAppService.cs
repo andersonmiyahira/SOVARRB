@@ -19,6 +19,11 @@ namespace Application.AppService.Layout
             _mapper = mapper;
         }
 
+        public void Excluir(int id)
+        {
+            _layoutService.ExcluirPorCodigo(id);
+        }
+
         public List<LayoutResponse> ObterPorFiltro(LayoutFilter filter)
         {
             var filters = _mapper.Map<Domain.Entities.Layout>(filter);

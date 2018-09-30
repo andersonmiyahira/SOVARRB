@@ -19,6 +19,6 @@ namespace Application.ViewModel.Response
         public string TipoCampoDescricao { get; set; }
         public bool Obrigatorio { get; set; }
 
-        public List<ValorEsperadoResponse> ValoresEsperados { get; set; }
+        public List<LayoutValorEsperadoResponse> ValoresEsperados { get; set; }
     }
 }

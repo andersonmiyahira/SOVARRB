@@ -11,6 +11,15 @@ export class ValorEsperadoBancoService extends ServiceBase {
   }
 
   obterValoresEsperados() {
+    
+    return this.apiService.get(this.urlAPI).pipe(
+      map((res: any) => {
+        return <ValorEsperado[]>res.data;
+      }));
+  }
+
+  obterValoresEsperadosPorFiltros(filter: ValorEsperado) {
+
     return this.apiService.get(this.urlAPI).pipe(
       map((res: any) => {
         return <ValorEsperado[]>res.data;

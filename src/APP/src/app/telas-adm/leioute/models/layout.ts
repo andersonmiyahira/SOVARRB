@@ -9,7 +9,7 @@ export class Layout{
     tipoBoletoId: number;
     posicaoDe:number;
     posicaoAte: number;
-    desricao: string;
+    descricao: string;
     tipoCampoId: number;
     tipoCampoDescricao: string;
     obrigatorio: boolean;

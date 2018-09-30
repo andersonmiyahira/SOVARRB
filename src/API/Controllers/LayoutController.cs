@@ -47,6 +47,7 @@ namespace API.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
+            _layoutAppService.Excluir(id);
             return Ok();
 
         }

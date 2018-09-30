@@ -12,6 +12,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DetalheValorEsperadoComponent } from './modals/detalhes-valor-esperado/valor-esperado-modal.component';
 import { ExcluirLayoutModalComponent } from './modals/excluir/excluir-layout-modal.component';
 import { EditarLayoutModalComponent } from 'app/telas-adm/leioute/listar/modals/editar/editar-layout-modal.component';
+import { ValorEsperado } from '../../valor-esperado-banco/model/valor-esperado';
 
 @Component({
   selector: 'app-leioute-lista',
@@ -27,11 +28,12 @@ export class LeiouteComponent implements OnInit {
   bancos: Array<Banco>;
 
   leioutes: LayoutList;
+  layoutFilter: Layout;
 
   optionsModel: number[];
   valoresEsperados: IMultiSelectOption[];
   private modalReference: NgbModalRef;
-
+  
   constructor(private router: Router,
     private LeiouteService: LeiouteService,
     private bancoService: BancoService,
@@ -39,6 +41,7 @@ export class LeiouteComponent implements OnInit {
     private modalService: NgbModal,
     private model: Layout) {
       this.leioutes = new LayoutList();
+      this.layoutFilter = new Layout();
   }
 
   ngOnInit() {
@@ -54,6 +57,7 @@ export class LeiouteComponent implements OnInit {
   buscarLeioute() {
 
     this.obterLeioutes();
+    this.obterValoresEsperados(this.layoutFilter.bancoId);
   }
   
   obterLeioutes() {
@@ -70,20 +74,28 @@ export class LeiouteComponent implements OnInit {
     });
   }
 
-  obterValoresEsperados(bancoId: number, tipoCNABid: number, tipoBoletoId: number) {
+  obterValoresEsperados(bancoId: number) {
+
+    let filter = new ValorEsperado();
+    filter.banco = new Banco();
+    filter.banco.id = bancoId;
+    filter.bancoId = bancoId;
 
     this.valoresEsperados = [];
-    this.valorEsperadoSevice.obterValoresEsperados().subscribe(res => {
-      debugger
-       this.valoresEsperados.push({ id: 1, name: 'testes'});
-       this.valoresEsperados.push({ id: 2, name: 'testes2'});
-       this.valoresEsperados.push({ id: 3, name: 'testes3'});
+    this.valorEsperadoSevice.obterValoresEsperadosPorFiltros(filter).subscribe(res => {
+      for(var i = 0; i< res.length; i++){
+        var element = res[i];
+        var nameFormatado = `${element.descricao} valor: ${element.valor}`;
+
+        this.valoresEsperados.push({ id: element.idValorEsperado, name: nameFormatado });
+      }
     });
   }
 
   /* Abertura de modais */
   editar(editarModal, model) {
      
+    this.childEditarLayoutModal.options = this.valoresEsperados;
     this.childEditarLayoutModal.leioutes = this.leioutes;
     this.childEditarLayoutModal.openModal(model);
   }
@@ -94,8 +106,9 @@ export class LeiouteComponent implements OnInit {
     this.childExcluirLayoutModal.openModal(model);
   } 
 
-  detalhesValoresEsperados() {
+  detalhesValoresEsperados(model) {
 
+    this.childComponentModalDetalhesValorEsperado.valoresEsperados = model.valoresEsperados;
     this.childComponentModalDetalhesValorEsperado.openModal();
   } 
 }

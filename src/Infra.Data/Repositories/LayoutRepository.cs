@@ -21,9 +21,18 @@ namespace Infra.Data.Repositories
                                     .ThenInclude(_ => _.ValorEsperado)
                               .Where(_ => _.BancoId != default(int) || _.BancoId == filters.BancoId)
                               .Where(_ => _.TipoCNABId != default(int) || _.TipoCNABId == filters.TipoCNABId)
-                              .Where(_ => _.TipoBoletoId != default(int) ||  _.TipoBoletoId == filters.TipoBoletoId);
+                              .Where(_ => _.TipoBoletoId != default(int) || _.TipoBoletoId == filters.TipoBoletoId);
 
-            return  query;            
+            return query;            
+        }
+
+        public Layout ObterPorCodigo(int id)
+        {
+            return _dbSet.AsNoTracking()
+                         .Include(_ => _.Banco)
+                         .Include(_ => _.LayoutValoresEsperados)
+                            .ThenInclude(_ => _.ValorEsperado)
+                         .FirstOrDefault(_ => _.IdLayout == id); 
         }
     }
 }

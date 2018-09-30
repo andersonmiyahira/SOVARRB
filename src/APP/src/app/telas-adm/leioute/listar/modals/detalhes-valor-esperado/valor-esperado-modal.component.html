@@ -10,14 +10,8 @@
       <div class="row">
         <div class="col-md-12">
           <ul>
-            <li>
-              Option1
-            </li>
-            <li>
-              Option2
-            </li>
-            <li>
-              Option3
+            <li *ngFor="let item of valoresEsperados">
+              <span> {{item.valorEsperado.descricao}} - valor: {{item.valorEsperado.valor}}</span>
             </li>
           </ul>
         </div>

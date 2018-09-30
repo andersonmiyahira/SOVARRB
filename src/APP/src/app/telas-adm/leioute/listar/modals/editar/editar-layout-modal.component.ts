@@ -22,6 +22,7 @@ export class EditarLayoutModalComponent implements OnInit {
 
   model: Layout;
   leioutes: LayoutList;
+  options: IMultiSelectOption[];
 
   private modalReference: NgbModalRef;
 
@@ -30,8 +31,6 @@ export class EditarLayoutModalComponent implements OnInit {
   }
 
   ngOnInit() {
-
-  
   }
 
   initFomControl() {
@@ -55,6 +54,9 @@ export class EditarLayoutModalComponent implements OnInit {
       tipoCampoId: new FormControl(this.model.tipoCampoId, [
         Validators.required
       ]),
+      idValoresEsperados: new FormControl(this.model.idValoresEsperados, [
+        Validators.required
+      ]),
       language: new FormControl()
     });
   }
@@ -65,5 +67,14 @@ export class EditarLayoutModalComponent implements OnInit {
     this.model = model;
     this.initFomControl();
     this.modalReference = this.modalService.open(this.modal, { size: 'lg' });
+  }
+
+  salvar() {
+
+    this.leiouteService.atualizarLayout(this.model).subscribe(res =>{
+      var indexObjAtualizado = this.leioutes.layout.findIndex(_ => _.idLayout == this.model.idLayout);
+      this.leioutes.layout[indexObjAtualizado] = res;
+      this.modalReference.close();
+    });
   }
 }

@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-md-4">
           <label for="cbBanco">Banco</label>
-          <select id="cbBanco" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+          <select id="cbBanco" [(ngModel)]="layoutFilter.bancoId" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
             <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
           </select>
         </div>
@@ -59,7 +59,7 @@
                       <td>{{header.tipoCampoDescricao}}</td>
                       <td>{{header.obrigatorio ? "Sim" : "Não"}}</td>
                       <td>
-                        <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados()" data-toggle="tooltip" data-placement="top" ngbTooltip="Detalhes">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados(header)" data-toggle="tooltip" data-placement="top" ngbTooltip="Detalhes">
                           <i class="fas fa-info-circle"></i>
                         </button>
                       </td>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
 
 namespace Application.ViewModel.Response
@@ -20,5 +22,16 @@ namespace Application.ViewModel.Response
         public bool Obrigatorio { get; set; }
 
         public List<LayoutValorEsperadoResponse> ValoresEsperados { get; set; }
+
+        public List<int> IdValoresEsperados
+        {
+            get
+            {
+                if(ValoresEsperados != null && ValoresEsperados.Count > 0)
+                    return ValoresEsperados.Select(_ => _.ValorEsperado.IdValorEsperado).ToList();
+                return null;
+            }
+        }
+
     }
 }

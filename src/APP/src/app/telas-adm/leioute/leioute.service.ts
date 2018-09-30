@@ -25,4 +25,12 @@ export class LeiouteService extends ServiceBase {
         return res;
       }));
   }
+
+  atualizarLayout(model: Layout) {
+
+    return this.apiService.put(this.urlAPI, model).pipe(
+      map((res: any) => {
+        return res.data;
+      }));
+  }
 }

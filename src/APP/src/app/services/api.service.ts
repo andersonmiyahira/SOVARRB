@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Inject, Injectable, OnInit } from '@angular/core';
 import { Observable, Observer } from 'rxjs/Rx';
@@ -7,16 +7,16 @@ import { Observable, Observer } from 'rxjs/Rx';
 @Injectable()
 export class ApiService {
 
-  constructor(private http: HttpClient, 
-              //private notificationToastr: NotificationToastrService
-             ) {
+  constructor(private http: HttpClient,
+    //private notificationToastr: NotificationToastrService
+  ) {
   }
 
   post(url: string, data: any): Observable<any> {
     return this.http.post(url, data)
       .catch(error => {
         //this.notificationToastr.error(error);
-        console.log('erros',error)
+        console.log('erros', error)
         return Observable.throw(error);
       });
   }
@@ -44,7 +44,7 @@ export class ApiService {
   delete(url: string, id: number): Observable<any> {
 
     let resource = `${url}?id=${id}`;
-    
+
     return this.http.delete(resource)
       .catch(error => {
 
@@ -69,5 +69,26 @@ export class ApiService {
         //this.notificationToastr.error(error);
         return Observable.throw(error);
       });
+  }
+  getByFilters(url: string, filter: any): Observable<any> {
+    let params = this.makeSearchParams(filter);
+
+    return this.http.get(url + "?" + params.toString())
+      .catch(error => {
+        //this.notificationToastr.error(error);
+        return Observable.throw(error);
+      });
+  }
+
+  private makeSearchParams(filters?: any): URLSearchParams {
+    const params = new URLSearchParams();
+    if (filters != null) {
+      for (const key in filters) {
+        if (filters.hasOwnProperty(key) && filters[key]) {
+          params.set(key, filters[key]);
+        }
+      }
+    }
+    return params;
   }
 }

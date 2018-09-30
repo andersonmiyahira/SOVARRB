@@ -14,4 +14,5 @@ export class Layout{
     tipoCampoDescricao: string;
     obrigatorio: boolean;
     valoresEsperados: Array<ValorEsperado>;
+    idValoresEsperados: Array<number>;
 }

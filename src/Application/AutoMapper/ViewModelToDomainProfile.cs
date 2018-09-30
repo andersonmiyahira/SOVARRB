@@ -12,6 +12,7 @@ namespace Application.AutoMapper
             Banco();
             Segmento();
             ValorEsperado();
+            Layout();
 
             // Map Filters
             ValorEsperadoFilter();
@@ -42,6 +43,11 @@ namespace Application.AutoMapper
         private void ValorEsperadoFilter()
         {
             CreateMap<ValorEsperadoFilter, ValorEsperado>();
+        }
+
+        private void Layout()
+        {
+            CreateMap<LayoutRequest, Layout>();
         }
 
         private void LayoutFilter()

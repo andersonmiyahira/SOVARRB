@@ -47,7 +47,7 @@
               </div>
               <div class="form-group">
                 <label for="valorEsperado">Valor esperado</label>
-                <ss-multiselect-dropdown [options]="valoresEsperados" style="display: inherit;width: 100%" ></ss-multiselect-dropdown>
+                <ss-multiselect-dropdown [options]="options" [(ngModel)]="model.idValoresEsperados" formControlName="idValoresEsperados" style="display: inherit;width: 100%" ></ss-multiselect-dropdown>
               </div>
             </form>
           </div>
@@ -56,7 +56,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary btn-left" (click)="c('Close click')">Salvar</button>
+    <button type="submit" class="btn btn-primary btn-left" (click)="salvar()">Salvar</button>
     <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
   </div>
 </ng-template>

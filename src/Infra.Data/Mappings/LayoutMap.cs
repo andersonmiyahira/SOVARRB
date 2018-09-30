@@ -58,6 +58,10 @@ namespace Infra.Data.Mappings
                 .HasColumnName("DataCadastro")
                 .IsRequired();
 
+            builder.Property(m => m.DataAlteracao)
+              .HasColumnName("DataAlteracao")
+              .IsRequired();
+
             builder.Property(m => m.Obrigatorio)
               .HasColumnName("Obrigatorio")
               .IsRequired();

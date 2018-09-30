@@ -26,8 +26,8 @@ namespace API.Controllers
         [HttpGet("GetById")]
         public IActionResult GetById(int id)
         {
-            return Ok();
-
+            var resp = _layoutAppService.GetById(id);
+            return Response(resp);
         }
 
         [HttpPost]
@@ -38,10 +38,12 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put()
+        public IActionResult Put([FromBody]LayoutRequest layoutRequest)
         {
-            return Ok();
+            _layoutAppService.AtualizarLayout(layoutRequest);
+            var resp = _layoutAppService.ObterPorCodigo(layoutRequest.IdLayout);
 
+            return Response(resp);
         }
 
         [HttpDelete]

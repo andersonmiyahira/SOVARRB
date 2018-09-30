@@ -17,5 +17,6 @@ namespace Application.ViewModel.Request
         public bool Obrigatorio { get; set; }
 
         public List<ValorEsperadoRequest> ValoresEsperados { get; set; }
+        public List<int> IdValoresEsperados { get; set; }
     }
 }

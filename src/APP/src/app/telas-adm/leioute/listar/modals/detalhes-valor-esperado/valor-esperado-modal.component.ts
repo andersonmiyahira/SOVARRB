@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
-import { Banco } from 'app/telas-adm/banco/models/banco';
 import { BancoService } from 'app/telas-adm/banco/banco.service';
+import { ValorEsperado } from 'app/telas-adm/valor-esperado-banco/model/valor-esperado';
 
 @Component({
   selector: 'app-valor-esperado-modal',
@@ -13,10 +12,8 @@ import { BancoService } from 'app/telas-adm/banco/banco.service';
 export class DetalheValorEsperadoComponent implements OnInit {
 
   @ViewChild('modal') modal: NgbModal;
-  bancos: Array<Banco>;
+  valoresEsperados: Array<ValorEsperado>;
 
-  optionsModel: number[];
-  valoresEsperados: IMultiSelectOption[];
   private modalReference: NgbModalRef;
 
   constructor(private router: Router,

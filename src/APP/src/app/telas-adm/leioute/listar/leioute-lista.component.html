@@ -59,7 +59,7 @@
                       <td>{{header.tipoCampoDescricao}}</td>
                       <td>{{header.obrigatorio ? "Sim" : "Não"}}</td>
                       <td>
-                        <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados(detalhesValorEsperado)" data-toggle="tooltip" data-placement="top" ngbTooltip="Detalhes">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados()" data-toggle="tooltip" data-placement="top" ngbTooltip="Detalhes">
                           <i class="fas fa-info-circle"></i>
                         </button>
                       </td>
@@ -98,7 +98,7 @@
                       <td>{{detalhe.tipoCampo}}</td>
                       <td>{{detalhe.obrigatorio}}</td>
                       <td>
-                        <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados(detalhesValorEsperado)" data-toggle="tooltip" data-placement="top" ngbTooltip="Detalhes">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados()" data-toggle="tooltip" data-placement="top" ngbTooltip="Detalhes">
                           <i class="fas fa-info-circle"></i>
                         </button>
                       </td>
@@ -137,7 +137,7 @@
                       <td>{{trailer.tipoCampo}}</td>
                       <td>{{trailer.obrigatorio}}</td>
                       <td>
-                        <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados(detalhesValorEsperado)" data-toggle="tooltip" data-placement="top" ngbTooltip="Detalhes">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados()" data-toggle="tooltip" data-placement="top" ngbTooltip="Detalhes">
                           <i class="fas fa-info-circle"></i>
                         </button>
                       </td>
@@ -162,120 +162,6 @@
 </div>
 
 
-<ng-template #editarModal let-c="close" let-d="dismiss">
-  <div class="modal-header bg-primary">
-    <h4 class="modal-title">Editar Parâmetro</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-12">
-            <form method="post" action="/" novalidate="novalidate" [formGroup]="form">
-              <div class="text-danger validation-summary-valid" data-valmsg-summary="true">
-                <ul>
-                  <li style="display:none"></li>
-                </ul>
-              </div>
-              <div class="form-group">
-                <label for="Input_Email">Posição De</label>
-                <input class="form-control" type="text" [(ngModel)]="model.posicaoDe" name="posicaoDe" formControlName="posicaoDe">
-              </div>
-              <div class="form-group">
-                <label for="Input_Email">Posição Até</label>
-                <input class="form-control" type="text" [(ngModel)]="model.posicaoAte" name="posicaoAte" formControlName="posicaoAte">
-              </div>
-              <div class="form-group">
-                <label for="Input_Email">Descrição</label>
-                <input class="form-control" type="text" [(ngModel)]="model.descricao" name="descricao" formControlName="descricao">
-              </div>
-              <div class="form-group">
-                <label for="cbTipoCampo">Tipo Campo</label>
-                <select id="cbTipoCampo" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%" [(ngModel)]="model.tipoCampoId" name="tipoCampoId" formControlName="tipoCampoId">
-                  <option value="1">Numérico</option>
-                  <option value="2">Alfanumérico</option>
-                  <option value="3">Data(aaaammdd)</option>
-                  <option value="4">Data(ddmmaa)</option>
-                  <option value="5">Data(ddmmaaaa)</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="cbObrigatorio">Obrigatório</label>
-                <select id="cbObrigatorio" [(ngModel)]="model.obrigatorio" name="obrigatorio" formControlName="obrigatorio" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
-                  <option value="1">Sim</option>
-                  <option value="2">Não</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="valorEsperado">Valor esperado</label>
-                <ss-multiselect-dropdown [options]="valoresEsperados" style="display: inherit;width: 100%" [(ngModel)]="optionsModel"></ss-multiselect-dropdown>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="submit" class="btn btn-primary btn-left" (click)="c('Close click')">Salvar</button>
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
-  </div>
-</ng-template>
-
-
-<ng-template #excludeModalId let-c="close" let-d="dismiss">
-  <div class="modal-header bg-danger">
-    <h4 class="modal-title">Excluir Leioute</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div>
-      <div class="row">
-        <div class="col-md-12">
-          Tem certeza que deseja excluir?
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="submit" class="btn btn-danger btn-left" (click)="excluir()">Sim</button>
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Não</button>
-  </div>
-</ng-template>
-<!-- 
-<ng-template #detalhesValorEsperado let-c="close" let-d="dismiss">
-  <div class="modal-header bg-primary">
-    <h4 class="modal-title">Valor(es) Esperado(s)</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div>
-      <div class="row">
-        <div class="col-md-12">
-          <ul>
-            <li>
-              Option1
-            </li>
-            <li>
-              Option2
-            </li>
-            <li>
-              Option3
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
-  </div>
-</ng-template> -->
-<app-valor-esperado-modal></app-valor-esperado-modal>
+<app-editar-layout-modal #editarLayoutModal></app-editar-layout-modal>
+<app-excluir-layout-modal #excluirLayoutModal></app-excluir-layout-modal>
+<app-valor-esperado-modal #detalhesValorEsperado></app-valor-esperado-modal>

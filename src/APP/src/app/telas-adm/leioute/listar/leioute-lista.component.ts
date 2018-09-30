@@ -9,6 +9,9 @@ import { LayoutList } from '../models/layout-list';
 import { ValorEsperadoBancoService } from '../../valor-esperado-banco/valor-esperado-banco.service';
 import { Layout } from '../models/layout';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DetalheValorEsperadoComponent } from './modals/detalhes-valor-esperado/valor-esperado-modal.component';
+import { ExcluirLayoutModalComponent } from './modals/excluir/excluir-layout-modal.component';
+import { EditarLayoutModalComponent } from 'app/telas-adm/leioute/listar/modals/editar/editar-layout-modal.component';
 
 @Component({
   selector: 'app-leioute-lista',
@@ -17,10 +20,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   providers: [Layout]
 })
 export class LeiouteComponent implements OnInit {
+  @ViewChild('detalhesValorEsperado') childComponentModalDetalhesValorEsperado: DetalheValorEsperadoComponent;
+  @ViewChild('excluirLayoutModal') childExcluirLayoutModal: ExcluirLayoutModalComponent;
+  @ViewChild('editarLayoutModal') childEditarLayoutModal: EditarLayoutModalComponent;
+
   bancos: Array<Banco>;
 
   leioutes: LayoutList;
-  public form: FormGroup;
 
   optionsModel: number[];
   valoresEsperados: IMultiSelectOption[];
@@ -38,7 +44,6 @@ export class LeiouteComponent implements OnInit {
   ngOnInit() {
 
     this.obterBancos();
-    this.initFomControl();
   }
 
   novoLeioute() {
@@ -67,62 +72,30 @@ export class LeiouteComponent implements OnInit {
 
   obterValoresEsperados(bancoId: number, tipoCNABid: number, tipoBoletoId: number) {
 
+    this.valoresEsperados = [];
     this.valorEsperadoSevice.obterValoresEsperados().subscribe(res => {
-       this.valoresEsperados.push({ id: 1, name: ''});
-    });
-  }
-
-  initFomControl() {
-
-    this.form = new FormGroup({ 
-      descricao: new FormControl(this.model.descricao, [
-        Validators.required
-      ]),
-      posicaoDe: new FormControl(this.model.posicaoDe, [
-        Validators.required
-      ]),
-      posicaoAte: new FormControl(this.model.posicaoAte, [
-        Validators.required
-      ]),
-      obrigatorio: new FormControl(this.model.obrigatorio, [
-        Validators.required
-      ]),
-      valorEsperado: new FormControl(this.model.valoresEsperados, [
-        Validators.required
-      ]),
-      tipoCampoId: new FormControl(this.model.tipoCampoId,[
-        Validators.required
-      ]),
-      language: new FormControl()
+      debugger
+       this.valoresEsperados.push({ id: 1, name: 'testes'});
+       this.valoresEsperados.push({ id: 2, name: 'testes2'});
+       this.valoresEsperados.push({ id: 3, name: 'testes3'});
     });
   }
 
   /* Abertura de modais */
   editar(editarModal, model) {
-    
-    this.model = model;
-    this.modalReference = this.modalService.open(editarModal, { size: 'lg' });
+     
+    this.childEditarLayoutModal.leioutes = this.leioutes;
+    this.childEditarLayoutModal.openModal(model);
   }
 
   exclude(excludeModalId, model) {
-    
-    this.model = model;
-    this.modalReference = this.modalService.open(excludeModalId, { size: 'sm' });
+     
+    this.childExcluirLayoutModal.leioutes = this.leioutes;
+    this.childExcluirLayoutModal.openModal(model);
   } 
 
-  detalhesValoresEsperados(detalhesValorEsperado) {
+  detalhesValoresEsperados() {
 
-    this.modalReference = this.modalService.open(detalhesValorEsperado, { size: 'lg' });
-  }
-
-
-  excluir() {
-    
-    this.LeiouteService.excluirBanco(this.model).subscribe(()=>{
-      debugger;
-      var indexObjExcluido = this.leioutes.layout.findIndex(_ => _.idLayout == this.model.idLayout);
-      this.leioutes.layout.splice(indexObjExcluido, 1);
-      this.modalReference.close();
-    }); 
-  }
+    this.childComponentModalDetalhesValorEsperado.openModal();
+  } 
 }

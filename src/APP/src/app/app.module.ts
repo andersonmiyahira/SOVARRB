@@ -45,7 +45,9 @@ import { MultiSelectComponent } from './telas-adm/leioute/components/multi-selec
 import { ButtonEditComponent } from './telas-adm/leioute/components/ng2-smart-table-button-edit.component';
 import { ValorEsperadoBancoComponent } from './telas-adm/valor-esperado-banco/valor-esperado-banco.component';
 import { ValorEsperadoBancoService } from './telas-adm/valor-esperado-banco/valor-esperado-banco.service';
-import { DetalheValorEsperadoComponent } from './telas-adm/leioute/listar/modals/valor-esperado-modal.component';
+import { DetalheValorEsperadoComponent } from './telas-adm/leioute/listar/modals/detalhes-valor-esperado/valor-esperado-modal.component';
+import { ExcluirLayoutModalComponent } from './telas-adm/leioute/listar/modals/excluir/excluir-layout-modal.component';
+import { EditarLayoutModalComponent } from './telas-adm/leioute/listar/modals/editar/editar-layout-modal.component';
 
 @NgModule({
   imports: [
@@ -75,7 +77,11 @@ import { DetalheValorEsperadoComponent } from './telas-adm/leioute/listar/modals
     CadastrarUsuarioComponent,
     EsqueciSenhaComponent,
     ValorEsperadoBancoComponent,
+
+    //modais
     DetalheValorEsperadoComponent,
+    ExcluirLayoutModalComponent,
+    EditarLayoutModalComponent,
 
     ButtonViewComponent,
     ButtonEditComponent,

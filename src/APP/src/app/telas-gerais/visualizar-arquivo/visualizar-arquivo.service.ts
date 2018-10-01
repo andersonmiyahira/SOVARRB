@@ -2,33 +2,27 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { ApiService } from 'app/services/api.service';
+import { ServiceBase } from 'app/shared/services/service-base';
+import { map } from 'rxjs/operators';
+import { VisualizarArquivo } from './models/visualizar-arquivo';
 
 @Injectable()
-export class VisualizarArquivoService {
-  constructor(private http: HttpClient,
-    private apiService: ApiService) {
+export class VisualizarArquivoService extends ServiceBase {
+  constructor(private apiService: ApiService) {
+    super("arquivo");
   }
 
   obterArquivos() {
-    return this.http.get<any[]>("http://localhost:52854/api/arquivosGetAll")
-      .pipe(
-         
-      );
-  }
+    return this.apiService.get(this.urlAPI).pipe(
+      map((res: any) => {
+        return <VisualizarArquivo[]>res.data;
+      }));
+  } 
 
-  obterBancos() {
-    // return this.apiService.get("http://localhost:52854/api/banco");
-    return this.http.get<any[]>("http://localhost:52854/api/banco")
-    .pipe(
-      //tap(banco => console.log(`fetched bancos`))
-    );
-   }
- 
-   obterTipoCNAB() {
-     //return this.apiService.get("http://localhost:52854/api/TipoCNAB");
-     return this.http.get<any[]>("http://localhost:52854/api/tipoCNAB")
-     .pipe(
-       //tap(cnab => console.log(`fetched cnab`))
-     );
-   }
+  obterArquivosPorFiltros(filters: VisualizarArquivo) {
+    return this.apiService.getByFilters(this.urlAPI, filters).pipe(
+      map((res: any) => {
+        return <VisualizarArquivo[]>res.data;
+      }));
+  } 
 }

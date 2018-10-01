@@ -6,6 +6,11 @@ namespace Domain.Entities
 {
     public class Arquivo
     {
+        public Arquivo()
+        {
+
+        }
+
         public Arquivo(int usuarioId, int bancoId, string nomeArquivoOriginal, int tipoCNABId, int tipoBoletoId, List<string> linhasArquivo)
         {
             UsuarioId = usuarioId;
@@ -32,7 +37,9 @@ namespace Domain.Entities
         public int TipoBoletoId { get; private set; }
         public bool EhValido { get; private set; }
         public DateTime DataCadastro { get; private set; }
-        public DateTime DataAlteracao { get; private set; }
+        public DateTime? DataAlteracao { get; private set; }
+
+        public Banco Banco { get; private set; }
 
         [NotMapped]
         public List<string> LinhasArquivo { get; set; }

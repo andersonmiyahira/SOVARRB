@@ -13,6 +13,7 @@ namespace Application.AutoMapper
         {
             ValorEsperado();
             Layout();
+            Arquivo();
         }
 
         private void ValorEsperado()
@@ -30,5 +31,12 @@ namespace Application.AutoMapper
                .ForMember(x => x.TipoCampoDescricao, opt => opt.MapFrom(src => ((ETipoCampo)Enum.ToObject(typeof(ETipoCampo), src.TipoCampoId)).GetDescription()))
                .ForMember(x => x.ValoresEsperados, opt => opt.MapFrom(src => src.LayoutValoresEsperados));
         }  
+
+        private void Arquivo()
+        {
+            CreateMap<Arquivo, ArquivoResponse>()
+             .ForMember(x => x.TipoBoletoDescricao, opt => opt.MapFrom(src => ((ETipoBoleto)Enum.ToObject(typeof(ETipoBoleto), src.TipoBoletoId)).GetDescription()))
+             .ForMember(x => x.TipoCNABDescricao, opt => opt.MapFrom(src => ((ETipoCNAB)Enum.ToObject(typeof(ETipoCNAB), src.TipoCNABId)).GetDescription()));
+        }
     }
 }

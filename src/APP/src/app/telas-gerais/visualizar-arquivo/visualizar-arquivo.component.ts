@@ -3,11 +3,15 @@ import { VisualizarArquivoService } from './visualizar-arquivo.service';
 import { NgbModule, NgbDatepickerModule, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ImportarArquivoService } from '../importar-arquivo/importar-arquivo.service';
 import { IMultiSelectOption, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
+import { BancoService } from '../../telas-adm/banco/banco.service';
+import { Banco } from 'app/telas-adm/banco/models/banco';
+import { VisualizarArquivo } from './models/visualizar-arquivo';
 
 @Component({
   selector: 'app-visualizar-arquivo',
   templateUrl: './visualizar-arquivo.component.html',
-  styleUrls: ['./visualizar-arquivo.component.css']
+  styleUrls: ['./visualizar-arquivo.component.css'],
+  providers: [VisualizarArquivo]
 })
 
 export class VisualizarArquivoComponent implements OnInit {
@@ -23,30 +27,25 @@ export class VisualizarArquivoComponent implements OnInit {
     displayAllSelectedText: true
 };
 
-  arquivos: any;
-  bancos: any;
-  cnabs: any;
+  filter: VisualizarArquivo;
+
+  arquivos: Array<VisualizarArquivo>;
+  bancos: Array<Banco>;
   mensagens: any;
 
   constructor(private visualizarArquivoService: VisualizarArquivoService,
     private importarArquivoService: ImportarArquivoService,
+    private bancoService: BancoService,
     private modalService: NgbModal) {
     this.mensagens = {};
+    this.filter = new VisualizarArquivo();
   }
 
   ngOnInit() {
-    this.obterResultadoValidacao();
-    this.obterCNAB();
+    
+    this.obterResultadoValidacao(); 
     this.obterBancos();
     this.obterValoresEsperados();
-  }
-
-  openLg(content) {
-    this.modalService.open(content, { size: 'lg' });
-  }
-
-  openBoletao(Boletao) {
-    this.modalService.open(Boletao, { size: 'sm' });
   }
 
   downloadArquivo() {
@@ -58,7 +57,13 @@ export class VisualizarArquivoComponent implements OnInit {
   }
 
   obterArquivos() {
-    this.visualizarArquivoService.obterArquivos().subscribe(res => {
+
+    // if(this.filter.de) {
+    //   this.filter.de =  
+    // }
+   
+
+    this.visualizarArquivoService.obterArquivosPorFiltros(this.filter).subscribe(res => {
       this.arquivos = res;
     });
   }
@@ -76,17 +81,11 @@ export class VisualizarArquivoComponent implements OnInit {
   }
 
   obterBancos() {
-    this.visualizarArquivoService.obterBancos().subscribe(response => {
+    this.bancoService.obterBancos().subscribe(response => {
       this.bancos = response;
     });
   }
-
-  obterCNAB() {
-    this.visualizarArquivoService.obterTipoCNAB().subscribe(response => {
-      this.cnabs = response;
-    });
-  }
-
+ 
   obterResultadoValidacao() {
     this.importarArquivoService.obterResultadoValidacao(1).subscribe(response => {
       this.mensagens.header = {};
@@ -110,5 +109,13 @@ export class VisualizarArquivoComponent implements OnInit {
       this.mensagens.trailer.sucesso = response.filter(x => x["tipo"] == 3 && x["ehValido"] == true);
       this.mensagens.trailer.erro = response.filter(x => x["tipo"] == 3 && x["ehValido"] == false);
     });
+  }
+
+  openLg(content) {
+    this.modalService.open(content, { size: 'lg' });
+  }
+
+  openBoletao(Boletao) {
+    this.modalService.open(Boletao, { size: 'sm' });
   }
 }

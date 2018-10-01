@@ -48,6 +48,9 @@ namespace Infra.Data.Mappings
                 .HasColumnName("DataAlteracao")
                 .IsRequired();
 
+            builder
+                 .HasOne(x => x.Banco);
+
             builder.HasKey(o => o.IdArquivo);
         }
     }

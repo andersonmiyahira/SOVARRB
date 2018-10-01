@@ -7,6 +7,7 @@ namespace Application.ViewModel.Response
         public int IdArquivo { get; set; }
         public int UsuarioId { get; set; }
         public int BancoId { get; set; }
+        public BancoResponse Banco { get; set; }
         public string NomeArquivoOriginal { get; set; }
         public string NomeArquivoGerado { get; set; }
         public int TipoCNABId { get; set; }
@@ -14,5 +15,8 @@ namespace Application.ViewModel.Response
         public bool EhValido { get; set; }
         public DateTime DataCadastro { get; set; }
         public DateTime DataAlteracao { get; set; }
+
+        public string TipoCNABDescricao { get; set; }
+        public string TipoBoletoDescricao { get; set; }
     }
 }

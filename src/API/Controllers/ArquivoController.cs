@@ -1,7 +1,6 @@
 ﻿using API.ControllerBaseExtensions;
 using Application.AppService.Banco;
 using Application.ViewModel.Filters;
-using Application.ViewModel.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers

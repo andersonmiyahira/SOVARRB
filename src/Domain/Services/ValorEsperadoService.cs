@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.Uow;
+using System;
+using System.Linq;
 
 namespace Domain.Services
 {

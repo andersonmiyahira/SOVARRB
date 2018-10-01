@@ -18,6 +18,9 @@ export class VisualizarArquivo {
     tipoBoletoDescricao: string;
 
     //filter properties
-    de: Date;
-    ate: Date;
+    deDatePicker: Date;
+    ateDatePicker: Date;
+
+    de: string;
+    ate: string;
 }

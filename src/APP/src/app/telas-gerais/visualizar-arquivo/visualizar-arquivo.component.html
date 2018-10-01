@@ -12,7 +12,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <input class="form-control" placeholder="yyyy-mm-dd" name="dpDe"
-                   [(ngModel)]="filter.de" ngbDatepicker #de="ngbDatepicker">
+                   [(ngModel)]="filter.deDatePicker" ngbDatepicker #de="ngbDatepicker">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="de.toggle()" type="button">
                       <img src="{{logoDatePickerUrl}}" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
@@ -28,7 +28,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <input class="form-control" placeholder="yyyy-mm-dd" name="dpAte"
-                   [(ngModel)]="filter.ate" ngbDatepicker #ate="ngbDatepicker">
+                   [(ngModel)]="filter.ateDatePicker" ngbDatepicker #ate="ngbDatepicker">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="ate.toggle()" type="button">
                       <img src="{{logoDatePickerUrl}}" style="width: 1.2rem; height: 1rem; cursor: pointer;" />

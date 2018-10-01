@@ -6,6 +6,7 @@ import { IMultiSelectOption, IMultiSelectSettings } from 'angular-2-dropdown-mul
 import { BancoService } from '../../telas-adm/banco/banco.service';
 import { Banco } from 'app/telas-adm/banco/models/banco';
 import { VisualizarArquivo } from './models/visualizar-arquivo';
+import * as _moment from 'moment';
 
 @Component({
   selector: 'app-visualizar-arquivo',
@@ -48,24 +49,23 @@ export class VisualizarArquivoComponent implements OnInit {
     this.obterValoresEsperados();
   }
 
-  downloadArquivo() {
-    window.open(this.fileURL + "REM01.txt", "_blank");
-  }
-
-  downloadArquivoBoletoPDF(){
-    window.open(this.fileURL + "Boleto1.pdf", "_blank");
-  }
-
   obterArquivos() {
 
-    // if(this.filter.de) {
-    //   this.filter.de =  
-    // }
-   
+    this.formataFiltrosData();
 
     this.visualizarArquivoService.obterArquivosPorFiltros(this.filter).subscribe(res => {
       this.arquivos = res;
     });
+  }
+
+  formataFiltrosData() {
+    if(this.filter.deDatePicker) {
+      this.filter.de =  _moment(this.filter.deDatePicker).add(-1, 'M').format("YYYY-MM-DD");
+    }
+
+    if(this.filter.ateDatePicker) {
+      this.filter.ate =  _moment(this.filter.ateDatePicker).add(-1, 'M').format("YYYY-MM-DD");
+    }
   }
 
   obterValoresEsperados() {
@@ -117,5 +117,13 @@ export class VisualizarArquivoComponent implements OnInit {
 
   openBoletao(Boletao) {
     this.modalService.open(Boletao, { size: 'sm' });
+  }
+
+  downloadArquivo() {
+    window.open(this.fileURL + "REM01.txt", "_blank");
+  }
+
+  downloadArquivoBoletoPDF(){
+    window.open(this.fileURL + "Boleto1.pdf", "_blank");
   }
 }

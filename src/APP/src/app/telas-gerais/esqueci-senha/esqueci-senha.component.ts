@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EsqueciSenhaService } from './esqueci-senha.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
  
 @Component({
   selector: 'app-esqueci-senha',
@@ -8,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./esqueci-senha.component.css']
 })
 export class EsqueciSenhaComponent implements OnInit {
-  constructor(private importarArquivoService: EsqueciSenhaService) {
+  constructor() {
     
   }
 

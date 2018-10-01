@@ -4,15 +4,20 @@
     "\\src",
     "\\src\\Application",
     "\\src\\Application\\AppService",
-    "\\src\\Application\\AppService\\Banco",
-    "\\src\\Application\\ViewModel",
-    "\\src\\Application\\ViewModel\\Request",
+    "\\src\\Application\\AppService\\AppBase",
+    "\\src\\Application\\AppService\\Arquivo",
+    "\\src\\Application\\AutoMapper",
+    "\\src\\Application\\Helpers",
+    "\\src\\CrossCutting",
     "\\src\\Domain",
-    "\\src\\Domain\\Entities",
+    "\\src\\Domain\\Enums",
+    "\\src\\Domain\\Extensions",
     "\\src\\Domain\\Interfaces",
-    "\\src\\Domain\\Interfaces\\Services",
-    "\\src\\Domain\\Services"
+    "\\src\\Domain\\Interfaces\\Repositories",
+    "\\src\\Infra.Data",
+    "\\src\\Infra.Data\\Context",
+    "\\src\\Infra.Data\\UoW"
   ],
-  "SelectedNode": "\\src\\Application\\AppService\\Banco\\BancoAppService.cs",
+  "SelectedNode": "\\src\\Infra.Data\\UoW\\UnitOfWork.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -2,11 +2,11 @@
   <img class="logo-login" src="../../assets/img/vbanking-logo-cinza.png" alt="VBanking" width="250" />
   <h1 class="h3 mb-3 font-weight-normal">Fazer login</h1>
   <label for="inputEmail" class="sr-only">E-mail</label>
-  <input type="email" [(ngModel)]="login.email" id="inputEmail" class="form-control" placeholder="E-mail" required autofocus data-val="true" data-val-email="The Email field is not a valid e-mail address."
-    data-val-required="The Email field is required." id="Input_Email" name="Input.Email" value="">
+  <input type="email" [(ngModel)]="login.email" id="inputEmail" class="form-control" placeholder="E-mail" required name="Input.Email">
+
   <label for="inputPassword" class="sr-only">Senha</label>
-  <input [(ngModel)]="login.senha" type="password" id="inputPassword" class="form-control" placeholder="Senha" required data-val="true" data-val-required="The Password field is required."
-    id="Input_Password" name="Input.Password">
+  <input [(ngModel)]="login.senha" type="password" class="form-control" placeholder="Senha" required name="Input.Password">
+
   <span class="text-danger field-validation-valid" data-valmsg-for="Input.Password" data-valmsg-replace="true"></span>
   <span class="text-danger field-validation-valid" *ngIf="!usuarioEncontrado">Usuário/Senha incorreto(s).</span>
   <button class="btn btn-lg btn-primary btn-block mb-3" type="submit" (click)="logarFake()">Entrar</button>

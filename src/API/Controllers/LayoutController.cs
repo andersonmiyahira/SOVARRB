@@ -31,10 +31,10 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public IActionResult Post([FromBody]LayoutRequest layoutRequest)
         {
-            return Ok();
-
+            var response = _layoutAppService.Inserir(layoutRequest);
+            return Response(response);
         }
 
         [HttpPut]

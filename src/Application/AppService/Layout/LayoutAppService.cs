@@ -20,6 +20,29 @@ namespace Application.AppService.Layout
             _mapper = mapper;
         }
 
+        public List<LayoutResponse> ObterPorFiltro(LayoutFilter filter)
+        {
+            var filters = _mapper.Map<Domain.Entities.Layout>(filter);
+
+            return _layoutService.ObterPorFiltros(filters)
+                                 .ProjectTo<LayoutResponse>()
+                                 .ToList();
+        }
+
+        public LayoutResponse ObterPorCodigo(int id)
+        {
+            return _mapper.Map<LayoutResponse>(_layoutService.ObterPorCodigo(id));
+        }
+
+        public LayoutResponse Inserir(LayoutRequest layoutRequest)
+        {
+            var entity = _mapper.Map<Domain.Entities.Layout>(layoutRequest);
+
+            var ret = _layoutService.Inserir(entity);
+
+            return null;
+        }
+
         public LayoutResponse AtualizarLayout(LayoutRequest layout)
         {
             var entity = _mapper.Map<Domain.Entities.Layout>(layout);
@@ -30,21 +53,6 @@ namespace Application.AppService.Layout
         public void Excluir(int id)
         {
             _layoutService.ExcluirPorCodigo(id);
-        }
-
-        public LayoutResponse ObterPorCodigo(int id)
-        {
-            return _mapper.Map<LayoutResponse>(_layoutService.ObterPorCodigo(id));
-        }
-
-        public List<LayoutResponse> ObterPorFiltro(LayoutFilter filter)
-        {
-            var filters = _mapper.Map<Domain.Entities.Layout>(filter);
-
-            return _layoutService.ObterPorFiltros(filters)
-                                 .ProjectTo<LayoutResponse>()
-                                 .ToList(); 
-                                  
         }
     }
 }

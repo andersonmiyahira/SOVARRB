@@ -2,12 +2,17 @@ import { Component, OnInit, ViewChild, Input, EventEmitter, Output, OnDestroy } 
 import { LeiouteService } from '../leioute.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ButtonViewComponent } from '../components/ng2-smart-table-button.component';
-import { MultiSelectComponent } from '../components/multi-select.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { EventosService } from 'app/core/eventos.service';
 import { ImportarArquivoService } from 'app/telas-gerais/importar-arquivo/importar-arquivo.service';
 import { ButtonEditComponent } from 'app/telas-adm/leioute/components/ng2-smart-table-button-edit.component';
+import { Banco } from 'app/telas-adm/banco/models/banco';
+import { BancoService } from '../../banco/banco.service';
+import { Segmento } from '../../tipo-segmento/model/segmento';
+import { TipoSegmentoService } from '../../tipo-segmento/tipo-segmento.service';
+import { Router } from '@angular/router';
+import { DetalheValorEsperadoCadastroComponent } from './modals/detalhes-valor-esperado-cadastro/valor-esperado-cadastro-modal.component';
 
 @Component({
   selector: 'app-leioute-cadastrar',
@@ -15,8 +20,7 @@ import { ButtonEditComponent } from 'app/telas-adm/leioute/components/ng2-smart-
   styleUrls: ['./leioute-cadastrar.component.css']
 })
 export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
- 
-  @ViewChild('detalhesValorEsperado') public childModal: NgbModal;
+  @ViewChild('detalhesValorEsperado') public childComponentModal: DetalheValorEsperadoCadastroComponent;
 
   private abrirModalEvent$: Subscription;
   private abrirModalEditEvent$: Subscription;
@@ -24,8 +28,8 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
   cnabSelecionado?: number;
   tipoRegistroSelecionado?: number;
 
-  bancos: any;
-  cnabs: any;
+  bancos: Array<Banco>;
+  segmentos: Array<Segmento>;
 
   settings: any;
   data: LocalDataSource;
@@ -34,34 +38,43 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
 
   constructor(private leiouteService: LeiouteService,
     private importarArquivoService: ImportarArquivoService,
+    private segmentoService: TipoSegmentoService,
+    private bancoService: BancoService,
+    private router: Router,
     private modalService: NgbModal) {
+
+      this.bancos = new Array<Banco>();
+      this.segmentos = new Array<Segmento>();
+
       this.listValorEsperado = true;
       this.cnabSelecionado = 0;
       this.tipoRegistroSelecionado = 0;
   }
 
-  obterBancos() {
-    this.importarArquivoService.obterBancos().subscribe(response => {
-      this.bancos = response;
-    });
-  }
-
-  obterCNAB() {
-    this.importarArquivoService.obterTipoCNAB().subscribe(response => {
-      this.cnabs = response;
-    });
-  }
-
   ngOnInit() {
+
     this.initSettings();
     this.obterBancos();
-    this.obterCNAB();
     this.cadastrarEventoAbrirModal();
   }
 
   ngOnDestroy(): void {
     if (this.abrirModalEvent$) this.abrirModalEvent$.unsubscribe();
     if (this.abrirModalEditEvent$) this.abrirModalEditEvent$.unsubscribe();
+  }
+
+  obterBancos() {
+    
+    this.bancoService.obterBancos().subscribe(response => {
+      this.bancos = response;
+    });
+  }
+
+  obterSegmentos() {
+    
+    this.segmentoService.obterSegmentos().subscribe(response => {
+      this.segmentos = response;
+    });
   }
 
   private cadastrarEventoAbrirModal() {
@@ -88,7 +101,7 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
         editButtonContent: 'Alterar',
         saveButtonContent: 'Salvar',
         cancelButtonContent: 'Cancelar',
-        confirmSave: false,
+        confirmSave: 'teste($event)'
       },
       delete: {
         deleteButtonContent: 'Excluir',
@@ -160,6 +173,9 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
     this.data = new LocalDataSource();
   }
 
+  teste(evt) {
+console.log(evt)
+  }
 
   salvarNovoLeioute() {
     this.data.add({
@@ -174,13 +190,20 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
   }
   
   abriModalValorEsperado() {
-    this.listValorEsperado = true;
-    this.modalService.open(this.childModal, { size: 'lg' });
+debugger
+    this.childComponentModal.listValorEsperado = true;
+    this.childComponentModal.openModal();
   }
 
   abriModalValorEsperadoEdit() {
-    this.listValorEsperado = false;
-    this.modalService.open(this.childModal, { size: 'lg' });
+
+    this.childComponentModal.listValorEsperado = false;
+    this.childComponentModal.openModal();
+  }
+
+  voltar() {
+
+    this.router.navigate(['leioute']);
   }
 }
 

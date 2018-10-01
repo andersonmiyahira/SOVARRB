@@ -9,6 +9,7 @@ namespace Application.AppService.Layout
     public interface ILayoutAppService : IAppServiceBase<Domain.Entities.Layout>
     {
         List<LayoutResponse> ObterPorFiltro(LayoutFilter filter);
+        LayoutResponse Inserir(LayoutRequest layoutRequest);
         LayoutResponse AtualizarLayout(LayoutRequest layout);
         LayoutResponse ObterPorCodigo(int id);
         void Excluir(int id);

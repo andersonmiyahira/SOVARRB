@@ -48,6 +48,7 @@ import { ValorEsperadoBancoService } from './telas-adm/valor-esperado-banco/valo
 import { DetalheValorEsperadoComponent } from './telas-adm/leioute/listar/modals/detalhes-valor-esperado/valor-esperado-modal.component';
 import { ExcluirLayoutModalComponent } from './telas-adm/leioute/listar/modals/excluir/excluir-layout-modal.component';
 import { EditarLayoutModalComponent } from './telas-adm/leioute/listar/modals/editar/editar-layout-modal.component';
+import { DetalheValorEsperadoCadastroComponent } from './telas-adm/leioute/cadastrar/modals/detalhes-valor-esperado-cadastro/valor-esperado-cadastro-modal.component';
 
 @NgModule({
   imports: [
@@ -80,6 +81,7 @@ import { EditarLayoutModalComponent } from './telas-adm/leioute/listar/modals/ed
 
     //modais
     DetalheValorEsperadoComponent,
+    DetalheValorEsperadoCadastroComponent,
     ExcluirLayoutModalComponent,
     EditarLayoutModalComponent,
 

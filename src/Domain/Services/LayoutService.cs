@@ -41,12 +41,25 @@ namespace Domain.Services
             return obj;
         }
 
-        private void AdicionarValoresEsperador(int idLayout, List<int> idValoresEsperados)
+        public Layout Inserir(Layout model)
         {
-            foreach (var idValorEsperado in idValoresEsperados)
-            {
-                _layoutValorEsperadoRepository.Add(new LayoutValorEsperado(idLayout, idValorEsperado));
-            }
+            AdicionarValoresEsperador(model.IdLayout, model.IdValoresEsperados); 
+
+            _layoutRepository.Add(model);
+            _uow.Commit();
+
+            return model;
+        }
+
+        public Layout ObterPorCodigo(int id)
+        {
+            return _layoutRepository.ObterPorCodigo(id);
+        }
+
+        public IQueryable<Layout> ObterPorFiltros(Layout filters)
+        {
+            var ret = _layoutRepository.ObterComItens(new Arquivo(filters.BancoId, filters.TipoCNABId, filters.TipoBoletoId));
+            return ret;
         }
 
         public void ExcluirPorCodigo(int id)
@@ -57,6 +70,14 @@ namespace Domain.Services
             _uow.Commit();
         }
 
+        private void AdicionarValoresEsperador(int idLayout, List<int> idValoresEsperados)
+        {
+            foreach (var idValorEsperado in idValoresEsperados)
+            {
+                _layoutValorEsperadoRepository.Add(new LayoutValorEsperado(idLayout, idValorEsperado));
+            }
+        }
+
         private void RemoverValoresEsperadosPorLayoutId(int id)
         {
             var layoutValorEsperado = _layoutValorEsperadoRepository.ObterPorCodigoLayout(id);
@@ -64,17 +85,6 @@ namespace Domain.Services
             {
                 _layoutValorEsperadoRepository.RemoveById(item.IdLayoutValorEsperado);
             }
-        }
-
-        public IQueryable<Layout> ObterPorFiltros(Layout filters)
-        {
-            var ret = _layoutRepository.ObterComItens(new Arquivo(filters.BancoId, filters.TipoCNABId, filters.TipoBoletoId));
-            return ret;
-        }
-
-        public Layout ObterPorCodigo(int id)
-        {
-            return _layoutRepository.ObterPorCodigo(id);
         }
     }
 }

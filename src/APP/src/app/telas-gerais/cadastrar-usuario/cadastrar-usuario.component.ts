@@ -46,9 +46,9 @@ export class CadastrarUsuarioComponent implements OnInit {
   }
 
   salvar() {
-    debugger
+    
     this.cadastrarUsuarioService.salvarUsuario(this.model).subscribe(()=>{
-      
+
     });
   }
 

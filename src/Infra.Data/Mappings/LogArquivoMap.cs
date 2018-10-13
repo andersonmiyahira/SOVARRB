@@ -7,7 +7,7 @@ namespace Infra.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Domain.Entities.LogArquivo> builder)
         {
-            builder.ToTable("LogArquivpo");
+            builder.ToTable("LogArquivo");
 
             builder.Property(m => m.IdLogArquivo)
                    .HasColumnName("IdLogArquivo")
@@ -15,6 +15,10 @@ namespace Infra.Data.Mappings
 
             builder.Property(m => m.ArquivoId)
                    .HasColumnName("ArquivoId")
+                   .IsRequired();
+
+            builder.Property(m => m.LayoutId)
+                   .HasColumnName("LayoutId")
                    .IsRequired();
 
             builder.Property(m => m.Linha)
@@ -43,6 +47,10 @@ namespace Infra.Data.Mappings
             builder.Property(m => m.TipoParametroId)
                    .HasColumnName("TipoParametroId")
                    .IsRequired();
+
+            builder.HasOne(m => m.Layout);
+
+            builder.HasOne(m => m.Arquivo);
 
             builder.HasKey(o => o.IdLogArquivo);
         }

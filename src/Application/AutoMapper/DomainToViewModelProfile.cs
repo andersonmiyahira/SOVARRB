@@ -7,6 +7,9 @@ using System;
 
 namespace Application.AutoMapper
 {
+    /// <summary>
+    /// Map domain models to response models
+    /// </summary>
     public class DomainToViewModelProfile : Profile
     {
         public DomainToViewModelProfile()
@@ -14,6 +17,7 @@ namespace Application.AutoMapper
             ValorEsperado();
             Layout();
             Arquivo();
+            LogArquivo();
         }
 
         private void ValorEsperado()
@@ -37,6 +41,11 @@ namespace Application.AutoMapper
             CreateMap<Arquivo, ArquivoResponse>()
              .ForMember(x => x.TipoBoletoDescricao, opt => opt.MapFrom(src => ((ETipoBoleto)Enum.ToObject(typeof(ETipoBoleto), src.TipoBoletoId)).GetDescription()))
              .ForMember(x => x.TipoCNABDescricao, opt => opt.MapFrom(src => ((ETipoCNAB)Enum.ToObject(typeof(ETipoCNAB), src.TipoCNABId)).GetDescription()));
+        }
+
+        private void LogArquivo()
+        {
+            CreateMap<LogArquivo, LogArquivoResponse>();             
         }
     }
 }

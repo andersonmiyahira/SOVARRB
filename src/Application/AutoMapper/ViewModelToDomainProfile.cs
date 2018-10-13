@@ -13,11 +13,6 @@ namespace Application.AutoMapper
             Segmento();
             ValorEsperado();
             Layout();
-
-            // Map Filters
-            ValorEsperadoFilter();
-            LayoutFilter();
-            ArquivoFilter();
         }
 
         private void Arquivo()
@@ -46,19 +41,5 @@ namespace Application.AutoMapper
             CreateMap<LayoutRequest, Layout>();
         }
 
-        private void ArquivoFilter()
-        {
-            CreateMap<ArquivoFilter, Arquivo>();
-        }
-
-        private void ValorEsperadoFilter()
-        {
-            CreateMap<ValorEsperadoFilter, ValorEsperado>();
-        }
-
-        private void LayoutFilter()
-        {
-            CreateMap<LayoutFilter, Layout>();
-        }
     }
 }

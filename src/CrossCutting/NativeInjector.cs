@@ -1,5 +1,6 @@
 ﻿using Application.AppService.Banco;
 using Application.AppService.Layout;
+using Application.AppService.LogArquivo;
 using Application.AppService.Segmento;
 using Application.AppService.ValorEsperado;
 using Domain.Interfaces.Repositories;
@@ -36,6 +37,7 @@ namespace CrossCutting
             services.AddScoped<IArquivoAppService, ArquivoAppService>();
             services.AddScoped<IBancoAppService, BancoAppService>();
             services.AddScoped<ILayoutAppService, LayoutAppService>();
+            services.AddScoped<ILogArquivoAppService, LogArquivoAppService>();
             services.AddScoped<ISegmentoAppService, SegmentoAppService>();
             services.AddScoped<IValorEsperadoAppService, ValorEsperadoAppService>();            
         }

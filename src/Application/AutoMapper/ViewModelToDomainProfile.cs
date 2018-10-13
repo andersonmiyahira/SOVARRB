@@ -2,6 +2,7 @@
 using Application.ViewModel.Request;
 using AutoMapper;
 using Domain.Entities;
+using System;
 
 namespace Application.AutoMapper
 {
@@ -13,6 +14,7 @@ namespace Application.AutoMapper
             Segmento();
             ValorEsperado();
             Layout();
+            Usuario();
         }
 
         private void Arquivo()
@@ -41,5 +43,14 @@ namespace Application.AutoMapper
             CreateMap<LayoutRequest, Layout>();
         }
 
+        private void Usuario()
+        {
+            // create default user
+            CreateMap<UsuarioRequest, Usuario>()                
+                .ForMember(x => x.EhAdministrador, opt => opt.MapFrom(src => false))
+                .ForMember(x => x.DataAlteracao, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(x => x.DataCadastro, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(x => x.Ativo, opt => opt.MapFrom(src => true)); 
+        }
     }
 }

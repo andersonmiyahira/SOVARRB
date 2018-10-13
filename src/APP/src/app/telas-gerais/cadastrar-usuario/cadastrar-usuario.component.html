@@ -1,4 +1,4 @@
-<form class="form-signin text-center" method="post" action="/Account/Register" novalidate="novalidate">
+<form class="form-signin text-center" method="post" action="/" novalidate="novalidate" [formGroup]="form">
   <img class="logo-login" src="../../assets/img/vbanking-logo-cinza.png" alt="VBanking" width="250" />
   <h1 class="h3 mb-3 font-weight-normal">Cadastrar usuário</h1>
   <div class="text-danger validation-summary-valid" data-valmsg-summary="true">
@@ -6,13 +6,23 @@
       <li style="display:none"></li>
     </ul>
   </div>
-  <input class="form-control" type="text" placeholder="Nome Completo" name="nome">
-  <input type="email" id="inputEmail" class="form-control" placeholder="E-mail" id="email" name="email">
-  <input class="form-control" type="password" placeholder="Senha" name="senha">
+
+  <input class="form-control" type="text" placeholder="Nome Completo" name="nome" [(ngModel)]="model.nome"
+    formControlName="nome">
+
+  <input type="email" id="inputEmail" class="form-control" placeholder="E-mail" id="email" name="email" [(ngModel)]="model.email"
+    formControlName="email">
+
+  <input class="form-control" type="password" placeholder="Senha" name="senha" [(ngModel)]="model.senha"
+    formControlName="senha">
+
   <span class="text-danger field-validation-valid" data-valmsg-for="Input.Password" data-valmsg-replace="true"></span>
+
   <input class="form-control confirm-password" type="password" placeholder="Confirmar Senha" name="confirmsenha">
+
   <span class="text-danger field-validation-valid" data-valmsg-for="Input.ConfirmPassword" data-valmsg-replace="true"></span>
-  <button class="btn btn-lg btn-primary btn-block mb-3" type="submit" (click)="direcionaLogin()">Cadastrar</button>
+
+  <button class="btn btn-lg btn-primary btn-block mb-3" type="submit" (click)="salvar()">Cadastrar</button>
   <div class="options mb-3">
     <label>
       <a routerLink="/login">Já tem uma conta? Faça o login</a>

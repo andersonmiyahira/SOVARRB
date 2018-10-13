@@ -39,7 +39,8 @@ namespace CrossCutting
             services.AddScoped<ILayoutAppService, LayoutAppService>();
             services.AddScoped<ILogArquivoAppService, LogArquivoAppService>();
             services.AddScoped<ISegmentoAppService, SegmentoAppService>();
-            services.AddScoped<IValorEsperadoAppService, ValorEsperadoAppService>();            
+            services.AddScoped<IValorEsperadoAppService, ValorEsperadoAppService>();
+            services.AddScoped<IUsuarioAppService, UsuarioAppService>();
         }
 
         private static void RegisterDomainServices(IServiceCollection services)

@@ -1,14 +1,15 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using API.ControllerBaseExtensions;
+using API.Models;
+using Application.AppService.ValorEsperado;
+using Application.ViewModel.Request;
+using Application.ViewModel.Response;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
-using Microsoft.IdentityModel.Tokens;
-using API.ControllerBaseExtensions;
-using Application.AppService.ValorEsperado;
-using Application.ViewModel.Request;
-using API.Models;
 
 namespace API.Controllers
 {
@@ -16,72 +17,70 @@ namespace API.Controllers
     public class LoginController : ApiController
     {
         private readonly IUsuarioAppService _usuarioAppService;
+        private readonly SigningConfigurations _signingConfigurations;
+        private readonly TokenConfigurations _tokenConfigurations;
 
-        public LoginController(IUsuarioAppService usuarioAppService)
+        public LoginController(IUsuarioAppService usuarioAppService,
+                               SigningConfigurations signingConfigurations,
+                               TokenConfigurations tokenConfigurations)
         {
+
             _usuarioAppService = usuarioAppService;
-        }  
+            _signingConfigurations = signingConfigurations;
+            _tokenConfigurations = tokenConfigurations;
+        }
 
         [AllowAnonymous]
         [HttpPost]
-        public object Post(
-            [FromBody]UsuarioRequest usuario,
-            [FromServices]SigningConfigurations signingConfigurations,
-            [FromServices]TokenConfigurations tokenConfigurations)
+        public IActionResult Post([FromBody]UsuarioRequest usuario)
         {
-            bool credenciaisValidas = true;
-            //if (usuario != null && !String.IsNullOrWhiteSpace(usuario.UserID))
-            //{
-            //    var usuarioBase = usersDAO.Find(usuario.UserID);
-            //    credenciaisValidas = (usuarioBase != null &&
-            //        usuario.UserID == usuarioBase.UserID &&
-            //        usuario.AccessKey == usuarioBase.AccessKey);
-            //}
-
-            if (credenciaisValidas)
+            if (usuario == null || String.IsNullOrWhiteSpace(usuario.Email) || String.IsNullOrWhiteSpace(usuario.Senha))
             {
-                ClaimsIdentity identity = new ClaimsIdentity(
-                    new GenericIdentity("usuario.Id", "Login"),
-                    new[] {
+                return Response("Invalido");
+            }
+
+            UsuarioResponse usuarioValidoEncontrado = _usuarioAppService.EfetuarLogin(usuario);
+            if(usuarioValidoEncontrado == null) return Response("Invalido");
+
+            ClaimsIdentity identity = new ClaimsIdentity(
+                new GenericIdentity(usuarioValidoEncontrado.IdUsuario.ToString(), "Login"),
+                new[] { 
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                        new Claim(JwtRegisteredClaimNames.UniqueName, "usuario.Id")
-                    }
-                );
+                        new Claim(JwtRegisteredClaimNames.UniqueName, usuarioValidoEncontrado.IdUsuario.ToString())
+                }
+            );
 
-                DateTime dataCriacao = DateTime.Now;
-                DateTime dataExpiracao = dataCriacao + TimeSpan.FromSeconds(tokenConfigurations.Seconds);
+            Claim claimNome = new Claim(ClaimTypes.Name, usuarioValidoEncontrado.Nome);
+            Claim claimEhAdm = new Claim(ClaimTypes.Role, usuarioValidoEncontrado.EhAdministrador ? "ADMIN" : "");
 
-                var handler = new JwtSecurityTokenHandler();
-                var securityToken = handler.CreateToken(new SecurityTokenDescriptor
-                {
-                    Issuer = tokenConfigurations.Issuer,
-                    Audience = tokenConfigurations.Audience,
-                    SigningCredentials = signingConfigurations.SigningCredentials,
-                    Subject = identity,
-                    NotBefore = dataCriacao,
-                    Expires = dataExpiracao
-                });
-                var token = handler.WriteToken(securityToken);
+            identity.AddClaim(claimNome);
+            identity.AddClaim(claimEhAdm);
 
-                return new
-                {
-                    authenticated = true,
-                    created = dataCriacao.ToString("yyyy-MM-dd HH:mm:ss"),
-                    expiration = dataExpiracao.ToString("yyyy-MM-dd HH:mm:ss"),
-                    accessToken = token,
-                    message = "OK"
-                };
-            }
-            else
+            DateTime dataCriacao = DateTime.Now;
+            DateTime dataExpiracao = dataCriacao + TimeSpan.FromSeconds(_tokenConfigurations.Seconds);
+
+            var handler = new JwtSecurityTokenHandler();
+            var securityToken = handler.CreateToken(new SecurityTokenDescriptor
             {
-                return new
-                {
-                    authenticated = false,
-                    message = "Falha ao autenticar"
-                };
-            }
+                Issuer = _tokenConfigurations.Issuer,
+                Audience = _tokenConfigurations.Audience,
+                SigningCredentials = _signingConfigurations.SigningCredentials,
+                Subject = identity,
+                NotBefore = dataCriacao,
+                Expires = dataExpiracao
+            });
+            var token = handler.WriteToken(securityToken);
 
-            return Response();
+            var response = new
+            {
+                authenticated = true,
+                created = dataCriacao.ToString("yyyy-MM-dd HH:mm:ss"),
+                expiration = dataExpiracao.ToString("yyyy-MM-dd HH:mm:ss"),
+                accessToken = token,
+                message = "OK"
+            };  
+
+            return Response(response);
         }
 
     }

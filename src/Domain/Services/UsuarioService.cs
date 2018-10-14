@@ -16,6 +16,11 @@ namespace Domain.Services
             _uow = uow;
         }
 
+        public Usuario EfetuarLogin(Usuario entity)
+        {
+            return _usuarioRepository.VerificarLogin(entity);
+        }
+
         public Usuario SalvarUsuario(Usuario entity)
         {
             _usuarioRepository.Add(entity);

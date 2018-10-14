@@ -1,4 +1,5 @@
-﻿using Application.ViewModel.Filters;
+﻿using Application.Helpers;
+using Application.ViewModel.Filters;
 using Application.ViewModel.Request;
 using Application.ViewModel.Response;
 using AutoMapper;
@@ -21,8 +22,18 @@ namespace Application.AppService.ValorEsperado
         public UsuarioResponse CadastrarUsuario(UsuarioRequest model)
         {
             var entity = _mapper.Map<Usuario>(model);
-
+            entity.AtualizaSenhaCriptografada(Hash.Create(entity.Senha));
             entity = _usuarioService.SalvarUsuario(entity);
+
+            return _mapper.Map<UsuarioResponse>(entity);
+        }
+
+        public UsuarioResponse EfetuarLogin(UsuarioRequest model)
+        {
+            var entity = _mapper.Map<Usuario>(model);
+            entity.AtualizaSenhaCriptografada(Hash.Create(entity.Senha));
+
+            entity = _usuarioService.EfetuarLogin(entity);
 
             return _mapper.Map<UsuarioResponse>(entity);
         }

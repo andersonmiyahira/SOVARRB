@@ -1,6 +1,7 @@
 ﻿using API.ControllerBaseExtensions;
 using Application.AppService.ValorEsperado;
 using Application.ViewModel.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -21,6 +22,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="usuarioRequest"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Post([FromBody]UsuarioRequest usuarioRequest)
         {

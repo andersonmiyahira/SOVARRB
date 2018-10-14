@@ -8,5 +8,6 @@ namespace Application.AppService.ValorEsperado
     public interface IUsuarioAppService : IAppServiceBase<Domain.Entities.Usuario>
     {
         UsuarioResponse CadastrarUsuario(UsuarioRequest model);
+        UsuarioResponse EfetuarLogin(UsuarioRequest model);
     }
 }

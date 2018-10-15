@@ -2,10 +2,12 @@
 using Application.AppService.Layout;
 using Application.ViewModel.Filters;
 using Application.ViewModel.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     [Produces("application/json")]
     public class LayoutController : ApiController
     {

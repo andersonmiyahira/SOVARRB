@@ -1,19 +1,27 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { JwtService } from 'app/services/jwt.service';
+import { AuthService } from 'app/services/auth.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
-  constructor(private router: Router, 
-              private jwtService: JwtService) { }
+  constructor(private router: Router,
+    private jwtService: JwtService,
+    private authService: AuthService) { }
 
-  canActivate(): boolean {
-    let isLoggedIn = this.jwtService.getToken();
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
-    if (isLoggedIn)
-      return true; 
-      
+    let isLoggedIn = this.authService.isLogged();
+    if (isLoggedIn) {
+      if (this.authService.hasAccessUrl(state.url))
+        return true;
+      else {
+        this.router.navigate(['/acesso-negado']);
+        return false;
+      }
+    }
+
     this.router.navigate(['/login']);
     return false;
   }

@@ -52,6 +52,7 @@ import { DetalheValorEsperadoCadastroComponent } from './telas-adm/leioute/cadas
 import { AuthService } from './services/auth.service';
 import { JwtService } from './services/jwt.service';
 import { HttpTokenInterceptor } from './shared/interceptors/http-token.interceptor';
+import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
 
 @NgModule({
   imports: [
@@ -73,6 +74,7 @@ import { HttpTokenInterceptor } from './shared/interceptors/http-token.intercept
   ],
   declarations: [
     AppComponent,
+    AcessoNegadoComponent,
     DashboardComponent,
 
     ImportarArquivoComponent,

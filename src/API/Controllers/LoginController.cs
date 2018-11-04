@@ -53,8 +53,16 @@ namespace API.Controllers
             Claim claimNome = new Claim(ClaimTypes.Name, usuarioValidoEncontrado.Nome);
             Claim claimEhAdm = new Claim(ClaimTypes.Role, usuarioValidoEncontrado.EhAdministrador ? "ADMIN" : "");
 
+            string menu = "importar-arquivo|visualizar-arquivo";
+            if (usuarioValidoEncontrado.EhAdministrador)
+            {
+                menu += "|banco|segmento|valor-esperado|layout|layout-cadastrar";
+            }
+            Claim claimMenu = new Claim("toolsAccess", menu);
+
             identity.AddClaim(claimNome);
             identity.AddClaim(claimEhAdm);
+            identity.AddClaim(claimMenu);
 
             DateTime dataCriacao = DateTime.Now;
             DateTime dataExpiracao = dataCriacao + TimeSpan.FromSeconds(_tokenConfigurations.Seconds);

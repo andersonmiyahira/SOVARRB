@@ -43,12 +43,12 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
     private router: Router,
     private modalService: NgbModal) {
 
-      this.bancos = new Array<Banco>();
-      this.segmentos = new Array<Segmento>();
+    this.bancos = new Array<Banco>();
+    this.segmentos = new Array<Segmento>();
 
-      this.listValorEsperado = true;
-      this.cnabSelecionado = 0;
-      this.tipoRegistroSelecionado = 0;
+    this.listValorEsperado = true;
+    this.cnabSelecionado = 0;
+    this.tipoRegistroSelecionado = 0;
   }
 
   ngOnInit() {
@@ -64,14 +64,14 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
   }
 
   obterBancos() {
-    
+
     this.bancoService.obterBancos().subscribe(response => {
       this.bancos = response;
     });
   }
 
   obterSegmentos() {
-    
+
     this.segmentoService.obterSegmentos().subscribe(response => {
       this.segmentos = response;
     });
@@ -90,7 +90,7 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
   initSettings() {
     this.settings = {
       hideSubHeader: true,
-      attr:{
+      attr: {
         class: "table table-bordered table-striped"
       },
       actions: {
@@ -158,9 +158,9 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
         valorEsperado: {
           title: 'Valor Esperado', filter: false
           , type: 'custom',
-          width:'150px',
+          width: '150px',
           renderComponent: ButtonViewComponent,
-          onComponentInitFunction(instance) { 
+          onComponentInitFunction(instance) {
           },
           editor: {
             type: 'custom',
@@ -174,7 +174,7 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
   }
 
   teste(evt) {
-console.log(evt)
+    console.log(evt)
   }
 
   salvarNovoLeioute() {
@@ -188,9 +188,9 @@ console.log(evt)
     });
     this.data.refresh();
   }
-  
+
   abriModalValorEsperado() {
-debugger
+    debugger
     this.childComponentModal.listValorEsperado = true;
     this.childComponentModal.openModal();
   }
@@ -203,7 +203,7 @@ debugger
 
   voltar() {
 
-    this.router.navigate(['leioute']);
+    this.router.navigate(['layout']);
   }
 }
 

@@ -1,4 +1,4 @@
-import { NgModule }             from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ImportarArquivoComponent } from 'app/telas-gerais/importar-arquivo/importar-arquivo.component';
@@ -13,24 +13,26 @@ import { LeiouteCadastrarComponent } from 'app/telas-adm/leioute/cadastrar/leiou
 import { DashboardComponent } from 'app/dashboard/dashboard.component';
 import { AuthGuardService } from 'app/core/auth-guard.service';
 import { ValorEsperadoBancoComponent } from 'app/telas-adm/valor-esperado-banco/valor-esperado-banco.component';
+import { AcessoNegadoComponent } from 'app/acesso-negado/acesso-negado.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: '', component: ImportarArquivoComponent, canActivate: [AuthGuardService] },
+  { path: 'acesso-negado', component: AcessoNegadoComponent },
   { path: 'importar-arquivo', component: ImportarArquivoComponent, canActivate: [AuthGuardService] },
   { path: 'visualizar-arquivo', component: VisualizarArquivoComponent, canActivate: [AuthGuardService] },
   { path: 'cadastrar-usuario', component: CadastrarUsuarioComponent },
   { path: 'login', component: LoginComponent },
   { path: 'esqueci-senha', component: EsqueciSenhaComponent },
   { path: 'banco', component: BancoComponent, canActivate: [AuthGuardService] },
-  { path: 'tipo-segmento', component: TipoSegmentoComponent, canActivate: [AuthGuardService] },
-  { path: 'leioute', component: LeiouteComponent, canActivate: [AuthGuardService] },
+  { path: 'segmento', component: TipoSegmentoComponent, canActivate: [AuthGuardService] },
+  { path: 'layout', component: LeiouteComponent, canActivate: [AuthGuardService] },
   { path: 'valor-esperado', component: ValorEsperadoBancoComponent, canActivate: [AuthGuardService] },
-  { path: 'leioute-cadastrar', component: LeiouteCadastrarComponent, canActivate: [AuthGuardService] },
+  { path: 'layout-cadastrar', component: LeiouteCadastrarComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

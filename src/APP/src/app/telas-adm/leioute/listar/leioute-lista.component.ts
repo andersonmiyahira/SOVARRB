@@ -51,7 +51,7 @@ export class LeiouteComponent implements OnInit {
 
   novoLeioute() {
 
-    this.router.navigate(['leioute-cadastrar']);
+    this.router.navigate(['layout-cadastrar']);
   }
 
   buscarLeioute() {

@@ -49,35 +49,12 @@ export class LoginComponent implements OnInit {
       if(res.authenticated) {
 
         this.authService.setAuth(res);
+        EventosService.realizouLogin.emit();
         this.router.navigate(['./importar-arquivo']);
       }
       else{
 
         this.usuarioEncontrado = false;
-      }
-    });
-  }
-
-  logarFake() {
-    this.loginService.obterLogin(this.login).subscribe(result => {
-      let usu = result.filter(x => x["email"] == this.login.email 
-                                && x["senha"] == this.login.senha);
-
-      if(usu && usu.length > 0) { 
-        localStorage.setItem("logado", "1");
-        localStorage.setItem("nomeLogged", usu[0]["nome"]);
-        localStorage.setItem("emailLogged", usu[0]["email"]);
-        localStorage.setItem("ehAdministradorLogged", usu[0]["ehAdministrador"]);
-      }
-      else{
-        //mostrar msg de usuario nao encontrado        
-        localStorage.clear();
-        this.usuarioEncontrado = false;
-      }
-
-      EventosService.realizouLogin.emit();
-      if(usu && usu.length > 0) {
-        this.router.navigate(['./importar-arquivo']);
       }
     });
   }

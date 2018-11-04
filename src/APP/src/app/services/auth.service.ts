@@ -19,4 +19,9 @@ export class AuthService {
         // this.currentUserSubject.next({} as UserModel);
         // this.isAuthenticatedSubject.next(false);
     }
+
+    isLogged(){
+        var token = this.jwtService.getToken();
+        return token != null && token != '' && token != undefined; 
+    }
 }

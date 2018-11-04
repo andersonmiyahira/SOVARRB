@@ -210,9 +210,9 @@ namespace API
                 c.AllowAnyOrigin();
             });
 
-            app.UseMvc();
-
             app.UseAuthentication();
+
+            app.UseMvc();
               
             app.UseStaticFiles();
 

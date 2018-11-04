@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -51,6 +51,7 @@ import { EditarLayoutModalComponent } from './telas-adm/leioute/listar/modals/ed
 import { DetalheValorEsperadoCadastroComponent } from './telas-adm/leioute/cadastrar/modals/detalhes-valor-esperado-cadastro/valor-esperado-cadastro-modal.component';
 import { AuthService } from './services/auth.service';
 import { JwtService } from './services/jwt.service';
+import { HttpTokenInterceptor } from './shared/interceptors/http-token.interceptor';
 
 @NgModule({
   imports: [
@@ -125,7 +126,8 @@ import { JwtService } from './services/jwt.service';
     AuthGuardService,
     ApiService,
     AuthService,
-    JwtService
+    JwtService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

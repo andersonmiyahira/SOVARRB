@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './data/in-memory-data.service';
+import { InMemoryDataService } from './data/in-memory-data.service';
 
 import { AppRoutingModule } from './routes/app-routing.module';
 import { ApiService } from './services/api.service';
@@ -53,6 +53,9 @@ import { AuthService } from './services/auth.service';
 import { JwtService } from './services/jwt.service';
 import { HttpTokenInterceptor } from './shared/interceptors/http-token.interceptor';
 import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
+import { LoadScreenComponent } from './load-screen/load-screen.component';
+import { LoaderInterceptorService } from './shared/interceptors/load-screen.interceptor';
+import { LoaderService } from './load-screen/service/load-screen.service';
 
 @NgModule({
   imports: [
@@ -75,6 +78,7 @@ import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
   declarations: [
     AppComponent,
     AcessoNegadoComponent,
+    LoadScreenComponent,
     DashboardComponent,
 
     ImportarArquivoComponent,
@@ -100,36 +104,41 @@ import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
     LeiouteComponent,
     LeiouteCadastrarComponent
   ],
-  entryComponents:[
+  entryComponents: [
     ButtonViewComponent,
     ButtonEditComponent,
     MultiSelectComponent
   ],
-  exports:[
+  exports: [
     ButtonViewComponent,
     ButtonEditComponent,
     MultiSelectComponent
   ],
   providers: [
-    ImportarArquivoService, 
-    VisualizarArquivoService, 
+    ImportarArquivoService,
+    VisualizarArquivoService,
     LoginService,
     CadastrarUsuarioService,
     EsqueciSenhaService,
 
     BancoService,
-    TipoSegmentoService,  
+    TipoSegmentoService,
     LeiouteService,
     LocalStorageService,
     ValorEsperadoBancoService,
-
 
     EventosService,
     AuthGuardService,
     ApiService,
     AuthService,
     JwtService,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true }
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,15 +1,15 @@
-<form class="form-signin text-center" method="post" novalidate="novalidate">
+<form class="form-signin text-center" method="post" novalidate="novalidate" [formGroup]="form">
   <img class="logo-login" src="../../assets/img/vbanking-logo-cinza.png" alt="VBanking" width="250" />
   <h1 class="h3 mb-3 font-weight-normal">Fazer login</h1>
   <label for="inputEmail" class="sr-only">E-mail</label>
-  <input type="email" [(ngModel)]="login.email" id="inputEmail" class="form-control" placeholder="E-mail" required name="Input.Email">
+  <input type="email" [(ngModel)]="login.email" formControlName="email" id="inputEmail" class="form-control" placeholder="E-mail" required name="Input.Email">
 
   <label for="inputPassword" class="sr-only">Senha</label>
-  <input [(ngModel)]="login.senha" type="password" class="form-control" placeholder="Senha" required name="Input.Password">
+  <input [(ngModel)]="login.senha" formControlName="senha" type="password" class="form-control" placeholder="Senha" required name="Input.Password">
 
   <span class="text-danger field-validation-valid" data-valmsg-for="Input.Password" data-valmsg-replace="true"></span>
   <span class="text-danger field-validation-valid" *ngIf="!usuarioEncontrado">Usuário/Senha incorreto(s).</span>
-  <button class="btn btn-lg btn-primary btn-block mb-3" type="submit" (click)="logarFake()">Entrar</button>
+  <button class="btn btn-lg btn-primary btn-block mb-3" type="submit" [disabled]="form.invalid" (click)="logar()">Entrar</button>
   <div class="options mb-3">
     <label>
       <a routerLink="/esqueci-senha">Esqueceu a senha?</a>

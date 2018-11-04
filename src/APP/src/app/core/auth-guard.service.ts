@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
+import { JwtService } from 'app/services/jwt.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, 
+              private jwtService: JwtService) { }
 
-  async canActivate(): Promise<boolean> {
-    let isLoggedIn = await localStorage.getItem("logado") === "1";
+  canActivate(): boolean {
+    let isLoggedIn = this.jwtService.getToken();
 
     if (isLoggedIn)
       return true; 

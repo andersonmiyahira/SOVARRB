@@ -49,6 +49,8 @@ import { DetalheValorEsperadoComponent } from './telas-adm/leioute/listar/modals
 import { ExcluirLayoutModalComponent } from './telas-adm/leioute/listar/modals/excluir/excluir-layout-modal.component';
 import { EditarLayoutModalComponent } from './telas-adm/leioute/listar/modals/editar/editar-layout-modal.component';
 import { DetalheValorEsperadoCadastroComponent } from './telas-adm/leioute/cadastrar/modals/detalhes-valor-esperado-cadastro/valor-esperado-cadastro-modal.component';
+import { AuthService } from './services/auth.service';
+import { JwtService } from './services/jwt.service';
 
 @NgModule({
   imports: [
@@ -121,7 +123,9 @@ import { DetalheValorEsperadoCadastroComponent } from './telas-adm/leioute/cadas
 
     EventosService,
     AuthGuardService,
-    ApiService
+    ApiService,
+    AuthService,
+    JwtService
   ],
   bootstrap: [AppComponent]
 })

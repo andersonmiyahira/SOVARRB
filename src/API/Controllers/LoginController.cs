@@ -40,7 +40,7 @@ namespace API.Controllers
             }
 
             UsuarioResponse usuarioValidoEncontrado = _usuarioAppService.EfetuarLogin(usuario);
-            if(usuarioValidoEncontrado == null) return Response("Invalido");
+            if(usuarioValidoEncontrado == null) return Response(new LoginResponse() { authenticated = false });
 
             ClaimsIdentity identity = new ClaimsIdentity(
                 new GenericIdentity(usuarioValidoEncontrado.IdUsuario.ToString(), "Login"),
@@ -71,7 +71,7 @@ namespace API.Controllers
             });
             var token = handler.WriteToken(securityToken);
 
-            var response = new
+            var response = new LoginResponse()
             {
                 authenticated = true,
                 created = dataCriacao.ToString("yyyy-MM-dd HH:mm:ss"),

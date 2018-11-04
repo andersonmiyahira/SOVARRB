@@ -203,14 +203,16 @@ namespace API
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseMvc();
-            app.UseAuthentication();
             app.UseCors(c =>
             {
                 c.AllowAnyHeader();
                 c.AllowAnyMethod();
                 c.AllowAnyOrigin();
             });
+
+            app.UseMvc();
+
+            app.UseAuthentication();
               
             app.UseStaticFiles();
 

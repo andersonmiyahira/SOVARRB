@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Inject, Injectable, OnInit } from '@angular/core';
 import { Observable, Observer } from 'rxjs/Rx';
@@ -14,6 +14,15 @@ export class ApiService {
 
   post(url: string, data: any): Observable<any> {
     return this.http.post(url, data)
+      .catch(error => {
+        //this.notificationToastr.error(error);
+        console.log('erros', error)
+        return Observable.throw(error);
+      });
+  }
+
+  postWithHttpOptions(url: string, data: any, httpHeaders: any): Observable<any> {
+    return this.http.post(url, data, httpHeaders)
       .catch(error => {
         //this.notificationToastr.error(error);
         console.log('erros', error)

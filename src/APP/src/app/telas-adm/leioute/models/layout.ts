@@ -11,6 +11,7 @@ export class Layout{
     posicaoAte: number;
     descricao: string;
     tipoCampoId: number;
+    tipoTransacaoId: number;
     tipoCampoDescricao: string;
     obrigatorio: boolean;
     valoresEsperados: Array<ValorEsperado>;

@@ -32,7 +32,13 @@ namespace Domain.Services
             var obj = _layoutRepository.ObterPorCodigo(model.IdLayout);
 
             obj.SetarDataAlteracao();
-            obj.AlterarDados(model.PosicaoDe, model.PosicaoAte, model.SegmentoId, model.TipoCampoId);
+
+            obj.AlterarDados(model.Descricao, 
+                             model.PosicaoDe, 
+                             model.PosicaoAte, 
+                             model.SegmentoId, 
+                             model.TipoCampoId, 
+                             model.Obrigatorio);
 
             _layoutRepository.Update(obj);
             _uow.Commit();

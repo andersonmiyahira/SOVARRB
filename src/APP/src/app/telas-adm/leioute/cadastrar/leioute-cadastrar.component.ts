@@ -13,6 +13,8 @@ import { Segmento } from '../../tipo-segmento/model/segmento';
 import { TipoSegmentoService } from '../../tipo-segmento/tipo-segmento.service';
 import { Router } from '@angular/router';
 import { DetalheValorEsperadoCadastroComponent } from './modals/detalhes-valor-esperado-cadastro/valor-esperado-cadastro-modal.component';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Layout } from '../models/layout';
 
 @Component({
   selector: 'app-leioute-cadastrar',
@@ -22,11 +24,9 @@ import { DetalheValorEsperadoCadastroComponent } from './modals/detalhes-valor-e
 export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
   @ViewChild('detalhesValorEsperado') public childComponentModal: DetalheValorEsperadoCadastroComponent;
 
+  public form: FormGroup;
   private abrirModalEvent$: Subscription;
   private abrirModalEditEvent$: Subscription;
-
-  cnabSelecionado?: number;
-  tipoRegistroSelecionado?: number;
 
   bancos: Array<Banco>;
   segmentos: Array<Segmento>;
@@ -35,6 +35,7 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
   data: LocalDataSource;
 
   listValorEsperado: boolean;
+  model: Layout;
 
   constructor(private leiouteService: LeiouteService,
     private importarArquivoService: ImportarArquivoService,
@@ -47,15 +48,57 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
     this.segmentos = new Array<Segmento>();
 
     this.listValorEsperado = true;
-    this.cnabSelecionado = 0;
-    this.tipoRegistroSelecionado = 0;
+    this.model = new Layout();
   }
 
   ngOnInit() {
 
     this.initSettings();
     this.obterBancos();
+    this.obterSegmentos();
     this.cadastrarEventoAbrirModal();
+    this.initFormControl();
+  }
+
+  initFormControl() {
+
+    this.form = new FormGroup({
+      banco: new FormControl(this.model.bancoId, [
+        Validators.required
+      ]),
+      cnab: new FormControl(this.model.tipoCNABId, [
+        Validators.required
+      ]),
+      tipoRegistro: new FormControl(this.model.tipoRegsitroId, [
+        Validators.required
+      ]),
+      tipoTransacao: new FormControl(this.model.tipoTransacaoId, [
+        Validators.required
+      ]),
+      segmento: new FormControl(this.model.segmentoId, []),
+      tipoRetorno: new FormControl(this.model.tipoBoletoId, [
+        Validators.required
+      ])
+    });
+  }
+
+  setValidacaoSegmento(add: boolean) {
+
+    this.form.get('segmento').clearValidators();
+    this.form.get('segmento').setValidators([]);
+    if (add) {
+      this.form.get('segmento').setValidators([Validators.required]);
+    }
+    this.form.get('segmento').updateValueAndValidity();
+  }
+
+  onChangeSelect($event) {
+
+    if (this.model.tipoCNABId == 1 && this.model.tipoRegsitroId == 2) {
+      this.setValidacaoSegmento(true);
+    } else {
+      this.setValidacaoSegmento(false);
+    }
   }
 
   ngOnDestroy(): void {

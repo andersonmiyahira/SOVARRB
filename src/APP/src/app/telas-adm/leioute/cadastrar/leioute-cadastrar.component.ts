@@ -121,17 +121,18 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
   }
 
   private cadastrarEventoAbrirModal() {
-    this.abrirModalEvent$ = EventosService.abriuModalValorEsperado.subscribe(() => {
-      this.abriModalValorEsperado();
+    this.abrirModalEvent$ = EventosService.abriuModalValorEsperado.subscribe(model => {
+      this.abriModalValorEsperado(model);
     });
 
-    this.abrirModalEditEvent$ = EventosService.abriuModalValorEsperadoEdit.subscribe(() => {
-      this.abriModalValorEsperadoEdit();
+    this.abrirModalEditEvent$ = EventosService.abriuModalValorEsperadoEdit.subscribe(model => {
+      this.abriModalValorEsperadoEdit(model);
     });
   }
 
   initSettings() {
     this.settings = {
+      noDataMessage: 'Nenhum registro encontrado',
       hideSubHeader: true,
       attr: {
         class: "table table-bordered table-striped"
@@ -143,14 +144,12 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
         inputClass: '',
         editButtonContent: 'Alterar',
         saveButtonContent: 'Salvar',
-        cancelButtonContent: 'Cancelar',
-        confirmSave: 'teste($event)'
+        cancelButtonContent: 'Cancelar'
       },
       delete: {
         deleteButtonContent: 'Excluir',
         confirmDelete: false,
       },
-      noDataMessage: 'Nenhum registro encontrado',
       columns: {
         posicaoDe: {
           title: 'Posição De', filter: false
@@ -161,15 +160,15 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
         descricao: {
           title: 'Descrição', filter: false
         },
-        tipoCampo: {
+        tipoCampoId: {
           title: 'Tipo do Campo', filter: false,
           valuePrepareFunction: (cell, row) => {
-            switch (row.tipoCampo) {
-              case "1": return "Numérico";
-              case "2": return "Alfanumérico";
-              case "3": return "Data(aaaammdd)";
-              case "4": return "Data(ddmmaa)";
-              case "5": return "Hora(ddmmaaaaa)";
+            switch (row.tipoCampoId) {
+              case 1: return "Numérico";
+              case 2: return "Alfanumérico";
+              case 3: return "Data(aaaammdd)";
+              case 4: return "Data(ddmmaa)";
+              case 5: return "Hora(ddmmaaaaa)";
             }
             return "";
           },
@@ -207,7 +206,11 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
           },
           editor: {
             type: 'custom',
-            component: ButtonEditComponent
+            component: ButtonEditComponent,
+            valuePrepareFunctio: (cell, row) => {
+              console.log('oi')
+              return `a`;
+          },
           }
         }
       }
@@ -216,38 +219,42 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
     this.data = new LocalDataSource();
   }
 
-  teste(evt) {
-    console.log(evt)
-  }
-
   salvarNovoLeioute() {
-    this.data.add({
-      posicaoDe: 0,
-      posicaoAte: 0,
-      descricao: '',
-      tipoCampo: "1",
-      obrigatorio: "2",
-      valorEsperado: '<a class="btn btn-primary" href="javascript:;" (click)="selecionarValorEsperado()">Selecionar</a>'
-    });
+
+    let objCopy = Object.assign({}, this.model);
+    objCopy.posicaoDe = 0;
+    objCopy.posicaoAte = 0;
+    objCopy.tipoCampoId = 1;
+    objCopy.descricao = "";
+    objCopy.obrigatorio = true;
+
+    this.data.add(objCopy);
     this.data.refresh();
   }
 
-  abriModalValorEsperado() {
-    debugger
+  abriModalValorEsperado(model) {
+
     this.childComponentModal.listValorEsperado = true;
-    this.childComponentModal.openModal();
+    this.childComponentModal.openModal(model, false);
   }
 
-  abriModalValorEsperadoEdit() {
+  abriModalValorEsperadoEdit(model) {
 
     this.childComponentModal.listValorEsperado = false;
-    this.childComponentModal.openModal();
+    this.childComponentModal.openModal(model, true);
   }
 
   voltar() {
 
     this.router.navigate(['layout']);
   }
+
+  salvarLeiouteConfigurado() {
+
+    console.log(this.data);
+  }
+
+  onEditConfirm(event) {
+
+  }
 }
-
-

@@ -10,15 +10,15 @@
         <div class="row">
           <div class="col-md-12" *ngIf="listValorEsperado">
             <ul>
-              <li>
-                01 - Remessa
+              <li *ngFor="let valorEsperado of valoresEsperadorPorBanco">
+                {{valorEsperado.descricao}} - {{valorEsperado.valor}}
               </li>
-              <li>
+              <!-- <li>
                 02 - Pedido de Baixa
               </li>
               <li>
                 04 - Concessão
-              </li>
+              </li> -->
             </ul>
           </div>
           <div class="col-md-12 lst-style" *ngIf="!listValorEsperado">

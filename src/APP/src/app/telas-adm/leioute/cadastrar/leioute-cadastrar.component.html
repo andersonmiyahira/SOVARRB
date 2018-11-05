@@ -58,7 +58,7 @@
       <button class="btn btn-left btn-info" type="button" (click)="voltar()">
         <i class="fas fa-chevron-left"></i> voltar
       </button>
-      <button type="submit" class="btn btn-primary" (click)="salvarNovoLeioute()" [disabled]="form.invalid">Salvar</button>
+      <button type="submit" class="btn btn-primary" (click)="salvarNovoLeioute()" [disabled]="form.invalid">Adicionar</button>
     </div>
   </div>
   <div class="card bg-light mb-3">
@@ -66,66 +66,10 @@
     <div class="card-body">
       <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
     </div>
+    <div class="card-footer text-muted text-right">
+      <button type="submit" class="btn btn-primary" (click)="salvarLeiouteConfigurado()">Salvar</button>
+    </div>
   </div>
 </div>
 
-
-
-<!-- <app-valor-esperado-cadastro-modal #detalhesValorEsperado></app-valor-esperado-cadastro-modal> -->
-
-<ng-template #detalhesValorEsperado let-c="close" let-d="dismiss">
-  <div class="modal-header bg-primary">
-    <h4 class="modal-title">Valor(es) Esperado(s)</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div>
-      <div class="row">
-        <div class="col-md-12" *ngIf="listValorEsperado">
-          <ul>
-            <li>
-              01 - Remessa
-            </li>
-            <li>
-              02 - Pedido de Baixa
-            </li>
-            <li>
-              04 - Concessão
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-12 lst-style" *ngIf="!listValorEsperado">
-          <ul>
-            <li>
-              <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                <input type="checkbox" class="custom-control-input" id="customControlInline1">
-                <label class="custom-control-label" for="customControlInline1">01 - Remessa</label>
-              </div>
-
-            </li>
-            <li>
-              <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                <input type="checkbox" class="custom-control-input" id="customControlInline2">
-                <label class="custom-control-label" for="customControlInline2">02 - Pedido de Baixa</label>
-              </div>
-
-            </li>
-            <li>
-              <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                <input type="checkbox" class="custom-control-input" id="customControlInline3">
-                <label class="custom-control-label" for="customControlInline3">04 - Concessão</label>
-              </div>
-
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="submit" *ngIf="!listValorEsperado" class="btn btn-primary btn-left" (click)="c('Close click')">Ok</button>
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
-  </div>
-</ng-template>
+<app-valor-esperado-cadastro-modal #detalhesValorEsperado></app-valor-esperado-cadastro-modal>

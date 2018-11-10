@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpErrorResponse } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -56,6 +56,7 @@ import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
 import { LoadScreenComponent } from './load-screen/load-screen.component';
 import { LoaderInterceptorService } from './shared/interceptors/load-screen.interceptor';
 import { LoaderService } from './load-screen/service/load-screen.service';
+import { ErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 
 @NgModule({
   imports: [
@@ -134,11 +135,8 @@ import { LoaderService } from './load-screen/service/load-screen.service';
     JwtService,
     LoaderService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LoaderInterceptorService,
-      multi: true
-    }
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

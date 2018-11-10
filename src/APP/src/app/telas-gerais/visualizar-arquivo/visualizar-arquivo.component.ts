@@ -128,13 +128,13 @@ export class VisualizarArquivoComponent implements OnInit {
   }
 
 
-  download(id: number){
+  download(id: number, nome: string){
     this.visualizarArquivoService
       .download(id)
-      .subscribe(data => { this.downloadFile(data, id); } );
+      .subscribe(data => { this.downloadFile(data, id, nome); } );
   }
 
-  downloadFile(data: any, id: number){
+  downloadFile(data: any, id: number, nome: string){
 
     var binary = atob(data.data)
     var array = new Uint8Array(binary.length)
@@ -146,7 +146,7 @@ export class VisualizarArquivoComponent implements OnInit {
     var a = document.createElement("a");
         document.body.appendChild(a);
         a.href = url;
-        a.download = "Arquivo" + id.toString() + ".txt";
+        a.download = nome;//"Arquivo" + id.toString() + ".txt";
         a.click();
   }
 }

@@ -100,7 +100,7 @@
                 <td>{{arquivo.banco.descricao}}</td>
                 <td>{{arquivo.ehValido ? "Sim" : "Não"}}</td>
                 <td style="text-align:center;">
-                  <button type="button" class="btn btn-primary btn-sm" download="mytextdocument" (click)="download(arquivo.idArquivo)" ngbTooltip="Download"
+                  <button type="button" class="btn btn-primary btn-sm" download="mytextdocument" (click)="download(arquivo.idArquivo, arquivo.nomeArquivoOriginal)" ngbTooltip="Download"
                     data-toggle="tooltip" data-placement="top">
                     <span class="fas fa-cloud-download-alt"></span>
                   </button>

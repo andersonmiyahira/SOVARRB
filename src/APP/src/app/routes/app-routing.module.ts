@@ -17,9 +17,9 @@ import { AcessoNegadoComponent } from 'app/acesso-negado/acesso-negado.component
 
 const routes: Routes = [
   //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: '', component: ImportarArquivoComponent, canActivate: [AuthGuardService] },
+  { path: '', component: LoginComponent, canActivate: [AuthGuardService] },
   { path: 'acesso-negado', component: AcessoNegadoComponent },
-  { path: 'importar-arquivo', component: ImportarArquivoComponent, canActivate: [AuthGuardService] },
+  { path: 'importar-arquivo', component: ImportarArquivoComponent},//, canActivate: [AuthGuardService] },
   { path: 'visualizar-arquivo', component: VisualizarArquivoComponent, canActivate: [AuthGuardService] },
   { path: 'cadastrar-usuario', component: CadastrarUsuarioComponent },
   { path: 'login', component: LoginComponent },

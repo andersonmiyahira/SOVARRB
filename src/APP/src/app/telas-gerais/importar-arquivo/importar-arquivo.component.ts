@@ -3,66 +3,66 @@ import { ImportarArquivoService } from './importar-arquivo.service';
 import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploader } from 'ng2-file-upload';
 import { ImportarArquivo } from './models/importar-arquivo';
-
-// const URL = '/api/';
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
+import { BancoService } from 'app/telas-adm/banco/banco.service';
+import { Banco } from 'app/telas-adm/banco/models/banco';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ETipoRegistro } from 'app/shared/enums/e-tipo-registro';
 
 @Component({
   selector: 'app-importar-arquivo',
   templateUrl: './importar-arquivo.component.html',
-  styleUrls: ['./importar-arquivo.component.css']
+  styleUrls: ['./importar-arquivo.component.css'],
+  providers : [ImportarArquivo]
 })
 export class ImportarArquivoComponent implements OnInit {
-  bancos: any;
-  cnabs: any;
+  
+  public uploader: FileUploader = new FileUploader({ url: '' });
+  public hasBaseDropZoneOver: boolean = false;
+  public hasAnotherDropZoneOver: boolean = false;
+  public form: FormGroup;
+  
+  bancos: Array<Banco>;
   importar: any;
+  model: ImportarArquivo;
 
   mensagens: any; 
 
   arquivosValidados: boolean;
   exibirResultado: number;
 
+  eTipoRegistro: ETipoRegistro;
+
   @ViewChild("fileInput") fileInput;
 
   constructor(private importarArquivoService: ImportarArquivoService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private bancoService: BancoService) {
     this.importar = {}; 
     this.arquivosValidados = false;
     this.mensagens = {};
     this.exibirResultado = 0;
+    this.model = new ImportarArquivo();
   }
 
   ngOnInit() {
+
     this.obterBancos();
-    this.obterCNAB();
-    this.obterResultadoValidacao(0);
+    //this.obterResultadoValidacao(0);
+    this.initFormGroup();
   }
-
-  // carregarErros(){
-  //     this.errors.push({ mensagem: "Erro! Posição 10 - Linha 100: formato de data errada", ehSucesso : false});
-  //     this.errors.push({ mensagem: "Erro! Posição 20 - Linha 100: formato de data errada", ehSucesso: false});   
-  //     this.errors.push({ mensagem: "Erro! Posição 30 - Linha 110: esperado valor numerico"});      
-  //     this.errors.push({ mensagem: "Sucesso! Posição 30 - Linha 110: OK",  ehSucesso: true}); 
-  // }
-
-  // carregarSucessos(){
-  //   this.sucessos.push({ tipo:"Detalhe", mensagem: "Posição 31 - Posição 35, Linha 111", ehSucesso: true}); 
-  //   this.sucessos.push({ tipo:"Detalhe", mensagem: "Posição 32 - Posição 40, Linha 112", ehSucesso: true}); 
-  // }
-
+  
   saveUpload(sucesso): void {
 
-    let model: ImportarArquivo = new ImportarArquivo();
-
+    this.model.fileToUpload = [];
     this.uploader.queue.forEach(element => {
-      model.fileToUpload.push(element.file.rawFile);
+      this.model.fileToUpload.push(element.file.rawFile);
     });
 
-    model.bancoId = 120;
-    model.tipoBoletoId = 1;
-    model.tipoCNABId = 1;
+    // this.model.bancoId = 120;
+    // this.model.tipoBoletoId = 1;
+    // this.model.tipoCNABId = 1;
 
-    this.importarArquivoService.upload(model)
+    this.importarArquivoService.upload(this.model)
       .subscribe(res => {
         this.uploader.queue.forEach(element => {
           element.isSuccess = true;
@@ -74,18 +74,11 @@ export class ImportarArquivoComponent implements OnInit {
   }
 
   obterBancos() {
-    this.importarArquivoService.obterBancos().subscribe(response => {
+    
+    this.bancoService.obterBancos().subscribe(response => {
       this.bancos = response;
-
-     
     });
-  }
-
-  obterCNAB() {
-    this.importarArquivoService.obterTipoCNAB().subscribe(response => {
-      this.cnabs = response;
-    });
-  }
+  } 
 
   obterResultadoValidacao(filter: number){
     this.importarArquivoService.obterResultadoValidacao(1).subscribe(response => {
@@ -115,13 +108,24 @@ export class ImportarArquivoComponent implements OnInit {
     });
   }
 
+  initFormGroup() {
+
+    this.form = new FormGroup({
+      banco: new FormControl(this.model.bancoId, [
+        Validators.required
+      ]),
+      cnab: new FormControl(this.model.tipoCNABId, [
+        Validators.required
+      ]),
+      tipoArquivo: new FormControl(this.model.tipoBoletoId, [
+        Validators.required
+      ]) 
+    });
+  }
+
   onExibirChange() {
     this.obterResultadoValidacao(this.exibirResultado);
   }
-
-  public uploader: FileUploader = new FileUploader({ url: URL });
-  public hasBaseDropZoneOver: boolean = false;
-  public hasAnotherDropZoneOver: boolean = false;
 
   public fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
@@ -129,5 +133,12 @@ export class ImportarArquivoComponent implements OnInit {
 
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
+  }
+
+  removerTodos() {
+
+    debugger
+    console.log(this.form)
+    this.uploader.clearQueue();
   }
 }

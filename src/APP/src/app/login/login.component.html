@@ -2,10 +2,12 @@
   <img class="logo-login" src="../../assets/img/vbanking-logo-cinza.png" alt="VBanking" width="250" />
   <h1 class="h3 mb-3 font-weight-normal">Fazer login</h1>
   <label for="inputEmail" class="sr-only">E-mail</label>
-  <input type="email" [(ngModel)]="login.email" formControlName="email" id="inputEmail" class="form-control" placeholder="E-mail" required name="Input.Email">
+  <input type="email" [(ngModel)]="login.email" formControlName="email" id="inputEmail" class="form-control"
+    placeholder="E-mail" required name="Input.Email">
 
   <label for="inputPassword" class="sr-only">Senha</label>
-  <input [(ngModel)]="login.senha" formControlName="senha" type="password" class="form-control" placeholder="Senha" required name="Input.Password">
+  <input [(ngModel)]="login.senha" formControlName="senha" type="password" class="form-control" placeholder="Senha"
+    required name="Input.Password">
 
   <span class="text-danger field-validation-valid" data-valmsg-for="Input.Password" data-valmsg-replace="true"></span>
   <span class="text-danger field-validation-valid" *ngIf="!usuarioEncontrado">Usuário/Senha incorreto(s).</span>
@@ -16,6 +18,12 @@
     </label>
     <label>
       <a routerLink="/cadastrar-usuario">Novo usuário</a>
+    </label>
+
+    <label>
+      <h3 style="margin-top:35px">
+        <a routerLink="/importar-arquivo">Validar Arquivo(s)</a>
+      </h3>
     </label>
   </div>
   <p class="mt-5 mb-3 text-muted">&copy; 2018</p>

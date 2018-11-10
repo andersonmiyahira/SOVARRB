@@ -4,6 +4,7 @@ import { ServiceBase } from 'app/shared/services/service-base';
 import { map } from 'rxjs/operators';
 
 import { Banco } from './models/banco';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class BancoService extends ServiceBase {
@@ -12,7 +13,7 @@ export class BancoService extends ServiceBase {
     super("banco");
   }
 
-  obterBancos() {
+  obterBancos(): Observable<any> {
 
     return this.apiService.get(this.urlAPI).pipe(
       map((res: any) => {

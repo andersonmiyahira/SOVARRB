@@ -29,7 +29,7 @@ export class DetalheValorEsperadoCadastroComponent implements OnInit {
   }
 
   openModal(model: any, edit: boolean) {
-    debugger
+
     if (model) {
       let filter = new ValorEsperado();
       filter.bancoId = parseInt(model.bancoId);

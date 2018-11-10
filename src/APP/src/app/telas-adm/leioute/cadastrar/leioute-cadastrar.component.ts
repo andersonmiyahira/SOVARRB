@@ -208,7 +208,7 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
             type: 'custom',
             component: ButtonEditComponent,
             valuePrepareFunctio: (cell, row) => {
-              console.log('oi')
+              //console.log('oi')
               return `a`;
           },
           }

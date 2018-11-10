@@ -1,6 +1,7 @@
 ﻿using API.ControllerBaseExtensions;
 using Application.AppService.Banco;
 using Application.ViewModel.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -17,6 +18,7 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("Importar")]
+        [AllowAnonymous]
         public IActionResult PostFile([FromForm] ImportarRequest request)
         {
             _arquivoAppService.ProcessarArquivo(request);

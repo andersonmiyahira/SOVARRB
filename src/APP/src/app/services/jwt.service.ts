@@ -7,14 +7,14 @@ export class JwtService {
   }
 
   getToken(): String {
-    return localStorage.getItem('jwtToken');
+    return localStorage.getItem('jwtTokenSovarrb');
   }
 
   saveToken(token: String) {
-    localStorage.setItem('jwtToken', token.toString());
+    localStorage.setItem('jwtTokenSovarrb', token.toString());
   }
 
   destroyToken() {
-    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('jwtTokenSovarrb');
   }
 }

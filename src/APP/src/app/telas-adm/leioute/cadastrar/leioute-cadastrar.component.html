@@ -64,7 +64,7 @@
   <div class="card bg-light mb-3">
     <div class="card-header">Lista de parâmetros de Layout</div>
     <div class="card-body">
-      <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
+      <ng2-smart-table [settings]="settings" [source]="data" (editConfirm)="onEditConfirm($event)"></ng2-smart-table>
     </div>
     <div class="card-footer text-muted text-right">
       <button type="submit" class="btn btn-primary" (click)="salvarLeiouteConfigurado()">Salvar</button>

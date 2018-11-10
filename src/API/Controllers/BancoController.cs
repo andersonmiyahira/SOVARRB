@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Authorize(Roles = "ADMIN")]
+    
     [Produces("application/json")]
     public class BancoController : ApiController
     {
@@ -18,6 +18,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Get()
         {
             var bancos = _bancoAppService.ObterTodosBancos();
@@ -25,19 +26,22 @@ namespace API.Controllers
         }
 
         [HttpGet("GetById")]
+        [AllowAnonymous]
         public IActionResult GetById(int id)
         {
             var bancos = _bancoAppService.ObterPorId(id);
             return Response(bancos);
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         public IActionResult Post([FromBody]BancoRequest banco)
         {
             var bancos = _bancoAppService.Salvar(banco);
             return Response(bancos);
-        } 
+        }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpDelete]
         public IActionResult Delete(int id)
         {

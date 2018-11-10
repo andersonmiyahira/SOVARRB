@@ -2,6 +2,7 @@
 using Application.AppService.Banco;
 using Application.ViewModel.Filters;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace API.Controllers
 {
@@ -20,6 +21,16 @@ namespace API.Controllers
         {
             var response = _arquivoAppService.ObterComFiltros(filter);
             return Response(response);
-        } 
+        }
+
+        [HttpGet("Download")]
+        public IActionResult Download(int id)
+        {
+            var fileBytes = _arquivoAppService.Download(id);
+            if (fileBytes == null)
+                return Response(HttpStatusCode.NotFound);
+
+            return Response(fileBytes);
+        }
     }
 }

@@ -23,6 +23,12 @@ namespace Application.AppService.Banco
             _mapper = mapper;
         }
 
+        public byte[] Download(int id)
+        {
+            var bin = _arquivoService.GetById(id).Binario;
+            return bin;
+        }
+
         public List<ArquivoResponse> ObterComFiltros(ArquivoFilter arquivoFilter)
         {
             var filters = _mapper.Map<Arquivo>(arquivoFilter);
@@ -34,6 +40,9 @@ namespace Application.AppService.Banco
         {
             var arquivos = CriarObjetoDominio(importarRequest);
 
+            if(importarRequest.UsuarioId != default(int))
+                _arquivoService.SalvarArquivos(arquivos);
+
             _arquivoService.ValidarArquivos(arquivos);
         }
 
@@ -43,8 +52,19 @@ namespace Application.AppService.Banco
             List<Arquivo> arquivos = new List<Arquivo>();
             foreach (var importacao in importarRequest.FormFiles)
             {
+                var arquivoBinario = FileHelper.ReadFileStream(importacao.OpenReadStream());
                 var linhas = TextoHelper.ObterLinhasDoArquivo(importacao.OpenReadStream());
-                arquivos.Add(new Arquivo(0, importarRequest.BancoId, importacao.FileName, importarRequest.TipoCNABId, importarRequest.TipoBoletoId, linhas));
+
+                var arquivo = new Arquivo(importarRequest.UsuarioId,
+                                         importarRequest.BancoId,
+                                         importacao.FileName,
+                                         importarRequest.TipoCNABId,
+                                         importarRequest.TipoBoletoId);
+
+                arquivo.SetarArquivoBinario(arquivoBinario);
+                arquivo.SetarLinhas(linhas);
+
+                arquivos.Add(arquivo);
             }
 
             return arquivos;

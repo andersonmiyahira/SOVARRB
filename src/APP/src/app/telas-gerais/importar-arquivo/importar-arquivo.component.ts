@@ -68,7 +68,7 @@ export class ImportarArquivoComponent implements OnInit {
           element.isSuccess = true;
         });
         //this.fileInput.nativeElement.value = "";
-        this.arquivosValidados = true;
+        //this.arquivosValidados = true;
         this.modalService.open(sucesso, { size: 'sm' });
     });
   }

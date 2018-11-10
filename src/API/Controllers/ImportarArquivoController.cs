@@ -3,6 +3,8 @@ using Application.AppService.Banco;
 using Application.ViewModel.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Net;
 
 namespace API.Controllers
 {
@@ -21,6 +23,8 @@ namespace API.Controllers
         [AllowAnonymous]
         public IActionResult PostFile([FromForm] ImportarRequest request)
         {
+            request.UsuarioId = Convert.ToInt32(StringUserId);
+
             _arquivoAppService.ProcessarArquivo(request);
             return Ok();
 
@@ -39,5 +43,7 @@ namespace API.Controllers
 
             //return Response(retorno);
         }
+ 
+       
     }
 }

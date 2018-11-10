@@ -29,5 +29,7 @@ namespace API.ControllerBaseExtensions
                 erros = ""
             });
         }
+
+        public string StringUserId => User.FindFirst("UserId")?.Value ?? "0";
     }
 }

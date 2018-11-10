@@ -126,4 +126,27 @@ export class VisualizarArquivoComponent implements OnInit {
   downloadArquivoBoletoPDF(){
     window.open(this.fileURL + "Boleto1.pdf", "_blank");
   }
+
+
+  download(id: number){
+    this.visualizarArquivoService
+      .download(id)
+      .subscribe(data => { this.downloadFile(data, id); } );
+  }
+
+  downloadFile(data: any, id: number){
+
+    var binary = atob(data.data)
+    var array = new Uint8Array(binary.length)
+    for( var i = 0; i < binary.length; i++ ) { array[i] = binary.charCodeAt(i) }
+    var blob = new Blob([array])
+
+    var url= window.URL.createObjectURL(blob);
+
+    var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.href = url;
+        a.download = "Arquivo" + id.toString() + ".txt";
+        a.click();
+  }
 }

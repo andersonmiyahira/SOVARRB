@@ -2,6 +2,7 @@
 using Domain.Enums;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
+using Domain.Interfaces.Uow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,20 +14,33 @@ namespace Domain.Services
         private readonly IArquivoRepository _arquivoRepository;
         private readonly ILogArquivoRepository _logArquivoRepository;
         private readonly ILayoutRepository _layoutRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public ArquivoService(IArquivoRepository arquivoRepository,
                               ILogArquivoRepository logArquivoRepository,
-                              ILayoutRepository layoutRepository) : base(arquivoRepository)
+                              ILayoutRepository layoutRepository,
+                              IUnitOfWork unitOfWork) : base(arquivoRepository)
         {
             _arquivoRepository = arquivoRepository;
             _layoutRepository = layoutRepository;
             _logArquivoRepository = logArquivoRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public List<Arquivo> ObterComFiltros(Arquivo filtros, DateTime de, DateTime ate)
         {
             return _arquivoRepository.ObterComFiltros(filtros, de, ate)
                                      .ToList();
+        }
+
+        public void SalvarArquivos(List<Arquivo> arquivos)
+        {
+            foreach (var arquivo in arquivos)
+            {
+                _arquivoRepository.Add(arquivo);
+            }
+
+            _unitOfWork.Commit();
         }
 
         public void ValidarArquivos(List<Arquivo> arquivos)

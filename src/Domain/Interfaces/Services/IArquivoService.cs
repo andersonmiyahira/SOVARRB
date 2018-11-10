@@ -7,6 +7,7 @@ namespace Domain.Interfaces.Services
     public interface IArquivoService : IServiceBase<Arquivo>
     {
         void ValidarArquivos(List<Arquivo> arquivos);
+        void SalvarArquivos(List<Arquivo> arquivos);
         List<Arquivo> ObterComFiltros(Arquivo filtros, DateTime de, DateTime ate);
     }
 }

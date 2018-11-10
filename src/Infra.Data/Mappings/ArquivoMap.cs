@@ -48,6 +48,11 @@ namespace Infra.Data.Mappings
                 .HasColumnName("DataAlteracao")
                 .IsRequired();
 
+
+            builder.Property(m => m.Binario)
+                .HasColumnName("Binario")
+                .IsRequired();
+
             builder
                  .HasOne(x => x.Banco);
 

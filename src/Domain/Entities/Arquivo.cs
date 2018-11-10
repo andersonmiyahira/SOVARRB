@@ -11,14 +11,16 @@ namespace Domain.Entities
 
         }
 
-        public Arquivo(int usuarioId, int bancoId, string nomeArquivoOriginal, int tipoCNABId, int tipoBoletoId, List<string> linhasArquivo)
+        public Arquivo(int usuarioId, int bancoId, string nomeArquivoOriginal, int tipoCNABId, int tipoBoletoId)
         {
             UsuarioId = usuarioId;
             BancoId = bancoId;
             NomeArquivoOriginal = nomeArquivoOriginal;
             TipoCNABId = tipoCNABId;
             TipoBoletoId = tipoBoletoId;
-            LinhasArquivo = linhasArquivo;
+            DataCadastro = DateTime.Now;
+            DataAlteracao = DateTime.Now;
+            NomeArquivoGerado = Guid.NewGuid().ToString() + ".txt";
         }
 
         public Arquivo(int bancoId, int tipoCNABId, int tipoBoletoId)
@@ -38,10 +40,21 @@ namespace Domain.Entities
         public bool EhValido { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public DateTime? DataAlteracao { get; private set; }
+        public byte[] Binario { get; private set; }
 
         public Banco Banco { get; private set; }
 
+        public void SetarArquivoBinario(byte[] binario)
+        {
+            Binario = binario;
+        }
+
+        public void SetarLinhas(List<string> linhas)
+        {
+            LinhasArquivo = linhas;
+        }
+
         [NotMapped]
-        public List<string> LinhasArquivo { get; set; }
+        public List<string> LinhasArquivo { get; private set; }
     }
 }

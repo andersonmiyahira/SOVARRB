@@ -10,5 +10,6 @@ namespace Application.AppService.Banco
     {
         void ProcessarArquivo(ImportarRequest importarRequest);
         List<ArquivoResponse> ObterComFiltros(ArquivoFilter arquivoFilter);
+        byte[] Download(int id);
     }
 }

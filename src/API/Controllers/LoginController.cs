@@ -50,6 +50,7 @@ namespace API.Controllers
                 }
             );
 
+            Claim claimUserId = new Claim("UserId", usuarioValidoEncontrado.IdUsuario.ToString());
             Claim claimNome = new Claim(ClaimTypes.Name, usuarioValidoEncontrado.Nome);
             Claim claimEhAdm = new Claim(ClaimTypes.Role, usuarioValidoEncontrado.EhAdministrador ? "ADMIN" : "");
 
@@ -60,6 +61,7 @@ namespace API.Controllers
             }
             Claim claimMenu = new Claim("toolsAccess", menu);
 
+            identity.AddClaim(claimUserId);
             identity.AddClaim(claimNome);
             identity.AddClaim(claimEhAdm);
             identity.AddClaim(claimMenu);

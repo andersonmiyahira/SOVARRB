@@ -35,7 +35,7 @@ namespace Infra.Data.Repositories
                          .Include(_ => _.Layout)
                             .ThenInclude(_ => _.LayoutValoresEsperados)
                                 .ThenInclude(_ => _.ValorEsperado)
-                         .Where(_ => arquivoId == 0 || _.ArquivoId == arquivoId)
+                         .Where(_ =>_.ArquivoId == arquivoId)
                          .OrderBy(_ => _.Layout.TipoRegistroId)
                          .ThenBy(_ => _.Linha)
                          .ThenBy(_ => _.PosicaoDe);

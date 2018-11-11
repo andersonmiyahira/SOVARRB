@@ -7,7 +7,7 @@ namespace Application.Helpers
 {
     public static class FileHelper
     {
-        public static byte[] ReadFileStream(Stream input)
+        public static byte[] ObterBytesPorStream(Stream input)
         {
             using (MemoryStream ms = new MemoryStream())
             {

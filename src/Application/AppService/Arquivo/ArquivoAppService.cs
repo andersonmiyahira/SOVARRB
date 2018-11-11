@@ -52,7 +52,7 @@ namespace Application.AppService.Banco
             List<Arquivo> arquivos = new List<Arquivo>();
             foreach (var importacao in importarRequest.FormFiles)
             {
-                var arquivoBinario = FileHelper.ReadFileStream(importacao.OpenReadStream());
+                var arquivoBinario = FileHelper.ObterBytesPorStream(importacao.OpenReadStream());
                 var linhas = TextoHelper.ObterLinhasDoArquivo(importacao.OpenReadStream());
 
                 var arquivo = new Arquivo(importarRequest.UsuarioId,

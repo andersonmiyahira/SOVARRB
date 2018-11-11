@@ -56,7 +56,7 @@ import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
 import { LoadScreenComponent } from './load-screen/load-screen.component';
 import { LoaderInterceptorService } from './shared/interceptors/load-screen.interceptor';
 import { LoaderService } from './load-screen/service/load-screen.service';
-import { ErrorInterceptor } from './shared/interceptors/http-error.interceptor';
+import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 
 @NgModule({
   imports: [
@@ -135,8 +135,8 @@ import { ErrorInterceptor } from './shared/interceptors/http-error.interceptor';
     JwtService,
     LoaderService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

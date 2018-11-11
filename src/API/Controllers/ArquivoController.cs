@@ -2,6 +2,7 @@
 using Application.AppService.Banco;
 using Application.ViewModel.Filters;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Net;
 
 namespace API.Controllers
@@ -18,7 +19,9 @@ namespace API.Controllers
 
         [HttpGet]
         public IActionResult GetByFilters(ArquivoFilter filter)
-        {
+        { 
+            if(!EhAdm) filter.UsuarioId = IdUsuarioLogado;
+
             var response = _arquivoAppService.ObterComFiltros(filter);
             return Response(response);
         }

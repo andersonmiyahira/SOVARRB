@@ -46,11 +46,13 @@ namespace API.Controllers
                 new GenericIdentity(usuarioValidoEncontrado.IdUsuario.ToString(), "Login"),
                 new[] { 
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                        new Claim(JwtRegisteredClaimNames.UniqueName, usuarioValidoEncontrado.IdUsuario.ToString())
+                        new Claim(JwtRegisteredClaimNames.UniqueName, usuarioValidoEncontrado.Nome + usuarioValidoEncontrado.IdUsuario.ToString())
                 }
             );
 
             Claim claimUserId = new Claim("UserId", usuarioValidoEncontrado.IdUsuario.ToString());
+            Claim claimAdm = new Claim("EhAdm", usuarioValidoEncontrado.EhAdministrador.ToString());
+
             Claim claimNome = new Claim(ClaimTypes.Name, usuarioValidoEncontrado.Nome);
             Claim claimEhAdm = new Claim(ClaimTypes.Role, usuarioValidoEncontrado.EhAdministrador ? "ADMIN" : "");
 
@@ -65,6 +67,7 @@ namespace API.Controllers
             identity.AddClaim(claimNome);
             identity.AddClaim(claimEhAdm);
             identity.AddClaim(claimMenu);
+            identity.AddClaim(claimAdm);
 
             DateTime dataCriacao = DateTime.Now;
             DateTime dataExpiracao = dataCriacao + TimeSpan.FromSeconds(_tokenConfigurations.Seconds);

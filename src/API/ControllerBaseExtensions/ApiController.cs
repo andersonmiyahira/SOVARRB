@@ -30,6 +30,23 @@ namespace API.ControllerBaseExtensions
             });
         }
 
-        public string StringUserId => User.FindFirst("UserId")?.Value ?? "0";
+        private string StringUserId => User.FindFirst("UserId")?.Value ?? "0";
+        private string Admin => User.FindFirst(type: "EhAdm")?.Value;
+
+        public bool EhAdm {
+            get
+            {
+                return bool.Parse(Admin);
+            }
+        }
+
+        public int IdUsuarioLogado {
+            get
+            {
+                if(!string.IsNullOrEmpty(StringUserId))
+                    return int.Parse(StringUserId);
+                return 0;
+            }
+        }
     }
 }

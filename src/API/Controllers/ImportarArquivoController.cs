@@ -23,7 +23,7 @@ namespace API.Controllers
         [AllowAnonymous]
         public IActionResult PostFile([FromForm] ImportarRequest request)
         {
-            request.UsuarioId = Convert.ToInt32(StringUserId);
+            request.UsuarioId = IdUsuarioLogado;
 
             _arquivoAppService.ProcessarArquivo(request);
             return Ok();

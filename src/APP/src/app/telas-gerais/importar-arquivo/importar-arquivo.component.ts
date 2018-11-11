@@ -137,8 +137,6 @@ export class ImportarArquivoComponent implements OnInit {
 
   removerTodos() {
 
-    debugger
-    console.log(this.form)
     this.uploader.clearQueue();
   }
 }

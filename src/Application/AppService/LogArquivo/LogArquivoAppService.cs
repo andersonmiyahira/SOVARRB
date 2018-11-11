@@ -24,14 +24,20 @@ namespace Application.AppService.LogArquivo
         {
             var filters = _mapper.Map<Domain.Entities.LogArquivo>(filter);
             var response = _logArquivoService.ObterPorFiltro(filters)
-                                     .ProjectTo<LogArquivoResponse>()
-                                     .ToList();
+                                             .ProjectTo<LogArquivoResponse>()
+                                             .ToList();
             return response;
         }
 
         public LogArquivoResponse ObterPorCodigo(int id)
         {
             return _mapper.Map<LogArquivoResponse>(_logArquivoService.ObterPorCodigo(id));
-        } 
+        }
+
+        public List<ResultadoProcessamentoResponse> ObterResultados(int arquivoId)
+        {
+            var response = _mapper.Map<List<ResultadoProcessamentoResponse>>(_logArquivoService.ObterResultados(arquivoId)); 
+            return response;
+        }
     }
 }

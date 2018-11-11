@@ -18,6 +18,7 @@ namespace Application.AutoMapper
             Layout();
             Arquivo();
             LogArquivo();
+            LogArquivoResultado();
         }
 
         private void ValorEsperado()
@@ -46,6 +47,12 @@ namespace Application.AutoMapper
         private void LogArquivo()
         {
             CreateMap<LogArquivo, LogArquivoResponse>();             
+        }
+
+        private void LogArquivoResultado()
+        {
+            CreateMap<LogArquivo, ResultadoProcessamentoResponse>()
+                 .ForMember(x => x.Mensagem, opt => opt.MapFrom(src => src.MensagemFormatada)); 
         }
     }
 }

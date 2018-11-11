@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
@@ -22,6 +23,13 @@ namespace Domain.Services
         public IQueryable<LogArquivo> ObterPorFiltro(LogArquivo filters)
         {
             return _logArquivoRepository.ObterPorFiltro(filters);
+        }
+
+        public List<LogArquivo> ObterResultados(int arquivoId)
+        {
+            var response = _logArquivoRepository.ObterResultado(arquivoId)
+                                                .ToList();
+            return response;
         }
     }
 }

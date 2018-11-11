@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Domain.Entities
 {
+    //Entity
     public partial class LogArquivo
     {
         public LogArquivo()
@@ -39,10 +41,38 @@ namespace Domain.Entities
 
     }
 
-    //filter
+    //Filter
     public partial class LogArquivo
     {
         [NotMapped]
         public bool? EhValidoFilter { get; private set; }
+    }
+
+    //Response
+    public partial class LogArquivo
+    {
+        [NotMapped]
+        public int Tipo
+        {
+            get
+            {
+                return Layout.TipoRegistroId;
+            }
+        }
+
+        [NotMapped]
+        public string MensagemFormatada
+        {
+            get
+            {
+                var valoresEsperados = string.Empty;
+                if(Layout.LayoutValoresEsperados.Any())
+                    valoresEsperados = string.Join(",", Layout.LayoutValoresEsperados.Select(_ => _.ValorEsperado.Descricao));
+
+                if (EhValido)
+                    return $"Linha {Linha} - OK";
+                return $"Linha {Linha}, Posição {PosicaoDe} - Posição {PosicaoAte}, Esperado {valoresEsperados} - Encontrado: {Mensagem}";
+            }
+        }
     }
 }

@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { environment } from 'environments/environment';
 import { ApiService } from 'app/services/api.service';
 import { ImportarArquivo } from './models/importar-arquivo';
+import { ServiceBase } from 'app/shared/services/service-base';
 
 @Injectable()
-export class ImportarArquivoService {
+export class ImportarArquivoService extends ServiceBase {
   
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private apiService: ApiService) {
+    super("Arquivo");
   }
 
   upload(model: ImportarArquivo): Observable<any> {
@@ -30,9 +33,10 @@ export class ImportarArquivoService {
   } 
 
   obterResultadoValidacao(id: number): any {
-    return this.http.get<any[]>("http://localhost:52854/api/resultadoValidacao")
-    .pipe(
-      tap(()=>{})
-    );
+     const url = `${environment.urlWebAPI}LogArquivo/GetResultados?ArquivoId=`+id;
+     return this.apiService.get(url).pipe(
+      map((res: any) => {
+        return <any[]>res.data;
+      }));
   }
 }

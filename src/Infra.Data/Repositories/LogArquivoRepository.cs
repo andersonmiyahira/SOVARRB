@@ -25,7 +25,20 @@ namespace Infra.Data.Repositories
         {
             return _dbSet.Include(_ => _.Arquivo)
                          .Include(_ => _.Layout)
-                         .Where(_ => !filters.EhValidoFilter.HasValue || _.EhValido == filters.EhValidoFilter);
+                         .Where(_ => !filters.EhValidoFilter.HasValue || _.EhValido == filters.EhValidoFilter)
+                         .Where(_ => filters.ArquivoId == 0 || _.ArquivoId == filters.ArquivoId);
+        }
+
+        public IQueryable<LogArquivo> ObterResultado(int arquivoId)
+        {
+            return _dbSet.Include(_ => _.Arquivo)
+                         .Include(_ => _.Layout)
+                            .ThenInclude(_ => _.LayoutValoresEsperados)
+                                .ThenInclude(_ => _.ValorEsperado)
+                         .Where(_ => arquivoId == 0 || _.ArquivoId == arquivoId)
+                         .OrderBy(_ => _.Layout.TipoRegistroId)
+                         .ThenBy(_ => _.Linha)
+                         .ThenBy(_ => _.PosicaoDe);
         }
     }
 }

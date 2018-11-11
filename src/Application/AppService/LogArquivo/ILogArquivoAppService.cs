@@ -8,6 +8,7 @@ namespace Application.AppService.LogArquivo
     public interface ILogArquivoAppService : IAppServiceBase<Domain.Entities.LogArquivo>
     {
         List<LogArquivoResponse> ObterPorFiltro(LogArquivoFilter filter);
+        List<ResultadoProcessamentoResponse> ObterResultados(int arquivoId);
         LogArquivoResponse ObterPorCodigo(int id);
     }
 }

@@ -22,6 +22,13 @@ namespace API.Controllers
             return Response(logArquivo);
         }
 
+        [HttpGet("GetResultados")]
+        public IActionResult GetResultados(int arquivoId)
+        {
+            var logArquivo = _logArquivoAppService.ObterResultados(arquivoId);
+            return Response(logArquivo);
+        }
+
         [HttpGet("GetById")]
         public IActionResult GetById(int id)
         {

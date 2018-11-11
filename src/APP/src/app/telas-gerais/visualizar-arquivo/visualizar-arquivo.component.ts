@@ -44,9 +44,7 @@ export class VisualizarArquivoComponent implements OnInit {
 
   ngOnInit() {
     
-    this.obterResultadoValidacao(); 
     this.obterBancos();
-    this.obterValoresEsperados();
   }
 
   obterArquivos() {
@@ -55,6 +53,12 @@ export class VisualizarArquivoComponent implements OnInit {
 
     this.visualizarArquivoService.obterArquivosPorFiltros(this.filter).subscribe(res => {
       this.arquivos = res;
+    });
+  }
+  
+  obterBancos() {
+    this.bancoService.obterBancos().subscribe(response => {
+      this.bancos = response;
     });
   }
 
@@ -80,14 +84,9 @@ export class VisualizarArquivoComponent implements OnInit {
     ]
   }
 
-  obterBancos() {
-    this.bancoService.obterBancos().subscribe(response => {
-      this.bancos = response;
-    });
-  }
  
-  obterResultadoValidacao() {
-    this.importarArquivoService.obterResultadoValidacao(1).subscribe(response => {
+  obterResultadoValidacao(IdArquivo) {
+    this.importarArquivoService.obterResultadoValidacao(IdArquivo).subscribe(response => {
       this.mensagens.header = {};
       this.mensagens.header.sucesso = [];
       this.mensagens.header.erro = [];
@@ -111,22 +110,19 @@ export class VisualizarArquivoComponent implements OnInit {
     });
   }
 
-  openLg(content) {
-    this.modalService.open(content, { size: 'lg' });
+  openResultadoValidacao(result, arquivoId) {
+
+    this.obterResultadoValidacao(arquivoId);
+    this.modalService.open(result, { size: 'lg' });
   }
 
   openBoletao(Boletao) {
     this.modalService.open(Boletao, { size: 'sm' });
-  }
-
-  downloadArquivo() {
-    window.open(this.fileURL + "REM01.txt", "_blank");
-  }
+  } 
 
   downloadArquivoBoletoPDF(){
     window.open(this.fileURL + "Boleto1.pdf", "_blank");
   }
-
 
   download(id: number, nome: string){
     this.visualizarArquivoService

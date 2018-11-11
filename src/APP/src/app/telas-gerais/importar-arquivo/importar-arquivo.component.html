@@ -1,6 +1,6 @@
 <div class="container">
   <h2>Validar Arquivos</h2>
-  <form  method="post" action="/" novalidate="novalidate" [formGroup]="form">
+  <form method="post" action="/" novalidate="novalidate" [formGroup]="form">
     <div class="card bg-light mb-3">
       <div class="card-body">
         <div class="row">
@@ -95,7 +95,7 @@
                   </tr>
                 </tbody>
               </table>
-            </div> 
+            </div>
           </div>
 
           <div class="col-md-12 no-p">
@@ -120,32 +120,35 @@
                 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
                   <ngb-panel title="REM01.txt">
                     <ng-template ngbPanelContent>
-                      <div class="list-alerts">
+                      <div *ngIf="mensagens.resultado.length <= 0">
+                        <label>Sem resultados para o arquivo</label>
+                      </div>
+                      <div class="list-alerts" *ngIf="mensagens.resultado.length > 0">
                         <ul>
                           <li>
                             <h3>Header:</h3>
-                            <div class="container-errors" *ngIf="mensagens.header.erro.length > 0">
+                            <div class="container-errors" *ngIf="mensagens.headerErro.length > 0">
                               <div class="errors">
                                 <h6>
-                                  Foram encontradas ({{mensagens.header.erro.length}}) falhas no arquivo enviado.
+                                  Foram encontradas ({{mensagens.headerErro.length}}) falhas no arquivo enviado.
                                 </h6>
-                                <hr *ngIf="mensagens.header.erro && mensagens.header.erro.length > 0">
-                                <ul *ngIf="mensagens.header.erro && mensagens.header.erro.length > 0" style="color: red">
-                                  <li *ngFor="let erros of mensagens.header.erro">
+                                <hr *ngIf="mensagens.headerErro && mensagens.headerErro.length > 0">
+                                <ul *ngIf="mensagens.headerErro && mensagens.headerErro.length > 0" style="color: red">
+                                  <li *ngFor="let erros of mensagens.headerErro">
                                     {{erros.mensagem}}
                                   </li>
                                 </ul>
                               </div>
                             </div>
-                            <div class="container-sucesso" *ngIf="mensagens.header.sucesso.length > 0">
+                            <div class="container-sucesso" *ngIf="mensagens.headerSucesso.length > 0">
                               <div class="sucesso">
                                 <h6>
-                                  Foram encontradas ({{mensagens.header.sucesso.length}}) linhas válidas no arquivo
+                                  Foram encontradas ({{mensagens.headerSucesso.length}}) linhas válidas no arquivo
                                   enviado.
                                 </h6>
-                                <hr *ngIf="mensagens.header.sucesso && mensagens.header.sucesso.length > 0">
-                                <ul *ngIf="mensagens.header.sucesso && mensagens.header.sucesso.length > 0" style="color: green">
-                                  <li *ngFor="let sucesso of mensagens.header.sucesso">
+                                <hr *ngIf="mensagens.headerSucesso && mensagens.headerSucesso.length > 0">
+                                <ul *ngIf="mensagens.headerSucesso && mensagens.headerSucesso.length > 0" style="color: green">
+                                  <li *ngFor="let sucesso of mensagens.headerSucesso">
                                     {{sucesso.mensagem}}
                                   </li>
                                 </ul>
@@ -154,28 +157,28 @@
                           </li>
                           <li>
                             <h3>Detalhes:</h3>
-                            <div class="container-errors" *ngIf="mensagens.detalhe.erro.length > 0">
+                            <div class="container-errors" *ngIf="mensagens.detalheErro.length > 0">
                               <div class="errors">
                                 <h6>
-                                  Foram encontradas ({{mensagens.detalhe.erro.length}}) falhas no arquivo enviado.
+                                  Foram encontradas ({{mensagens.detalheErro.length}}) falhas no arquivo enviado.
                                 </h6>
-                                <hr *ngIf="mensagens.detalhe.erro && mensagens.detalhe.erro.length > 0">
-                                <ul *ngIf="mensagens.detalhe.erro && mensagens.detalhe.erro.length > 0" style="color: red">
-                                  <li *ngFor="let error of mensagens.detalhe.erro">
+                                <hr *ngIf="mensagens.detalheErro && mensagens.detalheErro.length > 0">
+                                <ul *ngIf="mensagens.detalheErro && mensagens.detalheErro.length > 0" style="color: red">
+                                  <li *ngFor="let error of mensagens.detalheErro">
                                     {{error.mensagem}}
                                   </li>
                                 </ul>
                               </div>
                             </div>
-                            <div class="container-sucesso" *ngIf="mensagens.detalhe.sucesso.length > 0">
+                            <div class="container-sucesso" *ngIf="mensagens.detalheSucesso.length > 0">
                               <div class="sucesso">
                                 <h6>
-                                  Foram encontradas ({{mensagens.detalhe.sucesso.length}}) linhas válidas no arquivo
+                                  Foram encontradas ({{ mensagens.detalheSucesso.length}}) linhas válidas no arquivo
                                   enviado.
                                 </h6>
-                                <hr *ngIf="mensagens.detalhe.sucesso && mensagens.detalhe.sucesso.length > 0">
-                                <ul *ngIf="mensagens.detalhe.sucesso && mensagens.detalhe.sucesso.length > 0" style="color: green">
-                                  <li *ngFor="let sucesso of mensagens.detalhe.sucesso">
+                                <hr *ngIf="mensagens.detalheSucesso &&  mensagens.detalheSucesso.length > 0">
+                                <ul *ngIf="mensagens.detalheSucesso && mensagens.detalheSucesso.length > 0" style="color: green">
+                                  <li *ngFor="let sucesso of mensagens.detalheSucesso">
                                     {{sucesso.mensagem}}
                                   </li>
                                 </ul>
@@ -184,28 +187,28 @@
                           </li>
                           <li>
                             <h3>Trailer:</h3>
-                            <div class="container-errors" *ngIf="mensagens.trailer.erro.length > 0">
+                            <div class="container-errors" *ngIf="mensagens.trailerErro.length > 0">
                               <div class="errors">
                                 <h6>
-                                  Foram encontradas ({{mensagens.trailer.erro.length}}) falhas no arquivo enviado.
+                                  Foram encontradas ({{mensagens.trailerErro.length}}) falhas no arquivo enviado.
                                 </h6>
-                                <hr *ngIf="mensagens.trailer.erro && mensagens.trailer.erro.length > 0">
-                                <ul *ngIf="mensagens.trailer.erro && mensagens.trailer.erro.length > 0" style="color: red">
-                                  <li *ngFor="let error of mensagens.trailer.erro">
+                                <hr *ngIf="mensagens.trailerErro && mensagens.trailerErro.length > 0">
+                                <ul *ngIf="mensagens.trailerErro && mensagens.trailerErro.length > 0" style="color: red">
+                                  <li *ngFor="let error of mensagens.trailerErro">
                                     {{error.mensagem}}
                                   </li>
                                 </ul>
                               </div>
                             </div>
-                            <div class="container-sucesso" *ngIf="mensagens.trailer.sucesso.length > 0">
+                            <div class="container-sucesso" *ngIf="mensagens.trailerSucesso.length > 0">
                               <div class="sucesso">
                                 <h6>
-                                  Foram encontradas ({{mensagens.trailer.sucesso.length}}) linhas válidas no arquivo
+                                  Foram encontradas ({{mensagens.trailerSucesso.length}}) linhas válidas no arquivo
                                   enviado.
                                 </h6>
-                                <hr *ngIf="mensagens.trailer.sucesso && mensagens.trailer.sucesso.length > 0">
-                                <ul *ngIf="mensagens.trailer.sucesso  && mensagens.trailer.sucesso.length > 0" style="color: green">
-                                  <li *ngFor="let sucesso of mensagens.trailer.sucesso">
+                                <hr *ngIf="mensagens.trailerSucesso && mensagens.trailerSucesso.length > 0">
+                                <ul *ngIf="mensagens.trailerSucesso && mensagens.trailerSucesso.length > 0" style="color: green">
+                                  <li *ngFor="let sucesso of mensagens.trailerSucesso">
                                     {{sucesso.mensagem}}
                                   </li>
                                 </ul>

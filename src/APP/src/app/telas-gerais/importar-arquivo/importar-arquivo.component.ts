@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ImportarArquivoService } from './importar-arquivo.service';
-import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploader } from 'ng2-file-upload';
 import { ImportarArquivo } from './models/importar-arquivo';
 import { BancoService } from 'app/telas-adm/banco/banco.service';
@@ -47,7 +47,6 @@ export class ImportarArquivoComponent implements OnInit {
   ngOnInit() {
 
     this.obterBancos();
-    //this.obterResultadoValidacao(0);
     this.initFormGroup();
   }
   
@@ -56,11 +55,7 @@ export class ImportarArquivoComponent implements OnInit {
     this.model.fileToUpload = [];
     this.uploader.queue.forEach(element => {
       this.model.fileToUpload.push(element.file.rawFile);
-    });
-
-    // this.model.bancoId = 120;
-    // this.model.tipoBoletoId = 1;
-    // this.model.tipoCNABId = 1;
+    }); 
 
     this.importarArquivoService.upload(this.model)
       .subscribe(res => {

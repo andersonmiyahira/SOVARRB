@@ -7,6 +7,7 @@ import { BancoService } from '../../telas-adm/banco/banco.service';
 import { Banco } from 'app/telas-adm/banco/models/banco';
 import { VisualizarArquivo } from './models/visualizar-arquivo';
 import * as _moment from 'moment';
+import { ResultadoProcessadoResponse } from './models/log-arquivo';
 
 @Component({
   selector: 'app-visualizar-arquivo',
@@ -32,14 +33,14 @@ export class VisualizarArquivoComponent implements OnInit {
 
   arquivos: Array<VisualizarArquivo>;
   bancos: Array<Banco>;
-  mensagens: any;
+  mensagens: ResultadoProcessadoResponse;
 
   constructor(private visualizarArquivoService: VisualizarArquivoService,
     private importarArquivoService: ImportarArquivoService,
     private bancoService: BancoService,
     private modalService: NgbModal) {
-    this.mensagens = {};
     this.filter = new VisualizarArquivo();
+    this.mensagens = new ResultadoProcessadoResponse();
   }
 
   ngOnInit() {
@@ -87,26 +88,7 @@ export class VisualizarArquivoComponent implements OnInit {
  
   obterResultadoValidacao(IdArquivo) {
     this.importarArquivoService.obterResultadoValidacao(IdArquivo).subscribe(response => {
-      this.mensagens.header = {};
-      this.mensagens.header.sucesso = [];
-      this.mensagens.header.erro = [];
-
-      this.mensagens.detalhe = {};
-      this.mensagens.detalhe.sucesso = [];
-      this.mensagens.detalhe.erro = [];
-
-      this.mensagens.trailer = {};
-      this.mensagens.trailer.sucesso = [];
-      this.mensagens.trailer.erro = [];
-
-      this.mensagens.header.sucesso = response.filter(x => x["tipo"] == 1 && x["ehValido"] == true);
-      this.mensagens.header.erro = response.filter(x => x["tipo"] == 1 && x["ehValido"] == false);
-
-      this.mensagens.detalhe.sucesso = response.filter(x => x["tipo"] == 2 && x["ehValido"] == true);
-      this.mensagens.detalhe.erro = response.filter(x => x["tipo"] == 2 && x["ehValido"] == false);
-
-      this.mensagens.trailer.sucesso = response.filter(x => x["tipo"] == 3 && x["ehValido"] == true);
-      this.mensagens.trailer.erro = response.filter(x => x["tipo"] == 3 && x["ehValido"] == false);
+      this.mensagens.resultado = response;
     });
   }
 

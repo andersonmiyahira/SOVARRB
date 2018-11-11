@@ -6,6 +6,7 @@ import { environment } from 'environments/environment';
 import { ApiService } from 'app/services/api.service';
 import { ImportarArquivo } from './models/importar-arquivo';
 import { ServiceBase } from 'app/shared/services/service-base';
+import { LogArquivo } from '../visualizar-arquivo/models/log-arquivo';
 
 @Injectable()
 export class ImportarArquivoService extends ServiceBase {
@@ -36,7 +37,7 @@ export class ImportarArquivoService extends ServiceBase {
      const url = `${environment.urlWebAPI}LogArquivo/GetResultados?ArquivoId=`+id;
      return this.apiService.get(url).pipe(
       map((res: any) => {
-        return <any[]>res.data;
+        return <LogArquivo[]>res.data;
       }));
   }
 }

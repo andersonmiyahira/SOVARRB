@@ -70,7 +70,7 @@ namespace API.Controllers
             identity.AddClaim(claimAdm);
 
             DateTime dataCriacao = DateTime.Now;
-            DateTime dataExpiracao = dataCriacao + TimeSpan.FromSeconds(_tokenConfigurations.Seconds);
+            DateTime dataExpiracao = dataCriacao.AddDays(1) + TimeSpan.FromSeconds(_tokenConfigurations.Seconds);
 
             var handler = new JwtSecurityTokenHandler();
             var securityToken = handler.CreateToken(new SecurityTokenDescriptor

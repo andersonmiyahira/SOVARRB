@@ -26,6 +26,7 @@ namespace Domain.Entities
         internal void AlterarDados(Banco banco, string descricao, bool ativo)
         {
             Banco = banco;
+            BancoId = banco.Id;
             Descricao = descricao;
             Ativo = ativo;
         }

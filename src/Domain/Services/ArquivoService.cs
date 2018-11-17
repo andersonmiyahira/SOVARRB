@@ -131,6 +131,7 @@ namespace Domain.Services
                                                 DateTime.Now,
                                                 "",
                                                 layout.TipoRegistroId);
+                layout.LimparBancos();
                 logArquivo.SetarLayout(layout);
 
                 // Busca valores na linha corrente, pela posição do layout
@@ -140,48 +141,76 @@ namespace Domain.Services
                 // validando quando nao possui valor esperado de acordo com tipo
                 if (!layout.LayoutValoresEsperados.Any())
                 {
-                    //validar pelo tipo
-                    switch (layout.ETipoCampo)
-                    {
-                        case ETipoCampo.Numerico:
-                            long val = 0;
-                            ehValido = long.TryParse(valorEncontrado, out val);
-                            break;
-
-                        case ETipoCampo.Alfanumerico:
-                            //sempre valido
-                            ehValido = true;
-                            break;
-
-                        case ETipoCampo.DataDDMMAA:
-                            string valorDataFormato1 = valorEncontrado.Insert(4, "/").Insert(2, "");
-                            ehValido = DataHelper.ValidaDataString(valorDataFormato1, "dd/MM/yy");
-                            break;
-
-                        case ETipoCampo.DataMMDDAA:
-                            string valorDataFormato2 = valorEncontrado.Insert(4, "/").Insert(2, "");
-                            ehValido = DataHelper.ValidaDataString(valorDataFormato2, "MM/dd/yy");
-                            break;
-
-                        case ETipoCampo.HoraDDMMAAAA:
-                            string valorDataFormato3= valorEncontrado.Insert(4, "/").Insert(2, "");
-                            ehValido = DataHelper.ValidaDataString(valorDataFormato3, "dd/MM/yyyy");
-                            break;
-                    } 
+                    ehValido = ValidarPorTipo(layout, valorEncontrado, ehValido);
+                }
+                else
+                {
+                    // verifica se valor encontrado é valor esperado
+                    if (!layout.LayoutValoresEsperados.Any(_ => _.ValorEsperado.Valor == valorEncontrado))
+                        ehValido = false;
                 }
 
-                // verifica se valor encontrado é valor esperado
-                if (!layout.LayoutValoresEsperados.Any(_ => _.ValorEsperado.Valor == valorEncontrado))                
-                    ehValido = false;
-                
-                if(!ehValido) logArquivo.SetarMensagem(valorEncontrado.ToString());
-
                 logArquivo.SetarEhValido(ehValido);
-                _logArquivoRepository.Add(logArquivo);
-                logArquivosCriados.Add(logArquivo);
+
+                if (!ehValido)
+                {
+                    logArquivo.SetarMensagem(valorEncontrado.ToString());
+                    _logArquivoRepository.AdicionarSemFilhos(logArquivo);
+                    logArquivosCriados.Add(logArquivo);
+                }
+            }
+
+            // se linha estiver OK
+            if(logArquivosCriados.Count == 0)
+            {
+                var logArquivoLinhaOK = new LogArquivo(IdArquivo,
+                                                        rowCount,
+                                                        0,
+                                                        linha.Length,
+                                                        true,
+                                                        DateTime.Now,
+                                                        "",
+                                                        layoutValidacao.FirstOrDefault().TipoRegistroId);
+
+                logArquivosCriados.Add(logArquivoLinhaOK);
+                _logArquivoRepository.AdicionarSemFilhos(logArquivoLinhaOK);
             }
 
             return logArquivosCriados;
-        } 
+        }
+
+        private static bool ValidarPorTipo(Layout layout, string valorEncontrado, bool ehValido)
+        {
+            //validar pelo tipo
+            switch (layout.ETipoCampo)
+            {
+                case ETipoCampo.Numerico:
+                    long val = 0;
+                    ehValido = long.TryParse(valorEncontrado, out val);
+                    break;
+
+                case ETipoCampo.Alfanumerico:
+                    //sempre valido
+                    ehValido = true;
+                    break;
+
+                case ETipoCampo.DataDDMMAA:
+                    string valorDataFormato1 = valorEncontrado.Insert(4, "/").Insert(2, "");
+                    ehValido = DataHelper.ValidaDataString(valorDataFormato1, "dd/MM/yy");
+                    break;
+
+                case ETipoCampo.DataMMDDAA:
+                    string valorDataFormato2 = valorEncontrado.Insert(4, "/").Insert(2, "");
+                    ehValido = DataHelper.ValidaDataString(valorDataFormato2, "MM/dd/yy");
+                    break;
+
+                case ETipoCampo.HoraDDMMAAAA:
+                    string valorDataFormato3 = valorEncontrado.Insert(4, "/").Insert(2, "");
+                    ehValido = DataHelper.ValidaDataString(valorDataFormato3, "dd/MM/yyyy");
+                    break;
+            }
+
+            return ehValido;
+        }
     }
 }

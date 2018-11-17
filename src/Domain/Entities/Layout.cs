@@ -27,6 +27,11 @@ namespace Domain.Entities
         public List<LayoutValorEsperado> LayoutValoresEsperados { get; private set; }
         public bool? TipoRegistroFlag { get; set; }
 
+        public void LimparBancos()
+        {
+            Banco = null;
+        }
+
         [NotMapped]
         public ETipoCampo ETipoCampo
         {

@@ -27,7 +27,7 @@ namespace Domain.Entities
 
         public int IdLogArquivo { get; private set; }
         public int ArquivoId { get; private set; }
-        public int LayoutId { get; private set; }
+        public int? LayoutId { get; private set; }
         public int Linha { get; private set; }
         public int PosicaoDe { get; private set; }
         public int PosicaoAte { get; private set; }
@@ -71,7 +71,7 @@ namespace Domain.Entities
         {
             get
             {
-                return Layout.TipoRegistroId;
+                return Layout != null ? Layout.TipoRegistroId : 0;
             }
         }
 
@@ -80,12 +80,13 @@ namespace Domain.Entities
         {
             get
             {
+                if(Layout == null && EhValido)
+                    return $"Linha {Linha} - OK";
+
                 var valoresEsperados = Layout.ETipoCampo.GetDescription();
                 if(Layout.LayoutValoresEsperados.Any())
                     valoresEsperados = string.Join(",", Layout.LayoutValoresEsperados.Select(_ => _.ValorEsperado.Descricao));
 
-                if (EhValido)
-                    return $"Linha {Linha} - OK";
                 return $"Linha {Linha}, Posição {PosicaoDe} - Posição {PosicaoAte}, Esperado {valoresEsperados} - Encontrado: {Mensagem}";
             }
         }

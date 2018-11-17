@@ -8,5 +8,6 @@ namespace Domain.Interfaces.Repositories
         IQueryable<LogArquivo> ObterPorFiltro(LogArquivo filters);
         IQueryable<LogArquivo> ObterResultado(int arquivoId);
         LogArquivo ObterPorCodigo(int id);
+        void AdicionarSemFilhos(LogArquivo model);
     }
 }

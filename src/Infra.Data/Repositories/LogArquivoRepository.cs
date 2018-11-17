@@ -13,6 +13,15 @@ namespace Infra.Data.Repositories
 
         }
 
+        public void AdicionarSemFilhos(LogArquivo model)
+        {
+            if(model.Layout != null)
+                _context.Entry(model.Layout).State = EntityState.Modified;
+
+            _context.Entry(model).State = EntityState.Added;
+            _context.Set<LogArquivo>().Add(model);
+        }
+
         public LogArquivo ObterPorCodigo(int id)
         {
             return _dbSet.AsNoTracking()
@@ -40,5 +49,6 @@ namespace Infra.Data.Repositories
                          .ThenBy(_ => _.Linha)
                          .ThenBy(_ => _.PosicaoDe);
         }
+
     }
 }

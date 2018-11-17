@@ -9,6 +9,10 @@ namespace Infra.Data.Mappings
         {
             builder.ToTable("LogArquivo");
 
+            builder.Ignore(parent => parent.Layout);
+
+            builder.Ignore(parent => parent.Arquivo);
+
             builder.Property(m => m.IdLogArquivo)
                    .HasColumnName("IdLogArquivo")
                    .IsRequired();
@@ -19,7 +23,7 @@ namespace Infra.Data.Mappings
 
             builder.Property(m => m.LayoutId)
                    .HasColumnName("LayoutId")
-                   .IsRequired();
+                   .IsRequired(false);
 
             builder.Property(m => m.Linha)
                    .HasColumnName("Linha")

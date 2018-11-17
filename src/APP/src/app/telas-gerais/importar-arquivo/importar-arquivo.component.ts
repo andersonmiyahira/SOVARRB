@@ -7,7 +7,7 @@ import { BancoService } from 'app/telas-adm/banco/banco.service';
 import { Banco } from 'app/telas-adm/banco/models/banco';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ETipoRegistro } from 'app/shared/enums/e-tipo-registro';
-import { ResultadoProcessadoResponse } from '../visualizar-arquivo/models/log-arquivo';
+import { ResultadoProcessadoResponse, LogArquivoResponse } from '../visualizar-arquivo/models/log-arquivo';
 
 @Component({
   selector: 'app-importar-arquivo',
@@ -26,7 +26,7 @@ export class ImportarArquivoComponent implements OnInit {
   importar: any;
   model: ImportarArquivo;
 
-  mensagens: ResultadoProcessadoResponse;
+  response: Array<LogArquivoResponse>;
 
   arquivosValidados: boolean;
   exibirResultado: number;
@@ -42,7 +42,7 @@ export class ImportarArquivoComponent implements OnInit {
     this.arquivosValidados = false;
     this.exibirResultado = 0;
     this.model = new ImportarArquivo();
-    this.mensagens = new ResultadoProcessadoResponse();
+    this.response = new  Array<LogArquivoResponse>();
   }
 
   ngOnInit() {
@@ -63,9 +63,21 @@ export class ImportarArquivoComponent implements OnInit {
         this.uploader.queue.forEach(element => {
           element.isSuccess = true;
         });
-        //this.fileInput.nativeElement.value = "";
-        //this.arquivosValidados = true;
-        this.modalService.open(sucesso, { size: 'sm' });
+        
+        this.arquivosValidados = true;
+        this.response = res;
+
+        this.response.forEach(element => {
+          element.headerErro = element.resultado.filter(_ => _.tipo == 1 && !_.ehValido);
+          element.headerSucesso = element.resultado.filter(_ => _.tipo == 1 && _.ehValido);
+
+          element.detalheErro = element.resultado.filter(_ => _.tipo == 2 && !_.ehValido);
+          element.detalheSucesso = element.resultado.filter(_ => _.tipo == 2 && _.ehValido);
+
+          element.trailerErro = element.resultado.filter(_ => _.tipo == 3 && !_.ehValido);
+          element.trailerSucesso = element.resultado.filter(_ => _.tipo == 3 && _.ehValido);
+        });
+        //this.modalService.open(sucesso, { size: 'sm' });
       });
   }
 
@@ -74,16 +86,7 @@ export class ImportarArquivoComponent implements OnInit {
     this.bancoService.obterBancos().subscribe(response => {
       this.bancos = response;
     });
-  }
-
-  obterResultadoValidacao(filter: number, arquivoId: number) {
-    this.importarArquivoService.obterResultadoValidacao(arquivoId).subscribe(response => {
-      // if (filter > 0)
-      //   response = response.filter(_ => _["ehValido"] === (filter == 1));
-
-      this.mensagens.resultado = response;
-    });
-  }
+  } 
 
   initFormGroup() {
 
@@ -101,7 +104,7 @@ export class ImportarArquivoComponent implements OnInit {
   }
 
   onExibirChange() {
-    this.obterResultadoValidacao(this.exibirResultado, 0);
+     
   }
 
   public fileOverBase(e: any): void {

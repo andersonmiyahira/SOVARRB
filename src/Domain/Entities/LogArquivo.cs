@@ -13,9 +13,10 @@ namespace Domain.Entities
 
         }
 
-        public LogArquivo(int arquivoId, int linha, int posicaoDe, int posicaoAte, bool ehValido, DateTime dataCadastro, string mensagem, int tipoParametroId)
+        public LogArquivo(Arquivo arquivo, int linha, int posicaoDe, int posicaoAte, bool ehValido, DateTime dataCadastro, string mensagem, int tipoParametroId)
         {   
-            ArquivoId = arquivoId;
+            Arquivo = new Arquivo(arquivo.NomeArquivoGerado);
+            ArquivoId = arquivo.IdArquivo;
             Linha = linha;
             PosicaoDe = posicaoDe;
             PosicaoAte = posicaoAte;
@@ -80,7 +81,7 @@ namespace Domain.Entities
         {
             get
             {
-                if(Layout == null && EhValido)
+                if(EhValido)
                     return $"Linha {Linha} - OK";
 
                 var valoresEsperados = Layout.ETipoCampo.GetDescription();

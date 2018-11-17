@@ -11,6 +11,11 @@ namespace Domain.Entities
 
         }
 
+        public Arquivo(string NomeGerado)
+        {
+            NomeArquivoGerado = NomeGerado;
+        }
+
         public Arquivo(int usuarioId, int bancoId, string nomeArquivoOriginal, int tipoCNABId, int tipoBoletoId)
         {
             UsuarioId = usuarioId;
@@ -20,7 +25,7 @@ namespace Domain.Entities
             TipoBoletoId = tipoBoletoId;
             DataCadastro = DateTime.Now;
             DataAlteracao = DateTime.Now;
-            NomeArquivoGerado = Guid.NewGuid().ToString() + ".txt";
+            NomeArquivoGerado = Guid.NewGuid().ToString();
         }
 
         public Arquivo(int bancoId, int tipoCNABId, int tipoBoletoId)

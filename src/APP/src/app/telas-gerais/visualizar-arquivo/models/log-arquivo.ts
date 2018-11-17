@@ -1,3 +1,16 @@
+export class LogArquivoResponse {
+    idArquivo: number;
+    nomeArquivo: string;
+    resultado: Array<LogArquivo>; 
+
+    headerSucesso: Array<LogArquivo>; 
+    headerErro: Array<LogArquivo>;
+    detalheSucesso: Array<LogArquivo>;
+    detalheErro: Array<LogArquivo>;
+    trailerSucesso: Array<LogArquivo>
+    trailerErro: Array<LogArquivo>;    
+}
+
 export class LogArquivo {
    tipo: number;
    mensagem: string;

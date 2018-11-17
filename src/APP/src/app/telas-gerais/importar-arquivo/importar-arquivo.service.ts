@@ -6,7 +6,7 @@ import { environment } from 'environments/environment';
 import { ApiService } from 'app/services/api.service';
 import { ImportarArquivo } from './models/importar-arquivo';
 import { ServiceBase } from 'app/shared/services/service-base';
-import { LogArquivo } from '../visualizar-arquivo/models/log-arquivo';
+import { LogArquivo, LogArquivoResponse } from '../visualizar-arquivo/models/log-arquivo';
 
 @Injectable()
 export class ImportarArquivoService extends ServiceBase {
@@ -30,7 +30,10 @@ export class ImportarArquivoService extends ServiceBase {
 
     const url = `${environment.urlWebAPI}${urlRecurso}`;
     
-    return this.http.post(url, input); 
+    return this.http.post(url, input).pipe(
+      map((res: any) => {
+        return <LogArquivoResponse[]>res.data;
+      })); 
   } 
 
   obterResultadoValidacao(id: number): any {

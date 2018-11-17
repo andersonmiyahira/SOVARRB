@@ -7,6 +7,7 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces.Services;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Application.AppService.Banco
 {
@@ -16,7 +17,7 @@ namespace Application.AppService.Banco
         private readonly IMapper _mapper;
 
         public ArquivoAppService(IArquivoService arquivoService,
-                                IMapper mapper) 
+                                 IMapper mapper) 
             : base(arquivoService)
         {
             _arquivoService = arquivoService;
@@ -36,7 +37,7 @@ namespace Application.AppService.Banco
             return _mapper.Map<List<ArquivoResponse>>(arquivos);             
         }
 
-        public List<Domain.Entities.LogArquivo> ProcessarArquivo(ImportarRequest importarRequest)
+        public List<LogArquivoResultadoResponse> ProcessarArquivo(ImportarRequest importarRequest)
         {
             List<Domain.Entities.LogArquivo> logsCriados = new List<Domain.Entities.LogArquivo>();
             var arquivos = CriarObjetoDominio(importarRequest);
@@ -48,7 +49,22 @@ namespace Application.AppService.Banco
             }
             else
                 logsCriados.AddRange(_arquivoService.ValidarArquivos(arquivos, false));
-            return logsCriados;
+
+            // creating return
+            var response = new List<LogArquivoResultadoResponse>();
+            foreach (var arquivo in arquivos)
+            {
+                var logs = _mapper.Map<List<ResultadoProcessamentoResponse>>(logsCriados.Where(x => x.Arquivo.NomeArquivoGerado == arquivo.NomeArquivoGerado));
+
+                LogArquivoResultadoResponse obj = new LogArquivoResultadoResponse();
+                obj.IdArquivo = arquivo.IdArquivo;
+                obj.NomeArquivo = arquivo.NomeArquivoOriginal;
+                obj.Resultado = logs;
+
+                response.Add(obj);
+            }
+
+            return response;
         }
 
         private List<Arquivo> CriarObjetoDominio(ImportarRequest importarRequest)

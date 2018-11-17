@@ -97,13 +97,13 @@ namespace Domain.Services
             foreach (var linha in arquivo.LinhasArquivo)
             {
                 if (IdentificarLinha(linha, identificadorHeader))
-                    logArquivosCriados.AddRange(ValidarLinha(linha, layoutValidacaoHeader, arquivo.IdArquivo, rowCount));
+                    logArquivosCriados.AddRange(ValidarLinha(linha, layoutValidacaoHeader, arquivo, rowCount));
 
                 if (IdentificarLinha(linha, identificadorDetalhe))
-                    logArquivosCriados.AddRange(ValidarLinha(linha, layoutValidacaoDetalhe, arquivo.IdArquivo, rowCount));
+                    logArquivosCriados.AddRange(ValidarLinha(linha, layoutValidacaoDetalhe, arquivo, rowCount));
 
                 if (IdentificarLinha(linha, identificadorTrailer))
-                    logArquivosCriados.AddRange(ValidarLinha(linha, layoutValidacaoTrailer, arquivo.IdArquivo, rowCount));
+                    logArquivosCriados.AddRange(ValidarLinha(linha, layoutValidacaoTrailer, arquivo, rowCount));
 
                 rowCount++;
             }
@@ -117,13 +117,13 @@ namespace Domain.Services
             return valorEncontrado.ToString() == identificador.LayoutValoresEsperados.FirstOrDefault().ValorEsperado.Valor;
         }
 
-        private List<LogArquivo> ValidarLinha(string linha, List<Layout> layoutValidacao, int IdArquivo, int rowCount)
+        private List<LogArquivo> ValidarLinha(string linha, List<Layout> layoutValidacao, Arquivo arquivo, int rowCount)
         {
             List<LogArquivo> logArquivosCriados = new List<LogArquivo>();
             foreach (var layout in layoutValidacao.Where(_ => !_.TipoRegistroFlag.HasValue || !_.TipoRegistroFlag.Value))
             {
                 //cria novo log de arquivo
-                var logArquivo = new LogArquivo(IdArquivo,
+                var logArquivo = new LogArquivo(arquivo,
                                                 rowCount,
                                                 layout.PosicaoDe,
                                                 layout.PosicaoAte,
@@ -163,7 +163,7 @@ namespace Domain.Services
             // se linha estiver OK
             if(logArquivosCriados.Count == 0)
             {
-                var logArquivoLinhaOK = new LogArquivo(IdArquivo,
+                var logArquivoLinhaOK = new LogArquivo(arquivo,
                                                         rowCount,
                                                         0,
                                                         linha.Length,
@@ -172,6 +172,7 @@ namespace Domain.Services
                                                         "",
                                                         layoutValidacao.FirstOrDefault().TipoRegistroId);
 
+                logArquivoLinhaOK.SetarLayout(layoutValidacao.FirstOrDefault());
                 logArquivosCriados.Add(logArquivoLinhaOK);
                 _logArquivoRepository.AdicionarSemFilhos(logArquivoLinhaOK);
             }

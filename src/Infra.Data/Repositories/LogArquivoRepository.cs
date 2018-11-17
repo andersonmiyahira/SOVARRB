@@ -15,6 +15,9 @@ namespace Infra.Data.Repositories
 
         public void AdicionarSemFilhos(LogArquivo model)
         {
+            //if (model.Arquivo != null)
+            //    _context.Entry(model.Arquivo).State = EntityState.Modified;
+
             if(model.Layout != null)
                 _context.Entry(model.Layout).State = EntityState.Modified;
 

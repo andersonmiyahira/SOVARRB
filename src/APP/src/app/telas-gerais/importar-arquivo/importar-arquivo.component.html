@@ -118,7 +118,7 @@
                   </div>
                 </div>
                 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-                  <ngb-panel title="REM01.txt">
+                  <ngb-panel title="{{mensagens.nomeArquivo}}" *ngFor="let mensagens of response">
                     <ng-template ngbPanelContent>
                       <div *ngIf="mensagens.resultado.length <= 0">
                         <label>Sem resultados para o arquivo</label>
@@ -127,7 +127,7 @@
                         <ul>
                           <li>
                             <h3>Header:</h3>
-                            <div class="container-errors" *ngIf="mensagens.headerErro.length > 0">
+                            <div class="container-errors" *ngIf="mensagens.headerErro.length > 0 && (exibirResultado == 0 || exibirResultado == 2)">
                               <div class="errors">
                                 <h6>
                                   Foram encontradas ({{mensagens.headerErro.length}}) falhas no arquivo enviado.
@@ -140,7 +140,7 @@
                                 </ul>
                               </div>
                             </div>
-                            <div class="container-sucesso" *ngIf="mensagens.headerSucesso.length > 0">
+                            <div class="container-sucesso" *ngIf="mensagens.headerSucesso.length > 0 && (exibirResultado == 0 || exibirResultado == 1)">
                               <div class="sucesso">
                                 <h6>
                                   Foram encontradas ({{mensagens.headerSucesso.length}}) linhas válidas no arquivo
@@ -157,7 +157,7 @@
                           </li>
                           <li>
                             <h3>Detalhes:</h3>
-                            <div class="container-errors" *ngIf="mensagens.detalheErro.length > 0">
+                            <div class="container-errors" *ngIf="mensagens.detalheErro.length > 0 && (exibirResultado == 0 || exibirResultado == 2)">
                               <div class="errors">
                                 <h6>
                                   Foram encontradas ({{mensagens.detalheErro.length}}) falhas no arquivo enviado.
@@ -170,13 +170,13 @@
                                 </ul>
                               </div>
                             </div>
-                            <div class="container-sucesso" *ngIf="mensagens.detalheSucesso.length > 0">
+                            <div class="container-sucesso" *ngIf="mensagens.detalheSucesso.length > 0 && (exibirResultado == 0 || exibirResultado == 1)">
                               <div class="sucesso">
                                 <h6>
                                   Foram encontradas ({{ mensagens.detalheSucesso.length}}) linhas válidas no arquivo
                                   enviado.
                                 </h6>
-                                <hr *ngIf="mensagens.detalheSucesso &&  mensagens.detalheSucesso.length > 0">
+                                <hr *ngIf="mensagens.detalheSucesso && mensagens.detalheSucesso.length > 0">
                                 <ul *ngIf="mensagens.detalheSucesso && mensagens.detalheSucesso.length > 0" style="color: green">
                                   <li *ngFor="let sucesso of mensagens.detalheSucesso">
                                     {{sucesso.mensagem}}
@@ -187,7 +187,7 @@
                           </li>
                           <li>
                             <h3>Trailer:</h3>
-                            <div class="container-errors" *ngIf="mensagens.trailerErro.length > 0">
+                            <div class="container-errors" *ngIf="mensagens.trailerErro.length > 0 && (exibirResultado == 0 || exibirResultado == 2)">
                               <div class="errors">
                                 <h6>
                                   Foram encontradas ({{mensagens.trailerErro.length}}) falhas no arquivo enviado.
@@ -200,7 +200,7 @@
                                 </ul>
                               </div>
                             </div>
-                            <div class="container-sucesso" *ngIf="mensagens.trailerSucesso.length > 0">
+                            <div class="container-sucesso" *ngIf="mensagens.trailerSucesso.length > 0 && (exibirResultado == 0 || exibirResultado == 1)">
                               <div class="sucesso">
                                 <h6>
                                   Foram encontradas ({{mensagens.trailerSucesso.length}}) linhas válidas no arquivo

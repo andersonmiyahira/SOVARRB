@@ -66,6 +66,10 @@ namespace Infra.Data.Mappings
               .HasColumnName("Obrigatorio")
               .IsRequired();
 
+            builder.Property(m => m.TipoRegistroFlag)
+              .HasColumnName("TipoRegistroFlag")
+              .IsRequired();
+
             builder
                     .HasOne(x => x.Banco);
 

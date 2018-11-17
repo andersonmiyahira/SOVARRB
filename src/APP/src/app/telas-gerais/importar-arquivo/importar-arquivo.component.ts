@@ -101,7 +101,7 @@ export class ImportarArquivoComponent implements OnInit {
   }
 
   onExibirChange() {
-    this.obterResultadoValidacao(this.exibirResultado);
+    this.obterResultadoValidacao(this.exibirResultado, 0);
   }
 
   public fileOverBase(e: any): void {

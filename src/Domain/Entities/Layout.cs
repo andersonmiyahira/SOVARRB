@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,6 +25,16 @@ namespace Domain.Entities
 
         public Banco Banco { get; private set; }
         public List<LayoutValorEsperado> LayoutValoresEsperados { get; private set; }
+        public bool? TipoRegistroFlag { get; set; }
+
+        [NotMapped]
+        public ETipoCampo ETipoCampo
+        {
+            get
+            {
+                return (ETipoCampo)TipoCampoId;
+            }
+        }
 
         [NotMapped]
         public List<int> IdValoresEsperados { get; protected set; }

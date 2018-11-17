@@ -43,8 +43,10 @@ namespace Domain.Services
             _unitOfWork.Commit();
         }
 
-        public void ValidarArquivos(List<Arquivo> arquivos)
+        public List<LogArquivo> ValidarArquivos(List<Arquivo> arquivos, bool salvarLog)
         {
+            List<LogArquivo> logArquivosCriados = new List<LogArquivo>();
+
             var arquivoReferencia = arquivos.FirstOrDefault();
 
             var layout = _layoutRepository.ObterComItens(arquivoReferencia)
@@ -52,64 +54,120 @@ namespace Domain.Services
 
             foreach (var arquivo in arquivos)
             {
-                ValidarArquivo(arquivo, layout);
-            }   
+                logArquivosCriados.AddRange(ValidarArquivo(arquivo, layout));
+            }
+
+            if(salvarLog) _unitOfWork.Commit();
+
+            return logArquivosCriados;
         }
 
-        private void ValidarArquivo(Arquivo arquivo, List<Layout> layout)
+        private List<LogArquivo> ValidarArquivo(Arquivo arquivo, List<Layout> layout)
         {
+            List<LogArquivo> logArquivosCriados = new List<LogArquivo>();
+
+            //header
             var layoutValidacaoHeader = layout.Where(_ => _.TipoRegistroId == (int)ETipoRegistro.Header)
                                               .OrderBy(_ => _.PosicaoDe)
                                               .ThenBy(_ => _.PosicaoAte)
                                               .ToList();
 
+            var identificadorHeader = layoutValidacaoHeader.Where(_ => _.TipoRegistroFlag.HasValue && _.TipoRegistroFlag.Value).FirstOrDefault();
+
+            //detalhe
             var layoutValidacaoDetalhe = layout.Where(_ => _.TipoRegistroId == (int)ETipoRegistro.Detalhe)
                                                .OrderBy(_ => _.PosicaoDe)
                                                .ThenBy(_ => _.PosicaoAte)
                                                .ToList();
 
+            var identificadorDetalhe = layoutValidacaoDetalhe.Where(_ => _.TipoRegistroFlag.HasValue && _.TipoRegistroFlag.Value).FirstOrDefault();
+
+            //trailer
             var layoutValidacaoTrailer = layout.Where(_ => _.TipoRegistroId == (int)ETipoRegistro.Trailer)
                                                .OrderBy(_ => _.PosicaoDe)
                                                .ThenBy(_ => _.PosicaoAte)
                                                .ToList();
 
+            var identificadorTrailer = layoutValidacaoTrailer.Where(_ => _.TipoRegistroFlag.HasValue && _.TipoRegistroFlag.Value).FirstOrDefault();
+
+            int rowCount = 0;
+            //Validando linhas de arquivo
             foreach (var linha in arquivo.LinhasArquivo)
             {
-                // if(linha.tipo == header)
-                //ValidarLinha(linha, layoutValidacaoHeader);
+                if (IdentificarLinha(linha, identificadorHeader))
+                    logArquivosCriados.AddRange(ValidarLinha(linha, layoutValidacaoHeader, arquivo.IdArquivo, rowCount));
 
-                // if(linha.tipo == detealhe)
-                //ValidarLinha(linha, layoutValidacaoDetalhe);
+                if (IdentificarLinha(linha, identificadorDetalhe))
+                    logArquivosCriados.AddRange(ValidarLinha(linha, layoutValidacaoDetalhe, arquivo.IdArquivo, rowCount));
 
-                // if(linha.tipo == trailer)
-                //ValidarLinha(linha, layoutValidacaoTrailer);
+                if (IdentificarLinha(linha, identificadorTrailer))
+                    logArquivosCriados.AddRange(ValidarLinha(linha, layoutValidacaoTrailer, arquivo.IdArquivo, rowCount));
 
-                ValidarLinha(linha, layoutValidacaoDetalhe);
+                rowCount++;
             }
+
+            return logArquivosCriados;
         }
 
-        private void ValidarLinha(string linha, List<Layout> layoutValidacao)
+        private bool IdentificarLinha(string linha, Layout identificador)
         {
-            foreach (var layout in layoutValidacao)
-            {
-                // Busca valores na linha corrente, pela posição do layout
-                var valorEncontrado = linha.Substring(layout.PosicaoDe, layout.PosicaoAte);
-
-                //verifica se valor encontrado é valor esperado
-                //if (!layout.LayoutValoresEsperados.Any(_ => _.ValorEsperado.Valor == valorEncontrado))
-                //{
-                //    _logArquivoRepository.Add(new LogArquivo(
-                //                                               0,
-                //                                               0,
-                //                                               layout.PosicaoDe,
-                //                                               layout.PosicaoAte,
-                //                                               false,
-                //                                               DateTime.Now,
-                //                                               "Valor Encontrado é diferente do esperado",
-                //                                               3//detalhe
-                //                            ));
-                //}   
-            }
+            var valorEncontrado = linha.Substring(identificador.PosicaoDe, identificador.PosicaoAte + 1);
+            return valorEncontrado.ToString() == identificador.LayoutValoresEsperados.FirstOrDefault().ValorEsperado.Valor;
         }
+
+        private List<LogArquivo> ValidarLinha(string linha, List<Layout> layoutValidacao, int IdArquivo, int rowCount)
+        {
+            List<LogArquivo> logArquivosCriados = new List<LogArquivo>();
+            foreach (var layout in layoutValidacao.Where(_ => !_.TipoRegistroFlag.HasValue || !_.TipoRegistroFlag.Value))
+            {
+                var logArquivo = new LogArquivo(IdArquivo,
+                                                rowCount,
+                                                layout.PosicaoDe,
+                                                layout.PosicaoAte,
+                                                true,
+                                                DateTime.Now,
+                                                "",
+                                                layout.TipoRegistroId);
+                logArquivo.SetarLayout(layout);
+
+                // Busca valores na linha corrente, pela posição do layout
+                var valorEncontrado = linha.Substring(layout.PosicaoDe, layout.PosicaoAte + 1);
+
+                bool ehValido = true;
+                if (!layout.LayoutValoresEsperados.Any())
+                {
+                    //validar pelo tipo
+                    switch (layout.ETipoCampo)
+                    {
+                        case ETipoCampo.Numerico:
+                            long val = 0;
+                            ehValido = long.TryParse(valorEncontrado, out val);
+                            break;
+                        case ETipoCampo.Alfanumerico:
+                            ehValido = true;
+                            break;
+                        case ETipoCampo.DataAAAAMMDD:
+
+                            break;
+                        case ETipoCampo.DataMMDDAA:
+                            break;
+                        case ETipoCampo.HoraDDMMAAAA:
+                            break;
+                    } 
+                }
+
+                // verifica se valor encontrado é valor esperado
+                if (!layout.LayoutValoresEsperados.Any(_ => _.ValorEsperado.Valor == valorEncontrado))                
+                    ehValido = false;
+                
+                if(!ehValido) logArquivo.SetarMensagem(valorEncontrado.ToString());
+
+                logArquivo.SetarEhValido(ehValido);
+                _logArquivoRepository.Add(logArquivo);
+                logArquivosCriados.Add(logArquivo);
+            }
+
+            return logArquivosCriados;
+        } 
     }
 }

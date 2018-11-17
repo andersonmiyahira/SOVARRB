@@ -25,8 +25,8 @@ namespace API.Controllers
         {
             request.UsuarioId = IdUsuarioLogado;
 
-            _arquivoAppService.ProcessarArquivo(request);
-            return Ok();
+            var response = _arquivoAppService.ProcessarArquivo(request);
+            return Ok(response);
 
             //if (file == null || file.Length <= 0)
             //{

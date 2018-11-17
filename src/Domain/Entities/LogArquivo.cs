@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Extensions;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
@@ -39,6 +40,20 @@ namespace Domain.Entities
 
         public Layout Layout { get; private set; }
 
+        public void SetarEhValido(bool ehValido)
+        {
+            EhValido = ehValido;
+        }
+
+        public void SetarMensagem(string mensagem)
+        {
+            Mensagem = mensagem;
+        }
+
+        public void SetarLayout(Layout layout)
+        {
+            Layout = layout;
+        }
     }
 
     //Filter
@@ -65,7 +80,7 @@ namespace Domain.Entities
         {
             get
             {
-                var valoresEsperados = string.Empty;
+                var valoresEsperados = Layout.ETipoCampo.GetDescription();
                 if(Layout.LayoutValoresEsperados.Any())
                     valoresEsperados = string.Join(",", Layout.LayoutValoresEsperados.Select(_ => _.ValorEsperado.Descricao));
 

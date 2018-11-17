@@ -36,17 +36,21 @@ namespace Application.AppService.Banco
             return _mapper.Map<List<ArquivoResponse>>(arquivos);             
         }
 
-        public void ProcessarArquivo(ImportarRequest importarRequest)
+        public List<Domain.Entities.LogArquivo> ProcessarArquivo(ImportarRequest importarRequest)
         {
+            List<Domain.Entities.LogArquivo> logsCriados = new List<Domain.Entities.LogArquivo>();
             var arquivos = CriarObjetoDominio(importarRequest);
 
             if(importarRequest.UsuarioId != default(int))
+            {
                 _arquivoService.SalvarArquivos(arquivos);
-
-            _arquivoService.ValidarArquivos(arquivos);
+                logsCriados.AddRange(_arquivoService.ValidarArquivos(arquivos, true));
+            }
+            else
+                logsCriados.AddRange(_arquivoService.ValidarArquivos(arquivos, false));
+            return logsCriados;
         }
 
-        // TODO: Ajustar idUsuario que fez upload = 0
         private List<Arquivo> CriarObjetoDominio(ImportarRequest importarRequest)
         {
             List<Arquivo> arquivos = new List<Arquivo>();

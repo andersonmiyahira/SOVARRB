@@ -1,10 +1,12 @@
 ﻿using Domain.Entities;
 using Domain.Enums;
+using Domain.Helpers;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.Uow;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Domain.Services
@@ -120,6 +122,7 @@ namespace Domain.Services
             List<LogArquivo> logArquivosCriados = new List<LogArquivo>();
             foreach (var layout in layoutValidacao.Where(_ => !_.TipoRegistroFlag.HasValue || !_.TipoRegistroFlag.Value))
             {
+                //cria novo log de arquivo
                 var logArquivo = new LogArquivo(IdArquivo,
                                                 rowCount,
                                                 layout.PosicaoDe,
@@ -134,6 +137,7 @@ namespace Domain.Services
                 var valorEncontrado = linha.Substring(layout.PosicaoDe, layout.PosicaoAte + 1);
 
                 bool ehValido = true;
+                // validando quando nao possui valor esperado de acordo com tipo
                 if (!layout.LayoutValoresEsperados.Any())
                 {
                     //validar pelo tipo
@@ -143,15 +147,25 @@ namespace Domain.Services
                             long val = 0;
                             ehValido = long.TryParse(valorEncontrado, out val);
                             break;
+
                         case ETipoCampo.Alfanumerico:
+                            //sempre valido
                             ehValido = true;
                             break;
-                        case ETipoCampo.DataAAAAMMDD:
 
+                        case ETipoCampo.DataDDMMAA:
+                            string valorDataFormato1 = valorEncontrado.Insert(4, "/").Insert(2, "");
+                            ehValido = DataHelper.ValidaDataString(valorDataFormato1, "dd/MM/yy");
                             break;
+
                         case ETipoCampo.DataMMDDAA:
+                            string valorDataFormato2 = valorEncontrado.Insert(4, "/").Insert(2, "");
+                            ehValido = DataHelper.ValidaDataString(valorDataFormato2, "MM/dd/yy");
                             break;
+
                         case ETipoCampo.HoraDDMMAAAA:
+                            string valorDataFormato3= valorEncontrado.Insert(4, "/").Insert(2, "");
+                            ehValido = DataHelper.ValidaDataString(valorDataFormato3, "dd/MM/yyyy");
                             break;
                     } 
                 }

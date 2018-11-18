@@ -1,12 +1,5 @@
-import { Component, OnInit, ViewChild, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { LeiouteService } from '../leioute.service';
-import { LocalDataSource } from 'ng2-smart-table';
-import { ButtonViewComponent } from '../components/ng2-smart-table-button.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
-import { EventosService } from 'app/core/eventos.service';
-import { ImportarArquivoService } from 'app/telas-gerais/importar-arquivo/importar-arquivo.service';
-import { ButtonEditComponent } from 'app/telas-adm/leioute/components/ng2-smart-table-button-edit.component';
 import { Banco } from 'app/telas-adm/banco/models/banco';
 import { BancoService } from '../../banco/banco.service';
 import { Segmento } from '../../tipo-segmento/model/segmento';
@@ -15,6 +8,11 @@ import { Router } from '@angular/router';
 import { DetalheValorEsperadoCadastroComponent } from './modals/detalhes-valor-esperado-cadastro/valor-esperado-cadastro-modal.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Layout } from '../models/layout';
+import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
+import { ExcluirLayoutCadastroModalComponent } from './modals/excluir-cadastro/excluir-layout-modal-cadastro.component';
+import { EditarLayoutModalCadastroComponent } from './modals/editar-cadastro/editar-layout-modal-cadastro.component';
+import { LayoutList } from '../models/layout-list';
+import Helpers from 'app/core/helpers';
 
 @Component({
   selector: 'app-leioute-cadastrar',
@@ -22,41 +20,42 @@ import { Layout } from '../models/layout';
   styleUrls: ['./leioute-cadastrar.component.css']
 })
 export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
-  @ViewChild('detalhesValorEsperado') public childComponentModal: DetalheValorEsperadoCadastroComponent;
+  // @ViewChild('detalhesValorEsperado') public childComponentModal: DetalheValorEsperadoCadastroComponent;
+  // @ViewChild('detalhesValorEsperado') childComponentModalDetalhesValorEsperado: DetalheValorEsperadoComponent;
+
+  @ViewChild('excluirLayoutModal') childExcluirLayoutModal: ExcluirLayoutCadastroModalComponent;
+  @ViewChild('editarLayoutModal') childEditarLayoutModal: EditarLayoutModalCadastroComponent;
 
   public form: FormGroup;
-  private abrirModalEvent$: Subscription;
-  private abrirModalEditEvent$: Subscription;
+  public layouts: Array<Layout>;
 
   bancos: Array<Banco>;
   segmentos: Array<Segmento>;
 
   settings: any;
-  data: LocalDataSource;
 
   listValorEsperado: boolean;
   model: Layout;
 
+  valoresEsperados: IMultiSelectOption[];
+
   constructor(private leiouteService: LeiouteService,
-    private importarArquivoService: ImportarArquivoService,
     private segmentoService: TipoSegmentoService,
     private bancoService: BancoService,
-    private router: Router,
-    private modalService: NgbModal) {
+    private router: Router) {
 
     this.bancos = new Array<Banco>();
     this.segmentos = new Array<Segmento>();
 
     this.listValorEsperado = true;
     this.model = new Layout();
+    this.layouts = new Array<Layout>();
   }
 
   ngOnInit() {
 
-    this.initSettings();
     this.obterBancos();
     this.obterSegmentos();
-    this.cadastrarEventoAbrirModal();
     this.initFormControl();
   }
 
@@ -69,7 +68,7 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
       cnab: new FormControl(this.model.tipoCNABId, [
         Validators.required
       ]),
-      tipoRegistro: new FormControl(this.model.tipoRegsitroId, [
+      tipoRegistro: new FormControl(this.model.tipoRegistroId, [
         Validators.required
       ]),
       tipoTransacao: new FormControl(this.model.tipoTransacaoId, [
@@ -92,18 +91,7 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
     this.form.get('segmento').updateValueAndValidity();
   }
 
-  onChangeSelect($event) {
-
-    if (this.model.tipoCNABId == 1 && this.model.tipoRegsitroId == 2) {
-      this.setValidacaoSegmento(true);
-    } else {
-      this.setValidacaoSegmento(false);
-    }
-  }
-
   ngOnDestroy(): void {
-    if (this.abrirModalEvent$) this.abrirModalEvent$.unsubscribe();
-    if (this.abrirModalEditEvent$) this.abrirModalEditEvent$.unsubscribe();
   }
 
   obterBancos() {
@@ -120,105 +108,6 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
     });
   }
 
-  private cadastrarEventoAbrirModal() {
-    this.abrirModalEvent$ = EventosService.abriuModalValorEsperado.subscribe(model => {
-      this.abriModalValorEsperado(model);
-    });
-
-    this.abrirModalEditEvent$ = EventosService.abriuModalValorEsperadoEdit.subscribe(model => {
-      this.abriModalValorEsperadoEdit(model);
-    });
-  }
-
-  initSettings() {
-    this.settings = {
-      noDataMessage: 'Nenhum registro encontrado',
-      hideSubHeader: true,
-      attr: {
-        class: "table table-bordered table-striped"
-      },
-      actions: {
-        add: false
-      },
-      edit: {
-        inputClass: '',
-        editButtonContent: 'Alterar',
-        saveButtonContent: 'Salvar',
-        cancelButtonContent: 'Cancelar'
-      },
-      delete: {
-        deleteButtonContent: 'Excluir',
-        confirmDelete: false,
-      },
-      columns: {
-        posicaoDe: {
-          title: 'Posição De', filter: false
-        },
-        posicaoAte: {
-          title: 'Posição Até', filter: false
-        },
-        descricao: {
-          title: 'Descrição', filter: false
-        },
-        tipoCampoId: {
-          title: 'Tipo do Campo', filter: false,
-          valuePrepareFunction: (cell, row) => {
-            switch (row.tipoCampoId) {
-              case 1: return "Numérico";
-              case 2: return "Alfanumérico";
-              case 3: return "Data(aaaammdd)";
-              case 4: return "Data(ddmmaa)";
-              case 5: return "Hora(ddmmaaaaa)";
-            }
-            return "";
-          },
-          editor: {
-            type: 'list',
-            config: {
-              list: [{ value: '1', title: 'Numérico' },
-              { value: '2', title: 'Alfanumérico' },
-              { value: '3', title: 'Data(aaaammdd)' },
-              { value: '4', title: 'Data(ddmmaa)' },
-              { value: '5', title: 'Hora(ddmmaaaaa)' }
-              ]
-            }
-          }
-        },
-        obrigatorio: {
-          title: 'Obrigatório', filter: false,
-          valuePrepareFunction: (cell, row) => { return row.obrigatorio == 1 ? "Sim" : "Não" },
-          editor: {
-            type: 'list',
-            config: {
-              list: [{ value: '1', title: 'Sim' },
-              { value: '2', title: 'Não' }
-              ]
-            }
-          }
-
-        },
-        valorEsperado: {
-          title: 'Valor Esperado', filter: false
-          , type: 'custom',
-          width: '150px',
-          renderComponent: ButtonViewComponent,
-          onComponentInitFunction(instance) {
-          },
-          editor: {
-            type: 'custom',
-            component: ButtonEditComponent,
-            valuePrepareFunctio: (cell, row) => {
-              //console.log('oi')
-              return `a`;
-          },
-          }
-        }
-      }
-    };
-
-    this.data = new LocalDataSource();
-  }
-
   salvarNovoLeioute() {
 
     let objCopy = Object.assign({}, this.model);
@@ -226,22 +115,23 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
     objCopy.posicaoAte = 0;
     objCopy.tipoCampoId = 1;
     objCopy.descricao = "";
+    objCopy.tipoCampoDescricao = "Numérico";
     objCopy.obrigatorio = true;
+    objCopy.idLayoutReference = Helpers.NewGuid();
 
-    this.data.add(objCopy);
-    this.data.refresh();
+    this.layouts.push(objCopy);
   }
 
   abriModalValorEsperado(model) {
 
-    this.childComponentModal.listValorEsperado = true;
-    this.childComponentModal.openModal(model, false);
+    // this.childComponentModal.listValorEsperado = true;
+    // this.childComponentModal.openModal(model, false);
   }
 
   abriModalValorEsperadoEdit(model) {
 
-    this.childComponentModal.listValorEsperado = false;
-    this.childComponentModal.openModal(model, true);
+    //this.childEditarLayoutModal.list = false;
+    //this.childComponentModal.openModal(model, true);
   }
 
   voltar() {
@@ -249,12 +139,39 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
     this.router.navigate(['layout']);
   }
 
-  salvarLeiouteConfigurado() {
+  onChangeSelect($event) {
 
-    console.log(this.data);
+    if (this.model.tipoCNABId == 1 && this.model.tipoRegistroId == 2) {
+      this.setValidacaoSegmento(true);
+    } else {
+      this.setValidacaoSegmento(false);
+    }
   }
 
-  onEditConfirm(event) {
+  salvarLeiouteConfigurado() {
 
+    this.leiouteService.inserirVarios(this.layouts).subscribe(res => {
+    });
+  }
+
+  /* Abertura de modais */
+  editar(editarModal, model) {
+
+    this.childEditarLayoutModal.options = this.valoresEsperados;
+    //this.childEditarLayoutModal.leioutes = this.leioutes;
+    this.childEditarLayoutModal.openModal(model);
+  }
+
+  exclude(excludeModalId, model) {
+
+    this.childExcluirLayoutModal.leioutes = new LayoutList();
+    this.childExcluirLayoutModal.leioutes.layout = this.layouts;
+    this.childExcluirLayoutModal.openModal(model);
+  }
+
+  detalhesValoresEsperados(model) {
+
+    // this.childComponentModalDetalhesValorEsperado.valoresEsperados = model.valoresEsperados;
+    // this.childComponentModalDetalhesValorEsperado.openModal();
   }
 }

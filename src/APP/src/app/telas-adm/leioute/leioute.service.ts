@@ -33,4 +33,14 @@ export class LeiouteService extends ServiceBase {
         return res.data;
       }));
   }
+
+  inserirVarios(model: Array<Layout>) {
+
+    const url = `${this.urlAPI}SalvarVarios`;
+
+    return this.apiService.post(url, model).pipe(
+      map((res: any) => {
+        return res.data;
+      }));
+  }
 }

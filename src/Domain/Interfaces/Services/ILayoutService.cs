@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Domain.Interfaces.Services
@@ -14,5 +15,8 @@ namespace Domain.Interfaces.Services
         Layout Alterar(Layout entity);
 
         Layout Inserir(Layout entity);
+
+        List<Layout> Inserir(List<Layout> entity);
+
     }
 }

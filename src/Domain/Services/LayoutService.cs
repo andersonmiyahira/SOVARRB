@@ -56,6 +56,20 @@ namespace Domain.Services
             return model;
         }
 
+        public List<Layout> Inserir(List<Layout> entities)
+        {
+            foreach (var entity in entities)
+            {
+                AdicionarValoresEsperador(entity.IdLayout, entity.IdValoresEsperados);
+
+                _layoutRepository.Add(entity);
+            }
+
+            _uow.Commit();
+
+            return entities;
+        }
+
         public Layout ObterPorCodigo(int id)
         {
             return _layoutRepository.ObterPorCodigo(id);

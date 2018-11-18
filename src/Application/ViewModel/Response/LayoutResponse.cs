@@ -20,6 +20,7 @@ namespace Application.ViewModel.Response
         public int TipoCampoId { get; set; }
         public string TipoCampoDescricao { get; set; }
         public bool Obrigatorio { get; set; }
+        public bool? TipoRegistroFlag { get; set; }
 
         public List<LayoutValorEsperadoResponse> ValoresEsperados { get; set; }
 

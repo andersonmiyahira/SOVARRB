@@ -5,8 +5,6 @@ import { EventEmitter } from '@angular/core';
 export class EventosService {
 
   public static realizouLogin: EventEmitter<string> = new EventEmitter();
-  public static abriuModalValorEsperado: EventEmitter<string> = new EventEmitter();
-  public static abriuModalValorEsperadoEdit: EventEmitter<string> = new EventEmitter();
 
   constructor() { }
 

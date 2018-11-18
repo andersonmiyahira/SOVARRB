@@ -10,6 +10,7 @@ namespace Application.AppService.Layout
     {
         List<LayoutResponse> ObterPorFiltro(LayoutFilter filter);
         LayoutResponse Inserir(LayoutRequest layoutRequest);
+        List<LayoutResponse> Inserir(List<LayoutRequest> layoutRequest);
         LayoutResponse AtualizarLayout(LayoutRequest layout);
         LayoutResponse ObterPorCodigo(int id);
         void Excluir(int id);

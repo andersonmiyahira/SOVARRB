@@ -64,7 +64,43 @@
   <div class="card bg-light mb-3">
     <div class="card-header">Lista de parâmetros de Layout</div>
     <div class="card-body">
-      <ng2-smart-table [settings]="settings" [source]="data" (editConfirm)="onEditConfirm($event)"></ng2-smart-table>
+        <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Posição De</th>
+                <th scope="col">Posição Até</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Tipo Campo</th>
+                <th scope="col">Obrigatório</th>
+                <th scope="col">Identificador bloco</th>
+                <th scope="col">Valor esperado</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let layout of layouts">
+                <th>{{layout.posicaoDe}}</th>
+                <td>{{layout.posicaoAte}}</td>
+                <td>{{layout.descricao}}</td>
+                <td>{{layout.tipoCampoDescricao}}</td>
+                <td>{{layout.obrigatorio ? "Sim" : "Não"}}</td>
+                <td>{{layout.tipoRegistroFlag ? "Sim" : "Não"}}</td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados(layout)" data-toggle="tooltip" data-placement="top" ngbTooltip="Detalhes">
+                    <i class="fas fa-info-circle"></i>
+                  </button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-sm" (click)="editar(editarModal, layout)" data-toggle="tooltip" data-placement="top" ngbTooltip="Editar">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm" (click)="exclude(excludeModalId, layout)" data-toggle="tooltip" data-placement="top" ngbTooltip="Excluir">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
     </div>
     <div class="card-footer text-muted text-right">
       <button type="submit" class="btn btn-primary" (click)="salvarLeiouteConfigurado()">Salvar</button>
@@ -72,4 +108,8 @@
   </div>
 </div>
 
-<app-valor-esperado-cadastro-modal #detalhesValorEsperado></app-valor-esperado-cadastro-modal>
+<!-- <app-valor-esperado-cadastro-modal #detalhesValorEsperado></app-valor-esperado-cadastro-modal> -->
+<!-- <app-valor-esperado-cadastro-modal #detalhesValorEsperado></app-valor-esperado-modal> -->
+
+<app-editar-layout-cadastro-modal #editarLayoutModal></app-editar-layout-cadastro-modal>
+<app-excluir-layout-cadastro-modal #excluirLayoutModal></app-excluir-layout-cadastro-modal>

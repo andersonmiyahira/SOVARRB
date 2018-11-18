@@ -40,7 +40,16 @@ namespace Application.AppService.Layout
 
             var ret = _layoutService.Inserir(entity);
 
-            return null;
+            return _mapper.Map<LayoutResponse>(ret);
+        }
+
+        public List<LayoutResponse> Inserir(List<LayoutRequest> layoutRequest)
+        {
+            var entity = _mapper.Map<List<Domain.Entities.Layout>>(layoutRequest);
+
+            var ret = _layoutService.Inserir(entity);
+
+            return _mapper.Map<List<LayoutResponse>>(ret);
         }
 
         public LayoutResponse AtualizarLayout(LayoutRequest layout)

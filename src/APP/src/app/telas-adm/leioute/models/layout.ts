@@ -4,7 +4,7 @@ export class Layout{
     idLayout: number;
     bancoId: number;
     tipoCNABId: number;
-    tipoRegsitroId: number;
+    tipoRegistroId: number;
     segmentoId: number;
     tipoBoletoId: number;
     posicaoDe:number;
@@ -16,4 +16,7 @@ export class Layout{
     obrigatorio: boolean;
     valoresEsperados: Array<ValorEsperado>;
     idValoresEsperados: Array<number>;
+    tipoRegistroFlag?: boolean;
+
+    idLayoutReference: string;
 }

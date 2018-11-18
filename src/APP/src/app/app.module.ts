@@ -4,9 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpErrorResponse } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './data/in-memory-data.service';
-
 import { AppRoutingModule } from './routes/app-routing.module';
 import { ApiService } from './services/api.service';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -40,9 +37,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { LocalStorageService } from './core/local-storage.service';
 import { EventosService } from './core/eventos.service';
 import { AuthGuardService } from './core/auth-guard.service';
-import { ButtonViewComponent } from './telas-adm/leioute/components/ng2-smart-table-button.component';
 import { MultiSelectComponent } from './telas-adm/leioute/components/multi-select.component';
-import { ButtonEditComponent } from './telas-adm/leioute/components/ng2-smart-table-button-edit.component';
 import { ValorEsperadoBancoComponent } from './telas-adm/valor-esperado-banco/valor-esperado-banco.component';
 import { ValorEsperadoBancoService } from './telas-adm/valor-esperado-banco/valor-esperado-banco.service';
 import { DetalheValorEsperadoComponent } from './telas-adm/leioute/listar/modals/detalhes-valor-esperado/valor-esperado-modal.component';
@@ -57,6 +52,9 @@ import { LoadScreenComponent } from './load-screen/load-screen.component';
 import { LoaderInterceptorService } from './shared/interceptors/load-screen.interceptor';
 import { LoaderService } from './load-screen/service/load-screen.service';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
+import { ExcluirLayoutCadastroModalComponent } from './telas-adm/leioute/cadastrar/modals/excluir-cadastro/excluir-layout-modal-cadastro.component';
+import { EditarLayoutModalCadastroComponent } from './telas-adm/leioute/cadastrar/modals/editar-cadastro/editar-layout-modal-cadastro.component';
+import Helpers from './core/helpers';
 
 @NgModule({
   imports: [
@@ -69,11 +67,6 @@ import { HttpErrorInterceptor } from './shared/interceptors/http-error.intercept
     SelectModule,
     Ng2SmartTableModule,
     MultiselectDropdownModule,
-
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   InMemoryDataService, { dataEncapsulation: false }
-    // ),
-
     NgbModule.forRoot()
   ],
   declarations: [
@@ -94,9 +87,10 @@ import { HttpErrorInterceptor } from './shared/interceptors/http-error.intercept
     DetalheValorEsperadoCadastroComponent,
     ExcluirLayoutModalComponent,
     EditarLayoutModalComponent,
+    ExcluirLayoutCadastroModalComponent,
+    EditarLayoutModalCadastroComponent,
 
-    ButtonViewComponent,
-    ButtonEditComponent,
+
     NavBarComponent,
     MultiSelectComponent,
 
@@ -106,13 +100,9 @@ import { HttpErrorInterceptor } from './shared/interceptors/http-error.intercept
     LeiouteCadastrarComponent
   ],
   entryComponents: [
-    ButtonViewComponent,
-    ButtonEditComponent,
     MultiSelectComponent
   ],
   exports: [
-    ButtonViewComponent,
-    ButtonEditComponent,
     MultiSelectComponent
   ],
   providers: [
@@ -134,6 +124,7 @@ import { HttpErrorInterceptor } from './shared/interceptors/http-error.intercept
     AuthService,
     JwtService,
     LoaderService,
+    Helpers,
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true }

@@ -25,7 +25,7 @@ namespace Domain.Entities
 
         public Banco Banco { get; private set; }
         public List<LayoutValorEsperado> LayoutValoresEsperados { get; private set; }
-        public bool? TipoRegistroFlag { get; set; }
+        public bool? TipoRegistroFlag { get; protected set; }
 
         public void LimparBancos()
         {
@@ -43,6 +43,19 @@ namespace Domain.Entities
 
         [NotMapped]
         public List<int> IdValoresEsperados { get; protected set; }
+
+        internal void AdicionarLayoutValorEsperado(LayoutValorEsperado valorEsperado)
+        {
+            if (LayoutValoresEsperados == null)
+                LayoutValoresEsperados = new List<LayoutValorEsperado>();
+
+            LayoutValoresEsperados.Add(valorEsperado);
+        }
+
+        internal void SetarDataCadastro()
+        {
+            DataCadastro = DateTime.Now;
+        }
 
         internal void SetarDataAlteracao()
         {

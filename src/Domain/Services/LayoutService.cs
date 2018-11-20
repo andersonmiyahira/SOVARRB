@@ -27,7 +27,7 @@ namespace Domain.Services
         public Layout Alterar(Layout model)
         {
             RemoverValoresEsperadosPorLayoutId(model.IdLayout);
-            AdicionarValoresEsperador(model.IdLayout, model.IdValoresEsperados);
+            AdicionarValoresEsperado(model.IdLayout, model.IdValoresEsperados);
 
             var obj = _layoutRepository.ObterPorCodigo(model.IdLayout);
 
@@ -48,7 +48,7 @@ namespace Domain.Services
 
         public Layout Inserir(Layout model)
         {
-            AdicionarValoresEsperador(model.IdLayout, model.IdValoresEsperados); 
+            AdicionarValoresEsperado(model.IdLayout, model.IdValoresEsperados); 
 
             _layoutRepository.Add(model);
             _uow.Commit();
@@ -60,7 +60,9 @@ namespace Domain.Services
         {
             foreach (var entity in entities)
             {
-                AdicionarValoresEsperador(entity.IdLayout, entity.IdValoresEsperados);
+                AdicionarValoresEsperado(entity, entity.IdValoresEsperados);
+
+                entity.SetarDataCadastro();
 
                 _layoutRepository.Add(entity);
             }
@@ -89,7 +91,15 @@ namespace Domain.Services
             _uow.Commit();
         }
 
-        private void AdicionarValoresEsperador(int idLayout, List<int> idValoresEsperados)
+        private void AdicionarValoresEsperado(Layout entity, List<int> idValoresEsperados)
+        {
+            foreach (var idValorEsperado in idValoresEsperados)
+            {
+                entity.AdicionarLayoutValorEsperado(new LayoutValorEsperado(entity.IdLayout, idValorEsperado));
+            }
+        }
+
+        private void AdicionarValoresEsperado(int idLayout, List<int> idValoresEsperados)
         {
             foreach (var idValorEsperado in idValoresEsperados)
             {

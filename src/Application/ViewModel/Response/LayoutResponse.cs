@@ -29,7 +29,12 @@ namespace Application.ViewModel.Response
             get
             {
                 if(ValoresEsperados != null && ValoresEsperados.Count > 0)
-                    return ValoresEsperados.Select(_ => _.ValorEsperado.IdValorEsperado).ToList();
+                {
+                    return ValoresEsperados
+                                            .Where(_ => _.ValorEsperado != null)
+                                            .Select(_ => _.ValorEsperado.IdValorEsperado)
+                                            .ToList();
+                }
                 return null;
             }
         }

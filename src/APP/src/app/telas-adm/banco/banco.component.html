@@ -71,6 +71,7 @@
             <div class="form-group">
               <label for="cbStatus">Ativo</label>
               <select id="cbStatus" [(ngModel)]="model.ativo" formControlName="ativo" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+                <option [value]="undefined">Selecione</option>
                 <option selected="selected" value="true">Ativo</option>
                 <option value="false">Inativo</option>
               </select>

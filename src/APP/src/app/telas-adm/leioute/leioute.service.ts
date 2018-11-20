@@ -18,6 +18,14 @@ export class LeiouteService extends ServiceBase {
       }));
    }
 
+   obterLeioutesByFilters(model: Layout) {
+     
+    return this.apiService.getByFilters(this.urlAPI, model).pipe(
+      map((res: any) => {
+        return res.data;
+      }));
+   }
+
    excluirBanco(model: Layout) {
 
     return this.apiService.delete(this.urlAPI, model.idLayout).pipe(

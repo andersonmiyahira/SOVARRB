@@ -11,8 +11,8 @@
               </label>
               <div class="form-group">
                 <div class="input-group">
-                  <input class="form-control" placeholder="yyyy-mm-dd" name="dpDe"
-                   [(ngModel)]="filter.deDatePicker" ngbDatepicker #de="ngbDatepicker">
+                  <input class="form-control" placeholder="yyyy-mm-dd" name="dpDe" [(ngModel)]="filter.deDatePicker"
+                    ngbDatepicker #de="ngbDatepicker">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="de.toggle()" type="button">
                       <img src="{{logoDatePickerUrl}}" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
@@ -27,8 +27,8 @@
               </label>
               <div class="form-group">
                 <div class="input-group">
-                  <input class="form-control" placeholder="yyyy-mm-dd" name="dpAte"
-                   [(ngModel)]="filter.ateDatePicker" ngbDatepicker #ate="ngbDatepicker">
+                  <input class="form-control" placeholder="yyyy-mm-dd" name="dpAte" [(ngModel)]="filter.ateDatePicker"
+                    ngbDatepicker #ate="ngbDatepicker">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="ate.toggle()" type="button">
                       <img src="{{logoDatePickerUrl}}" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
@@ -43,7 +43,9 @@
           <div class="row">
             <div class="col-md-4 mb-3">
               <label>Tipo</label>
-              <select id="cbTipoBoleto" [(ngModel)]="filter.tipoBoletoId" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+              <select id="cbTipoBoleto" [(ngModel)]="filter.tipoBoletoId" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+                style="display: inherit;">
+                <option [value]="undefined">Selecione</option>
                 <option value="1">Remessa</option>
                 <option value="2">Retorno Bancário</option>
               </select>
@@ -51,14 +53,16 @@
             <div class="col-md-4">
               <label for="cbBanco">Banco</label>
               <select id="cbBanco" [(ngModel)]="filter.bancoId" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option [value]="undefined">Selecione</option>
                 <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
               </select>
             </div>
             <div class="col-md-4">
               <label for="cbCNAB">CNAB</label>
               <select id="cbCNAB" [(ngModel)]="filter.TipoCNABId" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
-                  <option value="1">CNAB 240</option>
-                  <option value="2">CNAB 400</option>
+                <option [value]="undefined">Selecione</option>
+                <option value="1">CNAB 240</option>
+                <option value="2">CNAB 400</option>
               </select>
             </div>
           </div>
@@ -67,7 +71,7 @@
     </div>
     <div class="card-footer text-muted text-right">
       <button type="button" class="btn btn-primary" (click)="obterArquivos()">
-         Buscar
+        Buscar
       </button>
     </div>
   </div>
@@ -100,16 +104,16 @@
                 <td>{{arquivo.banco.descricao}}</td>
                 <td>{{arquivo.ehValido ? "Sim" : "Não"}}</td>
                 <td style="text-align:center;">
-                  <button type="button" class="btn btn-primary btn-sm" download="mytextdocument" (click)="download(arquivo.idArquivo, arquivo.nomeArquivoOriginal)" ngbTooltip="Download"
-                    data-toggle="tooltip" data-placement="top">
+                  <button type="button" class="btn btn-primary btn-sm" download="mytextdocument" (click)="download(arquivo.idArquivo, arquivo.nomeArquivoOriginal)"
+                    ngbTooltip="Download" data-toggle="tooltip" data-placement="top">
                     <span class="fas fa-cloud-download-alt"></span>
                   </button>
-                  <button type="button" class="btn btn-secondary btn-sm" (click)="openBoletao(Boletao)" data-toggle="tooltip" data-placement="top"
-                    ngbTooltip="Gerar Boletos">
+                  <!-- <button type="button" class="btn btn-secondary btn-sm" (click)="openBoletao(Boletao)" data-toggle="tooltip"
+                    data-placement="top" ngbTooltip="Gerar Boletos">
                     <span class="fas fa-barcode"></span>
-                  </button>
-                  <button type="button" class="btn btn-secondary btn-sm" (click)="openResultadoValidacao(resultadoValidacao, arquivo.idArquivo)" data-toggle="tooltip" data-placement="top"
-                    ngbTooltip="Ver Detalhes">
+                  </button> -->
+                  <button type="button" class="btn btn-secondary btn-sm" (click)="openResultadoValidacao(resultadoValidacao, arquivo.idArquivo)"
+                    data-toggle="tooltip" data-placement="top" ngbTooltip="Ver Detalhes">
                     <span class="fas fa-info"></span>
                   </button>
                 </td>
@@ -242,13 +246,15 @@
     <div class="row">
       <div class="col-md-12">
         <form method="post" action="/" novalidate="novalidate">
-          <ss-multiselect-dropdown [options]="valoresEsperados" [settings]="mySettings" style="display: inherit;width: 100%" [(ngModel)]="optionsModel"></ss-multiselect-dropdown>
+          <ss-multiselect-dropdown [options]="valoresEsperados" [settings]="mySettings" style="display: inherit;width: 100%"
+            [(ngModel)]="optionsModel"></ss-multiselect-dropdown>
         </form>
       </div>
     </div>
   </div>
   <div class="modal-footer text-right">
-    <button type="button" class="btn btn-primary btn-sm" style="position: absolute;left: 15px;" (click)="downloadArquivoBoletoPDF()">Fazer Download</button>
+    <button type="button" class="btn btn-primary btn-sm" style="position: absolute;left: 15px;" (click)="downloadArquivoBoletoPDF()">Fazer
+      Download</button>
     <button type="button" class="btn btn-light btn-sm" (click)="c('Close click')">Fechar</button>
   </div>
 </ng-template>

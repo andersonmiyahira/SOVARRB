@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Filters;
 using Domain.Interfaces.Repositories;
 using Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
@@ -18,10 +19,16 @@ namespace Infra.Data.Repositories
             return _dbSet.AsNoTracking().FirstOrDefault(_ => _.IdValorEsperado == id);
         }
 
-        public IQueryable<ValorEsperado> ObterPorFiltros(ValorEsperado filters)
+        public IQueryable<ValorEsperado> ObterPorFiltros(ValorEsperadoFilter filters)
         {
             return _dbSet.Include(_ => _.Banco)
-                         .Where(_ => filters.BancoId == default(int) || _.BancoId == filters.BancoId);
+                         .Include(_ => _.LayoutValoresEsperados)
+                            .ThenInclude(_ => _.Layout)
+                         .Where(_ => filters.bancoId == default(int) || _.BancoId == filters.bancoId)
+                         .Where(_ => filters.tipoBoletoId == default(int) || _.TipoBoletoId == filters.tipoBoletoId)
+                         .Where(_ => filters.tipoCNABId == default(int) || _.TipoCNABId == filters.tipoCNABId)
+                         .Where(_ => filters.tipoRegistroId == default(int) 
+                                    || _.LayoutValoresEsperados.Any(__ => __.Layout.TipoRegistroId == filters.tipoRegistroId));
         }
     }
 }

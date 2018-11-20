@@ -24,7 +24,7 @@ export class ExcluirLayoutModalComponent implements OnInit {
   private modalReference: NgbModalRef;
 
   constructor(private modalService: NgbModal,
-              private leiouteService: LeiouteService) {
+    private leiouteService: LeiouteService) {
   }
 
   ngOnInit() {
@@ -38,11 +38,12 @@ export class ExcluirLayoutModalComponent implements OnInit {
   }
 
   excluir() {
-    
-    this.leiouteService.excluirBanco(this.model).subscribe(()=>{
+
+    this.leiouteService.excluirBanco(this.model).subscribe(() => {
+
       var indexObjExcluido = this.leioutes.layout.findIndex(_ => _.idLayout == this.model.idLayout);
       this.leioutes.layout.splice(indexObjExcluido, 1);
       this.modalReference.close();
-    }); 
+    });
   }
 }

@@ -62,7 +62,7 @@ export class LeiouteComponent implements OnInit {
   
   obterLeioutes() {
 
-    this.LeiouteService.obterLeioutes().subscribe(response => {
+    this.LeiouteService.obterLeioutesByFilters(this.layoutFilter).subscribe(response => {
       this.leioutes.layout = response;
     });
   }

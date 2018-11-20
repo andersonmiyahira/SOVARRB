@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Filters;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.Uow;
@@ -49,7 +50,7 @@ namespace Domain.Services
             return model;
         }
 
-        public IQueryable<ValorEsperado> ObterPorFiltros(ValorEsperado filters)
+        public IQueryable<ValorEsperado> ObterPorFiltros(ValorEsperadoFilter filters)
         {
             return _valorEsperadoRepository.ObterPorFiltros(filters);
         }

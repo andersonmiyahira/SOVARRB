@@ -8,6 +8,7 @@ namespace Application.ViewModel.Filters
     {
         public int BancoId { get; set; }
         public int TipoCNABId { get; set; }
+        public int TipoTransacaoId { get; set; }
         public int TipoBoletoId { get; set; }
     }
 }

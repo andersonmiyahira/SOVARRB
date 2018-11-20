@@ -23,7 +23,7 @@ namespace Application.AutoMapper
 
         private void ValorEsperadoFilter()
         {
-            CreateMap<ValorEsperadoFilter, ValorEsperado>();
+            CreateMap<ValorEsperadoFilter, Domain.Filters.ValorEsperadoFilter>();
         }
 
         private void LayoutFilter()

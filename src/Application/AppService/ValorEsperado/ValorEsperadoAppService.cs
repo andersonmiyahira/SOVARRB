@@ -39,7 +39,7 @@ namespace Application.AppService.ValorEsperado
 
         public List<ValorEsperadoResponse> ObterPorFiltro(ValorEsperadoFilter filter)
         {
-            var filters = _mapper.Map<Domain.Entities.ValorEsperado>(filter);
+            var filters = _mapper.Map<Domain.Filters.ValorEsperadoFilter>(filter);
             return _valorEsperadoService.ObterPorFiltros(filters).ProjectTo<ValorEsperadoResponse>().ToList();
         }
     }

@@ -13,6 +13,8 @@ import { ExcluirLayoutCadastroModalComponent } from './modals/excluir-cadastro/e
 import { EditarLayoutModalCadastroComponent } from './modals/editar-cadastro/editar-layout-modal-cadastro.component';
 import { LayoutList } from '../models/layout-list';
 import Helpers from 'app/core/helpers';
+import { ValorEsperado } from 'app/telas-adm/valor-esperado-banco/model/valor-esperado';
+import { ValorEsperadoBancoService } from 'app/telas-adm/valor-esperado-banco/valor-esperado-banco.service';
 
 @Component({
   selector: 'app-leioute-cadastrar',
@@ -20,7 +22,6 @@ import Helpers from 'app/core/helpers';
   styleUrls: ['./leioute-cadastrar.component.css']
 })
 export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
-  // @ViewChild('detalhesValorEsperado') public childComponentModal: DetalheValorEsperadoCadastroComponent;
   // @ViewChild('detalhesValorEsperado') childComponentModalDetalhesValorEsperado: DetalheValorEsperadoComponent;
 
   @ViewChild('excluirLayoutModal') childExcluirLayoutModal: ExcluirLayoutCadastroModalComponent;
@@ -42,7 +43,8 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
   constructor(private leiouteService: LeiouteService,
     private segmentoService: TipoSegmentoService,
     private bancoService: BancoService,
-    private router: Router) {
+    private router: Router,
+    private valorEsperadoService: ValorEsperadoBancoService) {
 
     this.bancos = new Array<Banco>();
     this.segmentos = new Array<Segmento>();
@@ -157,8 +159,22 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
   /* Abertura de modais */
   editar(editarModal, model) {
 
-    this.childEditarLayoutModal.options = this.valoresEsperados;
-    //this.childEditarLayoutModal.leioutes = this.leioutes;
+    const filters = new ValorEsperado();
+    filters.banco = new Banco();
+    filters.banco.id = this.model.bancoId;
+    filters.bancoId = this.model.bancoId;
+
+    let valoresEsperados = [];
+    this.valorEsperadoService.obterValoresEsperadosPorFiltros(filters).subscribe(res =>{
+      for(let i = 0; i < res.length; i++){
+
+        var element = res[i];
+        var nameFormatado = `${element.descricao} valor: ${element.valor}`;
+        valoresEsperados.push({ id: element.idValorEsperado, name: nameFormatado });
+      }
+      this.childEditarLayoutModal._options = valoresEsperados;
+    });
+
     this.childEditarLayoutModal.openModal(model);
   }
 

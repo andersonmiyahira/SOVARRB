@@ -51,6 +51,7 @@ namespace Domain.Services
 
             var arquivoReferencia = arquivos.FirstOrDefault();
 
+            // Obter layout por parametros de arquivo
             var layout = _layoutRepository.ObterComItens(arquivoReferencia)
                                           .ToList();
 

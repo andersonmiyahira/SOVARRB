@@ -68,12 +68,14 @@
             <div class="form-group">
               <label>Banco</label>
               <select id="cbBanco" formControlName="bancoId" [(ngModel)]="model.banco.id" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+                <option [value]="undefined">Selecione</option>
                 <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
               </select>
             </div>
             <div class="form-group">
               <label>Status</label>
               <select id="cbAtivo" [(ngModel)]="model.ativo" formControlName="ativo" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+                <option [value]="undefined">Selecione</option>
                 <option selected="selected" value="true">Ativo</option>
                 <option value="false">Inativo</option>
               </select>

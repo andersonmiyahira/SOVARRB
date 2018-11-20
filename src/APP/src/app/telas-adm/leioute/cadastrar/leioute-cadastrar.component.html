@@ -8,6 +8,7 @@
             <label for="cbBanco">Banco</label>
             <select id="cbBanco" formControlName="banco" [(ngModel)]="model.bancoId" class="custom-select mb-2 mr-sm-2 mb-sm-0"
               style="display: inherit;">
+              <option [value]="undefined">Selecione</option>
               <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
             </select>
           </div>
@@ -15,6 +16,7 @@
             <label for="cbCNAB">CNAB</label>
             <select id="cbCNAB" formControlName="cnab" [(ngModel)]="model.tipoCNABId" (change)="onChangeSelect($event)"
               class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+              <option [value]="undefined">Selecione</option>
               <option value="1">CNAB 240</option>
               <option value="2">CNAB 400</option>
             </select>
@@ -23,6 +25,7 @@
             <label for="cTipoTransascao">Tipo de transação</label>
             <select id="cTipoTransascao" formControlName="tipoTransacao" [(ngModel)]="model.tipoTransacaoId" class="custom-select mb-2 mr-sm-2 mb-sm-0"
               style="display: inherit;">
+              <option [value]="undefined">Selecione</option>
               <option value="1">Pagamento</option>
               <option value="2">Cobrança</option>
             </select>
@@ -31,6 +34,7 @@
             <label for="cbTipoRegistro">Tipo do registro</label>
             <select id="cbTipoRegistro" (change)="onChangeSelect($event)" [(ngModel)]="model.tipoRegsitroId"
               formControlName="tipoRegistro" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;">
+              <option [value]="undefined">Selecione</option>
               <option value="1">Header</option>
               <option value="2">Detalhe</option>
               <option value="3">Trailer</option>
@@ -40,6 +44,7 @@
             <label for="cbSegmento">Segmento</label>
             <select id="cbSegmento" formControlName="segmento" [(ngModel)]="model.segmentoId" class="custom-select mb-2 mr-sm-2 mb-sm-0"
               style="display: inherit;">
+              <option [value]="undefined">Selecione</option>
               <option *ngFor="let segmento of segmentos" value="{{segmento.idSegmento}}">{{segmento.descricao}}</option>
             </select>
           </div>
@@ -47,6 +52,7 @@
             <label for="cbTipoRetorno">Tipo</label>
             <select id="cbTipoRetorno" formControlName="tipoRetorno" [(ngModel)]="model.tipoBoletoId" class="custom-select mb-2 mr-sm-2 mb-sm-0"
               style="display: inherit;">
+              <option [value]="undefined">Selecione</option>
               <option value="1">Remessa</option>
               <option value="2">Retorno Bancário</option>
             </select>
@@ -58,7 +64,8 @@
       <button class="btn btn-left btn-info" type="button" (click)="voltar()">
         <i class="fas fa-chevron-left"></i> voltar
       </button>
-      <button type="submit" class="btn btn-primary" (click)="salvarNovoLeioute()" [disabled]="form.invalid">Adicionar</button>
+      <!-- [disabled]="form.invalid" -->
+      <button type="submit" class="btn btn-primary" (click)="salvarNovoLeioute()" >Adicionar</button>
     </div>
   </div>
   <div class="card bg-light mb-3">

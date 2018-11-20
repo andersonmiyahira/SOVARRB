@@ -77,7 +77,7 @@ namespace Domain.Services
 
         public IQueryable<Layout> ObterPorFiltros(Layout filters)
         {
-            var ret = _layoutRepository.ObterComItens(new Arquivo(filters.BancoId, filters.TipoCNABId, filters.TipoBoletoId));
+            var ret = _layoutRepository.ObterComItens(filters);
             return ret;
         }
 

@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from './login.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LocalStorageService } from '../core/local-storage.service';
 import { Login } from './login.model';
 import { EventosService } from '../core/eventos.service';
 import { Router } from '@angular/router';

@@ -62,11 +62,11 @@
             </div>
             <div class="form-group">
               <label>Código</label>
-              <input class="form-control" type="text" [(ngModel)]="model.id" name="id" formControlName="id">
+              <input class="form-control" type="number" [(ngModel)]="model.id" name="id" formControlName="id">
             </div>
             <div class="form-group">
               <label>Descrição</label>
-              <input class="form-control" type="text" [(ngModel)]="model.descricao" name="descricao" formControlName="descricao">
+              <input class="form-control" type="text" maxlength="255" [(ngModel)]="model.descricao" name="descricao" formControlName="descricao">
             </div>
             <div class="form-group">
               <label for="cbStatus">Ativo</label>

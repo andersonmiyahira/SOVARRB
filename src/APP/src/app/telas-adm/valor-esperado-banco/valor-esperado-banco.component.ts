@@ -5,6 +5,7 @@ import { ValorEsperado } from './model/valor-esperado';
 import { Banco } from '../banco/models/banco';
 import { BancoService } from '../banco/banco.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-valor-esperado-banco',
@@ -20,9 +21,10 @@ export class ValorEsperadoBancoComponent implements OnInit {
   private modalReference: NgbModalRef;
 
   constructor(private valorEsperadoBancoService: ValorEsperadoBancoService,
-              private bancoService: BancoService,
-              private modalService: NgbModal,
-              private model: ValorEsperado) {
+    private bancoService: BancoService,
+    private modalService: NgbModal,
+    private model: ValorEsperado,
+    private _notifications: NotificationsService) {
 
     this.valoresEsperados = new Array<ValorEsperado>();
   }
@@ -63,7 +65,7 @@ export class ValorEsperadoBancoComponent implements OnInit {
     this.bancoService.obterBancos().subscribe(response => {
       this.bancos = response;
     });
-  } 
+  }
 
   obterValoresEsperados() {
     this.valorEsperadoBancoService.obterValoresEsperados().subscribe(response => {
@@ -92,6 +94,8 @@ export class ValorEsperadoBancoComponent implements OnInit {
   excluir() {
 
     this.valorEsperadoBancoService.excluirValorEsperado(this.model).subscribe(() => {
+
+      this._notifications.success("Sucesso", "Valor esperado excluído com sucesso.");
       var indexObjExcluido = this.valoresEsperados.findIndex(_ => _.idValorEsperado == this.model.idValorEsperado);
       this.valoresEsperados.splice(indexObjExcluido, 1);
       this.modalReference.close();
@@ -99,15 +103,19 @@ export class ValorEsperadoBancoComponent implements OnInit {
   }
 
   salvar() {
-    
-    if(this.model.idValorEsperado > 0) {
+
+    if (this.model.idValorEsperado > 0) {
       this.valorEsperadoBancoService.atualizarValorEsperado(this.model).subscribe(() => {
+
+        this._notifications.success("Sucesso", "Valor Esperado atualizado com sucesso.");
         this.obterValoresEsperados();
         this.modalReference.close();
       });
     }
     else {
       this.valorEsperadoBancoService.inserirValorEsperado(this.model).subscribe(() => {
+
+        this._notifications.success("Sucesso", "Valor Esperado criado com sucesso.");
         this.obterValoresEsperados();
         this.modalReference.close();
       });

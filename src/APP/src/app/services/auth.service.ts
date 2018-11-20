@@ -10,15 +10,11 @@ export class AuthService {
     }
     
     setAuth(user: UsusarioLogado) {
-        this.jwtService.saveToken(user.accessToken);
-        // this.currentUserSubject.next(user);
-        // this.isAuthenticatedSubject.next(true);
+        this.jwtService.saveToken(user.accessToken); 
     }
 
     purgeAuth() {
-        this.jwtService.destroyToken();
-        // this.currentUserSubject.next({} as UserModel);
-        // this.isAuthenticatedSubject.next(false);
+        this.jwtService.destroyToken(); 
     }
 
     isLogged(){

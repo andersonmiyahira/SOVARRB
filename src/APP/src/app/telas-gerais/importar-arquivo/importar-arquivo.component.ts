@@ -8,6 +8,7 @@ import { Banco } from 'app/telas-adm/banco/models/banco';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ETipoRegistro } from 'app/shared/enums/e-tipo-registro';
 import { ResultadoProcessadoResponse, LogArquivoResponse } from '../visualizar-arquivo/models/log-arquivo';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-importar-arquivo',
@@ -36,8 +37,8 @@ export class ImportarArquivoComponent implements OnInit {
   @ViewChild("fileInput") fileInput;
 
   constructor(private importarArquivoService: ImportarArquivoService,
-    private modalService: NgbModal,
-    private bancoService: BancoService) {
+    private bancoService: BancoService,
+    private _notifications: NotificationsService) {
     this.importar = {};
     this.arquivosValidados = false;
     this.exibirResultado = 0;
@@ -77,7 +78,8 @@ export class ImportarArquivoComponent implements OnInit {
           element.trailerErro = element.resultado.filter(_ => _.tipo == 3 && !_.ehValido);
           element.trailerSucesso = element.resultado.filter(_ => _.tipo == 3 && _.ehValido);
         });
-        //this.modalService.open(sucesso, { size: 'sm' });
+
+        this._notifications.success("Sucesso", "Arquivo(s) importado(s) com sucesso!");
       });
   }
 
@@ -102,11 +104,7 @@ export class ImportarArquivoComponent implements OnInit {
       ])
     });
   }
-
-  onExibirChange() {
-     
-  }
-
+ 
   public fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
   }

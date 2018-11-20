@@ -109,7 +109,7 @@
                     <form class="form-inline" style="float:right">
                       <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Exibir:</label>
                       <select class="custom-select my-1" id="inlineFormCustomSelectPref" name="exibirResultado"
-                        [(ngModel)]="exibirResultado" (change)="onExibirChange()">
+                        [(ngModel)]="exibirResultado">
                         <option selected value="0">Todos</option>
                         <option value="1">Sucessos</option>
                         <option value="2">Erros</option>
@@ -227,26 +227,4 @@
       </div>
     </div>
   </form>
-</div>
-
-
-<ng-template #sucesso let-c="close" let-d="dismiss">
-  <div class="modal-header bg-success">
-    <h4 class="modal-title">Sucesso</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div>
-      <div class="row">
-        <div class="col-md-12">
-          Arquivo(s) importado(s) com sucesso!
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="submit" class="btn btn-success" (click)="c('Close click')">Ok</button>
-  </div>
-</ng-template>
+</div> 

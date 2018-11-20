@@ -5,6 +5,7 @@ import { BancoService } from '../banco/banco.service';
 import { Banco } from '../banco/models/banco';
 import { Segmento } from './model/segmento';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-tipo-segmento',
@@ -22,7 +23,8 @@ export class TipoSegmentoComponent implements OnInit {
   constructor(private tipoSegmentoService: TipoSegmentoService,
     private bancoService: BancoService,
     private modalService: NgbModal,
-    private model: Segmento) {
+    private model: Segmento,
+    private _notifications: NotificationsService) {
   }
 
   ngOnInit() {
@@ -66,6 +68,8 @@ export class TipoSegmentoComponent implements OnInit {
   excluir() {
 
     this.tipoSegmentoService.excluirSegmento(this.model).subscribe(() => {
+
+      this._notifications.success("Sucesso", "Segmento excluído com sucesso.");
       var indexObjExcluido = this.segmentos.findIndex(_ => _.idSegmento == this.model.idSegmento);
       this.segmentos.splice(indexObjExcluido, 1);
       this.modalReference.close();
@@ -74,14 +78,18 @@ export class TipoSegmentoComponent implements OnInit {
 
   salvar() {
 
-    if(this.model.idSegmento > 0) {
+    if (this.model.idSegmento > 0) {
       this.tipoSegmentoService.atualizarSegmento(this.model).subscribe(() => {
+
+        this._notifications.success("Sucesso", "Segmento atualizado com sucesso.");
         this.obterSegmentos();
         this.modalReference.close();
       });
     }
     else {
       this.tipoSegmentoService.inserirSegmento(this.model).subscribe(() => {
+
+        this._notifications.success("Sucesso", "Segmento criado com sucesso.");
         this.obterSegmentos();
         this.modalReference.close();
       });
@@ -89,7 +97,7 @@ export class TipoSegmentoComponent implements OnInit {
   }
 
   editarOpenModal(content, segmento) {
-    
+
     this.model = segmento;
     this.modalReference = this.modalService.open(content, { size: 'lg' });
   }

@@ -3,6 +3,7 @@ import { CadastrarUsuarioService } from './cadastrar-usuario.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Usuario } from './model/usuario';
+import { NotificationsService } from 'angular2-notifications';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class CadastrarUsuarioComponent implements OnInit {
 
   constructor(private cadastrarUsuarioService: CadastrarUsuarioService,
               private route: Router,
-              private model: Usuario) {
+              private model: Usuario,
+              private _notifications: NotificationsService) {
 
   }
 
@@ -48,7 +50,8 @@ export class CadastrarUsuarioComponent implements OnInit {
   salvar() {
     
     this.cadastrarUsuarioService.salvarUsuario(this.model).subscribe(()=>{
-
+      this._notifications.success("Sucesso", "Usuário criado com sucesso.");
+      this.direcionaLogin();
     });
   }
 

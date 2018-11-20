@@ -3,6 +3,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { BancoService } from './banco.service';
 import { Banco } from './models/banco';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-banco',
@@ -19,7 +20,8 @@ export class BancoComponent implements OnInit {
   private modalReference: NgbModalRef;
 
   constructor(private bancoService: BancoService,
-    private modalService: NgbModal) {
+    private modalService: NgbModal,
+    private _notifications: NotificationsService) {
     this.id = 0;
     this.model = new Banco();
   }
@@ -73,6 +75,8 @@ export class BancoComponent implements OnInit {
   excluir() {
 
     this.bancoService.excluirBanco(this.model).subscribe(() => {
+
+      this._notifications.success("Sucesso", "Banco excluído com sucesso.");
       var indexObjExcluido = this.bancos.findIndex(_ => _.id == this.model.id);
       this.bancos.splice(indexObjExcluido, 1);
       this.modalReference.close();
@@ -82,6 +86,8 @@ export class BancoComponent implements OnInit {
   salvar() {
 
     this.bancoService.salvarBanco(this.model).subscribe(() => {
+
+      this._notifications.success("Sucesso", "Operação realizada com sucesso.");
       this.obterBancos();
       this.modalReference.close();
     });

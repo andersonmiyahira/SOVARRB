@@ -2,11 +2,11 @@
   <img class="logo-login" src="../../assets/img/vbanking-logo-cinza.png" alt="VBanking" width="250" />
   <h1 class="h3 mb-3 font-weight-normal">Fazer login</h1>
   <label for="inputEmail" class="sr-only">E-mail</label>
-  <input type="email" [(ngModel)]="login.email" formControlName="email" id="inputEmail" class="form-control"
+  <input type="email" [(ngModel)]="login.email" maxlength="100" formControlName="email" id="inputEmail" class="form-control"
     placeholder="E-mail" required name="Input.Email">
 
   <label for="inputPassword" class="sr-only">Senha</label>
-  <input [(ngModel)]="login.senha" formControlName="senha" type="password" class="form-control" placeholder="Senha"
+  <input [(ngModel)]="login.senha" formControlName="senha"  maxlength="15" type="password" class="form-control" placeholder="Senha"
     required name="Input.Password">
 
   <span class="text-danger field-validation-valid" data-valmsg-for="Input.Password" data-valmsg-replace="true"></span>

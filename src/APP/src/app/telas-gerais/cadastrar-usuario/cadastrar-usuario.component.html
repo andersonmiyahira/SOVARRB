@@ -7,18 +7,18 @@
     </ul>
   </div>
 
-  <input class="form-control" type="text" placeholder="Nome Completo" name="nome" [(ngModel)]="model.nome"
+  <input class="form-control" type="text" maxlength="255" placeholder="Nome Completo" name="nome" [(ngModel)]="model.nome"
     formControlName="nome">
 
-  <input type="email" id="inputEmail" class="form-control" placeholder="E-mail" id="email" name="email" [(ngModel)]="model.email"
+  <input type="email" id="inputEmail" class="form-control"  maxlength="255"  placeholder="E-mail" id="email" name="email" [(ngModel)]="model.email"
     formControlName="email">
 
-  <input class="form-control" type="password" placeholder="Senha" name="senha" [(ngModel)]="model.senha"
+  <input class="form-control" type="password" placeholder="Senha" maxlength="15" name="senha" [(ngModel)]="model.senha"
     formControlName="senha">
 
   <span class="text-danger field-validation-valid" data-valmsg-for="Input.Password" data-valmsg-replace="true"></span>
 
-  <input class="form-control confirm-password" type="password" placeholder="Confirmar Senha" name="confirmsenha">
+  <input class="form-control confirm-password" type="password" maxlength="15" placeholder="Confirmar Senha" name="confirmsenha">
 
   <span class="text-danger field-validation-valid" data-valmsg-for="Input.ConfirmPassword" data-valmsg-replace="true"></span>
 

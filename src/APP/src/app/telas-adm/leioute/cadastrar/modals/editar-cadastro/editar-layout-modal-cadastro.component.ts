@@ -31,9 +31,6 @@ export class EditarLayoutModalCadastroComponent implements OnInit {
   }
 
   ngOnInit() { 
-    this._options = [
-      { id: 1, name: 'testes' }
-    ]
   }
 
   initFomControl() {

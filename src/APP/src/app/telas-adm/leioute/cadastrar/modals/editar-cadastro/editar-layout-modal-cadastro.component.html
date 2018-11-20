@@ -18,15 +18,15 @@
               </div>
               <div class="form-group">
                 <label for="Input_Email">Posição De</label>
-                <input class="form-control" type="text" [(ngModel)]="model.posicaoDe" name="posicaoDe" formControlName="posicaoDe">
+                <input class="form-control" type="number" [(ngModel)]="model.posicaoDe" name="posicaoDe" formControlName="posicaoDe">
               </div>
               <div class="form-group">
                 <label for="Input_Email">Posição Até</label>
-                <input class="form-control" type="text" [(ngModel)]="model.posicaoAte" name="posicaoAte" formControlName="posicaoAte">
+                <input class="form-control" type="number" [(ngModel)]="model.posicaoAte" name="posicaoAte" formControlName="posicaoAte">
               </div>
               <div class="form-group">
                 <label for="Input_Email">Descrição</label>
-                <input class="form-control" type="text" [(ngModel)]="model.descricao" name="descricao" formControlName="descricao">
+                <input class="form-control" type="text" maxlength="255" [(ngModel)]="model.descricao" name="descricao" formControlName="descricao">
               </div>
               <div class="form-group">
                 <label for="cbTipoCampo">Tipo Campo</label>
@@ -42,6 +42,7 @@
               <div class="form-group">
                 <label for="cbObrigatorio">Obrigatório</label>
                 <select id="cbObrigatorio" [(ngModel)]="model.obrigatorio" name="obrigatorio" formControlName="obrigatorio" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+                  <option [value]="undefined">Selecione</option>
                   <option value="true">Sim</option>
                   <option value="false">Não</option>
                 </select>
@@ -49,6 +50,7 @@
               <div class="form-group">
                 <label for="cbIdentificador">Identificador bloco</label>
                 <select id="cbIdentificador" [(ngModel)]="model.tipoRegistroFlag" name="tipoRegistroFlag" formControlName="tipoRegistroFlag" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+                  <option [value]="undefined">Selecione</option>
                   <option value="true">Sim</option>
                   <option value="false">Não</option>
                 </select>

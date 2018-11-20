@@ -50,7 +50,8 @@
                       <th scope="col">Descrição</th>
                       <th scope="col">Tipo Campo</th>
                       <th scope="col">Obrigatório</th>
-                      <th scope="col">Valor esperado</th>
+                      <th scope="col">Identificador</th>
+                      <th scope="col">Valor Esperado</th>
                       <th scope="col">Ações</th>
                     </tr>
                   </thead>
@@ -61,6 +62,7 @@
                       <td>{{header.descricao}}</td>
                       <td>{{header.tipoCampoDescricao}}</td>
                       <td>{{header.obrigatorio ? "Sim" : "Não"}}</td>
+                      <td>{{header.tipoRegistroFlag ? "Sim" : "Não"}}</td>
                       <td>
                         <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados(header)" data-toggle="tooltip" data-placement="top" ngbTooltip="Detalhes">
                           <i class="fas fa-info-circle"></i>
@@ -89,7 +91,8 @@
                       <th scope="col">Descrição</th>
                       <th scope="col">Tipo Campo</th>
                       <th scope="col">Obrigatório</th>
-                      <th scope="col">Valor esperado</th>
+                      <th scope="col">Identificador</th>
+                      <th scope="col">Valor Esperado</th>
                       <th scope="col">Ações</th>
                     </tr>
                   </thead>
@@ -100,6 +103,7 @@
                       <td>{{detalhe.descricao}}</td>
                       <td>{{detalhe.tipoCampoDescricao}}</td>
                       <td>{{detalhe.obrigatorio  ? "Sim" : "Não"}}</td>
+                      <td>{{detalhe.tipoRegistroFlag ? "Sim" : "Não"}}</td>
                       <td>
                         <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados(detalhe)" data-toggle="tooltip" data-placement="top" ngbTooltip="Detalhes">
                           <i class="fas fa-info-circle"></i>
@@ -128,7 +132,8 @@
                       <th scope="col">Descrição</th>
                       <th scope="col">Tipo Campo</th>
                       <th scope="col">Obrigatório</th>
-                      <th scope="col">Valor esperado</th>
+                      <th scope="col">Identificador</th>
+                      <th scope="col">Valor Esperado</th>
                       <th scope="col">Ações</th>
                     </tr>
                   </thead>
@@ -139,6 +144,7 @@
                       <td>{{trailer.descricao}}</td>
                       <td>{{trailer.tipoCampoDescricao}}</td>
                       <td>{{trailer.obrigatorio  ? "Sim" : "Não"}}</td>
+                      <td>{{trailer.tipoRegistroFlag ? "Sim" : "Não"}}</td>
                       <td>
                         <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados(trailer)" data-toggle="tooltip" data-placement="top" ngbTooltip="Detalhes">
                           <i class="fas fa-info-circle"></i>

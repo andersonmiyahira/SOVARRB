@@ -15,6 +15,7 @@ import { LayoutList } from '../models/layout-list';
 import Helpers from 'app/core/helpers';
 import { ValorEsperado } from 'app/telas-adm/valor-esperado-banco/model/valor-esperado';
 import { ValorEsperadoBancoService } from 'app/telas-adm/valor-esperado-banco/valor-esperado-banco.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-leioute-cadastrar',
@@ -22,8 +23,6 @@ import { ValorEsperadoBancoService } from 'app/telas-adm/valor-esperado-banco/va
   styleUrls: ['./leioute-cadastrar.component.css']
 })
 export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
-  // @ViewChild('detalhesValorEsperado') childComponentModalDetalhesValorEsperado: DetalheValorEsperadoComponent;
-
   @ViewChild('excluirLayoutModal') childExcluirLayoutModal: ExcluirLayoutCadastroModalComponent;
   @ViewChild('editarLayoutModal') childEditarLayoutModal: EditarLayoutModalCadastroComponent;
 
@@ -44,7 +43,8 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
     private segmentoService: TipoSegmentoService,
     private bancoService: BancoService,
     private router: Router,
-    private valorEsperadoService: ValorEsperadoBancoService) {
+    private valorEsperadoService: ValorEsperadoBancoService,
+    private _notifications: NotificationsService) {
 
     this.bancos = new Array<Banco>();
     this.segmentos = new Array<Segmento>();
@@ -123,19 +123,7 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
 
     this.layouts.push(objCopy);
   }
-
-  abriModalValorEsperado(model) {
-
-    // this.childComponentModal.listValorEsperado = true;
-    // this.childComponentModal.openModal(model, false);
-  }
-
-  abriModalValorEsperadoEdit(model) {
-
-    //this.childEditarLayoutModal.list = false;
-    //this.childComponentModal.openModal(model, true);
-  }
-
+ 
   voltar() {
 
     this.router.navigate(['layout']);
@@ -153,6 +141,7 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
   salvarLeiouteConfigurado() {
 
     this.leiouteService.inserirVarios(this.layouts).subscribe(res => {
+      this._notifications.success("Sucesso", "Layout salvo com sucesso.");
     });
   }
 

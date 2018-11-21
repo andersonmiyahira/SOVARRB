@@ -40,10 +40,9 @@ export class CadastrarUsuarioComponent implements OnInit {
       senha: new FormControl(this.model.senha, [
         Validators.required
       ]),
-      ativo: new FormControl(this.model.ativo, [
+      confirmaSenha: new FormControl(this.model.confirmaSenha, [
         Validators.required
-      ]),
-      language: new FormControl()
+      ]) 
     });
   }
 

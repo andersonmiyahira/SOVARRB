@@ -98,7 +98,7 @@ namespace API
             NativeInjector.RegisterServices(services);
 
             //Add automapper references
-            services.AddAutoMapper(typeof(DomainToViewModelProfile), typeof(ViewModelToDomainProfile));
+            services.AddAutoMapper(typeof(DomainToViewModelProfile), typeof(ViewModelToDomainProfile)); 
         }
 
         private static void RegisterAuthorizationFilter(IServiceCollection services)

@@ -16,11 +16,7 @@
   <input class="form-control" type="password" placeholder="Senha" maxlength="15" name="senha" [(ngModel)]="model.senha"
     formControlName="senha">
 
-  <span class="text-danger field-validation-valid" data-valmsg-for="Input.Password" data-valmsg-replace="true"></span>
-
-  <input class="form-control confirm-password" type="password" maxlength="15" placeholder="Confirmar Senha" name="confirmsenha">
-
-  <span class="text-danger field-validation-valid" data-valmsg-for="Input.ConfirmPassword" data-valmsg-replace="true"></span>
+  <input class="form-control confirm-password" type="password" [(ngModel)]="model.ConfirmaSenha"  formControlName="confirmaSenha" maxlength="15" placeholder="Confirmar Senha" name="confirmsenha">
 
   <button class="btn btn-lg btn-primary btn-block mb-3" type="submit" (click)="salvar()">Cadastrar</button>
   <div class="options mb-3">

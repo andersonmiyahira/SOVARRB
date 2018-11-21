@@ -36,6 +36,11 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]LayoutRequest layoutRequest)
         {
+            if (!layoutRequest.IsValid())
+            {
+                return Response(layoutRequest.ValidationResult);
+            }
+
             var response = _layoutAppService.Inserir(layoutRequest);
             return Response(response);
         }

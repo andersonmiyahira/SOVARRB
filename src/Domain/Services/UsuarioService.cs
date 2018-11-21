@@ -2,6 +2,7 @@
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.Uow;
+using System.Linq;
 
 namespace Domain.Services
 {
@@ -23,6 +24,13 @@ namespace Domain.Services
 
         public Usuario SalvarUsuario(Usuario entity)
         {
+            var usuarioPorEmail = _usuarioRepository.GetAll().Where(_ => _.Email.ToUpper() == entity.Email);
+            if (usuarioPorEmail != null)
+            {
+                entity.SetarValidationResultErrors(new FluentValidation.Results.ValidationFailure("Email", "Email já cadastrado."));
+                return entity;
+            }
+
             _usuarioRepository.Add(entity);
             _uow.Commit();
 

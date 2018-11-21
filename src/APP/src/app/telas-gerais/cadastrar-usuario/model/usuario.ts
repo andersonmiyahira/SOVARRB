@@ -3,6 +3,7 @@ export class Usuario {
     nome: string;
     email: string;
     senha: string;
+    confirmaSenha: string;
     ehAdministrador: boolean;
     dataCadastro: Date;
     dataAlteracao: Date;

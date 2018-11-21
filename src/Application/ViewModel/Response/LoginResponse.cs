@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FluentValidation.Results;
 
 namespace Application.ViewModel.Response
 {
@@ -11,5 +9,7 @@ namespace Application.ViewModel.Response
         public string expiration { get; set; }
         public string accessToken { get; set; }
         public string message { get; set; }
+
+        public ValidationResult ValidationResult { get; set; }
     }
 }

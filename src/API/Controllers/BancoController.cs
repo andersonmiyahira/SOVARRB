@@ -37,6 +37,11 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]BancoRequest banco)
         {
+            if (!banco.IsValid())
+            {
+                return Response(banco.ValidationResult);
+            }
+
             var bancos = _bancoAppService.Salvar(banco);
             return Response(bancos);
         }

@@ -3,6 +3,7 @@ using API.Models;
 using Application.AppService.ValorEsperado;
 using Application.ViewModel.Request;
 using Application.ViewModel.Response;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -40,7 +41,12 @@ namespace API.Controllers
             }
 
             UsuarioResponse usuarioValidoEncontrado = _usuarioAppService.EfetuarLogin(usuario);
-            if(usuarioValidoEncontrado == null) return Response(new LoginResponse() { authenticated = false });
+            if (usuarioValidoEncontrado == null)
+            {
+                ValidationResult vr = new ValidationResult();
+                vr.Errors.Add(new ValidationFailure("Email/Senha", "Email ou senha inválidos."));
+                return Response(new LoginResponse() { authenticated = false, ValidationResult = vr });
+            }
 
             ClaimsIdentity identity = new ClaimsIdentity(
                 new GenericIdentity(usuarioValidoEncontrado.IdUsuario.ToString(), "Login"),

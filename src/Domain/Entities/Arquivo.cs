@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
-    public class Arquivo
+    public class Arquivo 
     {
         public Arquivo()
         {

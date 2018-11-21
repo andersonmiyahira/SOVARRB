@@ -1,9 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Domain.EntitiesBase;
+using System;
 
 namespace Domain.Entities
 {
-    public class Usuario
+    public class Usuario : EntityBase
     {
         public int IdUsuario { get; private set; }
         public string Nome { get; private set; }
@@ -12,8 +12,7 @@ namespace Domain.Entities
         public bool EhAdministrador { get; private set; }        
         public DateTime DataCadastro { get; private set; }
         public DateTime DataAlteracao { get; private set; }
-        public bool Ativo { get; private set; } 
-
+        public bool Ativo { get; private set; }
 
         public void AtualizaSenhaCriptografada(string senhaCriptografada)
         {

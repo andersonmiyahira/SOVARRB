@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Domain.EntitiesBase;
+using System;
 
 namespace Domain.Entities
 {
-    public class Banco
+    public class Banco : EntityBase
     {
         public int Id { get; private set; }
         public string Descricao { get; private set; }

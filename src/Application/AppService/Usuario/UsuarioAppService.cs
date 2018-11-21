@@ -5,6 +5,7 @@ using Application.ViewModel.Response;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces.Services;
+using Domain.Validations;
 
 namespace Application.AppService.ValorEsperado
 {
@@ -22,6 +23,9 @@ namespace Application.AppService.ValorEsperado
         public UsuarioResponse CadastrarUsuario(UsuarioRequest model)
         {
             var entity = _mapper.Map<Usuario>(model);
+
+            //var isValid = entity.Invalid;
+             
             entity.AtualizaSenhaCriptografada(Hash.Create(entity.Senha));
             entity = _usuarioService.SalvarUsuario(entity);
 

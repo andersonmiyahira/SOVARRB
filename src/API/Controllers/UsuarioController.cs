@@ -26,6 +26,11 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]UsuarioRequest usuarioRequest)
         {
+            if (!usuarioRequest.IsValid())
+            {
+                return Response(usuarioRequest.ValidationResult);
+            }
+
             var response = _usuarioAppService.CadastrarUsuario(usuarioRequest);
             return Response(response);
         }

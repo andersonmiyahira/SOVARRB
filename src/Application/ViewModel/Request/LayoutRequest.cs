@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Application.ViewModel.RequestValidations;
+using FluentValidation.Results;
+using System.Collections.Generic;
 
 namespace Application.ViewModel.Request
 {
@@ -20,5 +22,15 @@ namespace Application.ViewModel.Request
 
         public List<ValorEsperadoRequest> ValoresEsperados { get; set; }
         public List<int> IdValoresEsperados { get; set; }
+
+        public ValidationResult ValidationResult { get; set; }
+
+        public bool IsValid()
+        {
+            var result = new LayoutRequestValidator().Validate(this);
+            ValidationResult = result;
+
+            return result.IsValid;
+        }
     }
 }

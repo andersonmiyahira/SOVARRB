@@ -24,7 +24,8 @@ namespace Domain.Services
 
         public Usuario SalvarUsuario(Usuario entity)
         {
-            var usuarioPorEmail = _usuarioRepository.GetAll().Where(_ => _.Email.ToUpper() == entity.Email);
+            var usuarioPorEmail = _usuarioRepository.GetAll()
+                                                    .FirstOrDefault(_ => _.Email.ToUpper() == entity.Email.ToUpper());
             if (usuarioPorEmail != null)
             {
                 entity.SetarValidationResultErrors(new FluentValidation.Results.ValidationFailure("Email", "Email já cadastrado."));

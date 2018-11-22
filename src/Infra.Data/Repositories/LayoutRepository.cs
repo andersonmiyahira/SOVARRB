@@ -21,7 +21,8 @@ namespace Infra.Data.Repositories
                               .Where(_ => filters.BancoId == default(int)         || _.BancoId == filters.BancoId)
                               .Where(_ => filters.TipoCNABId == default(int)      || _.TipoCNABId == filters.TipoCNABId)
                               .Where(_ => filters.TipoTransacaoId == default(int) || _.TipoTransacaoId == filters.TipoTransacaoId)
-                              .Where(_ => filters.TipoBoletoId == default(int)    || _.TipoBoletoId == filters.TipoBoletoId);
+                              .Where(_ => filters.TipoBoletoId == default(int)    || _.TipoBoletoId == filters.TipoBoletoId)
+                              .OrderBy(_ => _.PosicaoDe);
 
             return query;            
         }

@@ -34,8 +34,8 @@
                  [(ngModel)]="model.tipoCampoId" name="tipoCampoId" formControlName="tipoCampoId" (change)="onChange($event)">
                   <option value="1">Numérico</option>
                   <option value="2">Alfanumérico</option>
-                  <option value="3">Data(aaaammdd)</option>
-                  <option value="4">Data(ddmmaa)</option>
+                  <option value="3">Data(ddmmaa)</option>
+                  <option value="4">Data(mmddaa)</option>
                   <option value="5">Data(ddmmaaaa)</option>
                 </select>
               </div>
@@ -57,7 +57,7 @@
               </div>
               <div class="form-group">
                 <label for="valorEsperado">Valor esperado</label>
-                <ss-multiselect-dropdown [options]="_options" [(ngModel)]="model.idValoresEsperados" formControlName="idValoresEsperados" style="display: inherit;width: 100%" ></ss-multiselect-dropdown>
+                <ss-multiselect-dropdown [options]="_options" (ngModelChange)="onChangeValorEsperado($event)" [(ngModel)]="model.idValoresEsperados" formControlName="idValoresEsperados" style="display: inherit;width: 100%" ></ss-multiselect-dropdown>
               </div>
             </form>
           </div>

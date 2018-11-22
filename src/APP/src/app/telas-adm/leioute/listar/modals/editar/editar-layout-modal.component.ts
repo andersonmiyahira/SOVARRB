@@ -57,7 +57,9 @@ export class EditarLayoutModalComponent implements OnInit {
       idValoresEsperados: new FormControl(this.model.idValoresEsperados, [
         Validators.required
       ]),
-      language: new FormControl()
+      tipoRegistroFlag: new FormControl(this.model.tipoRegistroFlag, [
+        Validators.required
+      ])
     });
   }
 

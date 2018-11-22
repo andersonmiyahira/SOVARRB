@@ -5,6 +5,7 @@ using AutoMapper;
 using Domain.Interfaces.Services;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Application.AppService.Banco
 {
@@ -22,7 +23,7 @@ namespace Application.AppService.Banco
 
         public ICollection<BancoResponse> ObterTodosBancos()
         {
-            var bancos = this.GetAll();
+            var bancos = this.GetAll().OrderBy(b => b.Descricao);
             return _mapper.Map<List<BancoResponse>>(bancos);
         }
 

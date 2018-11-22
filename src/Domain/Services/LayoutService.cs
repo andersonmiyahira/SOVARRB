@@ -38,7 +38,8 @@ namespace Domain.Services
                              model.PosicaoAte, 
                              model.SegmentoId, 
                              model.TipoCampoId, 
-                             model.Obrigatorio);
+                             model.Obrigatorio,
+                             model.TipoRegistroFlag.Value);
 
             _layoutRepository.Update(obj);
             _uow.Commit();

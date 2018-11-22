@@ -86,9 +86,9 @@ namespace Domain.Entities
 
                 var valoresEsperados = Layout.ETipoCampo.GetDescription();
                 if(Layout.LayoutValoresEsperados.Any())
-                    valoresEsperados = string.Join(",", Layout.LayoutValoresEsperados.Select(_ => _.ValorEsperado.Descricao));
+                    valoresEsperados = string.Join(",", Layout.LayoutValoresEsperados.Select(_ => _.ValorEsperado.Valor));
 
-                return $"Linha {Linha}, Posição {PosicaoDe} - Posição {PosicaoAte}, Esperado {valoresEsperados} - Encontrado: {Mensagem}";
+                return $"Linha {Linha}, Posição {PosicaoDe} - Posição {PosicaoAte}, Esperado: {valoresEsperados} - Encontrado: {Mensagem}";
             }
         }
     }

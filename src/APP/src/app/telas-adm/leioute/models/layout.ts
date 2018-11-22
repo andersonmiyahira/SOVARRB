@@ -19,4 +19,6 @@ export class Layout{
     tipoRegistroFlag?: boolean;
 
     idLayoutReference: string;
+
+    valoresEsperadosSelecionados: string;
 }

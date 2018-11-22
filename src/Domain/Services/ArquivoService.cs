@@ -93,7 +93,7 @@ namespace Domain.Services
 
             var identificadorTrailer = layoutValidacaoTrailer.Where(_ => _.TipoRegistroFlag.HasValue && _.TipoRegistroFlag.Value).FirstOrDefault();
 
-            int rowCount = 0;
+            int rowCount = 1;
             //Validando linhas de arquivo
             foreach (var linha in arquivo.LinhasArquivo)
             {
@@ -114,7 +114,7 @@ namespace Domain.Services
 
         private bool IdentificarLinha(string linha, Layout identificador)
         {
-            var valorEncontrado = linha.Substring(identificador.PosicaoDe, identificador.PosicaoAte + 1);
+            var valorEncontrado = linha.Substring(identificador.PosicaoDe - 1, identificador.PosicaoAte);
             return valorEncontrado.ToString() == identificador.LayoutValoresEsperados.FirstOrDefault().ValorEsperado.Valor;
         }
 
@@ -123,6 +123,8 @@ namespace Domain.Services
             List<LogArquivo> logArquivosCriados = new List<LogArquivo>();
             foreach (var layout in layoutValidacao.Where(_ => !_.TipoRegistroFlag.HasValue || !_.TipoRegistroFlag.Value))
             {
+                if (!layout.Obrigatorio) continue;
+
                 //cria novo log de arquivo
                 var logArquivo = new LogArquivo(arquivo,
                                                 rowCount,
@@ -136,7 +138,7 @@ namespace Domain.Services
                 logArquivo.SetarLayout(layout);
 
                 // Busca valores na linha corrente, pela posição do layout
-                var valorEncontrado = linha.Substring(layout.PosicaoDe, layout.PosicaoAte + 1);
+                var valorEncontrado = linha.Substring(layout.PosicaoDe - 1, layout.PosicaoAte - layout.PosicaoDe + 1).Trim();
 
                 bool ehValido = true;
                 // validando quando nao possui valor esperado de acordo com tipo
@@ -197,17 +199,23 @@ namespace Domain.Services
                     break;
 
                 case ETipoCampo.DataDDMMAA:
-                    string valorDataFormato1 = valorEncontrado.Insert(4, "/").Insert(2, "");
+                    string valorDataFormato1 = valorEncontrado.Insert(4, "/");
+                           valorDataFormato1 = valorDataFormato1.Insert(2, "/");
+
                     ehValido = DataHelper.ValidaDataString(valorDataFormato1, "dd/MM/yy");
                     break;
 
                 case ETipoCampo.DataMMDDAA:
-                    string valorDataFormato2 = valorEncontrado.Insert(4, "/").Insert(2, "");
+                    string valorDataFormato2 = valorEncontrado.Insert(4, "/");
+                           valorDataFormato2 = valorDataFormato2.Insert(2, "/");
+
                     ehValido = DataHelper.ValidaDataString(valorDataFormato2, "MM/dd/yy");
                     break;
 
                 case ETipoCampo.HoraDDMMAAAA:
-                    string valorDataFormato3 = valorEncontrado.Insert(4, "/").Insert(2, "");
+                    string valorDataFormato3 = valorEncontrado.Insert(4, "/");
+                           valorDataFormato3 = valorDataFormato3.Insert(2, "/");
+
                     ehValido = DataHelper.ValidaDataString(valorDataFormato3, "dd/MM/yyyy");
                     break;
             }

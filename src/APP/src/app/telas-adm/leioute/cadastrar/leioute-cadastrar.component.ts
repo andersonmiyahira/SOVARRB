@@ -179,4 +179,12 @@ export class LeiouteCadastrarComponent implements OnInit, OnDestroy {
     // this.childComponentModalDetalhesValorEsperado.valoresEsperados = model.valoresEsperados;
     // this.childComponentModalDetalhesValorEsperado.openModal();
   }
+
+  concatenarValoresEsperados(valores: Array<ValorEsperado>) {
+
+    if(!valores) return;
+    valores.map(function(el){
+      return el.descricao;
+    }).join(",");
+  }
 }

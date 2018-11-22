@@ -82,4 +82,9 @@ export class EditarLayoutModalCadastroComponent implements OnInit {
 
     this.model.tipoCampoDescricao = selectElementText;
   }
+
+  onChangeValorEsperado($event) {
+    const optionSelected = this._options.filter(_ => _.id == $event).map(_ => _.name).join(",");
+    this.model.valoresEsperadosSelecionados = optionSelected;
+  }
 }

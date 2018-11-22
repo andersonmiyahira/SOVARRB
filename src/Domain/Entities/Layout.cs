@@ -62,13 +62,14 @@ namespace Domain.Entities
             DataAlteracao = DateTime.Now;
         }
 
-        internal void AlterarDados(string descricao, int posicaoDe, int posicaoAte, int? segmentoId, int tipoCampoId, bool obrigatorio)
+        internal void AlterarDados(string descricao, int posicaoDe, int posicaoAte, int? segmentoId, int tipoCampoId, bool obrigatorio, bool tipoRegistroFlag)
         {
             Descricao = descricao;
             PosicaoDe = posicaoDe;
             PosicaoAte = posicaoAte;
             TipoCampoId = tipoCampoId;
             Obrigatorio = obrigatorio;
+            TipoRegistroFlag = tipoRegistroFlag;
 
             if (segmentoId != default(int))
                 SegmentoId = segmentoId;

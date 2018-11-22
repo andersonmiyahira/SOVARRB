@@ -42,6 +42,15 @@ namespace Domain.Entities
         }
 
         [NotMapped]
+        public ETipoCNAB ETipoCNAB
+        {
+            get
+            {
+                return (ETipoCNAB)TipoCNABId;
+            }
+        }
+
+        [NotMapped]
         public List<int> IdValoresEsperados { get; protected set; }
 
         internal void AdicionarLayoutValorEsperado(LayoutValorEsperado valorEsperado)

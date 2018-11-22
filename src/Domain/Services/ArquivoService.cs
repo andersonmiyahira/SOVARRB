@@ -60,7 +60,7 @@ namespace Domain.Services
                 logArquivosCriados.AddRange(ValidarArquivo(arquivo, layout));
             }
 
-            if(salvarLog) _unitOfWork.Commit();
+            if (salvarLog) _unitOfWork.Commit();
 
             return logArquivosCriados;
         }
@@ -123,6 +123,7 @@ namespace Domain.Services
             List<LogArquivo> logArquivosCriados = new List<LogArquivo>();
             foreach (var layout in layoutValidacao.Where(_ => !_.TipoRegistroFlag.HasValue || !_.TipoRegistroFlag.Value))
             {
+                if (!QtdeCaracteresLinhaValida(linha, layoutValidacao, arquivo, rowCount, logArquivosCriados)) break;
                 if (!layout.Obrigatorio) continue;
 
                 //cria novo log de arquivo
@@ -133,7 +134,8 @@ namespace Domain.Services
                                                 true,
                                                 DateTime.Now,
                                                 "",
-                                                layout.TipoRegistroId);
+                                                layout.TipoRegistroId,
+                                                linha.Length);
                 layout.LimparBancos();
                 logArquivo.SetarLayout(layout);
 
@@ -164,23 +166,29 @@ namespace Domain.Services
             }
 
             // se linha estiver OK
-            if(logArquivosCriados.Count == 0)
+            if (logArquivosCriados.Count == 0)
             {
-                var logArquivoLinhaOK = new LogArquivo(arquivo,
-                                                        rowCount,
-                                                        0,
-                                                        linha.Length,
-                                                        true,
-                                                        DateTime.Now,
-                                                        "",
-                                                        layoutValidacao.FirstOrDefault().TipoRegistroId);
-
-                logArquivoLinhaOK.SetarLayout(layoutValidacao.FirstOrDefault());
-                logArquivosCriados.Add(logArquivoLinhaOK);
-                _logArquivoRepository.AdicionarSemFilhos(logArquivoLinhaOK);
+                CriaLogPorLinha(true, linha, layoutValidacao, arquivo, rowCount, logArquivosCriados);
             }
 
             return logArquivosCriados;
+        }
+
+        private void CriaLogPorLinha(bool ehValido, string linha, List<Layout> layoutValidacao, Arquivo arquivo, int rowCount, List<LogArquivo> logArquivosCriados)
+        {
+            var logArquivoLinha = new LogArquivo(arquivo,
+                                                    rowCount,
+                                                    0,
+                                                    linha.Length,
+                                                    ehValido,
+                                                    DateTime.Now,
+                                                    "",
+                                                    layoutValidacao.FirstOrDefault().TipoRegistroId,
+                                                    linha.Length);
+
+            logArquivoLinha.SetarLayout(layoutValidacao.FirstOrDefault());
+            logArquivosCriados.Add(logArquivoLinha);
+            _logArquivoRepository.AdicionarSemFilhos(logArquivoLinha);
         }
 
         private static bool ValidarPorTipo(Layout layout, string valorEncontrado, bool ehValido)
@@ -200,27 +208,38 @@ namespace Domain.Services
 
                 case ETipoCampo.DataDDMMAA:
                     string valorDataFormato1 = valorEncontrado.Insert(4, "/");
-                           valorDataFormato1 = valorDataFormato1.Insert(2, "/");
+                    valorDataFormato1 = valorDataFormato1.Insert(2, "/");
 
                     ehValido = DataHelper.ValidaDataString(valorDataFormato1, "dd/MM/yy");
                     break;
 
                 case ETipoCampo.DataMMDDAA:
                     string valorDataFormato2 = valorEncontrado.Insert(4, "/");
-                           valorDataFormato2 = valorDataFormato2.Insert(2, "/");
+                    valorDataFormato2 = valorDataFormato2.Insert(2, "/");
 
                     ehValido = DataHelper.ValidaDataString(valorDataFormato2, "MM/dd/yy");
                     break;
 
                 case ETipoCampo.HoraDDMMAAAA:
                     string valorDataFormato3 = valorEncontrado.Insert(4, "/");
-                           valorDataFormato3 = valorDataFormato3.Insert(2, "/");
+                    valorDataFormato3 = valorDataFormato3.Insert(2, "/");
 
                     ehValido = DataHelper.ValidaDataString(valorDataFormato3, "dd/MM/yyyy");
                     break;
             }
 
             return ehValido;
+        }
+
+        private bool QtdeCaracteresLinhaValida(string linha, List<Layout> layoutValidacao, Arquivo arquivo, int rowCount, List<LogArquivo> logArquivosCriados)
+        {
+            if ((layoutValidacao.FirstOrDefault().TipoCNABId == (int)ETipoCNAB.CNAB240 && linha.Length != 240)
+                || (layoutValidacao.FirstOrDefault().TipoCNABId == (int)ETipoCNAB.CNAB400 && linha.Length != 400))
+            {
+                CriaLogPorLinha(false, linha, layoutValidacao, arquivo, rowCount, logArquivosCriados);
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain.Extensions;
+﻿using Domain.Enums;
+using Domain.Extensions;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Domain.Entities
 
         }
 
-        public LogArquivo(Arquivo arquivo, int linha, int posicaoDe, int posicaoAte, bool ehValido, DateTime dataCadastro, string mensagem, int tipoParametroId)
+        public LogArquivo(Arquivo arquivo, int linha, int posicaoDe, int posicaoAte, bool ehValido, DateTime dataCadastro, string mensagem, int tipoParametroId, int qtdCaracteresLinha)
         {   
             Arquivo = new Arquivo(arquivo.NomeArquivoGerado);
             ArquivoId = arquivo.IdArquivo;
@@ -24,6 +25,7 @@ namespace Domain.Entities
             DataCadastro = dataCadastro;
             Mensagem = mensagem;
             TipoParametroId = tipoParametroId;
+            QtdCaracteresLinha = qtdCaracteresLinha;
         }
 
         public int IdLogArquivo { get; private set; }
@@ -77,12 +79,26 @@ namespace Domain.Entities
         }
 
         [NotMapped]
+        public int QtdCaracteresLinha
+        {
+            get;
+            private set;
+        }
+
+        [NotMapped]
         public string MensagemFormatada
         {
             get
             {
                 if(EhValido)
                     return $"Linha {Linha} - OK";
+
+                if((!EhValido && Layout.TipoCNABId == (int)ETipoCNAB.CNAB240 && QtdCaracteresLinha < 240)
+                    || (!EhValido && Layout.TipoCNABId == (int)ETipoCNAB.CNAB400 && QtdCaracteresLinha < 400))
+                {
+                    var cnab = Layout.ETipoCNAB.GetDescription();
+                    return $"Linha {Linha} - Quantidade de caracteres inválidos para " + cnab + ", Encontrado: " + QtdCaracteresLinha + " caracteres.";
+                }
 
                 var valoresEsperados = Layout.ETipoCampo.GetDescription();
                 if(Layout.LayoutValoresEsperados.Any())

@@ -94,8 +94,8 @@ namespace Domain.Entities
                     return $"Linha {Linha} - OK";
 
                 if(Mensagem == "LINHA" && !EhValido &&
-                   (Layout.TipoCNABId == (int)ETipoCNAB.CNAB240 && QtdCaracteresLinha < 240
-                   || Layout.TipoCNABId == (int)ETipoCNAB.CNAB400 && QtdCaracteresLinha < 400))
+                   (Layout.TipoCNABId == (int)ETipoCNAB.CNAB240 && QtdCaracteresLinha != 240
+                   || Layout.TipoCNABId == (int)ETipoCNAB.CNAB400 && QtdCaracteresLinha != 400))
                 {
                     var cnab = Layout.ETipoCNAB.GetDescription();
                     return $"Linha {Linha} - Quantidade de caracteres inválidos para " + cnab;

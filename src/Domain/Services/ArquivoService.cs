@@ -58,7 +58,7 @@ namespace Domain.Services
             foreach (var arquivo in arquivos)
             {
                 logArquivosCriados.AddRange(ValidarArquivo(arquivo, layout));
-                if (logArquivosCriados.Count(_ => _.EhValido) == arquivo.LinhasArquivo.Count)
+                if (logArquivosCriados.Count(_ => _.EhValido && _.ArquivoId == arquivo.IdArquivo) == arquivo.LinhasArquivo.Count)
                 {
                     arquivo.SetarEhValido(true);
                     _arquivoRepository.Update(arquivo);

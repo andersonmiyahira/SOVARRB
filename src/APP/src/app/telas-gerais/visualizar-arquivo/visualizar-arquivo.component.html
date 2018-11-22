@@ -134,10 +134,10 @@
     </button>
   </div>
   <div class="modal-body">
-    <div *ngIf="mensagens.resultado.length <= 0">
+    <div *ngIf="mensagens.resultado && mensagens.resultado.length <= 0">
       <label>Sem resultados para o arquivo</label>
     </div>
-    <div class="list-alerts" *ngIf="mensagens.resultado.length > 0">
+    <div class="list-alerts" *ngIf="mensagens.resultado && mensagens.resultado.length > 0">
       <ul>
         <li>
           <h3>Header:</h3>

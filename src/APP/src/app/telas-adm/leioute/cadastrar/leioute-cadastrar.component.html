@@ -65,7 +65,7 @@
         <i class="fas fa-chevron-left"></i> voltar
       </button>
       <!-- [disabled]="form.invalid" -->
-      <button type="submit" class="btn btn-primary" (click)="salvarNovoLeioute()" >Adicionar</button>
+      <button type="submit" class="btn btn-primary" (click)="salvarNovoLeioute()" [disabled]="form.invalid">Adicionar</button>
     </div>
   </div>
   <div class="card bg-light mb-3">
@@ -80,7 +80,7 @@
                 <th scope="col">Tipo Campo</th>
                 <th scope="col">Obrigatório</th>
                 <th scope="col">Identificador bloco</th>
-                <th scope="col">Valor esperado</th>
+                <!-- <th scope="col">Valor esperado</th> -->
                 <th scope="col">Ações</th>
               </tr>
             </thead>
@@ -92,11 +92,11 @@
                 <td>{{layout.tipoCampoDescricao}}</td>
                 <td>{{layout.obrigatorio ? "Sim" : "Não"}}</td>
                 <td>{{layout.tipoRegistroFlag ? "Sim" : "Não"}}</td>
-                <td>
+                <!-- <td>
                   <button type="button" class="btn btn-primary btn-sm" (click)="detalhesValoresEsperados(layout)" data-toggle="tooltip" data-placement="top" ngbTooltip="Detalhes">
                     <i class="fas fa-info-circle"></i>
                   </button>
-                </td>
+                </td> -->
                 <td>
                   <button type="button" class="btn btn-primary btn-sm" (click)="editar(editarModal, layout)" data-toggle="tooltip" data-placement="top" ngbTooltip="Editar">
                     <i class="fas fa-edit"></i>

@@ -58,6 +58,11 @@ namespace Domain.Services
             foreach (var arquivo in arquivos)
             {
                 logArquivosCriados.AddRange(ValidarArquivo(arquivo, layout));
+                if (logArquivosCriados.Count(_ => _.EhValido) == arquivo.LinhasArquivo.Count)
+                {
+                    arquivo.SetarEhValido(true);
+                    _arquivoRepository.Update(arquivo);
+                }
             }
 
             if (salvarLog) _unitOfWork.Commit();
@@ -182,7 +187,7 @@ namespace Domain.Services
                                                     linha.Length,
                                                     ehValido,
                                                     DateTime.Now,
-                                                    "",
+                                                    ehValido ? "" : "LINHA",
                                                     layoutValidacao.FirstOrDefault().TipoRegistroId,
                                                     linha.Length);
 

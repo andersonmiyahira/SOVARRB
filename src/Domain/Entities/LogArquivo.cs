@@ -93,11 +93,12 @@ namespace Domain.Entities
                 if(EhValido)
                     return $"Linha {Linha} - OK";
 
-                if((!EhValido && Layout.TipoCNABId == (int)ETipoCNAB.CNAB240 && QtdCaracteresLinha < 240)
-                    || (!EhValido && Layout.TipoCNABId == (int)ETipoCNAB.CNAB400 && QtdCaracteresLinha < 400))
+                if(Mensagem == "LINHA" && !EhValido &&
+                   (Layout.TipoCNABId == (int)ETipoCNAB.CNAB240 && QtdCaracteresLinha < 240
+                   || Layout.TipoCNABId == (int)ETipoCNAB.CNAB400 && QtdCaracteresLinha < 400))
                 {
                     var cnab = Layout.ETipoCNAB.GetDescription();
-                    return $"Linha {Linha} - Quantidade de caracteres inválidos para " + cnab + ", Encontrado: " + QtdCaracteresLinha + " caracteres.";
+                    return $"Linha {Linha} - Quantidade de caracteres inválidos para " + cnab;
                 }
 
                 var valoresEsperados = Layout.ETipoCampo.GetDescription();

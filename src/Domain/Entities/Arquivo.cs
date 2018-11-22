@@ -59,6 +59,11 @@ namespace Domain.Entities
             LinhasArquivo = linhas;
         }
 
+        public void SetarEhValido(bool ehValido)
+        {
+            EhValido = ehValido;
+        }
+
         [NotMapped]
         public List<string> LinhasArquivo { get; private set; }
     }

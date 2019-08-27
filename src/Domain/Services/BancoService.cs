@@ -2,6 +2,7 @@
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.Uow;
+using System;
 
 namespace Domain.Services
 {
@@ -17,9 +18,9 @@ namespace Domain.Services
             _uow = unitOfWork;
         }
 
-        public void Excluir(Banco bancoEntitie)
+        public void ExcluirPorId(int id)
         {
-            _bancoRepository.Remove(bancoEntitie);
+            _bancoRepository.RemoveById(id);
             _uow.Commit();
         }
 
@@ -32,10 +33,16 @@ namespace Domain.Services
         {
             var bancoSalvo = _bancoRepository.ObterPorCodigo(banco.Id);
             if (bancoSalvo != null)
+            {
+                banco.SetarDataCadastro(bancoSalvo.DataCadastro);
+                banco.SetarDataAlteracao(DateTime.Now);
                 _bancoRepository.Update(banco);
+            }
             else
+            {
+                banco.SetarDataCadastro(DateTime.Now);
                 _bancoRepository.Add(banco);
-
+            }
             _uow.Commit();
             return banco;
         }

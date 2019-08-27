@@ -1,21 +1,39 @@
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../environments/environment';
-import { ApiService } from '../../services/api.service';
+import { Injectable } from '@angular/core';
+import { ApiService } from 'app/services/api.service';
+import { ServiceBase } from 'app/shared/services/service-base';
+import { map } from 'rxjs/operators';
+
+import { Banco } from './models/banco';
+import { Observable } from 'rxjs';
 
 @Injectable()
-export class BancoService {
-  constructor(private http: HttpClient,
-    private apiService: ApiService) {
+export class BancoService extends ServiceBase {
+
+  constructor(private apiService: ApiService) {
+    super("banco");
   }
 
-  obterBancos() {
-    // return this.apiService.get("http://localhost:52854/api/banco");
- 
-    return this.http.get<any[]>("http://localhost:52854/api/bancoGetAll")
-    .pipe(
-      //tap(banco => console.log(`fetched bancos`))
-    );
-   }
+  obterBancos(): Observable<any> {
+
+    return this.apiService.get(this.urlAPI).pipe(
+      map((res: any) => {
+        return <Banco[]>res.data;
+      }));
+  }
+
+  salvarBanco(model: Banco) {
+
+    return this.apiService.post(this.urlAPI, model).pipe(
+      map((res: any) => {
+        return <Banco>res.data;
+      }));
+  } 
+   
+  excluirBanco(model: Banco) {
+
+    return this.apiService.delete(this.urlAPI, model.id).pipe(
+      map((res: any) => {
+        return <Banco>res.data;
+      }));
+  }
 }

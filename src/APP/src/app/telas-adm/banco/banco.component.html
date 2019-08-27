@@ -18,13 +18,13 @@
               <tr *ngFor="let banco of bancos">
                 <th scope="row">{{banco.id}}</th>
                 <td>{{banco.descricao}}</td>
-                <td>{{banco.dataCadastro}}</td>
-                <td>{{banco.status}}</td>
+                <td>{{banco.dataCadastro | date: 'dd/MM/yyyy'}}</td>
+                <td>{{banco.ativo ? "Sim" : "Não"}}</td>
                 <td>
-                  <button type="button" class="btn btn-primary btn-sm" (click)="editarOpenModal(content, banco.id)" ngbTooltip="Editar">
+                  <button type="button" class="btn btn-primary btn-sm" (click)="editarOpenModal(content, banco)" ngbTooltip="Editar">
                     <span class="fas fa-edit"></span>
                   </button>
-                  <button type="button" class="btn btn-danger btn-sm" (click)="excludeOpenModal(excluir)" ngbTooltip="Excluir">
+                  <button type="button" class="btn btn-danger btn-sm" (click)="excluirOpenModal(exclude, banco)" ngbTooltip="Excluir">
                     <span class="fas fa-trash-alt"></span>
                   </button>
                 </td>
@@ -45,7 +45,7 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header bg-primary">
-    <h4 class="modal-title">{{id == 0 ? 'Novo' : 'Editar'}} Banco</h4>
+    <h4 class="modal-title">Salvar Banco</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -54,25 +54,26 @@
     <div>
       <div class="row">
         <div class="col-md-12">
-          <form method="post" action="/" novalidate="novalidate">
+          <form method="post" action="/" novalidate="novalidate" [formGroup]="form">
             <div class="text-danger validation-summary-valid" data-valmsg-summary="true">
               <ul>
                 <li style="display:none"></li>
               </ul>
             </div>
             <div class="form-group">
-              <label for="Input_Email">Código</label>
-              <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
+              <label>Código</label>
+              <input class="form-control" type="number" [(ngModel)]="model.id" name="id" formControlName="id">
             </div>
             <div class="form-group">
-              <label for="Input_Email">Descrição</label>
-              <input class="form-control" type="text" data-val="true" id="Input_nome" name="Input.nome" value="">
+              <label>Descrição</label>
+              <input class="form-control" type="text" maxlength="255" [(ngModel)]="model.descricao" name="descricao" formControlName="descricao">
             </div>
             <div class="form-group">
-              <label for="cbCNAB">Status</label>
-              <select id="cbCNAB" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
-                <option selected="selected" value="1">Ativo</option>
-                <option value="2">Inativo</option>
+              <label for="cbStatus">Ativo</label>
+              <select id="cbStatus" [(ngModel)]="model.ativo" formControlName="ativo" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="display: inherit;width: 100%">
+                <option [value]="undefined">Selecione</option>
+                <option selected="selected" value="true">Ativo</option>
+                <option value="false">Inativo</option>
               </select>
             </div>
           </form>
@@ -81,13 +82,13 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary btn-left" (click)="salvar('Close click')">Salvar</button>
+    <button type="submit" class="btn btn-primary btn-left" (click)="salvar('Close click')" [disabled]="form.invalid">Salvar</button>
     <button type="button" class="btn btn-light" (click)="c('Close click')">Fechar</button>
   </div>
 </ng-template>
 
 
-<ng-template #excluir let-c="close" let-d="dismiss">
+<ng-template #exclude let-c="close" let-d="dismiss">
   <div class="modal-header bg-danger">
     <h4 class="modal-title">Excluir Banco</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -104,7 +105,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-danger btn-left" (click)="excluir()">Sim</button>
+    <button type="button" class="btn btn-danger btn-left" (click)="excluir()">Sim</button>
     <button type="button" class="btn btn-light" (click)="c('Close click')">Não</button>
   </div>
 </ng-template>

@@ -1,7 +1,10 @@
 ﻿using API.ControllerBaseExtensions;
 using Application.AppService.Banco;
 using Application.ViewModel.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Net;
 
 namespace API.Controllers
 {
@@ -17,25 +20,14 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("Importar")]
+        [AllowAnonymous]
         public IActionResult PostFile([FromForm] ImportarRequest request)
         {
-            _arquivoAppService.ProcessarArquivo(request);
-            return Ok();
+            request.UsuarioId = IdUsuarioLogado;
 
-            //if (file == null || file.Length <= 0)
-            //{
-            //NotifyError("400", "Arquivo inválido.");
+            var response = _arquivoAppService.ProcessarArquivo(request);
 
-            //}
-
-            //var retorno = _uploadService.UploadFile(file);
-            //if (!retorno.IsValid)
-            //{
-            //    NotifyError("400", retorno.Erro);
-            //    return Response();
-            //}
-
-            //return Response(retorno);
+            return Response(response);
         }
     }
 }

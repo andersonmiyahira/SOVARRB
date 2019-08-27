@@ -1,10 +1,12 @@
 ﻿using API.ControllerBaseExtensions;
 using Application.AppService.Banco;
 using Application.ViewModel.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    
     [Produces("application/json")]
     public class BancoController : ApiController
     {
@@ -16,6 +18,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Get()
         {
             var bancos = _bancoAppService.ObterTodosBancos();
@@ -23,23 +26,31 @@ namespace API.Controllers
         }
 
         [HttpGet("GetById")]
+        [AllowAnonymous]
         public IActionResult GetById(int id)
         {
             var bancos = _bancoAppService.ObterPorId(id);
             return Response(bancos);
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         public IActionResult Post([FromBody]BancoRequest banco)
         {
+            if (!banco.IsValid())
+            {
+                return Response(banco.ValidationResult);
+            }
+
             var bancos = _bancoAppService.Salvar(banco);
             return Response(bancos);
-        } 
+        }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpDelete]
-        public IActionResult Delete([FromBody]BancoRequest banco)
+        public IActionResult Delete(int id)
         {
-             _bancoAppService.Excluir(banco);
+             _bancoAppService.Excluir(id);
             return Response();
         }
     }

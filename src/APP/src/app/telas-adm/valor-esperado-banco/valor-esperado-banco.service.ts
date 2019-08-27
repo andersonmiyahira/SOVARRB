@@ -1,39 +1,53 @@
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../environments/environment';
+import { Injectable } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { ServiceBase } from '../../shared/services/service-base';
+import { map } from 'rxjs/operators';
+import { ValorEsperado } from './model/valor-esperado';
 
 @Injectable()
-export class ValorEsperadoBancoService {
-  constructor(private http: HttpClient,
-    private apiService: ApiService) {
-  }
-
-  obterBancos() {
-    // return this.apiService.get("http://localhost:52854/api/banco");
-
-    return this.http.get<any[]>("http://localhost:52854/api/bancoGetAll")
-      .pipe(
-        //tap(banco => console.log(`fetched bancos`))
-      );
-  }
-
-  obterTipoCNAB() {
-    //return this.apiService.get("http://localhost:52854/api/TipoCNAB");
-
-    return this.http.get<any[]>("http://localhost:52854/api/tipoCNAB")
-      .pipe(
-        //tap(cnab => {})
-      );
+export class ValorEsperadoBancoService extends ServiceBase {
+  constructor(private apiService: ApiService) {
+    super("valorEsperado");
   }
 
   obterValoresEsperados() {
-    // return this.apiService.get("http://localhost:52854/api/banco");
-
-    return this.http.get<any[]>("http://localhost:52854/api/valorEsperadoGetAll")
-      .pipe(
-        //tap(banco => console.log(`fetched bancos`))
-      );
+    
+    return this.apiService.get(this.urlAPI).pipe(
+      map((res: any) => {
+        return <ValorEsperado[]>res.data;
+      }));
   }
+
+  obterValoresEsperadosPorFiltros(filter: ValorEsperado) {
+
+    return this.apiService.getByFilters(this.urlAPI, filter).pipe(
+      map((res: any) => {
+        return <ValorEsperado[]>res.data;
+      }));
+  }
+
+  inserirValorEsperado(model: ValorEsperado) {
+
+    return this.apiService.post(this.urlAPI, model).pipe(
+      map((res: any) => {
+        return <ValorEsperado>res.data;
+      }));
+  }
+
+  atualizarValorEsperado(model: ValorEsperado) {
+
+    return this.apiService.put(this.urlAPI, model).pipe(
+      map((res: any) => {
+        return <ValorEsperado>res.data;
+      }));
+  }
+
+  excluirValorEsperado(model: ValorEsperado) {
+
+    return this.apiService.delete(this.urlAPI, model.idValorEsperado).pipe(
+      map((res: any) => {
+        return <ValorEsperado>res.data;
+      }));
+  }
+
 }

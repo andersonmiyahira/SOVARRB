@@ -1,4 +1,6 @@
 ﻿using Application.AppService.Banco;
+using Application.AppService.Layout;
+using Application.AppService.LogArquivo;
 using Application.AppService.Segmento;
 using Application.AppService.ValorEsperado;
 using Domain.Interfaces.Repositories;
@@ -35,8 +37,10 @@ namespace CrossCutting
             services.AddScoped<IArquivoAppService, ArquivoAppService>();
             services.AddScoped<IBancoAppService, BancoAppService>();
             services.AddScoped<ILayoutAppService, LayoutAppService>();
+            services.AddScoped<ILogArquivoAppService, LogArquivoAppService>();
             services.AddScoped<ISegmentoAppService, SegmentoAppService>();
-            services.AddScoped<IValorEsperadoAppService, ValorEsperadoAppService>();            
+            services.AddScoped<IValorEsperadoAppService, ValorEsperadoAppService>();
+            services.AddScoped<IUsuarioAppService, UsuarioAppService>();
         }
 
         private static void RegisterDomainServices(IServiceCollection services)
@@ -55,6 +59,7 @@ namespace CrossCutting
             services.AddScoped<IArquivoRepository, ArquivoRepository>();
             services.AddScoped<IBancoRepository, BancoRepository>();
             services.AddScoped<ILayoutRepository, LayoutRepository>();
+            services.AddScoped<ILayoutValorEsperadoRepository, LayoutValorEsperadoRepository>();
             services.AddScoped<ILogArquivoRepository, LogArquivoRepository>();
             services.AddScoped<ISegmentoRepository, SegmentoRepository>();
             services.AddScoped<IValorEsperadoRepository, ValorEsperadoRepository>();

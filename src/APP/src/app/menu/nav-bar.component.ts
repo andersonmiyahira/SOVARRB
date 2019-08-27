@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs/Subscription';
 import { EventosService } from '../core/eventos.service';
-import { LocalStorageService } from '../core/local-storage.service';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthService } from 'app/services/auth.service';
+import { JwtService } from 'app/services/jwt.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,8 +17,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
   logado: boolean;
   ehAdministrador: boolean;
 
-  constructor(private localStorageService: LocalStorageService,
-              private router: Router) {
+  constructor(private authService: AuthService,
+    private jwtTokenService: JwtService,
+    private router: Router) {
     this.logado = false;
     this.ehAdministrador = false;
     this.cadastrarEventoLogin();
@@ -32,12 +34,18 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   ajustaMenuLogin() {
-    this.logado = localStorage.getItem("logado") == "1";
-    this.ehAdministrador = localStorage.getItem("ehAdministradorLogged") == "1";
+
+    this.logado = this.authService.isLogged();
+    if (this.logado) {
+      const helper = new JwtHelperService();
+      const decodedToken = helper.decodeToken(this.jwtTokenService.getToken().toString());
+      this.ehAdministrador = decodedToken.role === "ADMIN";
+    }
   }
 
-  logout(){
-    localStorage.clear();
+  logout() {
+
+    this.authService.purgeAuth();
     this.ajustaMenuLogin();
     this.router.navigate(['./login']);
   }

@@ -1,10 +1,12 @@
 ﻿using API.ControllerBaseExtensions;
 using Application.AppService.Segmento;
 using Application.ViewModel.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     [Produces("application/json")]
     public class SegmentoController : ApiController
     {
@@ -44,9 +46,9 @@ namespace API.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete([FromBody]SegmentoRequest segmento)
+        public IActionResult Delete(int id)
         {
-            _segmentoAppService.Excluir(segmento);
+            _segmentoAppService.ExcluirPorId(id);
             return Response();
         }
     }

@@ -7,6 +7,7 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces.Services;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Application.AppService.Banco
 {
@@ -16,11 +17,17 @@ namespace Application.AppService.Banco
         private readonly IMapper _mapper;
 
         public ArquivoAppService(IArquivoService arquivoService,
-                                IMapper mapper) 
+                                 IMapper mapper) 
             : base(arquivoService)
         {
             _arquivoService = arquivoService;
             _mapper = mapper;
+        }
+
+        public byte[] Download(int id)
+        {
+            var bin = _arquivoService.GetById(id).Binario;
+            return bin;
         }
 
         public List<ArquivoResponse> ObterComFiltros(ArquivoFilter arquivoFilter)
@@ -30,21 +37,54 @@ namespace Application.AppService.Banco
             return _mapper.Map<List<ArquivoResponse>>(arquivos);             
         }
 
-        public void ProcessarArquivo(ImportarRequest importarRequest)
+        public List<LogArquivoResultadoResponse> ProcessarArquivo(ImportarRequest importarRequest)
         {
+            List<Domain.Entities.LogArquivo> logsCriados = new List<Domain.Entities.LogArquivo>();
             var arquivos = CriarObjetoDominio(importarRequest);
 
-            _arquivoService.ValidarArquivos(arquivos);
+            if(importarRequest.UsuarioId != default(int))
+            {
+                _arquivoService.SalvarArquivos(arquivos);
+                logsCriados.AddRange(_arquivoService.ValidarArquivos(arquivos, true));
+            }
+            else
+                logsCriados.AddRange(_arquivoService.ValidarArquivos(arquivos, false));
+
+            // creating return
+            var response = new List<LogArquivoResultadoResponse>();
+            foreach (var arquivo in arquivos)
+            {
+                var logs = _mapper.Map<List<ResultadoProcessamentoResponse>>(logsCriados.Where(x => x.Arquivo.NomeArquivoGerado == arquivo.NomeArquivoGerado));
+
+                LogArquivoResultadoResponse obj = new LogArquivoResultadoResponse();
+                obj.IdArquivo = arquivo.IdArquivo;
+                obj.NomeArquivo = arquivo.NomeArquivoOriginal;
+                obj.Resultado = logs;
+
+                response.Add(obj);
+            }
+
+            return response;
         }
 
-        // TODO: Ajustar idUsuario que fez upload = 0
         private List<Arquivo> CriarObjetoDominio(ImportarRequest importarRequest)
         {
             List<Arquivo> arquivos = new List<Arquivo>();
             foreach (var importacao in importarRequest.FormFiles)
             {
+                var arquivoBinario = FileHelper.ObterBytesPorStream(importacao.OpenReadStream());
                 var linhas = TextoHelper.ObterLinhasDoArquivo(importacao.OpenReadStream());
-                arquivos.Add(new Arquivo(0, importarRequest.BancoId, importacao.FileName, importarRequest.TipoCNABId, importarRequest.TipoBoletoId, linhas));
+
+                var arquivo = new Arquivo(importarRequest.UsuarioId,
+                                         importarRequest.BancoId,
+                                         importacao.FileName,
+                                         importarRequest.TipoCNABId,
+                                         importarRequest.TipoBoletoId);
+
+                arquivo.SetarArquivoBinario(arquivoBinario);
+                arquivo.SetarLinhas(linhas);
+
+                arquivos.Add(arquivo);
             }
 
             return arquivos;

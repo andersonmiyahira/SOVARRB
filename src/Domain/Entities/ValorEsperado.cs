@@ -12,9 +12,35 @@ namespace Domain.Entities
         public int TipoCNABId { get; private set; }
         public int TipoBoletoId { get; private set; }
         public DateTime DataCadastro { get; private set; }
+        public DateTime? DataAlteracao { get; private set; }
         public bool Ativo { get; private set; }
 
         public Banco Banco { get; private set; }
         public List<LayoutValorEsperado> LayoutValoresEsperados { get; private set; }
+
+        internal void SetarDataAlteracao()
+        {
+            DataAlteracao = DateTime.Now;
+        }
+
+        internal void AlterarDados(string descricao, string valor, int bancoId, int tipoCNABId, int tipoBoletoId, bool ativo)
+        {
+            Descricao = descricao;
+            Valor = valor;
+            BancoId = bancoId;
+            TipoCNABId = tipoCNABId;
+            TipoBoletoId = tipoBoletoId;
+            Ativo = ativo;
+        }
+
+        internal void SetarDataCadastro(DateTime now)
+        {
+            DataCadastro = now;
+        }
+
+        internal void LimparEntidades()
+        {
+            Banco = null;
+        }
     }
 }

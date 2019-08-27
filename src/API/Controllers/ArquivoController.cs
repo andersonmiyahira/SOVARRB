@@ -1,8 +1,9 @@
 ﻿using API.ControllerBaseExtensions;
 using Application.AppService.Banco;
 using Application.ViewModel.Filters;
-using Application.ViewModel.Request;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Net;
 
 namespace API.Controllers
 {
@@ -18,9 +19,21 @@ namespace API.Controllers
 
         [HttpGet]
         public IActionResult GetByFilters(ArquivoFilter filter)
-        {
+        { 
+            if(!EhAdm) filter.UsuarioId = IdUsuarioLogado;
+
             var response = _arquivoAppService.ObterComFiltros(filter);
             return Response(response);
-        } 
+        }
+
+        [HttpGet("Download")]
+        public IActionResult Download(int id)
+        {
+            var fileBytes = _arquivoAppService.Download(id);
+            if (fileBytes == null)
+                return Response(HttpStatusCode.NotFound);
+
+            return Response(fileBytes);
+        }
     }
 }

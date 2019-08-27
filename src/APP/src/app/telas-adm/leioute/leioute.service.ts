@@ -1,22 +1,54 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../environments/environment';
 import { ApiService } from '../../services/api.service';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
+import { ServiceBase } from 'app/shared/services/service-base';
+import { Layout } from './models/layout';
 
 @Injectable()
-export class LeiouteService {
-  constructor(private http: HttpClient,
-    private apiService: ApiService) {
+export class LeiouteService extends ServiceBase {
+  constructor(private apiService: ApiService) {
+    super("layout");
   }
 
-
   obterLeioutes() {
-    // return this.apiService.get("http://localhost:52854/api/banco");
-    return this.http.get<any[]>("http://localhost:52854/api/leioutes")
-    .pipe(
-      tap(banco => {})
-    );
+
+    return this.apiService.get(this.urlAPI).pipe(
+      map((res: any) => {
+        return res.data;
+      }));
    }
+
+   obterLeioutesByFilters(model: Layout) {
+     
+    return this.apiService.getByFilters(this.urlAPI, model).pipe(
+      map((res: any) => {
+        return res.data;
+      }));
+   }
+
+   excluirBanco(model: Layout) {
+
+    return this.apiService.delete(this.urlAPI, model.idLayout).pipe(
+      map((res: any) => {
+        return res;
+      }));
+  }
+
+  atualizarLayout(model: Layout) {
+
+    return this.apiService.put(this.urlAPI, model).pipe(
+      map((res: any) => {
+        return res.data;
+      }));
+  }
+
+  inserirVarios(model: Array<Layout>) {
+
+    const url = `${this.urlAPI}SalvarVarios`;
+
+    return this.apiService.post(url, model).pipe(
+      map((res: any) => {
+        return res.data;
+      }));
+  }
 }

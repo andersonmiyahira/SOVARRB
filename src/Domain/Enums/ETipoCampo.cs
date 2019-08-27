@@ -8,8 +8,8 @@ namespace Domain.Enums
         Numerico = 1,
         [Description("Alfanumérico")]
         Alfanumerico = 2,
-        [Description("DataAAAAMMDD")]
-        DataAAAAMMDD = 3,
+        [Description("Data DDMMAA")]
+        DataDDMMAA = 3,
         [Description("DataMMDDAA")]
         DataMMDDAA = 4,
         [Description("HoraDDMMAAAA")]

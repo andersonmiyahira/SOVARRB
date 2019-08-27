@@ -7,5 +7,6 @@ namespace Domain.Interfaces.Services
         Segmento Inserir(Segmento segmento);
         Segmento Alterar(Segmento segmento);
         void Excluir(Segmento segmento);
+        void ExcluirPorId(int id);
     }
 }

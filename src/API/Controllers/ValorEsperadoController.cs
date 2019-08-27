@@ -1,10 +1,13 @@
 ﻿using API.ControllerBaseExtensions;
 using Application.AppService.ValorEsperado;
+using Application.ViewModel.Filters;
 using Application.ViewModel.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     [Produces("application/json")]
     public class ValorEsperadoController : ApiController
     {
@@ -16,9 +19,9 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(ValorEsperadoFilter filter)
         {
-            var valorEsperado = _valorEsperadoAppService.GetAll();
+            var valorEsperado = _valorEsperadoAppService.ObterPorFiltro(filter);
             return Response(valorEsperado);
         }
 
@@ -44,9 +47,9 @@ namespace API.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete([FromBody]ValorEsperadoRequest valorEsperado)
+        public IActionResult Delete(int id)
         {
-            _valorEsperadoAppService.Excluir(valorEsperado);
+            _valorEsperadoAppService.Excluir(id);
             return Response();
         }
     }

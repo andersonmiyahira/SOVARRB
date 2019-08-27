@@ -1,0 +1,230 @@
+<div class="container">
+  <h2>Validar Arquivos</h2>
+  <form method="post" action="/" novalidate="novalidate" [formGroup]="form">
+    <div class="card bg-light mb-3">
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-md-4 form-group">
+            <label for="cbBanco">Banco</label>
+            <select id="cbBanco" formControlName="banco" [(ngModel)]="model.bancoId" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+              style="display: inherit;">
+              <option [value]="undefined">Selecione</option>
+              <option *ngFor="let banco of bancos" value="{{banco.id}}">{{banco.descricao}}</option>
+            </select>
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="cbCNAB">CNAB</label>
+            <select id="cbCNAB" formControlName="cnab" [(ngModel)]="model.tipoCNABId" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+              style="display: inherit;">
+              <option [value]="undefined">Selecione</option>
+              <option value="1">CNAB 240</option>
+              <option value="2">CNAB 400</option>
+            </select>
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="cbTipo">Tipo</label>
+            <select id="cbTipo" formControlName="tipoArquivo" [(ngModel)]="model.tipoBoletoId" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+              style="display: inherit;">
+              <option [value]="undefined">Selecione</option>
+              <option value="1">Remessa</option>
+              <option value="2">Retorno Bancário</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card bg-light mb-3">
+      <div class="card-header">Selecione os arquivos</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12 no-p">
+            <div class="input-group">
+              <label class="input-group-btn">
+                <span class="btn btn-primary" style="line-height: 1.15;border-top-right-radius: 0;border-bottom-right-radius: 0;">
+                  Procurar&hellip;
+                  <input type="file" ng2FileSelect [uploader]="uploader" style="display: none;" multiple>
+                </span>
+              </label>
+              <input type="text" class="form-control" style="height: 100%" value="Selecionados: {{ uploader?.queue?.length }} "
+                readonly>
+            </div>
+          </div>
+          <div class="col-md-12 no-p" *ngIf="uploader?.queue?.length > 0">
+            <div>
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th width="70%">Nome</th>
+                    <th width="15%;text-align: center;">Status</th>
+                    <th style="width: 15%;text-align: center;">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of uploader.queue">
+                    <td>
+                      <strong>{{ item?.file?.name }}</strong>
+                    </td>
+                    <td class="text-center">
+                      <span *ngIf="item.isSuccess">
+                        <i class="fas fa-check txt-green"></i>
+                      </span>
+                      <span *ngIf="item.isError">
+                        <i class="fas fa-times txt-red"></i>
+                      </span>
+                    </td>
+                    <td nowrap style="text-align: center;">
+                      <button type="button" class="btn btn-danger btn-sm" (click)="item.remove()" data-toggle="tooltip"
+                        data-placement="top" ngbTooltip="Excluir">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <td colspan="3">
+                      <button type="button" class="btn btn-success btn-sm" (click)="saveUpload(sucesso)" [disabled]="form.invalid">
+                        <span class="glyphicon glyphicon-upload"></span> Enviar e Validar
+                      </button>
+                      <button type="button" class="btn btn-danger btn-sm" (click)="removerTodos()" [disabled]="!uploader.queue.length">
+                        <i class="fas fa-trash-alt"></i> Remover Todos
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col-md-12 no-p">
+            <div class="row" *ngIf="arquivosValidados">
+              <div class="col-md-12">
+                <div class="row mb-3">
+                  <div class="col-md-8">
+                    <h2>Resultado</h2>
+                  </div>
+                  <div class="col-md-4 text-right">
+                    <form class="form-inline" style="float:right">
+                      <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Exibir:</label>
+                      <select class="custom-select my-1" id="inlineFormCustomSelectPref" name="exibirResultado"
+                        [(ngModel)]="exibirResultado">
+                        <option selected value="0">Todos</option>
+                        <option value="1">Sucessos</option>
+                        <option value="2">Erros</option>
+                      </select>
+                    </form>
+                  </div>
+                </div>
+                <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+                  <ngb-panel title="{{mensagens.nomeArquivo}}" *ngFor="let mensagens of response">
+                    <ng-template ngbPanelContent>
+                      <div *ngIf="mensagens.resultado.length <= 0">
+                        <label>Sem resultados para o arquivo</label>
+                      </div>
+                      <div class="list-alerts" *ngIf="mensagens.resultado.length > 0">
+                        <ul>
+                          <li>
+                            <h3>Header:</h3>
+                            <div class="container-errors" *ngIf="mensagens.headerErro.length > 0 && (exibirResultado == 0 || exibirResultado == 2)">
+                              <div class="errors">
+                                <h6>
+                                  Foram encontradas ({{mensagens.headerErro.length}}) falhas no arquivo enviado.
+                                </h6>
+                                <hr *ngIf="mensagens.headerErro && mensagens.headerErro.length > 0">
+                                <ul *ngIf="mensagens.headerErro && mensagens.headerErro.length > 0" style="color: red">
+                                  <li *ngFor="let erros of mensagens.headerErro">
+                                    {{erros.mensagem}}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="container-sucesso" *ngIf="mensagens.headerSucesso.length > 0 && (exibirResultado == 0 || exibirResultado == 1)">
+                              <div class="sucesso">
+                                <h6>
+                                  Foram encontradas ({{mensagens.headerSucesso.length}}) linhas válidas no arquivo
+                                  enviado.
+                                </h6>
+                                <hr *ngIf="mensagens.headerSucesso && mensagens.headerSucesso.length > 0">
+                                <ul *ngIf="mensagens.headerSucesso && mensagens.headerSucesso.length > 0" style="color: green">
+                                  <li *ngFor="let sucesso of mensagens.headerSucesso">
+                                    {{sucesso.mensagem}}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <h3>Detalhes:</h3>
+                            <div class="container-errors" *ngIf="mensagens.detalheErro.length > 0 && (exibirResultado == 0 || exibirResultado == 2)">
+                              <div class="errors">
+                                <h6>
+                                  Foram encontradas ({{mensagens.detalheErro.length}}) falhas no arquivo enviado.
+                                </h6>
+                                <hr *ngIf="mensagens.detalheErro && mensagens.detalheErro.length > 0">
+                                <ul *ngIf="mensagens.detalheErro && mensagens.detalheErro.length > 0" style="color: red">
+                                  <li *ngFor="let error of mensagens.detalheErro">
+                                    {{error.mensagem}}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="container-sucesso" *ngIf="mensagens.detalheSucesso.length > 0 && (exibirResultado == 0 || exibirResultado == 1)">
+                              <div class="sucesso">
+                                <h6>
+                                  Foram encontradas ({{ mensagens.detalheSucesso.length}}) linhas válidas no arquivo
+                                  enviado.
+                                </h6>
+                                <hr *ngIf="mensagens.detalheSucesso && mensagens.detalheSucesso.length > 0">
+                                <ul *ngIf="mensagens.detalheSucesso && mensagens.detalheSucesso.length > 0" style="color: green">
+                                  <li *ngFor="let sucesso of mensagens.detalheSucesso">
+                                    {{sucesso.mensagem}}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <h3>Trailer:</h3>
+                            <div class="container-errors" *ngIf="mensagens.trailerErro.length > 0 && (exibirResultado == 0 || exibirResultado == 2)">
+                              <div class="errors">
+                                <h6>
+                                  Foram encontradas ({{mensagens.trailerErro.length}}) falhas no arquivo enviado.
+                                </h6>
+                                <hr *ngIf="mensagens.trailerErro && mensagens.trailerErro.length > 0">
+                                <ul *ngIf="mensagens.trailerErro && mensagens.trailerErro.length > 0" style="color: red">
+                                  <li *ngFor="let error of mensagens.trailerErro">
+                                    {{error.mensagem}}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="container-sucesso" *ngIf="mensagens.trailerSucesso.length > 0 && (exibirResultado == 0 || exibirResultado == 1)">
+                              <div class="sucesso">
+                                <h6>
+                                  Foram encontradas ({{mensagens.trailerSucesso.length}}) linhas válidas no arquivo
+                                  enviado.
+                                </h6>
+                                <hr *ngIf="mensagens.trailerSucesso && mensagens.trailerSucesso.length > 0">
+                                <ul *ngIf="mensagens.trailerSucesso && mensagens.trailerSucesso.length > 0" style="color: green">
+                                  <li *ngFor="let sucesso of mensagens.trailerSucesso">
+                                    {{sucesso.mensagem}}
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </ng-template>
+                  </ngb-panel>
+                </ngb-accordion>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div> 

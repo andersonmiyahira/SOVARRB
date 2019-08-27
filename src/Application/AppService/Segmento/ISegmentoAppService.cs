@@ -9,5 +9,7 @@ namespace Application.AppService.Segmento
         SegmentoResponse Inserir(SegmentoRequest request);
         SegmentoResponse Alterar(SegmentoRequest request);
         void Excluir(SegmentoRequest request);
+        void ExcluirPorId(int id);
+
     }
 }
